@@ -1,0 +1,492 @@
+/* ==========================================================================
+   TicketFlow · Hoja de estilos del sistema de diseño
+   SDGE-12 · Responsable: Jorge Andrés Marín Díaz
+   SDGE-10 · Ajuste responsive — media queries al final de cada bloque
+
+   Paleta:      Indigo #635BFF · Azul #3B82F6 · Navy #111827 · Fondo #F8FAFC
+   Tipografía:  Space Grotesk (títulos) + Inter (interfaz)
+   Rejilla:     12 columnas en escritorio · 4 en móvil · base de 8 px
+   Márgenes:    16 px en móvil · 40 px en escritorio · contenido máx. 1280 px
+   Radios:      tarjetas 16–20 px · botones 10 px
+   ========================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root{
+  /* Paleta oficial */
+  --indigo:#635BFF;  --azul:#3B82F6;  --navy:#111827;  --fondo:#F8FAFC;
+  --texto-2:#64748B; --exito:#22C55E; --error:#EF4444;
+
+  /* Escalas derivadas */
+  --indigo-50:#F1F0FF; --indigo-100:#E4E2FF; --indigo-600:#5147F0; --indigo-700:#4238C9;
+  --azul-50:#EFF6FF;   --azul-600:#2563EB;
+  --navy-800:#1E293B;  --navy-700:#334155;
+  --blanco:#fff; --linea:#E2E8F0; --linea-suave:#EEF2F7; --gris-100:#F1F5F9;
+  --exito-100:#DCFCE7; --exito-600:#16A34A;
+  --alerta:#F59E0B;    --alerta-100:#FEF3C7; --alerta-600:#D97706;
+  --error-50:#FEF2F2;  --error-100:#FEE2E2;  --error-600:#DC2626;
+
+  /* Semánticos */
+  --texto:var(--navy); --texto-suave:var(--texto-2); --texto-tenue:#94A3B8;
+
+  /* Estados de reserva — reservados, no decorativos */
+  --estado-reservada-bg:var(--alerta-100);  --estado-reservada-fg:var(--alerta-600);
+  --estado-confirmada-bg:var(--exito-100);  --estado-confirmada-fg:var(--exito-600);
+  --estado-cancelada-bg:var(--error-100);   --estado-cancelada-fg:var(--error-600);
+
+  /* Gradiente único de marca */
+  --grad:linear-gradient(135deg,#635BFF 0%,#3B82F6 100%);
+
+  /* Sombras */
+  --sombra-sm:0 1px 2px rgba(17,24,39,.05);
+  --sombra-md:0 4px 16px rgba(17,24,39,.06);
+  --sombra-lg:0 12px 32px rgba(17,24,39,.10);
+  --brillo:0 4px 14px rgba(99,91,255,.28);
+
+  /* Espaciado — base 8 px */
+  --e1:4px; --e2:8px; --e3:12px; --e4:16px; --e5:20px;
+  --e6:24px; --e8:32px; --e10:40px; --e12:48px; --e16:64px; --e20:80px;
+
+  /* Radios */
+  --r-sm:8px; --r-btn:10px; --r-card:16px; --r-card-lg:20px; --r-full:999px;
+
+  /* Layout */
+  --ancho-max:1280px;
+  --margen:40px;   /* escritorio */
+}
+
+@media (max-width:768px){
+  :root{ --margen:16px; }
+}
+
+/* ---------- 2. Base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--fondo); color:var(--texto);
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4,.display{
+  font-family:'Space Grotesk','Inter',sans-serif;
+  font-weight:700; letter-spacing:-.02em; line-height:1.12;
+  text-wrap:balance;
+}
+h1{font-size:clamp(30px,5vw,48px)}
+h2{font-size:clamp(24px,3.4vw,32px)}
+h3{font-size:clamp(18px,2.2vw,21px)}
+
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px;border-radius:4px}
+
+.contenedor{
+  width:100%; max-width:var(--ancho-max);
+  margin-inline:auto; padding-inline:var(--margen);
+}
+
+/* ---------- 2b. Vistas — una sola página ----------
+   Todas las pantallas viven en index.html. El enrutador de js/app.js
+   muestra una y esconde el resto según el fragmento de la URL
+   (#/inicio, #/iniciar-sesion, #/registro-cliente, ...).
+   Así el botón Atrás del navegador sigue funcionando y cada pantalla
+   tiene su propia dirección para compartir. */
+.vista{display:none}
+.vista.activa{display:block;animation:aparecer .22s ease both}
+
+@keyframes aparecer{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .vista.activa{animation:none}
+}
+
+.seccion{padding-block:var(--e20)}
+@media (max-width:768px){ .seccion{padding-block:var(--e12)} }
+
+.overline{
+  font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--indigo-700);
+}
+.texto-suave{color:var(--texto-suave)}
+.centrado{text-align:center}
+.gradiente{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:var(--indigo);
+}
+
+/* ---------- 3. Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:var(--r-btn);
+  font-size:15px;font-weight:600;border:1px solid transparent;
+  cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-lg{padding:15px 28px;font-size:16px}
+.btn-primario{background:var(--grad);color:#fff;box-shadow:var(--brillo)}
+.btn-primario:hover{box-shadow:0 6px 20px rgba(99,91,255,.36)}
+.btn-secundario{background:#fff;color:var(--navy);border-color:var(--linea)}
+.btn-secundario:hover{border-color:var(--indigo);color:var(--indigo-700)}
+.btn-fantasma{background:transparent;color:var(--navy)}
+.btn-bloque{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ---------- 4. Encabezado · SDGE-3 ---------- */
+.encabezado{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--linea-suave);
+}
+.encabezado-fila{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--e6);padding-block:14px;
+}
+.marca{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;
+  letter-spacing:-.02em;color:var(--navy);
+}
+.marca-logo{
+  width:34px;height:34px;border-radius:9px;background:var(--grad);
+  display:grid;place-items:center;color:#fff;font-size:17px;flex-shrink:0;
+}
+.nav{display:flex;gap:var(--e8);align-items:center}
+.nav a{
+  font-size:15px;font-weight:500;color:var(--texto-suave);
+  padding-bottom:3px;border-bottom:2px solid transparent;
+}
+.nav a:hover{color:var(--navy)}
+.nav a.activo{color:var(--navy);font-weight:600;border-bottom-color:var(--indigo)}
+.acciones{display:flex;gap:var(--e3);align-items:center}
+
+.menu-btn{
+  display:none;background:none;border:1px solid var(--linea);
+  border-radius:var(--r-btn);padding:9px 12px;cursor:pointer;font-size:18px;line-height:1;
+}
+
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .nav,.acciones{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    background:#fff;border-bottom:1px solid var(--linea-suave);
+    flex-direction:column;align-items:stretch;gap:0;padding:var(--e2) var(--margen);
+  }
+  .encabezado.abierto .nav,.encabezado.abierto .acciones{display:flex}
+  .nav a{padding:13px 0;border-bottom:1px solid var(--linea-suave)}
+  .nav a.activo{border-bottom-color:var(--linea-suave)}
+  .acciones{padding-block:var(--e4);gap:var(--e3)}
+  .acciones .btn{width:100%}
+}
+
+/* ---------- 5. Hero con buscador · SDGE-4 ---------- */
+.hero{
+  position:relative;background:var(--navy);color:#fff;
+  padding-block:var(--e20) calc(var(--e20) + 40px);overflow:hidden;
+}
+.hero::before,.hero::after{
+  content:"";position:absolute;border-radius:50%;filter:blur(120px);
+}
+.hero::before{width:460px;height:460px;background:var(--indigo);opacity:.30;top:-160px;left:-100px}
+.hero::after{width:380px;height:380px;background:var(--azul);opacity:.24;bottom:-140px;right:-60px}
+.hero .contenedor{position:relative;z-index:2}
+.hero h1{max-width:16ch;margin-bottom:var(--e4)}
+.hero p{font-size:clamp(16px,2vw,19px);color:#CBD5E1;max-width:52ch;margin-bottom:var(--e10)}
+.hero .overline{color:#A8A3FF;margin-bottom:var(--e3)}
+
+/* Tarjeta del buscador — sin recortes, dentro del flujo */
+.buscador{
+  background:#fff;border-radius:var(--r-card-lg);padding:var(--e5);
+  box-shadow:var(--sombra-lg);display:grid;gap:var(--e3);
+  grid-template-columns:repeat(3,1fr) auto;align-items:end;
+}
+@media (max-width:900px){ .buscador{grid-template-columns:1fr} }
+
+.hero-datos{
+  display:flex;flex-wrap:wrap;gap:var(--e8);margin-top:var(--e10);
+}
+.hero-dato strong{
+  display:block;font-family:'Space Grotesk',sans-serif;
+  font-size:28px;font-weight:700;line-height:1;
+}
+.hero-dato span{font-size:13px;color:#94A3B8}
+
+/* ---------- 6. Formularios · SDGE-8 ---------- */
+.campo{display:flex;flex-direction:column;gap:7px}
+.campo label{
+  font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--texto-suave);
+}
+.campo input,.campo select,.campo textarea{
+  width:100%;padding:13px 15px;border-radius:var(--r-btn);
+  border:1px solid var(--linea);background:#fff;
+  font-family:inherit;font-size:15px;color:var(--navy);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.campo input::placeholder{color:var(--texto-tenue)}
+.campo input:focus,.campo select:focus,.campo textarea:focus{
+  outline:none;border-color:var(--indigo);
+  box-shadow:0 0 0 3px rgba(99,91,255,.16);
+}
+.campo input[aria-invalid="true"]{border-color:var(--error)}
+.campo input[aria-invalid="true"]:focus{box-shadow:0 0 0 3px rgba(239,68,68,.16)}
+
+.ayuda{font-size:12px;color:var(--texto-tenue)}
+.error{
+  font-size:12.5px;color:var(--error-600);font-weight:500;
+  display:none;align-items:center;gap:5px;
+}
+.error.visible{display:flex}
+.error::before{content:"!";display:grid;place-items:center;
+  width:15px;height:15px;border-radius:50%;background:var(--error-600);
+  color:#fff;font-size:10px;font-weight:700;flex-shrink:0}
+
+.fila{display:grid;gap:var(--e4);grid-template-columns:1fr 1fr}
+@media (max-width:620px){ .fila{grid-template-columns:1fr} }
+
+.form-pila{display:flex;flex-direction:column;gap:var(--e4)}
+
+/* Medidor de fuerza de contraseña */
+.fuerza{display:flex;gap:5px;margin-top:2px}
+.fuerza span{
+  height:4px;flex:1;border-radius:var(--r-full);background:var(--linea);
+  transition:background .2s ease;
+}
+.fuerza[data-nivel="1"] span:nth-child(1){background:var(--error)}
+.fuerza[data-nivel="2"] span:nth-child(-n+2){background:var(--alerta)}
+.fuerza[data-nivel="3"] span:nth-child(-n+3){background:var(--azul)}
+.fuerza[data-nivel="4"] span{background:var(--exito)}
+
+.aviso{
+  display:flex;gap:var(--e3);padding:var(--e4);
+  border-radius:var(--r-card);background:var(--indigo-50);
+  font-size:14px;color:var(--indigo-700);line-height:1.5;
+}
+.aviso.alerta{background:var(--alerta-100);color:var(--alerta-600)}
+
+/* ---------- 7. Pantallas de acceso (login y registros) ---------- */
+.acceso{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+@media (max-width:960px){ .acceso{grid-template-columns:1fr} }
+
+.acceso-form{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--e12) clamp(24px,6vw,80px);background:#fff;
+}
+.acceso-form-interior{width:100%;max-width:440px;margin-inline:auto}
+.acceso-titulo{margin-bottom:var(--e2)}
+.acceso-sub{color:var(--texto-suave);margin-bottom:var(--e8)}
+.acceso-pie{
+  margin-top:var(--e6);font-size:14.5px;color:var(--texto-suave);text-align:center;
+}
+.acceso-pie a{color:var(--indigo-700);font-weight:600}
+.acceso-pie a:hover{text-decoration:underline}
+
+.acceso-lateral{
+  background:var(--navy);color:#fff;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--e12) clamp(24px,5vw,64px);
+}
+.acceso-lateral::before{
+  content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+  background:var(--indigo);filter:blur(120px);opacity:.32;top:-120px;right:-120px;
+}
+.acceso-lateral > *{position:relative;z-index:2}
+.acceso-lateral h2{margin-bottom:var(--e4)}
+.acceso-lateral p{color:#CBD5E1;max-width:42ch}
+@media (max-width:960px){ .acceso-lateral{display:none} }
+
+.lista-ventajas{list-style:none;display:flex;flex-direction:column;gap:var(--e4);margin-top:var(--e8)}
+.lista-ventajas li{display:flex;gap:var(--e3);align-items:flex-start;font-size:15px;color:#E2E8F0}
+.lista-ventajas li::before{
+  content:"✓";display:grid;place-items:center;flex-shrink:0;
+  width:24px;height:24px;border-radius:50%;background:var(--grad);
+  color:#fff;font-size:13px;font-weight:700;
+}
+
+/* Entrada decorativa del panel lateral */
+.entrada{
+  background:#fff;color:var(--navy);border-radius:var(--r-card-lg);
+  padding:var(--e5);margin-top:var(--e10);max-width:330px;
+  box-shadow:var(--sombra-lg);position:relative;
+}
+.entrada::after{
+  content:"";position:absolute;left:0;right:0;bottom:74px;
+  border-top:2px dashed var(--linea);
+}
+.entrada-cat{font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--indigo-700)}
+.entrada h4{font-size:17px;margin:6px 0 2px}
+.entrada-meta{font-size:13px;color:var(--texto-suave)}
+.entrada-codigo{
+  margin-top:var(--e6);padding-top:var(--e5);
+  font-family:'Space Grotesk',monospace;font-size:15px;letter-spacing:.08em;
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+/* ---------- 7b. Alta de administrador · SDGE-6 ----------
+   Esta pantalla no existía en Figma. Se diseñó sobre el mismo sistema,
+   pero deliberadamente distinta de los otros dos registros: el
+   administrador no se autogestiona, entra por invitación. */
+.acceso-lateral.admin{background:#0B1120}
+.acceso-lateral.admin::before{background:var(--azul);opacity:.26}
+
+.sello{
+  display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  padding:7px 14px;border-radius:var(--r-full);
+  background:rgba(59,130,246,.14);border:1px solid rgba(59,130,246,.38);
+  color:#93C5FD;font-size:12px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:20px;
+}
+
+.permisos{
+  list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:32px;
+  border:1px solid rgba(255,255,255,.10);border-radius:var(--r-card);overflow:hidden;
+}
+.permisos li{
+  display:flex;gap:12px;align-items:center;
+  padding:14px 18px;font-size:14.5px;color:#E2E8F0;
+  background:rgba(255,255,255,.03);
+}
+.permisos li + li{border-top:1px solid rgba(255,255,255,.08)}
+.permisos .llave{
+  font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.08em;
+  color:#7DD3FC;background:rgba(14,165,233,.14);
+  padding:3px 8px;border-radius:5px;flex-shrink:0;min-width:74px;text-align:center;
+}
+
+.codigo-campo input{
+  font-family:'Space Grotesk',monospace;letter-spacing:.18em;
+  text-transform:uppercase;font-size:16px;
+}
+
+/* ---------- 8. Tarjetas de evento · SDGE-11 ---------- */
+.rejilla{display:grid;gap:var(--e6)}
+.rejilla-3{grid-template-columns:repeat(3,1fr)}
+.rejilla-4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:980px){ .rejilla-3,.rejilla-4{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:620px){ .rejilla-3,.rejilla-4{grid-template-columns:1fr} }
+
+.evento{
+  background:#fff;border-radius:var(--r-card-lg);overflow:hidden;
+  border:1px solid var(--linea-suave);box-shadow:var(--sombra-md);
+  display:flex;flex-direction:column;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.evento:hover{transform:translateY(-3px);box-shadow:var(--sombra-lg)}
+.evento-img{position:relative;aspect-ratio:16/9;background:var(--gris-100)}
+.evento-img img{width:100%;height:100%;object-fit:cover}
+.evento-cat{
+  position:absolute;top:12px;left:12px;
+  padding:5px 11px;border-radius:var(--r-full);
+  font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;
+}
+.cat-concierto{background:var(--indigo)}
+.cat-teatro{background:#7C6BFF}
+.cat-deporte{background:var(--azul)}
+.cat-festival{background:#0EA5E9}
+
+.evento-cuerpo{padding:var(--e5);display:flex;flex-direction:column;gap:10px;flex:1}
+.evento-cuerpo h3{font-size:18px;line-height:1.28}
+.evento-meta{
+  font-size:13.5px;color:var(--texto-suave);
+  display:flex;flex-direction:column;gap:4px;
+}
+.evento-pie{
+  margin-top:auto;padding-top:var(--e3);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:var(--e3);
+}
+.precio{
+  font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;
+  color:var(--navy);line-height:1.1;
+}
+.precio small{display:block;font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;color:var(--exito-600);letter-spacing:.03em}
+
+/* Categorías */
+.categoria{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  padding:var(--e5);display:flex;flex-direction:column;gap:6px;
+  box-shadow:var(--sombra-sm);transition:border-color .15s ease, transform .15s ease;
+}
+.categoria:hover{border-color:var(--indigo);transform:translateY(-2px)}
+.categoria-icono{
+  width:44px;height:44px;border-radius:var(--r-btn);
+  display:grid;place-items:center;font-size:21px;margin-bottom:2px;
+}
+.categoria h4{font-size:16px;font-family:'Space Grotesk',sans-serif}
+.categoria p{font-size:13px;color:var(--texto-suave)}
+
+/* Chips de estado — el color significa algo */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:var(--r-full);
+  font-size:12px;font-weight:600;letter-spacing:.02em;
+}
+.chip-reservada{background:var(--estado-reservada-bg);color:var(--estado-reservada-fg)}
+.chip-confirmada{background:var(--estado-confirmada-bg);color:var(--estado-confirmada-fg)}
+.chip-cancelada{background:var(--estado-cancelada-bg);color:var(--estado-cancelada-fg)}
+
+/* ---------- 9. Encabezado de sección ---------- */
+.seccion-titulo{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:var(--e6);margin-bottom:var(--e10);flex-wrap:wrap;
+}
+.seccion-titulo p{color:var(--texto-suave);margin-top:6px;max-width:56ch}
+
+/* ---------- 10. Pasos ---------- */
+.pasos{counter-reset:paso}
+.paso{position:relative;padding-left:56px}
+.paso::before{
+  counter-increment:paso;content:counter(paso);
+  position:absolute;left:0;top:0;
+  width:40px;height:40px;border-radius:var(--r-btn);
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
+}
+.paso h3{font-size:17px;margin-bottom:6px}
+.paso p{font-size:14.5px;color:var(--texto-suave)}
+
+/* ---------- 11. Pie de página · SDGE-2 ---------- */
+.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e16) var(--e8);margin-top:var(--e20)}
+.pie-rejilla{
+  display:grid;gap:var(--e10);
+  grid-template-columns:1.6fr repeat(3,1fr);
+}
+@media (max-width:900px){ .pie-rejilla{grid-template-columns:1fr 1fr} }
+@media (max-width:560px){ .pie-rejilla{grid-template-columns:1fr} }
+.pie .marca{color:#fff;margin-bottom:var(--e4)}
+.pie p{font-size:14px;max-width:34ch}
+.pie h4{
+  color:#fff;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;font-weight:700;margin-bottom:var(--e4);
+}
+.pie a{display:block;font-size:14px;margin-bottom:10px;color:#94A3B8}
+.pie a:hover{color:#fff}
+.pie-legal{
+  margin-top:var(--e12);padding-top:var(--e6);
+  border-top:1px solid var(--navy-700);
+  display:flex;justify-content:space-between;gap:var(--e4);
+  flex-wrap:wrap;font-size:13px;
+}
+
+/* ---------- 12. Accesibilidad ---------- */
+.solo-lectores{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.saltar{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--indigo);color:#fff;padding:12px 18px;border-radius:0 0 var(--r-btn) 0;
+}
+.saltar:focus{left:0}

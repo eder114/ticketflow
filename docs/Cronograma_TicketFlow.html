@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cronograma — TicketFlow</title>
+<style>
+  * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  body { background: #FFF8F0; margin: 0; padding: 32px; color: #222; }
+
+  h1 { color: #1F77B4; font-weight: 800; font-size: 36px; margin: 0 0 6px 0; text-align: center; }
+  .subtitle { color: #555; font-size: 14px; margin: 0 0 32px 0; text-align: center; }
+
+  /* Timeline horizontal con 3 momentos */
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 8%;
+    right: 8%;
+    height: 4px;
+    background: linear-gradient(90deg, #1F77B4, #2CA02C, #FF7F0E);
+    z-index: 0;
+  }
+
+  .step {
+    background: white;
+    border-radius: 12px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 1;
+    border-top: 6px solid;
+  }
+  .step-1 { border-color: #1F77B4; }
+  .step-2 { border-color: #2CA02C; }
+  .step-3 { border-color: #FF7F0E; }
+
+  .circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: white;
+    font-size: 26px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -50px auto 12px auto;
+    border: 4px solid #FFF8F0;
+  }
+  .circle-1 { background: #1F77B4; }
+  .circle-2 { background: #2CA02C; }
+  .circle-3 { background: #FF7F0E; }
+
+  .step h2 {
+    text-align: center;
+    font-size: 18px;
+    margin: 0 0 4px 0;
+    color: #222;
+  }
+  .step .fase {
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-size: 13px;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 16px 0 8px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+  }
+
+  .step ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .step li { margin-bottom: 5px; }
+
+  .canvas-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+  }
+  .tag-1 { background: #1F77B4; }
+  .tag-2 { background: #2CA02C; }
+  .tag-3 { background: #FF7F0E; }
+
+  /* Sección de vínculo con Canvas */
+  .link-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 24px;
+  }
+  .link-section h2 {
+    color: #1F77B4;
+    font-size: 20px;
+    margin: 0 0 16px 0;
+    text-align: center;
+  }
+  .link-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .link-card {
+    padding: 14px;
+    border-radius: 8px;
+    background: #F5F8FB;
+    border-left: 4px solid;
+  }
+  .link-card.c1 { border-color: #1F77B4; }
+  .link-card.c2 { border-color: #2CA02C; }
+  .link-card.c3 { border-color: #FF7F0E; }
+  .link-card h4 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: #222;
+  }
+  .link-card p {
+    margin: 0;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.5;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Cronograma de TicketFlow</h1>
+<p class="subtitle">Tres momentos de entrega, alineados con los bloques del Modelo Canvas</p>
+
+<!-- Timeline -->
+<div class="timeline">
+
+  <!-- MOMENTO 1 -->
+  <div class="step step-1">
+    <div class="circle circle-1">1</div>
+    <h2>Análisis y Diseño</h2>
+    <div class="fase">Primera entrega</div>
+
+    <h3>¿Qué entregamos?</h3>
+    <ul>
+      <li>Matriz PESTEL del proyecto</li>
+      <li>Modelo Canvas del negocio</li>
+      <li>Diagramas UML (casos de uso y clases)</li>
+      <li>Modelo Entidad-Relación de la BD</li>
+      <li>Wireframes/mockups en Figma</li>
+      <li>Repositorio GitHub configurado</li>
+    </ul>
+
+    <h3>Bloques del Canvas que aterriza</h3>
+    <div class="canvas-tags">
+      <span class="tag tag-1">Propuesta de valor</span>
+      <span class="tag tag-1">Segmentos de clientes</span>
+      <span class="tag tag-1">Socios clave</span>
+    </div>
+  </div>
+
+  <!-- MOMENTO 2 -->
+  <div class="step step-2">
+    <div class="circle circle-2">2</div>
+    <h2>Desarrollo Core</h2>
+    <div class="fase">Segunda entrega</div>
+
+    <h3>¿Qué entregamos?</h3>
+    <ul>
+      <li>Base de datos PostgreSQL implementada</li>
+      <li>Backend con API REST (Node + Express)</li>
+      <li>Sistema de autenticación (login/registro)</li>
+      <li>CRUD completo de entidades</li>
+      <li>Frontend MVC con Bootstrap</li>
+      <li>Flujo de reserva funcional (Cliente y Agente)</li>
+    </ul>
+
+    <h3>Bloques del Canvas que aterriza</h3>
+    <div class="canvas-tags">
+      <span class="tag tag-2">Actividades clave</span>
+      <span class="tag tag-2">Recursos clave</span>
+      <span class="tag tag-2">Canales</span>
+    </div>
+  </div>
+
+  <!-- MOMENTO 3 -->
+  <div class="step step-3">
+    <div class="circle circle-3">3</div>
+    <h2>Reportes y Cierre</h2>
+    <div class="fase">Tercera entrega</div>
+
+    <h3>¿Qué entregamos?</h3>
+    <ul>
+      <li>Dashboard del administrador con gráficas</li>
+      <li>Reportes generales, comerciales y de operación</li>
+      <li>Módulo self-service de cancelaciones/PQRS</li>
+      <li>Pruebas end-to-end por rol</li>
+      <li>Documentación final y manual de usuario</li>
+      <li>Preparación de sustentación individual</li>
+    </ul>
+
+    <h3>Bloques del Canvas que aterriza</h3>
+    <div class="canvas-tags">
+      <span class="tag tag-3">Relaciones con clientes</span>
+      <span class="tag tag-3">Fuentes de ingresos</span>
+      <span class="tag tag-3">Estructura de costos</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sección explicativa -->
+<div class="link-section">
+  <h2>Cómo se relaciona cada momento con el Canvas</h2>
+  <div class="link-grid">
+    <div class="link-card c1">
+      <h4>Momento 1 → Define el QUÉ y el A QUIÉN</h4>
+      <p>Aquí decidimos qué ofrece TicketFlow y para quién. Se materializan la <strong>Propuesta de valor</strong>, los <strong>Segmentos de clientes</strong> y los <strong>Socios clave</strong> del Canvas mediante los diagramas y mockups.</p>
+    </div>
+    <div class="link-card c2">
+      <h4>Momento 2 → Construye el CÓMO</h4>
+      <p>Aquí se hace el motor del negocio: las <strong>Actividades clave</strong> (desarrollo, ticketing, autenticación), los <strong>Recursos clave</strong> (plataforma, BD) y los <strong>Canales</strong> (sitio web funcional) del Canvas.</p>
+    </div>
+    <div class="link-card c3">
+      <h4>Momento 3 → Sostiene y mide</h4>
+      <p>Aquí cerramos la operación: <strong>Relaciones con clientes</strong> (PQRS, cancelaciones), <strong>Fuentes de ingresos</strong> (reportes de comisiones) y <strong>Estructura de costos</strong> (métricas del dashboard) del Canvas.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

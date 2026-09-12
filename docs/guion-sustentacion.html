@@ -1,0 +1,447 @@
+<title>Guion de sustentación TicketFlow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --ink:#111827; --ink-2:#475569; --ink-3:#7C899C;
+    --ground:#F5F7FB; --panel:#FFFFFF; --panel-2:#EEF1F7;
+    --line:#DFE5EE; --line-soft:#EAEEF5;
+    --indigo:#4F46E5; --indigo-soft:#EEEDFF; --indigo-ink:#3A32C4;
+    --blue:#2563EB; --amber:#B45309; --amber-soft:#FEF4E2;
+    --green:#15803D; --green-soft:#E7F6EC;
+    --shadow:0 1px 2px rgba(17,24,39,.05), 0 10px 28px rgba(17,24,39,.05);
+    --display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+    --body:'Inter','Segoe UI',system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EAEEF6; --ink-2:#A6B2C4; --ink-3:#78859A;
+      --ground:#0E1219; --panel:#161C26; --panel-2:#1E2531;
+      --line:#2A3341; --line-soft:#222A36;
+      --indigo:#8E88FF; --indigo-soft:#232242; --indigo-ink:#B5B0FF;
+      --blue:#7CA9FF; --amber:#F0B65E; --amber-soft:#2E2415;
+      --green:#6FD08C; --green-soft:#152A1D;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EAEEF6; --ink-2:#A6B2C4; --ink-3:#78859A;
+    --ground:#0E1219; --panel:#161C26; --panel-2:#1E2531;
+    --line:#2A3341; --line-soft:#222A36;
+    --indigo:#8E88FF; --indigo-soft:#232242; --indigo-ink:#B5B0FF;
+    --blue:#7CA9FF; --amber:#F0B65E; --amber-soft:#2E2415;
+    --green:#6FD08C; --green-soft:#152A1D;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--display); letter-spacing:-.02em; text-wrap:balance; margin:0}
+  p{margin:0}
+  a{color:var(--indigo-ink)}
+  :focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radius:4px}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 80px}
+
+  /* ---------- cabecera ---------- */
+  .head{
+    display:flex; flex-wrap:wrap; gap:28px; align-items:flex-end;
+    justify-content:space-between; padding-bottom:26px;
+    border-bottom:2px solid var(--ink); margin-bottom:34px;
+  }
+  .eyebrow{
+    font-size:11.5px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-3);
+  }
+  .head h1{font-size:clamp(30px,4.6vw,46px); line-height:1.05; margin-top:8px}
+  .head h1 em{font-style:normal; color:var(--indigo-ink)}
+  .head-meta{
+    font-size:13.5px; color:var(--ink-2); text-align:right;
+    display:flex; flex-direction:column; gap:3px;
+  }
+  .head-meta b{color:var(--ink); font-weight:600}
+
+  /* ---------- layout ---------- */
+  .cols{display:grid; grid-template-columns:230px 1fr; gap:44px; align-items:start}
+  @media (max-width:900px){ .cols{grid-template-columns:1fr; gap:28px} }
+
+  .rail{position:sticky; top:24px; font-size:13.5px}
+  @media (max-width:900px){ .rail{position:static} }
+  .rail h2{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px}
+  .rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px}
+  .rail a{
+    display:flex; gap:10px; padding:7px 10px; border-radius:7px;
+    color:var(--ink-2); text-decoration:none; line-height:1.35;
+  }
+  .rail a:hover{background:var(--panel-2); color:var(--ink)}
+  .rail a span{color:var(--indigo-ink); font-weight:700; font-variant-numeric:tabular-nums}
+  .rail .tot{
+    margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+    color:var(--ink-3); font-size:12.5px;
+  }
+
+  main{display:flex; flex-direction:column; gap:46px; min-width:0}
+
+  /* ---------- turno ---------- */
+  .turno{display:flex; flex-direction:column; gap:18px; scroll-margin-top:20px}
+  .turno-head{display:flex; gap:16px; align-items:baseline; flex-wrap:wrap}
+  .num{
+    font-family:var(--display); font-size:34px; font-weight:700;
+    color:var(--indigo); line-height:1; font-variant-numeric:tabular-nums;
+  }
+  .turno-head h2{font-size:25px; flex:1; min-width:200px}
+  .who{font-size:13px; color:var(--ink-2)}
+  .mins{
+    font-size:12px; font-weight:600; color:var(--ink-2);
+    background:var(--panel-2); padding:4px 10px; border-radius:99px; white-space:nowrap;
+  }
+
+  .frames{display:flex; flex-wrap:wrap; gap:6px}
+  .frame{
+    font-size:11.5px; font-weight:600; letter-spacing:.02em;
+    background:var(--indigo-soft); color:var(--indigo-ink);
+    padding:4px 10px; border-radius:5px; font-variant-numeric:tabular-nums;
+  }
+
+  /* texto para leer en voz alta */
+  .decir{
+    border-left:3px solid var(--indigo); padding-left:20px;
+    display:flex; flex-direction:column; gap:14px;
+    font-size:17px; line-height:1.72; color:var(--ink);
+  }
+  .decir b{font-weight:600}
+  .decir .pausa{
+    font-family:var(--display); font-size:11px; font-weight:600;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3);
+  }
+
+  /* notas de apoyo */
+  .notas{
+    background:var(--panel); border:1px solid var(--line-soft);
+    border-radius:10px; padding:16px 20px; box-shadow:var(--shadow);
+    font-size:14px; color:var(--ink-2);
+  }
+  .notas h3{
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:9px;
+  }
+  .notas ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px}
+  .notas strong{color:var(--ink); font-weight:600}
+
+  /* ---------- tabla ---------- */
+  .tabla-wrap{overflow-x:auto}
+  table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+  th,td{text-align:left; padding:9px 14px 9px 0; border-bottom:1px solid var(--line-soft); vertical-align:top}
+  th{
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-3); font-weight:600; border-bottom-color:var(--line);
+  }
+  td b{font-weight:600}
+  .est{font-size:12px; font-weight:600; padding:2px 9px; border-radius:99px; white-space:nowrap}
+  .est-r{background:var(--amber-soft); color:var(--amber)}
+  .est-c{background:var(--green-soft); color:var(--green)}
+
+  /* ---------- preguntas ---------- */
+  .qa{display:flex; flex-direction:column; gap:0}
+  .qa details{border-bottom:1px solid var(--line-soft); padding:2px 0}
+  .qa summary{
+    cursor:pointer; padding:13px 0; font-weight:600; font-size:15.5px;
+    list-style:none; display:flex; gap:11px; align-items:flex-start;
+  }
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::before{content:"?"; color:var(--indigo); font-family:var(--display); font-weight:700}
+  .qa details[open] summary{color:var(--indigo-ink)}
+  .qa p{padding:0 0 15px 22px; font-size:15px; color:var(--ink-2); line-height:1.65}
+
+  /* ---------- cierre ---------- */
+  .aviso{
+    background:var(--amber-soft); border-radius:10px; padding:18px 22px;
+    font-size:14.5px; color:var(--ink); line-height:1.6;
+  }
+  .aviso b{font-weight:600}
+
+  footer{
+    margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+    font-size:12.5px; color:var(--ink-3); display:flex;
+    justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+
+  @media print{
+    body{background:#fff}
+    .rail{display:none}
+    .cols{grid-template-columns:1fr}
+    .turno{break-inside:avoid}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="head">
+    <div>
+      <div class="eyebrow">Proyecto Integrador · 2026-2</div>
+      <h1>Guion de sustentación<br><em>TicketFlow</em></h1>
+    </div>
+    <div class="head-meta">
+      <div><b>Bases de Datos y Programación en Ambiente Web I</b></div>
+      <div>UCEVA · Entrega de la fase de diseño</div>
+      <div>4 expositores · 10 frames en Figma · ~15 min</div>
+    </div>
+  </header>
+
+  <div class="cols">
+
+    <nav class="rail">
+      <h2>Orden</h2>
+      <ol>
+        <li><a href="#t1"><span>01</span> El problema y el sistema de diseño</a></li>
+        <li><a href="#t2"><span>02</span> Entrada al sistema y roles</a></li>
+        <li><a href="#t3"><span>03</span> El flujo de compra</a></li>
+        <li><a href="#t4"><span>04</span> Gestión y cómo se construyó</a></li>
+        <li><a href="#qa"><span>05</span> Preguntas probables</a></li>
+        <li><a href="#falta"><span>06</span> Lo que falta</a></li>
+      </ol>
+      <div class="tot">Cada turno trae el texto para leer y, debajo, notas por si preguntan.</div>
+    </nav>
+
+    <main>
+
+      <!-- ============ TURNO 1 ============ -->
+      <section class="turno" id="t1">
+        <div class="turno-head">
+          <div class="num">01</div>
+          <h2>El problema y el sistema de diseño</h2>
+          <div class="mins">3 min</div>
+        </div>
+        <div class="who">Abre la presentación. Es el único turno que no muestra pantallas de flujo: se queda en el frame de inicio mientras explica la base.</div>
+        <div class="frames"><span class="frame">01 · Inicio</span></div>
+
+        <div class="decir">
+          <p>Buenas. Vamos a presentar <b>TicketFlow</b>, una plataforma web para la venta y reserva de entradas a eventos en Colombia: conciertos, teatro, deportes y festivales.</p>
+          <p>El problema que atacamos es concreto. Hoy, para un evento mediano en una ciudad como Tuluá o Palmira, la venta se hace por WhatsApp y por transferencia: no hay un registro confiable de cuántos cupos quedan, el organizador lleva las cuentas a mano y el comprador no tiene ninguna garantía de que su puesto exista. TicketFlow centraliza eso en un solo sistema con tres roles bien separados: el <b>cliente</b> que reserva, el <b>agente</b> que publica y administra sus eventos, y el <b>administrador</b> que supervisa la plataforma.</p>
+          <p class="pausa">— mostrar el frame de Inicio —</p>
+          <p>Antes de dibujar una sola pantalla definimos un sistema de diseño, porque somos cinco personas trabajando y necesitábamos que todo se viera como un solo producto. Ese sistema tiene tres piezas.</p>
+          <p>Primero, el <b>color</b>: un índigo como color principal, un azul de apoyo y un azul marino para los fondos oscuros, sobre un gris muy claro. Nada de esto es decorativo: el índigo marca siempre la acción principal de la pantalla, y hay tres colores reservados solo para estados —ámbar para <i>reservada</i>, verde para <i>confirmada</i>, rojo para <i>cancelada</i>—. Si un color de estado aparece, significa algo.</p>
+          <p>Segundo, la <b>tipografía</b>: dos familias con papeles distintos. Space Grotesk para los títulos, que le da el carácter, e Inter para todo lo que es interfaz y datos, porque es la que mejor se lee en tablas y formularios.</p>
+          <p>Y tercero, el <b>espaciado y las formas</b>: una rejilla de 12 columnas y una unidad base de 8 píxeles que gobierna todas las separaciones. Las tarjetas van con esquinas de 16 a 20 píxeles y los botones de 10, para que se distinga a simple vista qué es un contenedor y qué es algo en lo que puedes hacer clic.</p>
+          <p>Con eso definido, mis compañeros les muestran las pantallas.</p>
+        </div>
+
+        <div class="notas">
+          <h3>Si preguntan</h3>
+          <ul>
+            <li><strong>Sobre "lo colombiano":</strong> la ambientación está en el contenido —eventos reales de Cali, Medellín, Bogotá y Barranquilla, precios en pesos— y no en la estética. Decidimos a propósito no llenar la interfaz de banderas ni de motivos folclóricos.</li>
+            <li><strong>Colores exactos:</strong> índigo <code>#635BFF</code>, azul <code>#3B82F6</code>, navy <code>#111827</code>, fondo <code>#F8FAFC</code>.</li>
+            <li><strong>Por qué un sistema de diseño y no dibujar directo:</strong> porque el diseño después se traduce a CSS. Cada token de color es una variable, así que la fase de maquetación ya está resuelta cuando lleguemos a ella.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ TURNO 2 ============ -->
+      <section class="turno" id="t2">
+        <div class="turno-head">
+          <div class="num">02</div>
+          <h2>Entrada al sistema y roles</h2>
+          <div class="mins">3 min</div>
+        </div>
+        <div class="who">Recorre las cuatro pantallas públicas. Es el turno que conecta el diseño con el modelo de datos.</div>
+        <div class="frames">
+          <span class="frame">01 · Inicio</span>
+          <span class="frame">02 · Iniciar sesión</span>
+          <span class="frame">03 · Registro cliente</span>
+          <span class="frame">04 · Registro agente</span>
+        </div>
+
+        <div class="decir">
+          <p>Yo les muestro cómo entra un usuario al sistema.</p>
+          <p class="pausa">— frame 01, Inicio —</p>
+          <p>Esta es la página pública, la que ve cualquiera sin haber iniciado sesión. Lo primero que encuentra es el buscador: evento, ciudad y fecha, que son los tres filtros con los que la gente realmente busca. Debajo van las categorías, luego los eventos destacados y una sección de eventos cerca de ti. Un visitante puede navegar y ver todo el catálogo; lo que <b>no</b> puede hacer sin cuenta es reservar. Ese es el punto donde el sistema le pide identificarse.</p>
+          <p class="pausa">— frame 02, Iniciar sesión —</p>
+          <p>El inicio de sesión es una sola pantalla para los tres roles. No hicimos un login para cliente y otro para agente: el usuario entra con su correo y su contraseña, y el sistema lo lleva a un lugar distinto según el rol que tenga guardado. Eso es una decisión de base de datos antes que de diseño, y ahorita la explico.</p>
+          <p class="pausa">— frames 03 y 04, los dos registros —</p>
+          <p>El registro sí está separado, y aquí está la parte interesante. El <b>cliente</b> se registra con nombre, correo, contraseña y ciudad: cuatro campos, porque queremos que ese registro sea lo más corto posible.</p>
+          <p>El <b>agente</b> pide más: además de los datos personales, el nombre de la organización y sus datos de contacto, porque un agente va a publicar eventos y cobrar por ellos. Y hay una diferencia de fondo: la cuenta de agente no queda activa de inmediato, queda pendiente de aprobación del administrador. Un cliente se autogestiona; un agente lo habilita la plataforma.</p>
+          <p>En el modelo de datos esto se resuelve con una sola tabla de <b>Usuario</b> relacionada con una tabla de <b>Rol</b>. No son tres tablas de usuario distintas, es una sola con un rol asociado, y el rol es el que decide a qué pantallas tiene acceso cada quien. Por eso el login puede ser uno solo.</p>
+        </div>
+
+        <div class="notas">
+          <h3>Si preguntan</h3>
+          <ul>
+            <li><strong>Entidades del modelo:</strong> Usuario, Rol, Evento, Categoría, Ciudad/Lugar, Reserva y Pago. Un usuario tiene un rol; un evento pertenece a un agente, a una categoría y a un lugar; una reserva enlaza un usuario con un evento.</li>
+            <li><strong>Contraseñas:</strong> no se guardan en texto plano, van con hash. El formulario en Figma es la vista; la validación y el cifrado van del lado del servidor.</li>
+            <li><strong>Por qué el agente necesita aprobación:</strong> porque publica eventos que cobran dinero. Sin ese filtro cualquiera podría vender entradas de un evento que no existe.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ TURNO 3 ============ -->
+      <section class="turno" id="t3">
+        <div class="turno-head">
+          <div class="num">03</div>
+          <h2>El flujo de compra</h2>
+          <div class="mins">4 min</div>
+        </div>
+        <div class="who">El turno más largo y el más importante: son cuatro pantallas encadenadas. Se cuenta como una historia seguida, no pantalla por pantalla.</div>
+        <div class="frames">
+          <span class="frame">05 · Catálogo</span>
+          <span class="frame">06 · Detalle del evento</span>
+          <span class="frame">07 · Pago y reserva</span>
+          <span class="frame">08 · Confirmación</span>
+        </div>
+
+        <div class="decir">
+          <p>Estas cuatro pantallas son el corazón del proyecto. Las voy a contar como un solo recorrido: una persona que ya inició sesión y quiere una entrada.</p>
+          <p class="pausa">— frame 05, Catálogo —</p>
+          <p>Llega al catálogo. A la izquierda están los filtros —categoría, ciudad, fecha y rango de precio— y a la derecha la rejilla de eventos. Cada tarjeta trae lo mínimo que alguien necesita para decidir: imagen, categoría, título, ciudad, fecha y precio desde. Nada más. Cada uno de esos filtros corresponde a una columna consultable en la base de datos, no son adornos.</p>
+          <p class="pausa">— frame 06, Detalle del evento —</p>
+          <p>Entra al evento. Aquí sí está todo: la descripción, el lugar exacto, la fecha y hora, y el selector de localidad y cantidad de entradas. El precio se recalcula según lo que elija. Y hay un dato que decidimos mostrar siempre: la <b>disponibilidad real</b>. Si quedan pocos cupos, se ve; si está agotado, el botón se deshabilita. Eso viene directo del conteo de reservas contra la capacidad del evento.</p>
+          <p class="pausa">— frame 07, Pago y reserva —</p>
+          <p>Confirma y pasa al pago. Arriba hay un indicador de pasos, porque queríamos que en ningún momento la persona sienta que no sabe dónde está. A la izquierda van los datos de pago y a la derecha el resumen de la compra, que se queda fijo y visible mientras llena el formulario. Ese resumen no se va nunca de la pantalla: es lo que evita que alguien pague algo distinto de lo que creía.</p>
+          <p>Aquí ocurre lo importante del modelo: en el momento en que se confirma, se crea un registro en la tabla <b>Reserva</b>, y esa reserva nace en estado <i>reservada</i>. El cupo queda apartado. Solo cuando el pago se aprueba pasa a <i>confirmada</i>.</p>
+          <p class="pausa">— frame 08, Confirmación —</p>
+          <p>Y esta es la pantalla final: la entrada emitida, con su código de reserva y su QR. El QR es lo que se valida en la puerta del evento. Fíjense que la reserva ya aparece en verde, en estado confirmada, con el mismo código de color que definimos al comienzo.</p>
+          <p>Esos tres estados son la lógica central del sistema, y funcionan así:</p>
+        </div>
+
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr><th>Estado</th><th>Cuándo ocurre</th><th>Qué pasa con el cupo</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="est est-r">Reservada</span></td>
+                <td>Se confirma la reserva, el pago aún no se aprueba</td>
+                <td>Apartado temporalmente</td>
+              </tr>
+              <tr>
+                <td><span class="est est-c">Confirmada</span></td>
+                <td>El pago quedó aprobado y se emite la entrada</td>
+                <td>Descontado en firme</td>
+              </tr>
+              <tr>
+                <td><span class="est" style="background:#FEE2E2;color:#B91C1C">Cancelada</span></td>
+                <td>La cancela el usuario, el agente, o vence el tiempo de pago</td>
+                <td>Vuelve a quedar disponible</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="notas">
+          <h3>Si preguntan</h3>
+          <ul>
+            <li><strong>Pasarela de pago:</strong> el alcance del curso es la reserva y el registro del pago, no integrar una pasarela real. La pantalla está diseñada para conectarse a una después, pero no la implementamos.</li>
+            <li><strong>Sobreventa:</strong> se evita porque el cupo se descuenta al crear la reserva, no al pagar. Si el pago no llega, la reserva se cancela y el cupo se libera.</li>
+            <li><strong>El QR:</strong> codifica el código de reserva, que es único. La validación en puerta consulta ese código contra la base.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ TURNO 4 ============ -->
+      <section class="turno" id="t4">
+        <div class="turno-head">
+          <div class="num">04</div>
+          <h2>Gestión y cómo se construyó</h2>
+          <div class="mins">4 min</div>
+        </div>
+        <div class="who">Cierra. Muestra las dos últimas pantallas, explica el método de trabajo y anuncia lo que sigue.</div>
+        <div class="frames">
+          <span class="frame">09 · Mis reservas</span>
+          <span class="frame">10 · Panel del agente</span>
+        </div>
+
+        <div class="decir">
+          <p>Yo cierro con las dos pantallas de gestión y con cómo hicimos todo esto.</p>
+          <p class="pausa">— frame 09, Mis reservas —</p>
+          <p>Este es el panel del cliente. A la izquierda tiene su menú —inicio, mis entradas, mis reservas, favoritos, historial, perfil y ajustes— y en el centro sus reservas, cada una con su chip de estado. Aquí es donde se ve el valor de haber definido los colores desde el principio: el usuario reconoce de un vistazo cuáles ya están confirmadas y cuáles siguen pendientes, sin tener que leer.</p>
+          <p class="pausa">— frame 10, Panel del agente —</p>
+          <p>Y este es el otro lado del sistema: lo que ve quien organiza. Arriba, los indicadores —eventos activos, entradas vendidas e ingresos— y debajo la tabla de sus eventos. Es la misma información que el cliente, pero agregada y vista desde el negocio. Un agente solo ve sus propios eventos, nunca los de otro; eso también es una restricción del modelo de datos, no del diseño.</p>
+          <p class="pausa">— hablar del método —</p>
+          <p>Sobre cómo lo construimos. No dibujamos las pantallas una por una a mano, y quiero explicar por qué.</p>
+          <p>Primero escribimos el sistema de diseño como un documento: colores, tipografías, espaciados, radios, componentes. Con ese documento generamos las maquetas, y luego las revisamos y las corregimos a nivel de código: unificamos la tipografía, arreglamos gráficos que venían mal cerrados, tradujimos textos que quedaron en inglés y dejamos las imágenes incrustadas para que ningún frame dependiera de un enlace externo. Y de ahí las importamos a Figma.</p>
+          <p>El resultado de trabajar así es que las diez pantallas comparten exactamente el mismo sistema —no hay dos índigos distintos ni dos tamaños de título para lo mismo— y que cuando pasemos a programar, la traducción a HTML y CSS ya está resuelta, porque el diseño nació de ahí.</p>
+          <p>Lo que sigue es la fase de base de datos: montar el esquema en PostgreSQL con las entidades que mencionamos, y sobre eso el backend. Gracias.</p>
+        </div>
+
+        <div class="notas">
+          <h3>Si preguntan</h3>
+          <ul>
+            <li><strong>Si preguntan si usaron IA:</strong> decirlo sin rodeos y explicar el criterio. Se usó para generar las maquetas a partir de un sistema de diseño que el equipo definió; el sistema, las decisiones de flujo, el modelo de datos y la corrección de cada pantalla son del equipo. Es una herramienta de producción, igual que usar una librería.</li>
+            <li><strong>Qué se corrigió a mano:</strong> tipografías que salían al tamaño equivocado, curvas de gráficos incompletas, textos en inglés en el panel del cliente y una tarjeta del buscador que quedaba cortada.</li>
+            <li><strong>Por qué Figma y no directo a HTML:</strong> porque Figma permite iterar el diseño y discutirlo entre los cinco antes de escribir código, que es más barato que corregir maquetación ya programada.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ PREGUNTAS ============ -->
+      <section class="turno" id="qa">
+        <div class="turno-head">
+          <div class="num">05</div>
+          <h2>Preguntas probables</h2>
+          <div class="mins">3 min</div>
+        </div>
+        <div class="who">Responde quien tenga el turno más cercano al tema. Si nadie sabe, se dice que está pendiente de definir; no se inventa.</div>
+
+        <div class="qa">
+          <details>
+            <summary>¿Por qué separaron cliente y agente en el registro pero no en el login?</summary>
+            <p>Porque el rol es un dato del usuario, no un sistema aparte. Una sola tabla de Usuario con su Rol asociado permite un solo login; lo que cambia después de entrar es a qué pantallas tiene acceso. Separar el registro sí se justifica porque los datos que se piden son distintos y el agente necesita aprobación.</p>
+          </details>
+          <details>
+            <summary>¿Qué pasa si dos personas reservan la última entrada al mismo tiempo?</summary>
+            <p>La reserva se crea contra la capacidad del evento, y el descuento del cupo ocurre en la misma transacción que crea la reserva. La segunda solicitud encuentra la capacidad en cero y se rechaza. Es una restricción que se resuelve en la base de datos, no en la interfaz.</p>
+          </details>
+          <details>
+            <summary>¿Ya está funcionando?</summary>
+            <p>No, y no debería estarlo todavía. Esta es la fase de diseño de interfaz. Lo que se presenta hoy son las pantallas y el sistema de diseño; la siguiente entrega es el esquema en PostgreSQL y después el backend.</p>
+          </details>
+          <details>
+            <summary>¿Es responsive?</summary>
+            <p>El sistema está definido para dos rejillas, 12 columnas en escritorio y 4 en móvil, con márgenes de 16 píxeles en móvil y 40 en escritorio, y el contenido tope a 1280 píxeles de ancho. Los frames que presentamos hoy son la versión de escritorio.</p>
+          </details>
+          <details>
+            <summary>¿Por qué esa paleta y esas tipografías?</summary>
+            <p>El índigo transmite tecnología y confianza, que es lo que necesita una plataforma donde la gente va a pagar. Las dos tipografías cumplen papeles distintos: Space Grotesk le da carácter a los títulos y Inter es la que mejor se lee en tablas, formularios y datos, que es la mayor parte de la aplicación.</p>
+          </details>
+          <details>
+            <summary>¿Cómo se dividieron el trabajo entre cinco?</summary>
+            <p>Por bloques funcionales, no por pantallas sueltas: el sistema de diseño y la página pública, la autenticación, el flujo de compra, los paneles de gestión y la administración. Así cada bloque queda coherente por dentro y el sistema de diseño lo mantiene coherente por fuera.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ============ LO QUE FALTA ============ -->
+      <section class="turno" id="falta">
+        <div class="turno-head">
+          <div class="num">06</div>
+          <h2>Lo que falta y cómo decirlo</h2>
+          <div class="mins">—</div>
+        </div>
+
+        <div class="aviso">
+          <p>Quedan <b>cuatro frames sin exportar</b>: crear evento, reservas por evento, dashboard del administrador y reportes. No se mencionan como algo que faltó — se mencionan como el alcance de la siguiente entrega. Si el profesor pregunta, la respuesta es:</p>
+          <p style="margin-top:12px"><i>“Hoy presentamos el recorrido completo del cliente y la entrada del agente. Las pantallas de administración —creación de eventos, control de reservas y los reportes del administrador— están diseñadas y entran en la siguiente entrega junto con el esquema de base de datos, porque dependen de las consultas que todavía estamos definiendo.”</i></p>
+        </div>
+
+        <div class="notas">
+          <h3>Antes de entrar</h3>
+          <ul>
+            <li>Abrir Figma en <strong>modo presentación</strong> y dejar el frame 01 en pantalla antes de empezar.</li>
+            <li>Verificar el orden de los frames en el canvas: deben ir de izquierda a derecha 01 → 10.</li>
+            <li>Cada quien sabe en qué frame empieza y en cuál termina, para que la transición entre expositores no tenga silencios.</li>
+            <li><strong>No leer palabra por palabra.</strong> Este guion es para saber qué decir y en qué orden; lo que se dice en voz alta debe sonar a explicación, no a lectura.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <div>TicketFlow · Proyecto Integrador 2026-2 · UCEVA</div>
+    <div>Equipo de 5 integrantes · 4 expositores</div>
+  </footer>
+</div>

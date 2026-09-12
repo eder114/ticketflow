@@ -1,0 +1,28 @@
+﻿Summary,Issue Type,Description,Sprint,Story point estimate,Labels,Labels
+Modelo entidad-relacion y diccionario de datos,Tarea,Talla M (5 SP). Responsable sugerido: EG,SDGE Sprint 2,5,base-de-datos,EG
+Esquema PostgreSQL: usuarios y roles,Tarea,Talla S (3 SP). Responsable sugerido: EG,SDGE Sprint 2,3,base-de-datos,EG
+"Esquema PostgreSQL: eventos, categorias y lugares",Tarea,Talla M (5 SP). Responsable sugerido: EG,SDGE Sprint 2,5,base-de-datos,EG
+"Esquema PostgreSQL: reservas, pagos y estados",Tarea,Talla M (5 SP). Responsable sugerido: EG,SDGE Sprint 2,5,base-de-datos,EG
+"Datos de prueba: eventos, ciudades y categorias",Tarea,Talla S (3 SP). Responsable sugerido: I5,SDGE Sprint 2,3,base-de-datos,I5
+Backend de registro e inicio de sesion,Tarea,Talla L (8 SP). Responsable sugerido: JD,SDGE Sprint 2,8,autenticacion,JD
+Control de acceso por rol,Tarea,Talla M (5 SP). Responsable sugerido: JD,SDGE Sprint 2,5,autenticacion,JD
+Aprobacion de agentes por el administrador,Tarea,Talla S (3 SP). Responsable sugerido: JD,SDGE Sprint 2,3,autenticacion,JD
+Panel del cliente: estructura y menu,Tarea,Talla M (5 SP). Responsable sugerido: I4,SDGE Sprint 2,5,frontend,I4
+Listado de eventos con paginacion,Tarea,Talla M (5 SP). Responsable sugerido: EM,SDGE Sprint 3,5,catalogo,EM
+Filtros y buscador de eventos,Tarea,Talla L (8 SP). Responsable sugerido: EM,SDGE Sprint 3,8,catalogo,EM
+Detalle del evento,Tarea,Talla M (5 SP). Responsable sugerido: I4,SDGE Sprint 3,5,catalogo,I4
+Crear y editar eventos (agente),Tarea,Talla L (8 SP). Responsable sugerido: EG,SDGE Sprint 3,8,gestion-de-eventos,EG
+Carga de imagenes de eventos,Tarea,Talla S (3 SP). Responsable sugerido: EG,SDGE Sprint 3,3,gestion-de-eventos,EG
+Control de capacidad y disponibilidad,Tarea,Talla M (5 SP). Responsable sugerido: JD,SDGE Sprint 3,5,gestion-de-eventos,JD
+Crear reserva y apartar cupo,Tarea,Talla L (8 SP). Responsable sugerido: JD,SDGE Sprint 3,8,reservas,JD
+Pantalla de pago con resumen de compra,Tarea,Talla M (5 SP). Responsable sugerido: EM,SDGE Sprint 3,5,reservas,EM
+"Confirmacion, codigo de reserva y QR",Tarea,Talla M (5 SP). Responsable sugerido: I5,SDGE Sprint 3,5,reservas,I5
+Mis reservas del cliente,Tarea,Talla M (5 SP). Responsable sugerido: I4,SDGE Sprint 4,5,reservas,I4
+Cancelar reserva y liberar el cupo,Tarea,Talla M (5 SP). Responsable sugerido: JD,SDGE Sprint 4,5,reservas,JD
+Reservas por evento (vista del agente),Tarea,Talla M (5 SP). Responsable sugerido: EG,SDGE Sprint 4,5,gestion-de-eventos,EG
+Panel del agente: indicadores y tabla,Tarea,Talla M (5 SP). Responsable sugerido: I5,SDGE Sprint 4,5,gestion-de-eventos,I5
+Dashboard del administrador,Tarea,Talla M (5 SP). Responsable sugerido: I4,SDGE Sprint 4,5,administracion,I4
+Reportes: ventas por evento y por categoria,Tarea,Talla L (8 SP). Responsable sugerido: EM,SDGE Sprint 4,8,administracion,EM
+Pruebas del flujo completo,Tarea,Talla M (5 SP). Tarea de todo el equipo,SDGE Sprint 4,5,entrega,
+Despliegue,Tarea,Talla M (5 SP). Responsable sugerido: JD,SDGE Sprint 4,5,entrega,JD
+Manual de usuario y documentacion tecnica,Tarea,Talla M (5 SP). Responsable sugerido: I5,SDGE Sprint 4,5,entrega,I5
