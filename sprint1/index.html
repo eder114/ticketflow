@@ -61,62 +61,39 @@
 
   <main id="contenido">
 
-    <!-- SDGE-4 · Sección hero con buscador de eventos
-         Dos columnas: el banner a la izquierda, el texto y el buscador
-         a la derecha. Bloque compacto, no una franja a todo el ancho. -->
+    <!-- SDGE-4 · Sección hero con buscador de eventos -->
     <section class="hero">
-      <div class="contenedor hero-rejilla">
+      <div class="contenedor">
+        <p class="overline">Más de 2.800 eventos en todo el país</p>
+        <h1>Tu próximo plan empieza aquí</h1>
+        <p>Conciertos, teatro, deportes y festivales en Colombia. Reserva tu cupo en
+           segundos y recibe tu entrada al instante.</p>
 
-        <div class="hero-banner">
-          <img src="img/festival-noche.jpg" alt="Público con las manos en alto en un festival nocturno">
-          <div class="hero-banner-pie">
-            <span class="etiqueta">Lo más reservado</span>
-            <h3>Festival de Música Cali Vive</h3>
-            <p>24 de septiembre · Cali, Valle del Cauca</p>
+        <form class="buscador" role="search" aria-label="Buscar eventos">
+          <div class="campo">
+            <label for="q-evento">Evento</label>
+            <input type="search" id="q-evento" name="evento" placeholder="Artista, obra o equipo">
           </div>
-        </div>
-
-        <div class="hero-texto">
-          <p class="overline">Más de 2.800 eventos en todo el país</p>
-          <h1>Tu próximo plan empieza aquí</h1>
-          <p>Conciertos, teatro, deportes y festivales en Colombia. Reserva tu cupo en
-             segundos y recibe tu entrada al instante.</p>
-
-          <form class="buscador" role="search" aria-label="Buscar eventos">
-            <div class="campo">
-              <label for="q-evento">Evento</label>
-              <input type="search" id="q-evento" name="evento" placeholder="Artista, obra o equipo">
-            </div>
-            <div class="campo">
-              <label for="q-ciudad">Ciudad</label>
-              <select id="q-ciudad" name="ciudad">
-                <option value="">Todas las ciudades</option>
-                <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-                <option>Barranquilla</option><option>Tuluá</option><option>Palmira</option>
-              </select>
-            </div>
-            <div class="campo">
-              <label for="q-fecha">Fecha</label>
-              <input type="date" id="q-fecha" name="fecha">
-            </div>
-            <div class="campo">
-              <label for="q-categoria">Categoría</label>
-              <select id="q-categoria" name="categoria">
-                <option value="">Todas</option>
-                <option>Conciertos</option><option>Deportes</option>
-                <option>Teatro</option><option>Festivales</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primario btn-lg">Buscar eventos</button>
-          </form>
-
-          <div class="hero-datos">
-            <div class="hero-dato"><strong>2.845</strong><span>Eventos activos</span></div>
-            <div class="hero-dato"><strong>34</strong><span>Ciudades</span></div>
-            <div class="hero-dato"><strong>120 mil</strong><span>Entradas emitidas</span></div>
+          <div class="campo">
+            <label for="q-ciudad">Ciudad</label>
+            <select id="q-ciudad" name="ciudad">
+              <option value="">Todas las ciudades</option>
+              <option>Bogotá</option><option>Medellín</option><option>Cali</option>
+              <option>Barranquilla</option><option>Tuluá</option><option>Palmira</option>
+            </select>
           </div>
-        </div>
+          <div class="campo">
+            <label for="q-fecha">Fecha</label>
+            <input type="date" id="q-fecha" name="fecha">
+          </div>
+          <button type="submit" class="btn btn-primario btn-lg">Buscar</button>
+        </form>
 
+        <div class="hero-datos">
+          <div class="hero-dato"><strong>2.845</strong><span>Eventos activos</span></div>
+          <div class="hero-dato"><strong>34</strong><span>Ciudades</span></div>
+          <div class="hero-dato"><strong>120 mil</strong><span>Entradas emitidas</span></div>
+        </div>
       </div>
     </section>
 
