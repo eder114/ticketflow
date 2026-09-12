@@ -87,6 +87,8 @@ img{display:block;max-width:100%}
 button{font-family:inherit}
 
 :focus-visible{outline:3px solid var(--indigo);outline-offset:2px;border-radius:4px}
+/* El enrutador enfoca el h1 para los lectores de pantalla; ese foco no se pinta. */
+[tabindex="-1"]:focus{outline:none}
 
 .contenedor{
   width:100%; max-width:var(--ancho-max);
@@ -227,13 +229,13 @@ button{font-family:inherit}
 /* ---------- 6. Formularios · SDGE-8 ---------- */
 .campo{display:flex;flex-direction:column;gap:7px}
 .campo label{
-  font-size:11px;font-weight:700;letter-spacing:.1em;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--texto-suave);
 }
 .campo input,.campo select,.campo textarea{
-  width:100%;padding:13px 15px;border-radius:var(--r-btn);
+  width:100%;padding:15px 16px;border-radius:var(--r-btn);
   border:1px solid var(--linea);background:#fff;
-  font-family:inherit;font-size:15px;color:var(--navy);
+  font-family:inherit;font-size:16px;color:var(--navy);
   transition:border-color .15s ease, box-shadow .15s ease;
 }
 .campo input::placeholder{color:var(--texto-tenue)}
@@ -283,32 +285,50 @@ button{font-family:inherit}
 
 .acceso-form{
   display:flex;flex-direction:column;justify-content:center;
-  padding:var(--e12) clamp(24px,6vw,80px);background:#fff;
+  padding:40px clamp(24px,4.5vw,60px);background:#fff;
 }
-.acceso-form-interior{width:100%;max-width:440px;margin-inline:auto}
-.acceso-titulo{margin-bottom:var(--e2)}
-.acceso-sub{color:var(--texto-suave);margin-bottom:var(--e8)}
+.acceso-form-interior{width:100%;max-width:480px;margin-inline:auto}
+.marca-acceso{margin-bottom:28px}
+.acceso-titulo{font-size:clamp(30px,3.2vw,38px);margin-bottom:var(--e2)}
+.acceso-sub{color:var(--texto-suave);font-size:15.5px;margin-bottom:26px}
 .acceso-pie{
   margin-top:var(--e6);font-size:14.5px;color:var(--texto-suave);text-align:center;
 }
 .acceso-pie a{color:var(--indigo-700);font-weight:600}
 .acceso-pie a:hover{text-decoration:underline}
 
+/* Panel lateral con fotografía real.
+   Antes era navy plano y quedaba medio panel vacío. Ahora la foto ocupa
+   todo el alto, un velo vertical de marca garantiza que el texto se lea,
+   y el contenido se ancla abajo en vez de flotar en el centro. */
 .acceso-lateral{
   background:var(--navy);color:#fff;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:var(--e12) clamp(24px,5vw,64px);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:44px clamp(24px,4vw,52px);
 }
-.acceso-lateral::before{
-  content:"";position:absolute;width:420px;height:420px;border-radius:50%;
-  background:var(--indigo);filter:blur(120px);opacity:.32;top:-120px;right:-120px;
+.acceso-lateral::before{            /* la fotografía */
+  content:"";position:absolute;inset:0;
+  background-image:var(--foto);background-size:cover;background-position:center;
+  transform:scale(1.04);
+}
+.acceso-lateral::after{             /* velo de marca, de arriba a abajo */
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(17,24,39,.30) 0%, rgba(17,24,39,.86) 52%, rgba(17,24,39,.97) 100%),
+    linear-gradient(135deg, rgba(99,91,255,.34) 0%, rgba(59,130,246,.16) 60%, transparent 100%);
 }
 .acceso-lateral > *{position:relative;z-index:2}
+
+/* Una foto por pantalla */
+#vista-iniciar-sesion   .acceso-lateral{--foto:url('../img/festival-noche.jpg')}
+#vista-registro-cliente .acceso-lateral{--foto:url('../img/concierto-artista.jpg')}
+#vista-registro-agente  .acceso-lateral{--foto:url('../img/evento-ambiente.jpg')}
+#vista-registro-admin   .acceso-lateral{--foto:url('../img/teatro-sala.jpg')}
 .acceso-lateral h2{margin-bottom:var(--e4)}
 .acceso-lateral p{color:#CBD5E1;max-width:42ch}
 @media (max-width:960px){ .acceso-lateral{display:none} }
 
-.lista-ventajas{list-style:none;display:flex;flex-direction:column;gap:var(--e4);margin-top:var(--e8)}
+.lista-ventajas{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:26px}
 .lista-ventajas li{display:flex;gap:var(--e3);align-items:flex-start;font-size:15px;color:#E2E8F0}
 .lista-ventajas li::before{
   content:"✓";display:grid;place-items:center;flex-shrink:0;
@@ -319,7 +339,7 @@ button{font-family:inherit}
 /* Entrada decorativa del panel lateral */
 .entrada{
   background:#fff;color:var(--navy);border-radius:var(--r-card-lg);
-  padding:var(--e5);margin-top:var(--e10);max-width:330px;
+  padding:22px;margin-top:26px;max-width:none;
   box-shadow:var(--sombra-lg);position:relative;
 }
 .entrada::after{
@@ -340,8 +360,15 @@ button{font-family:inherit}
    Esta pantalla no existía en Figma. Se diseñó sobre el mismo sistema,
    pero deliberadamente distinta de los otros dos registros: el
    administrador no se autogestiona, entra por invitación. */
+/* El panel de administrador conserva su foto, pero con un velo más frío
+   y más cerrado que los otros tres: es una pantalla de acceso restringido
+   y tiene que sentirse distinta. */
 .acceso-lateral.admin{background:#0B1120}
-.acceso-lateral.admin::before{background:var(--azul);opacity:.26}
+.acceso-lateral.admin::after{
+  background:
+    linear-gradient(180deg, rgba(11,17,32,.55) 0%, rgba(11,17,32,.92) 50%, rgba(11,17,32,.98) 100%),
+    linear-gradient(135deg, rgba(59,130,246,.26) 0%, transparent 65%);
+}
 
 .sello{
   display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
@@ -352,7 +379,7 @@ button{font-family:inherit}
 }
 
 .permisos{
-  list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:32px;
+  list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:26px;
   border:1px solid rgba(255,255,255,.10);border-radius:var(--r-card);overflow:hidden;
 }
 .permisos li{
