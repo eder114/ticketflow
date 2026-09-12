@@ -352,76 +352,70 @@
 <!-- ####################################################################### -->
 <div class="vista" id="vista-iniciar-sesion" data-titulo="Iniciar sesión" hidden>
   <div class="acceso">
+    <div class="acceso-columna">
 
-    <section class="acceso-form">
-      <div class="acceso-form-interior">
-
-        <a href="#/inicio" class="marca marca-acceso">
+      <a href="#/inicio" class="marca" style="align-self:center">
           <span class="marca-logo" aria-hidden="true">◆</span> TicketFlow
         </a>
 
-        <h1 class="acceso-titulo">Bienvenido de nuevo</h1>
-        <p class="acceso-sub">Entra a tu cuenta para ver tus reservas y tus entradas.</p>
-
-        <form data-validar class="form-pila" novalidate>
-
-          <div class="campo">
-            <label for="log-correo">Correo electrónico</label>
-            <input type="email" id="log-correo" name="correo"
-                   placeholder="nombre@correo.com" autocomplete="email"
-                   data-reglas="requerido correo" aria-describedby="err-log-correo">
-            <p class="error" id="err-log-correo" role="alert"></p>
+      <div class="tarjeta-acceso">
+        <div class="tarjeta-foto">
+          <img src="img/festival-noche.jpg" alt="Público con las manos en alto en un festival">
+          <div class="tarjeta-foto-texto">
+            <span class="overline">2.845 eventos activos</span>
+            <h1>Bienvenido de nuevo</h1>
           </div>
+        </div>
 
-          <div class="campo">
-            <label for="log-clave">Contraseña</label>
-            <input type="password" id="log-clave" name="clave"
-                   placeholder="Tu contraseña" autocomplete="current-password"
-                   data-reglas="requerido" aria-describedby="err-log-clave">
-            <p class="error" id="err-log-clave" role="alert"></p>
-          </div>
+        <div class="tarjeta-cuerpo">
+          <p class="acceso-sub">Entra a tu cuenta para ver tus reservas y tus entradas.</p>
 
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
-            <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400">
-              <input type="checkbox" name="recordar" style="width:auto"> Mantener la sesión abierta
-            </label>
-            <a href="#/iniciar-sesion" style="font-size:14px;color:var(--indigo-700);font-weight:600">¿Olvidaste tu contraseña?</a>
-          </div>
+      <form data-validar class="form-pila" novalidate>
 
-          <p class="aviso" data-exito hidden>
-            Los datos son válidos. El inicio de sesión real se conecta en el Sprint 2,
-            cuando exista la tabla de usuarios en PostgreSQL.
-          </p>
+                <div class="campo">
+                  <label for="log-correo">Correo electrónico</label>
+                  <input type="email" id="log-correo" name="correo"
+                         placeholder="nombre@correo.com" autocomplete="email"
+                         data-reglas="requerido correo" aria-describedby="err-log-correo">
+                  <p class="error" id="err-log-correo" role="alert"></p>
+                </div>
 
-          <button type="submit" class="btn btn-primario btn-lg btn-bloque">Iniciar sesión</button>
-        </form>
+                <div class="campo">
+                  <label for="log-clave">Contraseña</label>
+                  <input type="password" id="log-clave" name="clave"
+                         placeholder="Tu contraseña" autocomplete="current-password"
+                         data-reglas="requerido" aria-describedby="err-log-clave">
+                  <p class="error" id="err-log-clave" role="alert"></p>
+                </div>
 
-        <p class="acceso-pie">
-          ¿No tienes cuenta? <a href="#/registro-cliente">Regístrate como cliente</a><br>
-          <span style="font-size:13.5px">¿Organizas eventos? <a href="#/registro-agente">Registra tu organización</a></span>
-        </p>
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+                  <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400">
+                    <input type="checkbox" name="recordar" style="width:auto"> Mantener la sesión abierta
+                  </label>
+                  <a href="#/iniciar-sesion" style="font-size:14px;color:var(--indigo-700);font-weight:600">¿Olvidaste tu contraseña?</a>
+                </div>
 
-      </div>
-    </section>
+                <p class="aviso" data-exito hidden>
+                  Los datos son válidos. El inicio de sesión real se conecta en el Sprint 2,
+                  cuando exista la tabla de usuarios en PostgreSQL.
+                </p>
 
-    <aside class="acceso-lateral">
-      <p class="overline" style="color:#A8A3FF">Tu entrada, siempre contigo</p>
-      <h2>Todas tus entradas en un solo lugar</h2>
-      <p>No más capturas de pantalla ni comprobantes perdidos en el chat.
-         Cada reserva queda guardada en tu cuenta con su código.</p>
-
-      <div class="entrada">
-        <p class="entrada-cat">Festival</p>
-        <h4>Festival de Música Cali Vive</h4>
-        <p class="entrada-meta">24 de septiembre · Cali, Valle del Cauca</p>
-        <p class="entrada-meta" style="margin-top:10px"><span class="chip chip-confirmada">Confirmada</span></p>
-        <div class="entrada-codigo">
-          <span>TF-2026-9F42B</span>
-          <span aria-hidden="true" style="font-size:26px">▦</span>
+                <button type="submit" class="btn btn-primario btn-lg btn-bloque">Iniciar sesión</button>
+              </form>
+            <div class="separador"><span>o</span></div>
+            <div class="accesos-rapidos">
+              <a href="#/registro-cliente">Crear cuenta de cliente</a>
+              <a href="#/registro-agente">Registrar organización</a>
+            </div>
         </div>
       </div>
-    </aside>
 
+      <p class="acceso-pie">
+                ¿No tienes cuenta? <a href="#/registro-cliente">Regístrate como cliente</a><br>
+                <span style="font-size:13.5px">¿Organizas eventos? <a href="#/registro-agente">Registra tu organización</a></span>
+              </p>
+
+    </div>
   </div>
 </div>
 
@@ -431,105 +425,98 @@
 <!-- ####################################################################### -->
 <div class="vista" id="vista-registro-cliente" data-titulo="Crear cuenta de cliente" hidden>
   <div class="acceso">
+    <div class="acceso-columna">
 
-    <section class="acceso-form">
-      <div class="acceso-form-interior">
-
-        <a href="#/inicio" class="marca marca-acceso">
+      <a href="#/inicio" class="marca" style="align-self:center">
           <span class="marca-logo" aria-hidden="true">◆</span> TicketFlow
         </a>
 
-        <h1 class="acceso-titulo">Crea tu cuenta</h1>
-        <p class="acceso-sub">Cuatro datos y listo. Después reservas en dos clics.</p>
-
-        <form data-validar class="form-pila" novalidate>
-
-          <div class="campo">
-            <label for="cli-nombre">Nombre completo</label>
-            <input type="text" id="cli-nombre" name="nombre"
-                   placeholder="Como aparece en tu documento" autocomplete="name"
-                   data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-cli-nombre">
-            <p class="error" id="err-cli-nombre" role="alert"></p>
+      <div class="tarjeta-acceso">
+        <div class="tarjeta-foto">
+          <img src="img/concierto-artista.jpg" alt="Artista cantando frente al público">
+          <div class="tarjeta-foto-texto">
+            <span class="overline">Cuenta de cliente</span>
+            <h1>Crea tu cuenta</h1>
           </div>
+        </div>
 
-          <div class="campo">
-            <label for="cli-correo">Correo electrónico</label>
-            <input type="email" id="cli-correo" name="correo"
-                   placeholder="nombre@correo.com" autocomplete="email"
-                   data-reglas="requerido correo" aria-describedby="err-cli-correo">
-            <p class="error" id="err-cli-correo" role="alert"></p>
-            <p class="ayuda">Ahí te llegan tus entradas, revisa que esté bien escrito.</p>
-          </div>
+        <div class="tarjeta-cuerpo">
+          <p class="acceso-sub">Cuatro datos y listo. Después reservas en dos clics.</p>
 
-          <div class="campo">
-            <label for="cli-ciudad">Ciudad</label>
-            <select id="cli-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-cli-ciudad">
-              <option value="">Elige tu ciudad</option>
-              <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-              <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
-              <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
-            </select>
-            <p class="error" id="err-cli-ciudad" role="alert"></p>
-            <p class="ayuda">La usamos para mostrarte primero los eventos cerca de ti.</p>
-          </div>
+      <form data-validar class="form-pila" novalidate>
 
-          <div class="campo">
-            <label for="cli-clave">Contraseña</label>
-            <input type="password" id="cli-clave" name="clave"
-                   placeholder="Mínimo 8 caracteres" autocomplete="new-password"
-                   data-reglas="requerido clave" data-medidor="cli-fuerza" aria-describedby="err-cli-clave">
-            <div class="fuerza" id="cli-fuerza" data-nivel="0" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <p class="error" id="err-cli-clave" role="alert"></p>
-            <p class="ayuda">Al menos 8 caracteres, con una letra y un número.</p>
-          </div>
+                <div class="campo">
+                  <label for="cli-nombre">Nombre completo</label>
+                  <input type="text" id="cli-nombre" name="nombre"
+                         placeholder="Como aparece en tu documento" autocomplete="name"
+                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-cli-nombre">
+                  <p class="error" id="err-cli-nombre" role="alert"></p>
+                </div>
 
-          <div class="campo">
-            <label for="cli-clave2">Confirma tu contraseña</label>
-            <input type="password" id="cli-clave2" name="clave2"
-                   placeholder="Escríbela otra vez" autocomplete="new-password"
-                   data-reglas="requerido confirmar" data-confirmar="cli-clave" aria-describedby="err-cli-clave2">
-            <p class="error" id="err-cli-clave2" role="alert"></p>
-          </div>
+                <div class="campo">
+                  <label for="cli-correo">Correo electrónico</label>
+                  <input type="email" id="cli-correo" name="correo"
+                         placeholder="nombre@correo.com" autocomplete="email"
+                         data-reglas="requerido correo" aria-describedby="err-cli-correo">
+                  <p class="error" id="err-cli-correo" role="alert"></p>
+                  <p class="ayuda">Ahí te llegan tus entradas, revisa que esté bien escrito.</p>
+                </div>
 
-          <div class="campo">
-            <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
-              <input type="checkbox" id="cli-terminos" name="terminos" style="width:auto;margin-top:3px"
-                     data-reglas="aceptar" aria-describedby="err-cli-terminos">
-              <span>Acepto los <a href="#/registro-cliente" style="color:var(--indigo-700);font-weight:600">términos y condiciones</a>
-                    y el <a href="#/registro-cliente" style="color:var(--indigo-700);font-weight:600">tratamiento de mis datos</a>.</span>
-            </label>
-            <p class="error" id="err-cli-terminos" role="alert"></p>
-          </div>
+                <div class="campo">
+                  <label for="cli-ciudad">Ciudad</label>
+                  <select id="cli-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-cli-ciudad">
+                    <option value="">Elige tu ciudad</option>
+                    <option>Bogotá</option><option>Medellín</option><option>Cali</option>
+                    <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
+                    <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
+                  </select>
+                  <p class="error" id="err-cli-ciudad" role="alert"></p>
+                  <p class="ayuda">La usamos para mostrarte primero los eventos cerca de ti.</p>
+                </div>
 
-          <p class="aviso" data-exito hidden>
-            Todos los datos son válidos. La cuenta queda activa de inmediato en cuanto
-            exista la base de datos, en el Sprint 2.
-          </p>
+                <div class="campo">
+                  <label for="cli-clave">Contraseña</label>
+                  <input type="password" id="cli-clave" name="clave"
+                         placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                         data-reglas="requerido clave" data-medidor="cli-fuerza" aria-describedby="err-cli-clave">
+                  <div class="fuerza" id="cli-fuerza" data-nivel="0" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <p class="error" id="err-cli-clave" role="alert"></p>
+                  <p class="ayuda">Al menos 8 caracteres, con una letra y un número.</p>
+                </div>
 
-          <button type="submit" class="btn btn-primario btn-lg btn-bloque">Crear mi cuenta</button>
-        </form>
+                <div class="campo">
+                  <label for="cli-clave2">Confirma tu contraseña</label>
+                  <input type="password" id="cli-clave2" name="clave2"
+                         placeholder="Escríbela otra vez" autocomplete="new-password"
+                         data-reglas="requerido confirmar" data-confirmar="cli-clave" aria-describedby="err-cli-clave2">
+                  <p class="error" id="err-cli-clave2" role="alert"></p>
+                </div>
 
-        <p class="acceso-pie">¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a></p>
+                <div class="campo">
+                  <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
+                    <input type="checkbox" id="cli-terminos" name="terminos" style="width:auto;margin-top:3px"
+                           data-reglas="aceptar" aria-describedby="err-cli-terminos">
+                    <span>Acepto los <a href="#/registro-cliente" style="color:var(--indigo-700);font-weight:600">términos y condiciones</a>
+                          y el <a href="#/registro-cliente" style="color:var(--indigo-700);font-weight:600">tratamiento de mis datos</a>.</span>
+                  </label>
+                  <p class="error" id="err-cli-terminos" role="alert"></p>
+                </div>
 
+                <p class="aviso" data-exito hidden>
+                  Todos los datos son válidos. La cuenta queda activa de inmediato en cuanto
+                  exista la base de datos, en el Sprint 2.
+                </p>
+
+                <button type="submit" class="btn btn-primario btn-lg btn-bloque">Crear mi cuenta</button>
+              </form>
+        </div>
       </div>
-    </section>
 
-    <aside class="acceso-lateral">
-      <p class="overline" style="color:#A8A3FF">Cuenta de cliente</p>
-      <h2>Reserva sin perseguir a nadie por WhatsApp</h2>
-      <p>Tu cupo queda apartado a tu nombre desde que confirmas, no cuando
-         alguien alcance a leer tu mensaje.</p>
+      <p class="acceso-pie">¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a></p>
 
-      <ul class="lista-ventajas">
-        <li>Ves la disponibilidad real de cada evento antes de reservar</li>
-        <li>Tu entrada llega con un código QR que se valida en la puerta</li>
-        <li>Todo tu historial de reservas queda guardado en tu cuenta</li>
-        <li>Cancelas desde la aplicación y el cupo se libera solo</li>
-      </ul>
-    </aside>
-
+    </div>
   </div>
 </div>
 
@@ -539,152 +526,145 @@
 <!-- ####################################################################### -->
 <div class="vista" id="vista-registro-agente" data-titulo="Registrar organización" hidden>
   <div class="acceso">
+    <div class="acceso-columna">
 
-    <section class="acceso-form">
-      <div class="acceso-form-interior">
-
-        <a href="#/inicio" class="marca marca-acceso">
+      <a href="#/inicio" class="marca" style="align-self:center">
           <span class="marca-logo" aria-hidden="true">◆</span> TicketFlow
         </a>
 
-        <h1 class="acceso-titulo">Registra tu organización</h1>
-        <p class="acceso-sub">Publica eventos y controla tus ventas desde un solo panel.</p>
-
-        <form data-validar class="form-pila" novalidate>
-
-          <p class="overline" style="margin-top:8px">Datos del responsable</p>
-
-          <div class="campo">
-            <label for="ag-nombre">Nombre completo</label>
-            <input type="text" id="ag-nombre" name="nombre"
-                   placeholder="Quien administra la cuenta" autocomplete="name"
-                   data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-ag-nombre">
-            <p class="error" id="err-ag-nombre" role="alert"></p>
+      <div class="tarjeta-acceso">
+        <div class="tarjeta-foto">
+          <img src="img/evento-ambiente.jpg" alt="Público frente a un escenario iluminado">
+          <div class="tarjeta-foto-texto">
+            <span class="overline">Cuenta de organizador</span>
+            <h1>Registra tu organización</h1>
           </div>
+        </div>
 
-          <div class="fila">
-            <div class="campo">
-              <label for="ag-correo">Correo electrónico</label>
-              <input type="email" id="ag-correo" name="correo"
-                     placeholder="nombre@organizacion.com" autocomplete="email"
-                     data-reglas="requerido correo" aria-describedby="err-ag-correo">
-              <p class="error" id="err-ag-correo" role="alert"></p>
-            </div>
-            <div class="campo">
-              <label for="ag-telefono">Teléfono de contacto</label>
-              <input type="tel" id="ag-telefono" name="telefono"
-                     placeholder="300 123 4567" autocomplete="tel"
-                     data-reglas="requerido telefono" aria-describedby="err-ag-telefono">
-              <p class="error" id="err-ag-telefono" role="alert"></p>
-            </div>
-          </div>
+        <div class="tarjeta-cuerpo">
+          <p class="acceso-sub">Publica eventos y controla tus ventas desde un solo panel.</p>
 
-          <p class="overline" style="margin-top:16px">Datos de la organización</p>
+      <form data-validar class="form-pila" novalidate>
 
-          <div class="campo">
-            <label for="ag-organizacion">Nombre de la organización</label>
-            <input type="text" id="ag-organizacion" name="organizacion"
-                   placeholder="Razón social o nombre comercial"
-                   data-reglas="requerido minimo" data-minimo="3" aria-describedby="err-ag-organizacion">
-            <p class="error" id="err-ag-organizacion" role="alert"></p>
-          </div>
+                <p class="overline" style="margin-top:8px">Datos del responsable</p>
 
-          <div class="fila">
-            <div class="campo">
-              <label for="ag-nit">NIT</label>
-              <input type="text" id="ag-nit" name="nit" placeholder="900123456-7"
-                     data-reglas="requerido nit" aria-describedby="err-ag-nit">
-              <p class="error" id="err-ag-nit" role="alert"></p>
-            </div>
-            <div class="campo">
-              <label for="ag-ciudad">Ciudad de operación</label>
-              <select id="ag-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-ag-ciudad">
-                <option value="">Elige la ciudad</option>
-                <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-                <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
-                <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
-              </select>
-              <p class="error" id="err-ag-ciudad" role="alert"></p>
-            </div>
-          </div>
+                <div class="campo">
+                  <label for="ag-nombre">Nombre completo</label>
+                  <input type="text" id="ag-nombre" name="nombre"
+                         placeholder="Quien administra la cuenta" autocomplete="name"
+                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-ag-nombre">
+                  <p class="error" id="err-ag-nombre" role="alert"></p>
+                </div>
 
-          <div class="campo">
-            <label for="ag-tipo">Tipo de eventos que organiza</label>
-            <select id="ag-tipo" name="tipo" data-reglas="requerido" aria-describedby="err-ag-tipo">
-              <option value="">Elige una categoría</option>
-              <option>Conciertos</option><option>Teatro</option><option>Deportes</option>
-              <option>Festivales</option><option>Académicos y conferencias</option>
-              <option>Varias categorías</option>
-            </select>
-            <p class="error" id="err-ag-tipo" role="alert"></p>
-          </div>
+                <div class="fila">
+                  <div class="campo">
+                    <label for="ag-correo">Correo electrónico</label>
+                    <input type="email" id="ag-correo" name="correo"
+                           placeholder="nombre@organizacion.com" autocomplete="email"
+                           data-reglas="requerido correo" aria-describedby="err-ag-correo">
+                    <p class="error" id="err-ag-correo" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="ag-telefono">Teléfono de contacto</label>
+                    <input type="tel" id="ag-telefono" name="telefono"
+                           placeholder="300 123 4567" autocomplete="tel"
+                           data-reglas="requerido telefono" aria-describedby="err-ag-telefono">
+                    <p class="error" id="err-ag-telefono" role="alert"></p>
+                  </div>
+                </div>
 
-          <p class="overline" style="margin-top:16px">Acceso</p>
+                <p class="overline" style="margin-top:16px">Datos de la organización</p>
 
-          <div class="fila">
-            <div class="campo">
-              <label for="ag-clave">Contraseña</label>
-              <input type="password" id="ag-clave" name="clave"
-                     placeholder="Mínimo 8 caracteres" autocomplete="new-password"
-                     data-reglas="requerido clave" data-medidor="ag-fuerza" aria-describedby="err-ag-clave">
-              <div class="fuerza" id="ag-fuerza" data-nivel="0" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <p class="error" id="err-ag-clave" role="alert"></p>
-            </div>
-            <div class="campo">
-              <label for="ag-clave2">Confirma la contraseña</label>
-              <input type="password" id="ag-clave2" name="clave2"
-                     placeholder="Escríbela otra vez" autocomplete="new-password"
-                     data-reglas="requerido confirmar" data-confirmar="ag-clave" aria-describedby="err-ag-clave2">
-              <p class="error" id="err-ag-clave2" role="alert"></p>
-            </div>
-          </div>
+                <div class="campo">
+                  <label for="ag-organizacion">Nombre de la organización</label>
+                  <input type="text" id="ag-organizacion" name="organizacion"
+                         placeholder="Razón social o nombre comercial"
+                         data-reglas="requerido minimo" data-minimo="3" aria-describedby="err-ag-organizacion">
+                  <p class="error" id="err-ag-organizacion" role="alert"></p>
+                </div>
 
-          <div class="aviso alerta">
-            <span aria-hidden="true" style="font-size:18px;line-height:1">⏱</span>
-            <span><strong>Tu cuenta queda pendiente de aprobación.</strong>
-            Un administrador revisa los datos de la organización antes de habilitarte
-            para publicar eventos. Te avisamos por correo, normalmente el mismo día.</span>
-          </div>
+                <div class="fila">
+                  <div class="campo">
+                    <label for="ag-nit">NIT</label>
+                    <input type="text" id="ag-nit" name="nit" placeholder="900123456-7"
+                           data-reglas="requerido nit" aria-describedby="err-ag-nit">
+                    <p class="error" id="err-ag-nit" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="ag-ciudad">Ciudad de operación</label>
+                    <select id="ag-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-ag-ciudad">
+                      <option value="">Elige la ciudad</option>
+                      <option>Bogotá</option><option>Medellín</option><option>Cali</option>
+                      <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
+                      <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
+                    </select>
+                    <p class="error" id="err-ag-ciudad" role="alert"></p>
+                  </div>
+                </div>
 
-          <div class="campo">
-            <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
-              <input type="checkbox" id="ag-terminos" name="terminos" style="width:auto;margin-top:3px"
-                     data-reglas="aceptar" aria-describedby="err-ag-terminos">
-              <span>Acepto los <a href="#/registro-agente" style="color:var(--indigo-700);font-weight:600">términos para organizadores</a>
-                    y confirmo que los datos de la organización son reales.</span>
-            </label>
-            <p class="error" id="err-ag-terminos" role="alert"></p>
-          </div>
+                <div class="campo">
+                  <label for="ag-tipo">Tipo de eventos que organiza</label>
+                  <select id="ag-tipo" name="tipo" data-reglas="requerido" aria-describedby="err-ag-tipo">
+                    <option value="">Elige una categoría</option>
+                    <option>Conciertos</option><option>Teatro</option><option>Deportes</option>
+                    <option>Festivales</option><option>Académicos y conferencias</option>
+                    <option>Varias categorías</option>
+                  </select>
+                  <p class="error" id="err-ag-tipo" role="alert"></p>
+                </div>
 
-          <p class="aviso" data-exito hidden>
-            Todos los datos son válidos. La solicitud quedará en estado pendiente
-            hasta que el administrador la apruebe, desde el Sprint 2.
-          </p>
+                <p class="overline" style="margin-top:16px">Acceso</p>
 
-          <button type="submit" class="btn btn-primario btn-lg btn-bloque">Enviar solicitud</button>
-        </form>
+                <div class="fila">
+                  <div class="campo">
+                    <label for="ag-clave">Contraseña</label>
+                    <input type="password" id="ag-clave" name="clave"
+                           placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                           data-reglas="requerido clave" data-medidor="ag-fuerza" aria-describedby="err-ag-clave">
+                    <div class="fuerza" id="ag-fuerza" data-nivel="0" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <p class="error" id="err-ag-clave" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="ag-clave2">Confirma la contraseña</label>
+                    <input type="password" id="ag-clave2" name="clave2"
+                           placeholder="Escríbela otra vez" autocomplete="new-password"
+                           data-reglas="requerido confirmar" data-confirmar="ag-clave" aria-describedby="err-ag-clave2">
+                    <p class="error" id="err-ag-clave2" role="alert"></p>
+                  </div>
+                </div>
 
-        <p class="acceso-pie">¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a></p>
+                <div class="aviso alerta">
+                  <span aria-hidden="true" style="font-size:18px;line-height:1">⏱</span>
+                  <span><strong>Tu cuenta queda pendiente de aprobación.</strong>
+                  Un administrador revisa los datos de la organización antes de habilitarte
+                  para publicar eventos. Te avisamos por correo, normalmente el mismo día.</span>
+                </div>
 
+                <div class="campo">
+                  <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
+                    <input type="checkbox" id="ag-terminos" name="terminos" style="width:auto;margin-top:3px"
+                           data-reglas="aceptar" aria-describedby="err-ag-terminos">
+                    <span>Acepto los <a href="#/registro-agente" style="color:var(--indigo-700);font-weight:600">términos para organizadores</a>
+                          y confirmo que los datos de la organización son reales.</span>
+                  </label>
+                  <p class="error" id="err-ag-terminos" role="alert"></p>
+                </div>
+
+                <p class="aviso" data-exito hidden>
+                  Todos los datos son válidos. La solicitud quedará en estado pendiente
+                  hasta que el administrador la apruebe, desde el Sprint 2.
+                </p>
+
+                <button type="submit" class="btn btn-primario btn-lg btn-bloque">Enviar solicitud</button>
+              </form>
+        </div>
       </div>
-    </section>
 
-    <aside class="acceso-lateral">
-      <p class="overline" style="color:#A8A3FF">Cuenta de organizador</p>
-      <h2>Deja de llevar las cuentas a mano</h2>
-      <p>Publica el evento, define el aforo y mira las reservas entrar en
-         tiempo real. Sin cuadernos ni hojas de cálculo.</p>
+      <p class="acceso-pie">¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a></p>
 
-      <ul class="lista-ventajas">
-        <li>Control de aforo automático: el sistema no vende de más</li>
-        <li>Panel con entradas vendidas e ingresos del evento</li>
-        <li>Lista de reservas por evento, con el estado de cada una</li>
-        <li>Validación de entradas en la puerta con el código QR</li>
-      </ul>
-    </aside>
-
+    </div>
   </div>
 </div>
 
@@ -695,121 +675,113 @@
 <!-- ####################################################################### -->
 <div class="vista" id="vista-registro-admin" data-titulo="Alta de administrador" hidden>
   <div class="acceso">
+    <div class="acceso-columna">
 
-    <section class="acceso-form">
-      <div class="acceso-form-interior">
-
-        <a href="#/inicio" class="marca marca-acceso">
+      <a href="#/inicio" class="marca" style="align-self:center">
           <span class="marca-logo" aria-hidden="true">◆</span> TicketFlow
         </a>
 
-        <h1 class="acceso-titulo">Alta de administrador</h1>
-        <p class="acceso-sub">Esta cuenta se crea solo por invitación de otro administrador.</p>
-
-        <form data-validar class="form-pila" novalidate>
-
-          <div class="campo codigo-campo">
-            <label for="adm-codigo">Código de invitación</label>
-            <input type="text" id="adm-codigo" name="codigo" placeholder="TF-ADM-0000" maxlength="12"
-                   data-reglas="requerido minimo" data-minimo="8" aria-describedby="err-adm-codigo">
-            <p class="error" id="err-adm-codigo" role="alert"></p>
-            <p class="ayuda">Te lo envía por correo el administrador que te está dando de alta.</p>
+      <div class="tarjeta-acceso">
+        <div class="tarjeta-foto">
+          <img src="img/teatro-sala.jpg" alt="Interior de una sala de teatro">
+          <div class="tarjeta-foto-texto">
+            <span class="overline">Acceso restringido</span>
+            <h1>Alta de administrador</h1>
           </div>
+        </div>
 
-          <div class="campo">
-            <label for="adm-nombre">Nombre completo</label>
-            <input type="text" id="adm-nombre" name="nombre"
-                   placeholder="Como aparece en tu documento" autocomplete="name"
-                   data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-adm-nombre">
-            <p class="error" id="err-adm-nombre" role="alert"></p>
-          </div>
+        <div class="tarjeta-cuerpo">
+          <p class="acceso-sub">Esta cuenta se crea solo por invitación de otro administrador.</p>
 
-          <div class="campo">
-            <label for="adm-correo">Correo institucional</label>
-            <input type="email" id="adm-correo" name="correo"
-                   placeholder="nombre@uceva.edu.co" autocomplete="email"
-                   data-reglas="requerido correoInstitucional" aria-describedby="err-adm-correo">
-            <p class="error" id="err-adm-correo" role="alert"></p>
-            <p class="ayuda">Solo se aceptan correos del dominio @uceva.edu.co.</p>
-          </div>
+      <form data-validar class="form-pila" novalidate>
 
-          <div class="campo">
-            <label for="adm-cargo">Cargo</label>
-            <input type="text" id="adm-cargo" name="cargo" placeholder="Coordinador de plataforma"
-                   data-reglas="requerido minimo" data-minimo="4" aria-describedby="err-adm-cargo">
-            <p class="error" id="err-adm-cargo" role="alert"></p>
-          </div>
+                <div class="campo codigo-campo">
+                  <label for="adm-codigo">Código de invitación</label>
+                  <input type="text" id="adm-codigo" name="codigo" placeholder="TF-ADM-0000" maxlength="12"
+                         data-reglas="requerido minimo" data-minimo="8" aria-describedby="err-adm-codigo">
+                  <p class="error" id="err-adm-codigo" role="alert"></p>
+                  <p class="ayuda">Te lo envía por correo el administrador que te está dando de alta.</p>
+                </div>
 
-          <div class="fila">
-            <div class="campo">
-              <label for="adm-clave">Contraseña</label>
-              <input type="password" id="adm-clave" name="clave"
-                     placeholder="Mínimo 8 caracteres" autocomplete="new-password"
-                     data-reglas="requerido clave" data-medidor="adm-fuerza" aria-describedby="err-adm-clave">
-              <div class="fuerza" id="adm-fuerza" data-nivel="0" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <p class="error" id="err-adm-clave" role="alert"></p>
-            </div>
-            <div class="campo">
-              <label for="adm-clave2">Confirma la contraseña</label>
-              <input type="password" id="adm-clave2" name="clave2"
-                     placeholder="Escríbela otra vez" autocomplete="new-password"
-                     data-reglas="requerido confirmar" data-confirmar="adm-clave" aria-describedby="err-adm-clave2">
-              <p class="error" id="err-adm-clave2" role="alert"></p>
-            </div>
-          </div>
+                <div class="campo">
+                  <label for="adm-nombre">Nombre completo</label>
+                  <input type="text" id="adm-nombre" name="nombre"
+                         placeholder="Como aparece en tu documento" autocomplete="name"
+                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-adm-nombre">
+                  <p class="error" id="err-adm-nombre" role="alert"></p>
+                </div>
 
-          <div class="aviso alerta">
-            <span aria-hidden="true" style="font-size:18px;line-height:1">⚠</span>
-            <span><strong>Esta cuenta tiene permisos sobre toda la plataforma.</strong>
-            Puede aprobar organizadores, editar cualquier evento y consultar los datos
-            de todos los usuarios. Cada acción queda registrada con tu nombre.</span>
-          </div>
+                <div class="campo">
+                  <label for="adm-correo">Correo institucional</label>
+                  <input type="email" id="adm-correo" name="correo"
+                         placeholder="nombre@uceva.edu.co" autocomplete="email"
+                         data-reglas="requerido correoInstitucional" aria-describedby="err-adm-correo">
+                  <p class="error" id="err-adm-correo" role="alert"></p>
+                  <p class="ayuda">Solo se aceptan correos del dominio @uceva.edu.co.</p>
+                </div>
 
-          <div class="campo">
-            <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
-              <input type="checkbox" id="adm-terminos" name="terminos" style="width:auto;margin-top:3px"
-                     data-reglas="aceptar" aria-describedby="err-adm-terminos">
-              <span>Entiendo el alcance de estos permisos y acepto la
-                    <a href="#/registro-admin" style="color:var(--indigo-700);font-weight:600">política de uso de datos personales</a>.</span>
-            </label>
-            <p class="error" id="err-adm-terminos" role="alert"></p>
-          </div>
+                <div class="campo">
+                  <label for="adm-cargo">Cargo</label>
+                  <input type="text" id="adm-cargo" name="cargo" placeholder="Coordinador de plataforma"
+                         data-reglas="requerido minimo" data-minimo="4" aria-describedby="err-adm-cargo">
+                  <p class="error" id="err-adm-cargo" role="alert"></p>
+                </div>
 
-          <p class="aviso" data-exito hidden>
-            Todos los datos son válidos. La verificación del código contra la base
-            de datos se implementa en el Sprint 2.
-          </p>
+                <div class="fila">
+                  <div class="campo">
+                    <label for="adm-clave">Contraseña</label>
+                    <input type="password" id="adm-clave" name="clave"
+                           placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                           data-reglas="requerido clave" data-medidor="adm-fuerza" aria-describedby="err-adm-clave">
+                    <div class="fuerza" id="adm-fuerza" data-nivel="0" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <p class="error" id="err-adm-clave" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="adm-clave2">Confirma la contraseña</label>
+                    <input type="password" id="adm-clave2" name="clave2"
+                           placeholder="Escríbela otra vez" autocomplete="new-password"
+                           data-reglas="requerido confirmar" data-confirmar="adm-clave" aria-describedby="err-adm-clave2">
+                    <p class="error" id="err-adm-clave2" role="alert"></p>
+                  </div>
+                </div>
 
-          <button type="submit" class="btn btn-primario btn-lg btn-bloque">Activar cuenta de administrador</button>
-        </form>
+                <div class="aviso alerta">
+                  <span aria-hidden="true" style="font-size:18px;line-height:1">⚠</span>
+                  <span><strong>Esta cuenta tiene permisos sobre toda la plataforma.</strong>
+                  Puede aprobar organizadores, editar cualquier evento y consultar los datos
+                  de todos los usuarios. Cada acción queda registrada con tu nombre.</span>
+                </div>
 
-        <p class="acceso-pie">
-          ¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a><br>
-          <span style="font-size:13.5px">¿Buscabas otra cosa?
-            <a href="#/registro-cliente">Registro de cliente</a> ·
-            <a href="#/registro-agente">Registro de organizador</a></span>
-        </p>
+                <div class="campo">
+                  <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5">
+                    <input type="checkbox" id="adm-terminos" name="terminos" style="width:auto;margin-top:3px"
+                           data-reglas="aceptar" aria-describedby="err-adm-terminos">
+                    <span>Entiendo el alcance de estos permisos y acepto la
+                          <a href="#/registro-admin" style="color:var(--indigo-700);font-weight:600">política de uso de datos personales</a>.</span>
+                  </label>
+                  <p class="error" id="err-adm-terminos" role="alert"></p>
+                </div>
 
+                <p class="aviso" data-exito hidden>
+                  Todos los datos son válidos. La verificación del código contra la base
+                  de datos se implementa en el Sprint 2.
+                </p>
+
+                <button type="submit" class="btn btn-primario btn-lg btn-bloque">Activar cuenta de administrador</button>
+              </form>
+        </div>
       </div>
-    </section>
 
-    <aside class="acceso-lateral admin">
-      <span class="sello">Acceso restringido</span>
-      <h2>El administrador no se registra solo</h2>
-      <p>Un cliente se autogestiona y un organizador solicita aprobación.
-         Esta cuenta, en cambio, la crea otro administrador y por eso exige
-         un código de invitación y correo institucional.</p>
+      <p class="acceso-pie">
+                ¿Ya tienes cuenta? <a href="#/iniciar-sesion">Inicia sesión</a><br>
+                <span style="font-size:13.5px">¿Buscabas otra cosa?
+                  <a href="#/registro-cliente">Registro de cliente</a> ·
+                  <a href="#/registro-agente">Registro de organizador</a></span>
+              </p>
 
-      <ul class="permisos">
-        <li><span class="llave">Agentes</span> Aprobar o rechazar solicitudes de organizadores</li>
-        <li><span class="llave">Eventos</span> Editar, ocultar o eliminar cualquier evento</li>
-        <li><span class="llave">Usuarios</span> Consultar y suspender cuentas</li>
-        <li><span class="llave">Reportes</span> Ver ventas e ingresos de toda la plataforma</li>
-      </ul>
-    </aside>
-
+    </div>
   </div>
 </div>
 

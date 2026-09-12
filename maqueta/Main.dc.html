@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; }
+    a { color: #4238C9; text-decoration: none; }
+    a:hover { color: #635BFF; }
+  </style>
+</helmet>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 1440px; height: 900px; background: #ffffff;">
+
+  <!-- Columna del formulario -->
+  <div style="display: flex; flex-direction: column; justify-content: center; padding: 40px 60px; background: #ffffff;">
+    <div style="width: 100%; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column;">
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px;">
+        <div style="width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, {{acento}} 0%, #3B82F6 100%); display: flex; align-items: center; justify-content: center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 9-9 9-9-9 9-9z" fill="#ffffff"/></svg>
+        </div>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: #111827;">TicketFlow</span>
+      </div>
+
+      <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.12; letter-spacing: -0.02em; color: #111827; margin: 0 0 8px;">Bienvenido de nuevo</h1>
+      <p style="font-size: 15.5px; line-height: 1.55; color: #64748B; margin: 0 0 26px;">Entra a tu cuenta para ver tus reservas y tus entradas.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <label style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #64748B;">Correo electrónico</label>
+          <div style="padding: 15px 16px; border-radius: 10px; border: 1px solid #E2E8F0; background: #ffffff; font-size: 16px; color: #94A3B8;">nombre@correo.com</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <label style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #64748B;">Contraseña</label>
+          <div style="padding: 15px 16px; border-radius: 10px; border: 1px solid #E2E8F0; background: #ffffff; font-size: 16px; color: #94A3B8;">Tu contraseña</div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #64748B;">
+            <div style="width: 15px; height: 15px; border: 1px solid #CBD5E1; border-radius: 3px;"></div>
+            Mantener la sesión abierta
+          </div>
+          <span style="font-size: 14px; font-weight: 600; color: #4238C9;">¿Olvidaste tu contraseña?</span>
+        </div>
+
+        <div style="padding: 15px 28px; border-radius: 10px; background: linear-gradient(135deg, {{acento}} 0%, #3B82F6 100%); box-shadow: 0 4px 14px rgba(99, 91, 255, 0.28); color: #ffffff; font-size: 16px; font-weight: 600; text-align: center; margin-top: 4px;">Iniciar sesión</div>
+      </div>
+
+      <p style="text-align: center; font-size: 14.5px; color: #64748B; margin: 24px 0 0;">¿No tienes cuenta? <span style="color: #4238C9; font-weight: 600;">Regístrate como cliente</span></p>
+    </div>
+  </div>
+
+  <!-- Panel con fotografía a sangre -->
+  <div style="position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 44px 52px;">
+    <img src="festival-noche.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,24,39,0.30) 0%, rgba(17,24,39,0.86) 52%, rgba(17,24,39,0.97) 100%);"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(99,91,255,0.34) 0%, rgba(59,130,246,0.16) 60%, transparent 100%);"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column;">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #A8A3FF; margin-bottom: 12px;">Tu entrada, siempre contigo</span>
+      <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.12; letter-spacing: -0.02em; color: #ffffff; margin: 0 0 16px;">Todas tus entradas en un solo lugar</h2>
+      <p style="font-size: 16px; line-height: 1.55; color: #CBD5E1; margin: 0; max-width: 42ch;">No más capturas de pantalla ni comprobantes perdidos en el chat. Cada reserva queda guardada en tu cuenta con su código.</p>
+
+      <div style="background: #ffffff; border-radius: 20px; padding: 22px; margin-top: 26px; box-shadow: 0 12px 32px rgba(17,24,39,0.10);">
+        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4238C9;">Festival</span>
+        <h4 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; color: #111827; margin: 6px 0 2px;">Festival de Música Cali Vive</h4>
+        <p style="font-size: 13px; color: #64748B; margin: 0;">24 de septiembre · Cali, Valle del Cauca</p>
+        <div style="display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 999px; background: #DCFCE7; color: #16A34A; font-size: 12px; font-weight: 600; margin-top: 10px;">Confirmada</div>
+        <div style="border-top: 2px dashed #E2E8F0; margin-top: 20px; padding-top: 18px; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-family: 'Space Grotesk', monospace; font-size: 15px; letter-spacing: 0.08em; color: #111827;">TF-2026-9F42B</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" stroke="#111827" stroke-width="2"/><rect x="14" y="3" width="7" height="7" stroke="#111827" stroke-width="2"/><rect x="3" y="14" width="7" height="7" stroke="#111827" stroke-width="2"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1" stroke="#111827" stroke-width="2"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"acento":{"editor":"color","default":"#635BFF","options":["#635BFF","#0EA5E9","#E11D48","#0F766E"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { acento: this.props.acento ?? '#635BFF' };
+  }
+}
+</script>
+</body>
+</html>

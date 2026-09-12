@@ -1,0 +1,30 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",    "x": 0,    "y": 0, "w": 1440, "h": 900, "title": "A · Hero en dos columnas" },
+    { "file": "InicioB.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 900, "title": "B · Hero con foto a sangre" },
+    { "file": "InicioC.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 900, "title": "C · Hero compacto" }
+  ],
+  "annotations": [
+    {
+      "id": "el-problema",
+      "x": 0, "y": -230, "w": 620,
+      "text": "EL PROBLEMA DE LA VERSIÓN ACTUAL\nEl hero mide unos 700 px de alto y la mitad derecha está vacía: el título llega hasta 16 caracteres y el párrafo hasta 52, así que el 45% de esa franja oscura no tiene nada.\n\nLas tres direcciones atacan ese vacío de forma distinta."
+    },
+    {
+      "id": "nota-a",
+      "x": 0, "y": -100, "w": 420,
+      "text": "A · DOS COLUMNAS\nLa derecha deja de estar vacía: lleva el evento más reservado de la semana, con su foto, precio y cupos restantes.\n\nA favor: la mitad muerta pasa a vender.\nEn contra: sigue siendo una franja oscura alta."
+    },
+    {
+      "id": "nota-b",
+      "x": 1560, "y": -100, "w": 420,
+      "text": "B · FOTO A SANGRE\nLa foto ocupa toda la franja, el texto va centrado encima y el buscador queda montado sobre el borde.\n\nA favor: cero vacío y la entrada más impactante.\nEn contra: la más oscura de las tres, justo lo que el profesor marcó."
+    },
+    {
+      "id": "nota-c",
+      "x": 3120, "y": -100, "w": 420,
+      "text": "C · COMPACTO\nLa franja oscura baja de 700 a unos 300 px: título, datos y buscador en un solo bloque, y los eventos arrancan de una.\n\nA favor: la que menos espacio muerto deja y la que menos oscuro usa. Es la misma lógica de la pantalla de acceso C.\nEn contra: entra sin ceremonia."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

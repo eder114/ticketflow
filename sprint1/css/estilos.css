@@ -195,25 +195,39 @@ button{font-family:inherit}
 }
 
 /* ---------- 5. Hero con buscador · SDGE-4 ---------- */
+/* Hero con fotografía a sangre y el buscador montado encima.
+   La versión anterior dejaba vacía la mitad derecha de la franja: el
+   título llegaba a 16 caracteres y el resto era degradado. Ahora la
+   foto ocupa todo el ancho y el contenido va centrado sobre ella. */
 .hero{
   position:relative;background:var(--navy);color:#fff;
-  padding-block:56px 64px;overflow:hidden;
+  padding-block:64px 68px;overflow:hidden;text-align:center;
 }
-.hero::before,.hero::after{
-  content:"";position:absolute;border-radius:50%;filter:blur(120px);
+.hero::before{                      /* la fotografía */
+  content:"";position:absolute;inset:0;
+  background:url('../img/festival-noche.jpg') center/cover no-repeat;
 }
-.hero::before{width:460px;height:460px;background:var(--indigo);opacity:.30;top:-160px;left:-100px}
-.hero::after{width:380px;height:380px;background:var(--azul);opacity:.24;bottom:-140px;right:-60px}
+.hero::after{                       /* velo de marca */
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(17,24,39,.74) 0%, rgba(17,24,39,.60) 42%, rgba(17,24,39,.94) 100%),
+    linear-gradient(135deg, rgba(99,91,255,.30) 0%, rgba(59,130,246,.12) 55%, transparent 100%);
+}
 .hero .contenedor{position:relative;z-index:2}
-.hero h1{max-width:16ch;margin-bottom:var(--e3)}
-.hero p{font-size:clamp(16px,2vw,19px);color:#CBD5E1;max-width:52ch;margin-bottom:var(--e6)}
+.hero h1{max-width:18ch;margin:0 auto var(--e3)}
+.hero p{
+  font-size:clamp(16px,2vw,19px);color:#E2E8F0;
+  max-width:56ch;margin:0 auto var(--e6);
+}
 .hero .overline{color:#A8A3FF;margin-bottom:var(--e3)}
+.hero-datos{justify-content:center}
 
 /* Tarjeta del buscador — sin recortes, dentro del flujo */
 .buscador{
   background:#fff;border-radius:var(--r-card-lg);padding:var(--e5);
   box-shadow:var(--sombra-lg);display:grid;gap:var(--e3);
   grid-template-columns:repeat(3,1fr) auto;align-items:end;
+  text-align:left;   /* el hero va centrado; el formulario no */
 }
 @media (max-width:900px){ .buscador{grid-template-columns:1fr} }
 
@@ -279,15 +293,67 @@ button{font-family:inherit}
 }
 .aviso.alerta{background:var(--alerta-100);color:var(--alerta-600)}
 
-/* ---------- 7. Pantallas de acceso (login y registros) ---------- */
-.acceso{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-@media (max-width:960px){ .acceso{grid-template-columns:1fr} }
+/* ---------- 7. Pantallas de acceso (login y registros) ----------
+   Dirección compacta: una sola columna centrada, sin panel lateral.
+   Al no haber media pantalla que llenar, no queda espacio muerto, y
+   se ve igual en móvil que en escritorio. */
+.acceso{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px var(--margen);gap:var(--e5);
+}
+.acceso-columna{width:100%;max-width:560px;display:flex;flex-direction:column;gap:var(--e5)}
+
+.tarjeta-acceso{
+  background:#fff;border-radius:var(--r-card-lg);
+  border:1px solid var(--linea-suave);box-shadow:var(--sombra-lg);
+  overflow:hidden;
+}
+
+/* Franja de foto dentro de la tarjeta */
+.tarjeta-foto{position:relative;height:158px}
+.tarjeta-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tarjeta-foto::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(17,24,39,.35) 0%, rgba(17,24,39,.82) 100%);
+}
+.tarjeta-foto-texto{position:absolute;left:28px;right:28px;bottom:20px;z-index:2}
+.tarjeta-foto-texto .overline{color:#A8A3FF;display:block;margin-bottom:6px}
+.tarjeta-foto-texto h1{
+  font-size:clamp(23px,3vw,27px);color:#fff;margin:0;line-height:1.14;
+}
+@media (max-width:560px){
+  .tarjeta-foto{height:132px}
+  .tarjeta-foto-texto{left:20px;right:20px;bottom:16px}
+}
+
+.tarjeta-cuerpo{padding:28px;display:flex;flex-direction:column;gap:var(--e4)}
+@media (max-width:560px){ .tarjeta-cuerpo{padding:22px} }
+/* Dentro de la tarjeta el espaciado lo da el gap del contenedor */
+.tarjeta-cuerpo .acceso-sub{margin-bottom:0}
+.tarjeta-cuerpo .form-pila{gap:var(--e4)}
+.acceso-pie{margin-top:0}
+
+/* Separador "o" y los dos accesos rápidos */
+.separador{display:flex;align-items:center;gap:var(--e3);margin-top:2px}
+.separador::before,.separador::after{
+  content:"";flex:1;height:1px;background:var(--linea-suave);
+}
+.separador span{font-size:12px;color:var(--texto-tenue)}
+
+.accesos-rapidos{display:grid;grid-template-columns:1fr 1fr;gap:var(--e3)}
+@media (max-width:420px){ .accesos-rapidos{grid-template-columns:1fr} }
+.accesos-rapidos a{
+  padding:13px 16px;border-radius:var(--r-btn);
+  border:1px solid var(--linea);background:#fff;
+  font-size:14.5px;font-weight:600;color:var(--navy);text-align:center;
+}
+.accesos-rapidos a:hover{border-color:var(--indigo);color:var(--indigo-700)}
 
 .acceso-form{
   display:flex;flex-direction:column;justify-content:center;
   padding:40px clamp(24px,4.5vw,60px);background:#fff;
 }
-.acceso-form-interior{width:100%;max-width:480px;margin-inline:auto}
 .marca-acceso{margin-bottom:28px}
 .acceso-titulo{font-size:clamp(30px,3.2vw,38px);margin-bottom:var(--e2)}
 .acceso-sub{color:var(--texto-suave);font-size:15.5px;margin-bottom:26px}
@@ -297,78 +363,16 @@ button{font-family:inherit}
 .acceso-pie a{color:var(--indigo-700);font-weight:600}
 .acceso-pie a:hover{text-decoration:underline}
 
-/* Panel lateral con fotografía real.
-   Antes era navy plano y quedaba medio panel vacío. Ahora la foto ocupa
-   todo el alto, un velo vertical de marca garantiza que el texto se lea,
-   y el contenido se ancla abajo en vez de flotar en el centro. */
-.acceso-lateral{
-  background:var(--navy);color:#fff;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:44px clamp(24px,4vw,52px);
-}
-.acceso-lateral::before{            /* la fotografía */
-  content:"";position:absolute;inset:0;
-  background-image:var(--foto);background-size:cover;background-position:center;
-  transform:scale(1.04);
-}
-.acceso-lateral::after{             /* velo de marca, de arriba a abajo */
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(180deg, rgba(17,24,39,.30) 0%, rgba(17,24,39,.86) 52%, rgba(17,24,39,.97) 100%),
-    linear-gradient(135deg, rgba(99,91,255,.34) 0%, rgba(59,130,246,.16) 60%, transparent 100%);
-}
-.acceso-lateral > *{position:relative;z-index:2}
-
-/* Una foto por pantalla */
-#vista-iniciar-sesion   .acceso-lateral{--foto:url('../img/festival-noche.jpg')}
-#vista-registro-cliente .acceso-lateral{--foto:url('../img/concierto-artista.jpg')}
-#vista-registro-agente  .acceso-lateral{--foto:url('../img/evento-ambiente.jpg')}
-#vista-registro-admin   .acceso-lateral{--foto:url('../img/teatro-sala.jpg')}
 .acceso-lateral h2{margin-bottom:var(--e4)}
 .acceso-lateral p{color:#CBD5E1;max-width:42ch}
 @media (max-width:960px){ .acceso-lateral{display:none} }
 
-.lista-ventajas{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:26px}
-.lista-ventajas li{display:flex;gap:var(--e3);align-items:flex-start;font-size:15px;color:#E2E8F0}
-.lista-ventajas li::before{
-  content:"✓";display:grid;place-items:center;flex-shrink:0;
-  width:24px;height:24px;border-radius:50%;background:var(--grad);
-  color:#fff;font-size:13px;font-weight:700;
-}
 
-/* Entrada decorativa del panel lateral */
-.entrada{
-  background:#fff;color:var(--navy);border-radius:var(--r-card-lg);
-  padding:22px;margin-top:26px;max-width:none;
-  box-shadow:var(--sombra-lg);position:relative;
-}
-.entrada::after{
-  content:"";position:absolute;left:0;right:0;bottom:74px;
-  border-top:2px dashed var(--linea);
-}
-.entrada-cat{font-size:11px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--indigo-700)}
-.entrada h4{font-size:17px;margin:6px 0 2px}
-.entrada-meta{font-size:13px;color:var(--texto-suave)}
-.entrada-codigo{
-  margin-top:var(--e6);padding-top:var(--e5);
-  font-family:'Space Grotesk',monospace;font-size:15px;letter-spacing:.08em;
-  display:flex;justify-content:space-between;align-items:center;
-}
 
 /* ---------- 7b. Alta de administrador · SDGE-6 ----------
    Esta pantalla no existía en Figma. Se diseñó sobre el mismo sistema,
    pero deliberadamente distinta de los otros dos registros: el
    administrador no se autogestiona, entra por invitación. */
-/* El panel de administrador conserva su foto, pero con un velo más frío
-   y más cerrado que los otros tres: es una pantalla de acceso restringido
-   y tiene que sentirse distinta. */
-.acceso-lateral.admin{background:#0B1120}
-.acceso-lateral.admin::after{
-  background:
-    linear-gradient(180deg, rgba(11,17,32,.55) 0%, rgba(11,17,32,.92) 50%, rgba(11,17,32,.98) 100%),
-    linear-gradient(135deg, rgba(59,130,246,.26) 0%, transparent 65%);
-}
 
 .sello{
   display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
@@ -378,21 +382,6 @@ button{font-family:inherit}
   text-transform:uppercase;margin-bottom:20px;
 }
 
-.permisos{
-  list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:26px;
-  border:1px solid rgba(255,255,255,.10);border-radius:var(--r-card);overflow:hidden;
-}
-.permisos li{
-  display:flex;gap:12px;align-items:center;
-  padding:14px 18px;font-size:14.5px;color:#E2E8F0;
-  background:rgba(255,255,255,.03);
-}
-.permisos li + li{border-top:1px solid rgba(255,255,255,.08)}
-.permisos .llave{
-  font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.08em;
-  color:#7DD3FC;background:rgba(14,165,233,.14);
-  padding:3px 8px;border-radius:5px;flex-shrink:0;min-width:74px;text-align:center;
-}
 
 .codigo-campo input{
   font-family:'Space Grotesk',monospace;letter-spacing:.18em;

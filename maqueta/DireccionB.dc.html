@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; }
+    a { color: #4238C9; text-decoration: none; }
+    a:hover { color: #635BFF; }
+  </style>
+</helmet>
+
+<!-- DIRECCIÓN B · Editorial clara
+     Sin masa oscura. La foto va contenida en una tarjeta, no a sangre,
+     y el fondo claro es continuo de lado a lado. Menos saltos de color. -->
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 1440px; height: 900px; background: #F8FAFC;">
+
+  <!-- Columna del formulario -->
+  <div style="display: flex; flex-direction: column; justify-content: center; padding: 48px 64px;">
+    <div style="width: 100%; max-width: 460px; margin: 0 auto; display: flex; flex-direction: column;">
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 32px;">
+        <div style="width: 34px; height: 34px; border-radius: 9px; background: {{acento}}; display: flex; align-items: center; justify-content: center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 9-9 9-9-9 9-9z" fill="#ffffff"/></svg>
+        </div>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: #111827;">TicketFlow</span>
+      </div>
+
+      <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.08; letter-spacing: -0.025em; color: #111827; margin: 0 0 10px;">Bienvenido<br>de nuevo</h1>
+      <p style="font-size: 16px; line-height: 1.55; color: #64748B; margin: 0 0 32px;">Entra a tu cuenta para ver tus reservas y tus entradas.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <label style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #64748B;">Correo electrónico</label>
+          <div style="padding: 15px 16px; border-radius: 10px; border: 1px solid #E2E8F0; background: #ffffff; font-size: 16px; color: #94A3B8;">nombre@correo.com</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <label style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #64748B;">Contraseña</label>
+          <div style="padding: 15px 16px; border-radius: 10px; border: 1px solid #E2E8F0; background: #ffffff; font-size: 16px; color: #94A3B8;">Tu contraseña</div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #64748B;">
+            <div style="width: 15px; height: 15px; border: 1px solid #CBD5E1; border-radius: 3px; background: #ffffff;"></div>
+            Mantener la sesión abierta
+          </div>
+          <span style="font-size: 14px; font-weight: 600; color: {{acentoOscuro}};">¿Olvidaste tu contraseña?</span>
+        </div>
+
+        <div style="padding: 16px 28px; border-radius: 10px; background: {{acento}}; color: #ffffff; font-size: 16px; font-weight: 600; text-align: center;">Iniciar sesión</div>
+      </div>
+
+      <p style="text-align: center; font-size: 14.5px; color: #64748B; margin: 26px 0 0;">¿No tienes cuenta? <span style="color: {{acentoOscuro}}; font-weight: 600;">Regístrate como cliente</span></p>
+    </div>
+  </div>
+
+  <!-- Columna de la foto contenida -->
+  <div style="display: flex; flex-direction: column; justify-content: center; padding: 48px 64px 48px 0;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+
+      <div style="position: relative; border-radius: 20px; overflow: hidden; height: 420px;">
+        <img src="festival-noche.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,24,39,0.82) 100%);"></div>
+        <div style="position: absolute; left: 28px; right: 28px; bottom: 26px;">
+          <span style="display: inline-flex; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.16); backdrop-filter: blur(6px); color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">Festival · Cali</span>
+          <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 27px; line-height: 1.14; letter-spacing: -0.02em; color: #ffffff; margin: 12px 0 0;">Festival de Música Cali Vive</h2>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: #111827; margin: 0;">Todas tus entradas en un solo lugar</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M20 6L9 17l-5-5" stroke="{{acento}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size: 15px; color: #334155;">Tu cupo queda apartado desde que confirmas</span>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M20 6L9 17l-5-5" stroke="{{acento}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size: 15px; color: #334155;">La entrada llega con un código que se valida en la puerta</span>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M20 6L9 17l-5-5" stroke="{{acento}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size: 15px; color: #334155;">Todo tu historial de reservas queda en tu cuenta</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"acento":{"editor":"color","default":"#635BFF","options":["#635BFF","#0EA5E9","#E11D48","#0F766E"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var a = this.props.acento ?? '#635BFF';
+    return { acento: a, acentoOscuro: a };
+  }
+}
+</script>
+</body>
+</html>
