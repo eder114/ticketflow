@@ -110,8 +110,11 @@ button{font-family:inherit}
   .vista.activa{animation:none}
 }
 
-.seccion{padding-block:var(--e20)}
-@media (max-width:768px){ .seccion{padding-block:var(--e12)} }
+/* Ritmo vertical compacto.
+   El profesor marcó que sobraba aire: los bloques pasaron de 80 a 56 px
+   de separación, y de 48 a 36 px en móvil. */
+.seccion{padding-block:56px}
+@media (max-width:768px){ .seccion{padding-block:36px} }
 
 .overline{
   font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -192,7 +195,7 @@ button{font-family:inherit}
 /* ---------- 5. Hero con buscador · SDGE-4 ---------- */
 .hero{
   position:relative;background:var(--navy);color:#fff;
-  padding-block:var(--e20) calc(var(--e20) + 40px);overflow:hidden;
+  padding-block:56px 64px;overflow:hidden;
 }
 .hero::before,.hero::after{
   content:"";position:absolute;border-radius:50%;filter:blur(120px);
@@ -200,8 +203,8 @@ button{font-family:inherit}
 .hero::before{width:460px;height:460px;background:var(--indigo);opacity:.30;top:-160px;left:-100px}
 .hero::after{width:380px;height:380px;background:var(--azul);opacity:.24;bottom:-140px;right:-60px}
 .hero .contenedor{position:relative;z-index:2}
-.hero h1{max-width:16ch;margin-bottom:var(--e4)}
-.hero p{font-size:clamp(16px,2vw,19px);color:#CBD5E1;max-width:52ch;margin-bottom:var(--e10)}
+.hero h1{max-width:16ch;margin-bottom:var(--e3)}
+.hero p{font-size:clamp(16px,2vw,19px);color:#CBD5E1;max-width:52ch;margin-bottom:var(--e6)}
 .hero .overline{color:#A8A3FF;margin-bottom:var(--e3)}
 
 /* Tarjeta del buscador — sin recortes, dentro del flujo */
@@ -213,7 +216,7 @@ button{font-family:inherit}
 @media (max-width:900px){ .buscador{grid-template-columns:1fr} }
 
 .hero-datos{
-  display:flex;flex-wrap:wrap;gap:var(--e8);margin-top:var(--e10);
+  display:flex;flex-wrap:wrap;gap:var(--e8);margin-top:var(--e6);
 }
 .hero-dato strong{
   display:block;font-family:'Space Grotesk',sans-serif;
@@ -370,7 +373,7 @@ button{font-family:inherit}
 }
 
 /* ---------- 8. Tarjetas de evento · SDGE-11 ---------- */
-.rejilla{display:grid;gap:var(--e6)}
+.rejilla{display:grid;gap:var(--e5)}
 .rejilla-3{grid-template-columns:repeat(3,1fr)}
 .rejilla-4{grid-template-columns:repeat(4,1fr)}
 @media (max-width:980px){ .rejilla-3,.rejilla-4{grid-template-columns:repeat(2,1fr)} }
@@ -385,17 +388,18 @@ button{font-family:inherit}
 .evento:hover{transform:translateY(-3px);box-shadow:var(--sombra-lg)}
 .evento-img{position:relative;aspect-ratio:16/9;background:var(--gris-100)}
 .evento-img img{width:100%;height:100%;object-fit:cover}
+/* Un solo tratamiento para todas las categorías.
+   Antes cada una tenía su color (índigo, violeta, azul, cian) y eso
+   competía con los colores de estado, que sí significan algo. Ahora la
+   categoría se lee por su texto, no por su color. */
 .evento-cat{
   position:absolute;top:12px;left:12px;
   padding:5px 11px;border-radius:var(--r-full);
   font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;
+  background:rgba(17,24,39,.74);backdrop-filter:blur(6px);
 }
-.cat-concierto{background:var(--indigo)}
-.cat-teatro{background:#7C6BFF}
-.cat-deporte{background:var(--azul)}
-.cat-festival{background:#0EA5E9}
 
-.evento-cuerpo{padding:var(--e5);display:flex;flex-direction:column;gap:10px;flex:1}
+.evento-cuerpo{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
 .evento-cuerpo h3{font-size:18px;line-height:1.28}
 .evento-meta{
   font-size:13.5px;color:var(--texto-suave);
@@ -415,13 +419,14 @@ button{font-family:inherit}
 /* Categorías */
 .categoria{
   background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
-  padding:var(--e5);display:flex;flex-direction:column;gap:6px;
+  padding:18px;display:flex;flex-direction:column;gap:5px;
   box-shadow:var(--sombra-sm);transition:border-color .15s ease, transform .15s ease;
 }
 .categoria:hover{border-color:var(--indigo);transform:translateY(-2px)}
 .categoria-icono{
-  width:44px;height:44px;border-radius:var(--r-btn);
-  display:grid;place-items:center;font-size:21px;margin-bottom:2px;
+  width:42px;height:42px;border-radius:var(--r-btn);
+  display:grid;place-items:center;font-size:20px;margin-bottom:2px;
+  background:var(--indigo-50);color:var(--indigo);  /* el mismo para las cuatro */
 }
 .categoria h4{font-size:16px;font-family:'Space Grotesk',sans-serif}
 .categoria p{font-size:13px;color:var(--texto-suave)}
@@ -436,10 +441,30 @@ button{font-family:inherit}
 .chip-confirmada{background:var(--estado-confirmada-bg);color:var(--estado-confirmada-fg)}
 .chip-cancelada{background:var(--estado-cancelada-bg);color:var(--estado-cancelada-fg)}
 
+/* ---------- 8b. Llamado a organizadores ----------
+   Antes era un bloque alto con el texto a la izquierda y medio ancho
+   vacío a la derecha. Ahora es una fila: el texto ocupa su ancho de
+   lectura y el botón se sienta al lado en vez de debajo. */
+.llamado{
+  background:var(--navy);color:#fff;border-radius:var(--r-card-lg);
+  padding:36px clamp(24px,4vw,44px);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--e8);flex-wrap:wrap;
+}
+.llamado-texto{max-width:58ch;display:flex;flex-direction:column;gap:8px}
+.llamado-texto h2{font-size:clamp(21px,2.6vw,27px)}
+.llamado-texto p{color:#CBD5E1;font-size:15px}
+.llamado .btn{flex-shrink:0}
+
+@media (max-width:760px){
+  .llamado{padding:28px 24px;align-items:stretch}
+  .llamado .btn{width:100%}
+}
+
 /* ---------- 9. Encabezado de sección ---------- */
 .seccion-titulo{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:var(--e6);margin-bottom:var(--e10);flex-wrap:wrap;
+  gap:var(--e6);margin-bottom:var(--e6);flex-wrap:wrap;
 }
 .seccion-titulo p{color:var(--texto-suave);margin-top:6px;max-width:56ch}
 
@@ -458,9 +483,9 @@ button{font-family:inherit}
 .paso p{font-size:14.5px;color:var(--texto-suave)}
 
 /* ---------- 11. Pie de página · SDGE-2 ---------- */
-.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e16) var(--e8);margin-top:var(--e20)}
+.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e12) var(--e6);margin-top:56px}
 .pie-rejilla{
-  display:grid;gap:var(--e10);
+  display:grid;gap:var(--e8);
   grid-template-columns:1.6fr repeat(3,1fr);
 }
 @media (max-width:900px){ .pie-rejilla{grid-template-columns:1fr 1fr} }
@@ -474,7 +499,7 @@ button{font-family:inherit}
 .pie a{display:block;font-size:14px;margin-bottom:10px;color:#94A3B8}
 .pie a:hover{color:#fff}
 .pie-legal{
-  margin-top:var(--e12);padding-top:var(--e6);
+  margin-top:var(--e8);padding-top:var(--e5);
   border-top:1px solid var(--navy-700);
   display:flex;justify-content:space-between;gap:var(--e4);
   flex-wrap:wrap;font-size:13px;
