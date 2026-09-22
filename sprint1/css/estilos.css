@@ -1,11 +1,19 @@
 /* ==========================================================================
    TicketFlow · Hoja de estilos del sistema de diseño
    SDGE-12 · Responsable: Jorge Andrés Marín Díaz
-   SDGE-10 · Ajuste responsive — media queries al final de cada bloque
+   SDGE-14 · Maquetación Mobile-First
+
+   MOBILE-FIRST: los estilos base de cada bloque son los del celular
+   (360 px). Tablet y escritorio se agregan encima, SOLO con min-width:
+       576 px  celular grande / tablet vertical
+       768 px  tablet
+      1024 px  escritorio
+      1280 px  ancho máximo del contenido
+   No hay ninguna regla de layout con max-width.
 
    Paleta:      Indigo #635BFF · Azul #3B82F6 · Navy #111827 · Fondo #F8FAFC
    Tipografía:  Space Grotesk (títulos) + Inter (interfaz)
-   Rejilla:     12 columnas en escritorio · 4 en móvil · base de 8 px
+   Cortes:      576 · 768 · 1024 px (min-width) · base de 8 px
    Márgenes:    16 px en móvil · 40 px en escritorio · contenido máx. 1280 px
    Radios:      tarjetas 16–20 px · botones 10 px
    ========================================================================== */
@@ -51,11 +59,11 @@
 
   /* Layout */
   --ancho-max:1280px;
-  --margen:40px;   /* escritorio */
+  --margen:16px;   /* celular */
 }
 
-@media (max-width:768px){
-  :root{ --margen:16px; }
+@media (min-width:768px){
+  :root{ --margen:40px; }
 }
 
 /* ---------- 2. Base ---------- */
@@ -115,8 +123,8 @@ button{font-family:inherit}
 /* Ritmo vertical compacto.
    El profesor marcó que sobraba aire: los bloques pasaron de 80 a 56 px
    de separación, y de 48 a 36 px en móvil. */
-.seccion{padding-block:56px}
-@media (max-width:768px){ .seccion{padding-block:36px} }
+.seccion{padding-block:36px}
+@media (min-width:768px){ .seccion{padding-block:56px} }
 
 .overline{
   font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -166,32 +174,42 @@ button{font-family:inherit}
   width:34px;height:34px;border-radius:9px;background:var(--grad);
   display:grid;place-items:center;color:#fff;font-size:17px;flex-shrink:0;
 }
-.nav{display:flex;gap:var(--e8);align-items:center}
-.nav a{
-  font-size:15px;font-weight:500;color:var(--texto-suave);
-  padding-bottom:3px;border-bottom:2px solid transparent;
-}
-.nav a:hover{color:var(--navy)}
-.nav a.activo{color:var(--navy);font-weight:600;border-bottom-color:var(--indigo)}
-.acciones{display:flex;gap:var(--e3);align-items:center}
-
+/* Celular: logo + botón de menú. La navegación y los botones de sesión
+   se despliegan debajo de la barra al tocar el botón. */
 .menu-btn{
-  display:none;background:none;border:1px solid var(--linea);
+  display:block;background:none;border:1px solid var(--linea);
   border-radius:var(--r-btn);padding:9px 12px;cursor:pointer;font-size:18px;line-height:1;
 }
+/* El menú abierto se despliega en el flujo, debajo del logo: los enlaces
+   y luego los botones, sin quedar uno encima del otro. */
+.encabezado-fila{flex-wrap:wrap}
+.nav,.acciones{
+  display:none;width:100%;
+  flex-direction:column;align-items:stretch;gap:0;
+}
+.encabezado.abierto .nav,.encabezado.abierto .acciones{display:flex}
+.nav a{
+  font-size:15px;font-weight:500;color:var(--texto-suave);
+  padding:13px 0;border-bottom:1px solid var(--linea-suave);
+}
+.nav a:hover{color:var(--navy)}
+.nav a.activo{color:var(--navy);font-weight:600}
+.acciones{padding-block:var(--e4);gap:var(--e3)}
+.acciones .btn{width:100%}
 
-@media (max-width:900px){
-  .menu-btn{display:block}
-  .nav,.acciones{
-    display:none;position:absolute;left:0;right:0;top:100%;
-    background:#fff;border-bottom:1px solid var(--linea-suave);
-    flex-direction:column;align-items:stretch;gap:0;padding:var(--e2) var(--margen);
+/* Escritorio: la barra completa en una sola fila. */
+@media (min-width:1024px){
+  .menu-btn{display:none}
+  .encabezado-fila{flex-wrap:nowrap}
+  .nav,.acciones,
+  .encabezado.abierto .nav,.encabezado.abierto .acciones{
+    display:flex;width:auto;flex-direction:row;align-items:center;
   }
-  .encabezado.abierto .nav,.encabezado.abierto .acciones{display:flex}
-  .nav a{padding:13px 0;border-bottom:1px solid var(--linea-suave)}
-  .nav a.activo{border-bottom-color:var(--linea-suave)}
-  .acciones{padding-block:var(--e4);gap:var(--e3)}
-  .acciones .btn{width:100%}
+  .nav{gap:var(--e8)}
+  .nav a{padding:0 0 3px;border-bottom:2px solid transparent}
+  .nav a.activo{border-bottom-color:var(--indigo)}
+  .acciones{gap:var(--e3);padding-block:0}
+  .acciones .btn{width:auto}
 }
 
 /* ---------- 5. Hero con buscador · SDGE-4 ---------- */
@@ -201,8 +219,9 @@ button{font-family:inherit}
    foto ocupa todo el ancho y el contenido va centrado sobre ella. */
 .hero{
   position:relative;background:var(--navy);color:#fff;
-  padding-block:64px 68px;overflow:hidden;text-align:center;
+  padding-block:40px 44px;overflow:hidden;text-align:center;
 }
+@media (min-width:768px){ .hero{padding-block:64px 68px} }
 .hero::before{                      /* la fotografía */
   content:"";position:absolute;inset:0;
   background:url('../img/festival-noche.jpg') center/cover no-repeat;
@@ -224,19 +243,37 @@ button{font-family:inherit}
 
 /* Tarjeta del buscador — sin recortes, dentro del flujo */
 .buscador{
-  background:#fff;border-radius:var(--r-card-lg);padding:var(--e5);
+  background:#fff;border-radius:var(--r-card-lg);padding:var(--e4);
   box-shadow:var(--sombra-lg);display:grid;gap:var(--e3);
-  grid-template-columns:repeat(3,1fr) auto;align-items:end;
+  /* Celular: el evento y el botón a todo el ancho; ciudad y fecha, que
+     son cortos, comparten fila. Así el buscador no se come la pantalla. */
+  grid-template-columns:repeat(2,minmax(0,1fr));
   text-align:left;   /* el hero va centrado; el formulario no */
 }
-@media (max-width:900px){ .buscador{grid-template-columns:1fr} }
+.buscador .campo:first-child,
+.buscador .btn{grid-column:1 / -1;width:100%}
+.buscador input,.buscador select{padding:13px 12px}
+.buscador input[type="date"]{padding-inline:10px 8px}
+@media (min-width:768px){
+  .buscador{
+    padding:var(--e5);align-items:end;
+    grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) auto;
+  }
+  .buscador .campo:first-child,
+  .buscador .btn{grid-column:auto;width:auto}
+  .buscador input,.buscador select{padding:15px 16px}
+}
 
 .hero-datos{
-  display:flex;flex-wrap:wrap;gap:var(--e8);margin-top:var(--e6);
+  display:flex;flex-wrap:wrap;gap:var(--e5);margin-top:var(--e6);
 }
 .hero-dato strong{
   display:block;font-family:'Space Grotesk',sans-serif;
-  font-size:28px;font-weight:700;line-height:1;
+  font-size:22px;font-weight:700;line-height:1;
+}
+@media (min-width:768px){
+  .hero-datos{gap:var(--e8)}
+  .hero-dato strong{font-size:28px}
 }
 .hero-dato span{font-size:13px;color:#94A3B8}
 
@@ -270,8 +307,8 @@ button{font-family:inherit}
   width:15px;height:15px;border-radius:50%;background:var(--error-600);
   color:#fff;font-size:10px;font-weight:700;flex-shrink:0}
 
-.fila{display:grid;gap:var(--e4);grid-template-columns:1fr 1fr}
-@media (max-width:620px){ .fila{grid-template-columns:1fr} }
+.fila{display:grid;gap:var(--e4);grid-template-columns:1fr}
+@media (min-width:576px){ .fila{grid-template-columns:1fr 1fr} }
 
 .form-pila{display:flex;flex-direction:column;gap:var(--e4)}
 
@@ -300,8 +337,9 @@ button{font-family:inherit}
 .acceso{
   min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:40px var(--margen);gap:var(--e5);
+  padding:24px var(--margen);gap:var(--e5);
 }
+@media (min-width:768px){ .acceso{padding-block:40px} }
 .acceso-columna{width:100%;max-width:560px;display:flex;flex-direction:column;gap:var(--e5)}
 
 .tarjeta-acceso{
@@ -311,24 +349,24 @@ button{font-family:inherit}
 }
 
 /* Franja de foto dentro de la tarjeta */
-.tarjeta-foto{position:relative;height:158px}
+.tarjeta-foto{position:relative;height:132px}
 .tarjeta-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tarjeta-foto::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg, rgba(17,24,39,.35) 0%, rgba(17,24,39,.82) 100%);
 }
-.tarjeta-foto-texto{position:absolute;left:28px;right:28px;bottom:20px;z-index:2}
+.tarjeta-foto-texto{position:absolute;left:20px;right:20px;bottom:16px;z-index:2}
 .tarjeta-foto-texto .overline{color:#A8A3FF;display:block;margin-bottom:6px}
 .tarjeta-foto-texto h1{
   font-size:clamp(23px,3vw,27px);color:#fff;margin:0;line-height:1.14;
 }
-@media (max-width:560px){
-  .tarjeta-foto{height:132px}
-  .tarjeta-foto-texto{left:20px;right:20px;bottom:16px}
-}
 
-.tarjeta-cuerpo{padding:28px;display:flex;flex-direction:column;gap:var(--e4)}
-@media (max-width:560px){ .tarjeta-cuerpo{padding:22px} }
+.tarjeta-cuerpo{padding:22px;display:flex;flex-direction:column;gap:var(--e4)}
+@media (min-width:576px){
+  .tarjeta-foto{height:158px}
+  .tarjeta-foto-texto{left:28px;right:28px;bottom:20px}
+  .tarjeta-cuerpo{padding:28px}
+}
 /* Dentro de la tarjeta el espaciado lo da el gap del contenedor */
 .tarjeta-cuerpo .acceso-sub{margin-bottom:0}
 .tarjeta-cuerpo .form-pila{gap:var(--e4)}
@@ -341,8 +379,8 @@ button{font-family:inherit}
 }
 .separador span{font-size:12px;color:var(--texto-tenue)}
 
-.accesos-rapidos{display:grid;grid-template-columns:1fr 1fr;gap:var(--e3)}
-@media (max-width:420px){ .accesos-rapidos{grid-template-columns:1fr} }
+.accesos-rapidos{display:grid;grid-template-columns:1fr;gap:var(--e3)}
+@media (min-width:576px){ .accesos-rapidos{grid-template-columns:1fr 1fr} }
 .accesos-rapidos a{
   padding:13px 16px;border-radius:var(--r-btn);
   border:1px solid var(--linea);background:#fff;
@@ -363,9 +401,6 @@ button{font-family:inherit}
 .acceso-pie a{color:var(--indigo-700);font-weight:600}
 .acceso-pie a:hover{text-decoration:underline}
 
-.acceso-lateral h2{margin-bottom:var(--e4)}
-.acceso-lateral p{color:#CBD5E1;max-width:42ch}
-@media (max-width:960px){ .acceso-lateral{display:none} }
 
 
 
@@ -389,11 +424,23 @@ button{font-family:inherit}
 }
 
 /* ---------- 8. Tarjetas de evento · SDGE-11 ---------- */
-.rejilla{display:grid;gap:var(--e5)}
-.rejilla-3{grid-template-columns:repeat(3,1fr)}
-.rejilla-4{grid-template-columns:repeat(4,1fr)}
-@media (max-width:980px){ .rejilla-3,.rejilla-4{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:620px){ .rejilla-3,.rejilla-4{grid-template-columns:1fr} }
+/* Celular: una columna. Las categorías son tarjetas cortas, así que van
+   de a dos desde el principio para no gastar pantalla. */
+.rejilla{display:grid;gap:var(--e4);grid-template-columns:1fr}
+.rejilla-4{grid-template-columns:repeat(2,1fr)}
+@media (min-width:576px){
+  .rejilla{gap:var(--e5)}
+  .rejilla-3{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:768px){
+  .rejilla-4{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width:1024px){
+  .rejilla-3{grid-template-columns:repeat(3,1fr)}
+}
+/* Los tres pasos no se parten en 2 + 1: una columna hasta tablet. */
+.pasos.rejilla-3{grid-template-columns:1fr}
+@media (min-width:768px){ .pasos.rejilla-3{grid-template-columns:repeat(3,1fr)} }
 
 .evento{
   background:#fff;border-radius:var(--r-card-lg);overflow:hidden;
@@ -435,7 +482,7 @@ button{font-family:inherit}
 /* Categorías */
 .categoria{
   background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
-  padding:18px;display:flex;flex-direction:column;gap:5px;
+  padding:14px;display:flex;flex-direction:column;gap:5px;
   box-shadow:var(--sombra-sm);transition:border-color .15s ease, transform .15s ease;
 }
 .categoria:hover{border-color:var(--indigo);transform:translateY(-2px)}
@@ -444,7 +491,7 @@ button{font-family:inherit}
   display:grid;place-items:center;font-size:20px;margin-bottom:2px;
   background:var(--indigo-50);color:var(--indigo);  /* el mismo para las cuatro */
 }
-.categoria h4{font-size:16px;font-family:'Space Grotesk',sans-serif}
+.categoria h3{font-size:16px;font-family:'Space Grotesk',sans-serif}
 .categoria p{font-size:13px;color:var(--texto-suave)}
 
 /* Chips de estado — el color significa algo */
@@ -463,18 +510,21 @@ button{font-family:inherit}
    lectura y el botón se sienta al lado en vez de debajo. */
 .llamado{
   background:var(--navy);color:#fff;border-radius:var(--r-card-lg);
-  padding:36px clamp(24px,4vw,44px);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:var(--e8);flex-wrap:wrap;
+  padding:28px 24px;
+  display:flex;flex-direction:column;align-items:stretch;
+  gap:var(--e5);
 }
 .llamado-texto{max-width:58ch;display:flex;flex-direction:column;gap:8px}
 .llamado-texto h2{font-size:clamp(21px,2.6vw,27px)}
 .llamado-texto p{color:#CBD5E1;font-size:15px}
-.llamado .btn{flex-shrink:0}
+.llamado .btn{width:100%}
 
-@media (max-width:760px){
-  .llamado{padding:28px 24px;align-items:stretch}
-  .llamado .btn{width:100%}
+@media (min-width:768px){
+  .llamado{
+    padding:36px clamp(24px,4vw,44px);flex-direction:row;flex-wrap:wrap;
+    align-items:center;justify-content:space-between;gap:var(--e8);
+  }
+  .llamado .btn{width:auto;flex-shrink:0}
 }
 
 /* ---------- 9. Encabezado de sección ---------- */
@@ -499,16 +549,16 @@ button{font-family:inherit}
 .paso p{font-size:14.5px;color:var(--texto-suave)}
 
 /* ---------- 11. Pie de página · SDGE-2 ---------- */
-.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e12) var(--e6);margin-top:56px}
-.pie-rejilla{
-  display:grid;gap:var(--e8);
-  grid-template-columns:1.6fr repeat(3,1fr);
+.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e10) var(--e6);margin-top:36px}
+.pie-rejilla{display:grid;gap:var(--e6);grid-template-columns:1fr}
+@media (min-width:576px){ .pie-rejilla{grid-template-columns:1fr 1fr} }
+@media (min-width:1024px){
+  .pie{padding-block:var(--e12) var(--e6);margin-top:56px}
+  .pie-rejilla{gap:var(--e8);grid-template-columns:1.6fr repeat(3,1fr)}
 }
-@media (max-width:900px){ .pie-rejilla{grid-template-columns:1fr 1fr} }
-@media (max-width:560px){ .pie-rejilla{grid-template-columns:1fr} }
 .pie .marca{color:#fff;margin-bottom:var(--e4)}
 .pie p{font-size:14px;max-width:34ch}
-.pie h4{
+.pie h3{
   color:#fff;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
   font-family:'Inter',sans-serif;font-weight:700;margin-bottom:var(--e4);
 }

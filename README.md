@@ -31,11 +31,23 @@ TicketFlow es una plataforma web inspirada en referentes de la industria (Tubole
 
 ```
 ticketflow/
-├── frontend/     # Aplicación cliente (HTML/CSS/Bootstrap/TS con patrón MVC)
-├── backend/      # API REST (Node.js + Express + TypeScript)
-├── database/     # Scripts SQL, esquema y datos de prueba (PostgreSQL)
-└── docs/         # Documentación, diagramas UML, wireframes
+├── sprint1/          # ENTREGA ACTUAL · Home Page Mobile-First + pantallas de acceso
+│   ├── index.html    #   las 5 pantallas en una sola página
+│   ├── css/          #   estilos.css: sistema de diseño Mobile-First
+│   ├── js/           #   app.js: enrutador + validación de formularios
+│   └── img/          #   fotografías de los eventos
+├── docs/             # Documentación del proyecto
+│   ├── capturas/     #   la Home en celular, tablet y escritorio
+│   └── entregables/  #   Matriz de Vester, Canvas y documento del seminario
+├── frontend/         # Prototipos anteriores de la interfaz
+├── unificado/        # Prototipo navegable con todas las pantallas del diseño
+├── design/           # Scripts que generan las pantallas del prototipo
+├── maqueta*/         # Exploraciones de diseño (mockups)
+├── backend/          # API REST (Node.js + Express + TypeScript) · Sprint 2
+└── database/         # Esquema PostgreSQL · Sprint 2
 ```
+
+Para ver la entrega actual basta con abrir `sprint1/index.html` en el navegador.
 
 ## Requisitos previos
 
@@ -72,16 +84,18 @@ npm run dev
 
 ## Equipo de desarrollo
 
-| Nombre | Rol | GitHub |
-|---|---|---|
-| _Pendiente_ | _Pendiente_ | [@eder114](https://github.com/eder114) |
-| _Pendiente_ | _Pendiente_ | _Pendiente_ |
-| _Pendiente_ | _Pendiente_ | _Pendiente_ |
-| _Pendiente_ | _Pendiente_ | _Pendiente_ |
+| Nombre | Trabajo en el Sprint 1 (Jira SDGE) |
+|---|---|
+| Eder Fabián Rodríguez Murillo · [@eder114](https://github.com/eder114) | Página de inicio, encabezado, hero con buscador, repositorio |
+| Eduardo José Benítez Guevara | Inicio de sesión, registros de cliente y agente, Scrum Daily |
+| Jorge Andrés Marín Díaz | Sistema de diseño, responsive, **maquetación Mobile-First** |
+| Samuel Uribe Naranjo | Registro de administrador, eventos y categorías, validación |
 
 ## Estado del proyecto
 
-En desarrollo — Fase 1: Análisis y Diseño.
+Sprint 1 en curso (9 – 28 de septiembre de 2026): interfaz de la página de
+inicio y de las pantallas de acceso. El backend y la base de datos entran en
+el Sprint 2.
 
 ## Licencia
 
@@ -101,7 +115,7 @@ página**: las cinco pantallas viven en `index.html` y un enrutador en
 ```
 sprint1/
 ├── index.html        Las 5 pantallas
-├── css/estilos.css   Sistema de diseño + responsive
+├── css/estilos.css   Sistema de diseño Mobile-First
 ├── js/app.js         Enrutador + validación de formularios
 └── img/              Imágenes de los eventos
 ```
@@ -118,8 +132,30 @@ Para verlo basta con abrir `sprint1/index.html` en el navegador.
 | `#/registro-agente` | Registro de organizador | SDGE-9 |
 | `#/registro-admin` | Alta de administrador | SDGE-6 |
 
-La hoja de estilos corresponde a SDGE-12, la validación a SDGE-8 y el
-comportamiento responsive a SDGE-10.
+La hoja de estilos corresponde a SDGE-12, la validación a SDGE-8, la
+maquetación Mobile-First a SDGE-14 y el ajuste de los registros a SDGE-10.
+
+### Maquetación Mobile-First (SDGE-14)
+
+La hoja de estilos está escrita **primero para celular**. Los estilos base de
+cada bloque son los de una pantalla de 360 px, y tablet y escritorio se
+agregan encima solo con `@media (min-width: …)`. No hay ninguna regla de
+layout con `max-width`.
+
+| Punto de corte | Qué cambia |
+|---|---|
+| Base (360 px) | Menú desplegable, buscador compacto, eventos en 1 columna, categorías de a 2 |
+| `min-width: 576px` | Eventos y formularios en 2 columnas, pie en 2 columnas |
+| `min-width: 768px` | Buscador en una sola fila, categorías y pasos en fila, márgenes de 40 px |
+| `min-width: 1024px` | Barra de navegación completa, eventos en 3 columnas, pie en 4 columnas |
+| 1280 px | Ancho máximo del contenido |
+
+Verificado sin desplazamiento horizontal a 360, 768, 1024 y 1440 px, y con
+el validador del W3C: **0 errores** en HTML y en CSS.
+
+| Celular | Tablet | Escritorio |
+|---|---|---|
+| ![Celular](docs/capturas/home-movil.png) | ![Tablet](docs/capturas/home-tablet.png) | ![Escritorio](docs/capturas/home-escritorio.png) |
 
 ### Sistema de diseño
 
@@ -127,7 +163,7 @@ comportamiento responsive a SDGE-10.
 |---|---|
 | Colores | Índigo `#635BFF` · Azul `#3B82F6` · Navy `#111827` · Fondo `#F8FAFC` |
 | Tipografías | Space Grotesk en títulos · Inter en interfaz |
-| Rejilla | 12 columnas en escritorio · 4 en móvil · unidad base de 8 px |
+| Puntos de corte | 576 · 768 · 1024 px, siempre con `min-width` · unidad base de 8 px |
 | Márgenes | 16 px en móvil · 40 px en escritorio · contenido máx. 1280 px |
 | Radios | Tarjetas 16–20 px · botones 10 px |
 | Estados | Ámbar reservada · verde confirmada · rojo cancelada |
