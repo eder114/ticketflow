@@ -83,7 +83,6 @@ __pycache__/
 *.pyc
 
 # ===========================
-# Generados (se reconstruyen con los scripts)
+# Configuración local del editor
 # ===========================
-unificado/ticketflow.html
-frontend/ticketflow-completo.html
+.claude/
