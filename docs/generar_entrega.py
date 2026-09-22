@@ -25,6 +25,7 @@ RAIZ = os.path.dirname(AQUI)
 JIRA = sys.argv[1]
 DESTINO = os.path.join(os.path.expanduser("~"), "Downloads", "Entrega_TicketFlow_Sprint1")
 REPO = "https://github.com/eder114/ticketflow"
+PAGINA = "https://eder114.github.io/ticketflow/sprint1/"
 CAPTURAS = os.path.join(AQUI, "capturas")
 
 AZUL = RGBColor(0x49, 0x3E, 0xE5)
@@ -32,11 +33,12 @@ TINTA = RGBColor(0x19, 0x1C, 0x1E)
 GRIS = RGBColor(0x5A, 0x58, 0x68)
 
 # ============================================================== carpeta ==
-if os.path.exists(DESTINO):
-    shutil.rmtree(DESTINO)
-os.makedirs(DESTINO)
-
+# Se reemplaza cada parte por separado, sin borrar la carpeta entera: si el
+# Word está abierto, lo demás igual queda actualizado.
+os.makedirs(DESTINO, exist_ok=True)
 codigo = os.path.join(DESTINO, "1_Codigo_HTML5_CSS3")
+if os.path.exists(codigo):
+    shutil.rmtree(codigo)
 shutil.copytree(os.path.join(RAIZ, "sprint1"), codigo,
                 ignore=shutil.ignore_patterns("_prueba*", "*.bak"))
 with open(os.path.join(codigo, "LEEME.txt"), "w", encoding="utf-8") as f:
@@ -65,15 +67,17 @@ Edge, presionar F12 y luego Ctrl + Shift + M, y elegir el dispositivo
 Validación W3C (validator.w3.org y jigsaw.w3.org/css-validator):
 0 errores en HTML y 0 errores en CSS.
 
+Página en línea: %s
 Repositorio: %s
-""" % REPO)
+""" % (PAGINA, REPO))
 
 caps = os.path.join(DESTINO, "4_Capturas")
-os.makedirs(caps)
+os.makedirs(caps, exist_ok=True)
 for nombre, dest in (("home-movil.png", "Home_celular_360px.png"),
                      ("home-tablet.png", "Home_tablet_768px.png"),
                      ("home-escritorio.png", "Home_escritorio_1440px.png"),
-                     ("home-comparativa.png", "Home_comparativa_3_tamanos.png")):
+                     ("home-comparativa.png", "Home_comparativa_3_tamanos.png"),
+                     ("qr-ticketflow.png", "QR_pagina_en_linea.png")):
     shutil.copy(os.path.join(CAPTURAS, nombre), os.path.join(caps, dest))
 
 shutil.copy(os.path.join(AQUI, "entregables", "Scrum_Daily_Sprint1_TicketFlow.xlsx"),
@@ -81,6 +85,8 @@ shutil.copy(os.path.join(AQUI, "entregables", "Scrum_Daily_Sprint1_TicketFlow.xl
 
 with open(os.path.join(DESTINO, "Repositorio_GitHub.url"), "w", encoding="utf-8") as f:
     f.write("[InternetShortcut]\nURL=%s\n" % REPO)
+with open(os.path.join(DESTINO, "Pagina_en_linea.url"), "w", encoding="utf-8") as f:
+    f.write("[InternetShortcut]\nURL=%s\n" % PAGINA)
 
 # ================================================================= Word ==
 doc = Document()
@@ -167,7 +173,8 @@ for n in ("Eder Fabián Rodríguez Murillo", "Eduardo José Benítez Guevara",
     p(n, tam=11.5, centro=True, despues=2)
 p("Unidad Central del Valle del Cauca — UCEVA · Tuluá", tam=11, negrita=True, centro=True, antes=30, despues=2)
 p("22 de septiembre de 2026", tam=11, color=GRIS, centro=True)
-par = p("Repositorio: ", tam=11, centro=True, antes=18); enlace(par, REPO)
+par = p("Página en línea: ", tam=11, centro=True, antes=18); enlace(par, PAGINA)
+par = p("Repositorio: ", tam=11, centro=True); enlace(par, REPO)
 salto()
 
 # --- 0. contenido de la entrega ----------------------------------------------
@@ -177,7 +184,8 @@ tabla(["Archivo o carpeta", "Qué contiene"],
        ["2_Informe_Jira_GitHub_Scrum.docx", "Este documento: trazabilidad en Jira, control de versiones y Scrum Daily."],
        ["3_Scrum_Daily_Sprint1.xlsx", "Tabla de reuniones diarias, burndown del sprint e impedimentos."],
        ["4_Capturas/", "La página de inicio en celular (360 px), tablet (768 px) y escritorio (1440 px)."],
-       ["Repositorio_GitHub.url", "Acceso directo a " + REPO]],
+       ["Repositorio_GitHub.url", "Acceso directo a " + REPO],
+       ["Pagina_en_linea.url", "Acceso directo a la página publicada: " + PAGINA]],
       [5.4, 11.0], tam=9.5)
 
 # --- 1. maquetación ------------------------------------------------------------
@@ -199,6 +207,11 @@ p("Verificación: sin desplazamiento horizontal a 360, 768, 1024 y 1440 px, y 0 
   "validador del W3C tanto en HTML (validator.w3.org) como en CSS (jigsaw.w3.org/css-validator).")
 figura(os.path.join(CAPTURAS, "home-comparativa.png"),
        "Figura 1. La página de inicio en celular, tablet y escritorio.")
+par = p("La página está publicada con GitHub Pages y se abre desde cualquier celular, tablet o computador: ")
+enlace(par, PAGINA)
+doc.add_picture(os.path.join(CAPTURAS, "qr-ticketflow.png"), width=Cm(4.5))
+doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+p("Código QR de la página.", tam=9, cursiva=True, color=GRIS, centro=True, despues=12)
 
 # --- 2. jira -------------------------------------------------------------------
 salto()
@@ -339,7 +352,10 @@ for tipo, texto in (("begin", None), (None, " PAGE "), ("end", None)):
     run._r.append(e)
 
 ruta = os.path.join(DESTINO, "2_Informe_Jira_GitHub_Scrum.docx")
-doc.save(ruta)
+try:
+    doc.save(ruta)
+except PermissionError:
+    print("OJO: el Word está abierto. Ciérrelo y vuelva a correr el script para actualizarlo.")
 print("Carpeta:", DESTINO)
 for base, _, archivos in os.walk(DESTINO):
     nivel = base.replace(DESTINO, "").count(os.sep)
