@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3320 1960" width="3320" height="1960" font-family="Segoe UI, Arial, sans-serif">
+<rect width="3320" height="1960" fill="#FFFFFF"/>
+<line x1="267.5" y1="165.0" x2="193.0" y2="84.7" stroke="#64748B" stroke-width="2"/>
+<line x1="332.5" y1="165.0" x2="407.0" y2="84.7" stroke="#64748B" stroke-width="2"/>
+<line x1="965.0" y1="165.0" x2="885.3" y2="85.3" stroke="#64748B" stroke-width="2"/>
+<line x1="1035.0" y1="165.0" x2="1115.4" y2="84.6" stroke="#64748B" stroke-width="2"/>
+<line x1="1667.5" y1="165.0" x2="1593.0" y2="84.7" stroke="#64748B" stroke-width="2"/>
+<line x1="1732.5" y1="165.0" x2="1807.0" y2="84.7" stroke="#64748B" stroke-width="2"/>
+<line x1="925.0" y1="665.0" x2="748.8" y2="582.8" stroke="#64748B" stroke-width="2"/>
+<line x1="895.0" y1="692.8" x2="522.9" y2="667.1" stroke="#64748B" stroke-width="2"/>
+<line x1="962.5" y1="665.0" x2="726.1" y2="444.4" stroke="#64748B" stroke-width="2"/>
+<line x1="998.8" y1="665.0" x2="990.9" y2="446.0" stroke="#64748B" stroke-width="2"/>
+<line x1="1000.0" y1="1215.0" x2="1000.0" y2="1354.0" stroke="#64748B" stroke-width="2"/>
+<line x1="1672.8" y1="965.0" x2="1579.5" y2="845.1" stroke="#64748B" stroke-width="2"/>
+<line x1="1757.5" y1="965.0" x2="1891.0" y2="883.7" stroke="#64748B" stroke-width="2"/>
+<line x1="1687.3" y1="1335.0" x2="1629.4" y2="1494.2" stroke="#64748B" stroke-width="2"/>
+<line x1="1738.9" y1="1335.0" x2="1872.7" y2="1455.4" stroke="#64748B" stroke-width="2"/>
+<line x1="373.8" y1="1085.0" x2="268.9" y2="1224.8" stroke="#64748B" stroke-width="2"/>
+<line x1="428.0" y1="1085.0" x2="540.0" y2="1224.9" stroke="#64748B" stroke-width="2"/>
+<line x1="2434.2" y1="665.0" x2="2805.4" y2="285.1" stroke="#64748B" stroke-width="2"/>
+<line x1="2474.0" y1="665.0" x2="3095.7" y2="371.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2457.9" y1="665.0" x2="2791.7" y2="463.2" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="675.9" x2="3077.5" y2="544.4" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="681.7" x2="2767.4" y2="636.1" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="701.4" x2="3049.1" y2="708.7" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="722.8" x2="2780.3" y2="782.7" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="727.0" x2="3075.1" y2="873.3" stroke="#64748B" stroke-width="2"/>
+<line x1="2453.8" y1="735.0" x2="2793.2" y2="956.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2470.0" y1="735.0" x2="3097.3" y2="1048.6" stroke="#64748B" stroke-width="2"/>
+<line x1="2432.7" y1="735.0" x2="2806.2" y2="1134.5" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="1380.5" x2="2761.2" y2="1332.8" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="1401.4" x2="3061.1" y2="1408.9" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="1422.8" x2="2780.3" y2="1482.7" stroke="#64748B" stroke-width="2"/>
+<line x1="2505.0" y1="1427.0" x2="3075.1" y2="1573.3" stroke="#64748B" stroke-width="2"/>
+<line x1="2453.8" y1="1435.0" x2="2793.2" y2="1656.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2470.0" y1="1435.0" x2="3097.3" y2="1748.6" stroke="#64748B" stroke-width="2"/>
+<line x1="366.1" y1="637.5" x2="228.0" y2="580.0" stroke="#64748B" stroke-width="2"/>
+<line x1="366.1" y1="682.5" x2="228.0" y2="740.0" stroke="#64748B" stroke-width="2"/>
+<line x1="555.0" y1="200.0" x2="405.0" y2="200.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="516.0" cy="187.2" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="516.0" y="194.2" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="745.0" y1="204.0" x2="895.0" y2="204.0" stroke="#64748B" stroke-width="2"/>
+<line x1="745.0" y1="196.0" x2="895.0" y2="196.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="784.0" cy="212.8" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="784.0" y="219.8" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="1255.0" y1="200.0" x2="1105.0" y2="200.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1216.0" cy="187.2" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1216.0" y="194.2" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="1445.0" y1="204.0" x2="1595.0" y2="204.0" stroke="#64748B" stroke-width="2"/>
+<line x1="1445.0" y1="196.0" x2="1595.0" y2="196.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1484.0" cy="212.8" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1484.0" y="219.8" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="1389.4" y1="421.9" x2="1651.0" y2="235.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1464.8" cy="383.7" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1464.8" y="390.7" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="1308.3" y1="474.9" x2="1046.7" y2="661.7" stroke="#64748B" stroke-width="2"/>
+<line x1="1313.0" y1="481.4" x2="1051.3" y2="668.3" stroke="#64748B" stroke-width="2"/>
+<circle cx="1235.2" cy="516.3" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1235.2" y="523.3" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="2010.6" y1="421.9" x2="1749.0" y2="235.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1950.1" cy="362.9" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1950.1" y="369.9" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="2087.0" y1="481.4" x2="2348.7" y2="668.3" stroke="#64748B" stroke-width="2"/>
+<line x1="2091.7" y1="474.9" x2="2353.3" y2="661.7" stroke="#64748B" stroke-width="2"/>
+<circle cx="2149.9" cy="537.1" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="2149.9" y="544.1" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="1000.0" y1="902.0" x2="1000.0" y2="735.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1012.8" cy="858.6" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1012.8" y="865.6" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="996.0" y1="998.0" x2="996.0" y2="1145.0" stroke="#64748B" stroke-width="2"/>
+<line x1="1004.0" y1="998.0" x2="1004.0" y2="1145.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="987.2" cy="1036.2" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="987.2" y="1043.2" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="1298.6" y1="828.0" x2="1081.7" y2="735.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1247.2" cy="792.0" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1247.2" y="799.0" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="1399.8" y1="875.7" x2="1616.8" y2="968.7" stroke="#64748B" stroke-width="2"/>
+<line x1="1403.0" y1="868.4" x2="1619.9" y2="961.3" stroke="#64748B" stroke-width="2"/>
+<circle cx="1452.8" cy="908.0" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1452.8" y="915.0" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="1323.2" y1="1115.5" x2="1027.2" y2="735.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1256.3" cy="1008.7" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1256.3" y="1015.7" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="1399.8" y1="1175.7" x2="1616.8" y2="1268.7" stroke="#64748B" stroke-width="2"/>
+<line x1="1403.0" y1="1168.4" x2="1619.9" y2="1261.3" stroke="#64748B" stroke-width="2"/>
+<circle cx="1452.8" cy="1208.0" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1452.8" y="1215.0" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="741.0" y1="872.7" x2="947.5" y2="735.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="801.8" cy="847.5" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="801.8" y="854.5" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="650.5" y1="920.3" x2="468.2" y2="1011.4" stroke="#64748B" stroke-width="2"/>
+<line x1="654.0" y1="927.5" x2="471.8" y2="1018.6" stroke="#64748B" stroke-width="2"/>
+<circle cx="599.1" cy="936.1" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="599.1" y="943.1" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="2014.8" y1="1030.2" x2="1740.8" y2="1265.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1935.2" cy="1081.5" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1935.2" y="1088.5" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="2087.8" y1="972.8" x2="2361.8" y2="738.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2082.6" y1="966.8" x2="2356.6" y2="732.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="2164.8" cy="918.5" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="2164.8" y="925.5" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="2020.9" y1="1366.7" x2="1730.6" y2="1035.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="1955.0" cy="1272.0" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="1955.0" y="1279.0" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="2145.0" y1="1404.0" x2="2295.0" y2="1404.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2145.0" y1="1396.0" x2="2295.0" y2="1396.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="2184.0" cy="1412.8" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="2184.0" y="1419.8" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<line x1="2400.0" y1="1002.0" x2="2400.0" y2="735.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="2412.8" cy="932.6" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="2412.8" y="939.6" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">1</text>
+<line x1="2396.0" y1="1098.0" x2="2396.0" y2="1365.0" stroke="#64748B" stroke-width="2"/>
+<line x1="2404.0" y1="1098.0" x2="2404.0" y2="1365.0" stroke="#64748B" stroke-width="2"/>
+<circle cx="2387.2" cy="1167.4" r="17" fill="#FFFFFF" stroke="#635BFF" stroke-width="1.5"/>
+<text x="2387.2" y="1174.4" text-anchor="middle" font-size="19" font-weight="700" fill="#635BFF">N</text>
+<ellipse cx="170" cy="60" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="170" y="67" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">id_pais</text>
+<ellipse cx="430" cy="60" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="430" y="67" text-anchor="middle" font-size="19" fill="#111827">nombre</text>
+<ellipse cx="860" cy="60" rx="107" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="860" y="67" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">id_departamento</text>
+<ellipse cx="1140" cy="60" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1140" y="67" text-anchor="middle" font-size="19" fill="#111827">nombre</text>
+<ellipse cx="1570" cy="60" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1570" y="67" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">id_ciudad</text>
+<ellipse cx="1830" cy="60" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1830" y="67" text-anchor="middle" font-size="19" fill="#111827">nombre</text>
+<ellipse cx="700" cy="560" rx="101" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="700" y="567" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">identificacion</text>
+<ellipse cx="420" cy="660" rx="107" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="420" y="667" text-anchor="middle" font-size="19" fill="#111827">nombre_completo</text>
+<ellipse cx="700" cy="420" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="700" y="427" text-anchor="middle" font-size="19" fill="#111827">correo</text>
+<ellipse cx="990" cy="420" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="427" text-anchor="middle" font-size="19" fill="#111827">direccion</text>
+<ellipse cx="1000" cy="1380" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1000" y="1387" text-anchor="middle" font-size="19" fill="#111827" style="text-decoration:underline;text-decoration-style:dashed">numero</text>
+<ellipse cx="1560" cy="820" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1560" y="827" text-anchor="middle" font-size="19" fill="#111827">puntos</text>
+<ellipse cx="1930" cy="860" rx="95" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1930" y="867" text-anchor="middle" font-size="19" fill="#111827">ve_publicidad</text>
+<ellipse cx="1620" cy="1520" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1620" y="1527" text-anchor="middle" font-size="19" fill="#111827">comision</text>
+<ellipse cx="1900" cy="1480" rx="84" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1900" y="1487" text-anchor="middle" font-size="19" fill="#111827">experiencia</text>
+<ellipse cx="250" cy="1250" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="250" y="1257" text-anchor="middle" font-size="19" fill="#111827">salario</text>
+<ellipse cx="560" cy="1250" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="560" y="1257" text-anchor="middle" font-size="19" fill="#111827">horario</text>
+<ellipse cx="2830" cy="260" rx="95" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2830" y="267" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">codigo_evento</text>
+<ellipse cx="3140" cy="350" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="357" text-anchor="middle" font-size="19" fill="#111827">nombre</text>
+<ellipse cx="2830" cy="440" rx="84" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2830" y="447" text-anchor="middle" font-size="19" fill="#111827">descripcion</text>
+<ellipse cx="3140" cy="530" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="537" text-anchor="middle" font-size="19" fill="#111827">teatro</text>
+<ellipse cx="2860" cy="620" rx="118" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2860" y="627" text-anchor="middle" font-size="19" fill="#111827">fecha_hora_inicio</text>
+<ellipse cx="3150" cy="710" rx="101" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3150" y="717" text-anchor="middle" font-size="19" fill="#111827">fecha_hora_fin</text>
+<ellipse cx="2860" cy="800" rx="107" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2860" y="807" text-anchor="middle" font-size="19" fill="#111827">capacidad_total</text>
+<ellipse cx="3140" cy="890" rx="84" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="897" text-anchor="middle" font-size="19" fill="#111827">precio_base</text>
+<ellipse cx="2830" cy="980" rx="95" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2830" y="987" text-anchor="middle" font-size="19" fill="#111827">observaciones</text>
+<ellipse cx="3140" cy="1070" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="1077" text-anchor="middle" font-size="19" fill="#111827">estado</text>
+<ellipse cx="2830" cy="1160" rx="118" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="2830" y="1167" text-anchor="middle" font-size="19" fill="#111827">cupos_disponibles</text>
+<ellipse cx="2830" cy="1320" rx="79" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2830" y="1327" text-anchor="middle" font-size="19" fill="#111827" text-decoration="underline">id_reserva</text>
+<ellipse cx="3140" cy="1410" rx="79" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="1417" text-anchor="middle" font-size="19" fill="#111827">fecha_hora</text>
+<ellipse cx="2860" cy="1500" rx="107" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2860" y="1507" text-anchor="middle" font-size="19" fill="#111827">numero_entradas</text>
+<ellipse cx="3140" cy="1590" rx="84" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="3140" y="1597" text-anchor="middle" font-size="19" fill="#111827">valor_total</text>
+<ellipse cx="2830" cy="1680" rx="95" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="2830" y="1687" text-anchor="middle" font-size="19" fill="#111827">observaciones</text>
+<ellipse cx="3140" cy="1770" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="3140" y="1777" text-anchor="middle" font-size="19" fill="#111827">estado</text>
+<ellipse cx="180" cy="560" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="180" y="567" text-anchor="middle" font-size="19" fill="#111827">nombres</text>
+<ellipse cx="180" cy="760" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="180" y="767" text-anchor="middle" font-size="19" fill="#111827">apellidos</text>
+<rect x="195" y="165" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="300" y="208" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">PAIS</text>
+<rect x="895" y="165" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="1000" y="208" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">DEPARTAMENTO</text>
+<rect x="1595" y="165" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="1700" y="208" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">CIUDAD</text>
+<rect x="895" y="665" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="1000" y="708" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">PERSONA</text>
+<rect x="895" y="1145" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<rect x="903" y="1153" width="194" height="54" rx="2" fill="none" stroke="#635BFF" stroke-width="2"/>
+<text x="1000" y="1188" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">TELEFONO</text>
+<rect x="1595" y="965" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="1700" y="1008" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">CLIENTE</text>
+<rect x="1595" y="1265" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="1700" y="1308" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">AGENTE</text>
+<rect x="295" y="1015" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="400" y="1058" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">ADMINISTRADOR</text>
+<rect x="2295" y="665" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="2400" y="708" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">EVENTO</text>
+<rect x="2295" y="1365" width="210" height="70" rx="4" fill="#EEEDFF" stroke="#635BFF" stroke-width="2.5"/>
+<text x="2400" y="1408" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">RESERVA</text>
+<polygon points="650,152 745,200 650,248 555,200" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="650" y="207" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">tiene</text>
+<polygon points="1350,152 1445,200 1350,248 1255,200" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="1350" y="207" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">tiene</text>
+<polygon points="1350,402 1445,450 1350,498 1255,450" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="1350" y="457" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">reside en</text>
+<polygon points="2050,402 2145,450 2050,498 1955,450" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="2050" y="457" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">se realiza en</text>
+<polygon points="1000,902 1095,950 1000,998 905,950" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<polygon points="1000,913 1084,950 1000,987 916,950" fill="none" stroke="#B45309" stroke-width="2"/>
+<text x="1000" y="957" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">posee</text>
+<polygon points="1350,802 1445,850 1350,898 1255,850" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="1350" y="857" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">es</text>
+<polygon points="1350,1102 1445,1150 1350,1198 1255,1150" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="1350" y="1157" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">es</text>
+<polygon points="700,852 795,900 700,948 605,900" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="700" y="907" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">es</text>
+<polygon points="2050,952 2145,1000 2050,1048 1955,1000" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="2050" y="1007" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">registra</text>
+<polygon points="2050,1352 2145,1400 2050,1448 1955,1400" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="2050" y="1407" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">realiza</text>
+<polygon points="2400,1002 2495,1050 2400,1098 2305,1050" fill="#FCF2E5" stroke="#B45309" stroke-width="2.5"/>
+<text x="2400" y="1057" text-anchor="middle" font-size="19" font-weight="600" fill="#111827">genera</text>
+<rect x="90" y="1560" width="760" height="330" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="116" y="1604" font-size="24" font-weight="700" fill="#111827">Convenciones (notación de Chen)</text>
+<rect x="120" y="1632" width="64" height="28" fill="#EEEDFF" stroke="#635BFF" stroke-width="2"/>
+<text x="208" y="1653" font-size="19" fill="#111827">Entidad</text>
+<rect x="120" y="1672" width="64" height="28" fill="#EEEDFF" stroke="#635BFF" stroke-width="2"/>
+<rect x="126" y="1678" width="52" height="16" fill="none" stroke="#635BFF" stroke-width="1.5"/>
+<text x="208" y="1693" font-size="19" fill="#111827">Entidad débil</text>
+<polygon points="152,1710 186,1726 152,1742 118,1726" fill="#FCF2E5" stroke="#B45309" stroke-width="2"/>
+<text x="208" y="1733" font-size="19" fill="#111827">Relación</text>
+<polygon points="152,1750 186,1766 152,1782 118,1766" fill="#FCF2E5" stroke="#B45309" stroke-width="2"/>
+<polygon points="152,1757 172,1766 152,1775 132,1766" fill="none" stroke="#B45309" stroke-width="1.5"/>
+<text x="208" y="1773" font-size="19" fill="#111827">Relación identificadora</text>
+<ellipse cx="152" cy="1806" rx="34" ry="15" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="208" y="1813" font-size="19" fill="#111827">Atributo · clave subrayada</text>
+<ellipse cx="152" cy="1846" rx="34" ry="15" fill="#E7F4F2" stroke="#0F766E" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="208" y="1853" font-size="19" fill="#111827">Atributo derivado (punteado)</text>
+<text x="120" y="1876" font-size="17" fill="#5A5868">La línea doble marca participación total.</text>
+<text x="3260" y="60" text-anchor="end" font-size="30" font-weight="700" fill="#111827">TicketFlow · Diagrama Entidad-Relación (Chen)</text>
+<text x="3260" y="94" text-anchor="end" font-size="19" fill="#5A5868">Proyecto Integrador 2026-2 · Bases de Datos y Programación en Ambiente Web I</text>
+</svg>
