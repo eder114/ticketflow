@@ -12,6 +12,8 @@ Esquema en PostgreSQL · Sprint 2.
 | `DER_Chen_TicketFlow.svg` | Imagen vectorial, no se pixela al ampliar |
 | `DER_Chen_TicketFlow.drawio` | Editable en [draw.io](https://app.diagrams.net) |
 | `der_chen.py` | Genera los tres archivos anteriores |
+| `Modelo_Relacional_TicketFlow.docx` | Paso del modelo E-R al modelo relacional, siguiendo los pasos de la asignatura |
+| `modelo_relacional.py` | Genera el documento anterior |
 
 Notación: rectángulo = entidad · rectángulo doble = entidad débil · rombo =
 relación · rombo doble = relación identificadora · elipse = atributo ·
@@ -62,6 +64,14 @@ una relación identificadora.
 `RESERVA` resuelve la relación N:M que habría entre `CLIENTE` y `EVENTO`: al
 guardar fecha, número de entradas, valor y estado, deja de ser una simple tabla
 de cruce y se convierte en una entidad propia.
+
+## Paso al modelo relacional
+
+El documento `Modelo_Relacional_TicketFlow.docx` aplica los siete pasos vistos
+en clase (entidades fuertes, entidad débil, 1:N, 1:1 y subtipos, N:M,
+atributos multivaluados y relaciones n-arias), y termina con el esquema de las
+diez tablas, sus llaves foráneas, las restricciones de integridad y el
+`CREATE TABLE` para PostgreSQL.
 
 ## Estados
 
