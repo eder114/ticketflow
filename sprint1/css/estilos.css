@@ -219,7 +219,7 @@ button{font-family:inherit}
    foto ocupa todo el ancho y el contenido va centrado sobre ella. */
 .hero{
   position:relative;background:var(--navy);color:#fff;
-  padding-block:40px 44px;overflow:hidden;text-align:center;
+  padding-block:40px 44px;overflow:visible;text-align:center;
 }
 @media (min-width:768px){ .hero{padding-block:64px 68px} }
 .hero::before{                      /* la fotografía */
@@ -299,13 +299,68 @@ button{font-family:inherit}
   position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
 }
 .bq-chip.tiene-valor .bq-valor{display:block}
-/* El control real, transparente y encima de todo el chip */
-.bq-control{
+/* Botón transparente que cubre todo el chip y abre su panel */
+.bq-abrir{
   position:absolute;inset:0;width:100%;height:100%;
-  opacity:0;cursor:pointer;border:0;margin:0;font-size:16px;
+  background:none;border:0;border-radius:inherit;cursor:pointer;padding:0;margin:0;
 }
-.bq-control option{color:var(--navy)}
-.bq-seg:focus-within{outline:3px solid #A8A3FF;outline-offset:2px}
+.bq-abrir:focus-visible{outline:3px solid #A8A3FF;outline-offset:2px}
+.bq-chip.abierto{border-color:#A8A3FF;background:rgba(99,91,255,.35)}
+
+/* ---------- Paneles: lista y calendario propios ----------
+   En celular el panel ocupa el ancho del buscador, justo debajo; en
+   escritorio sale debajo de su segmento de la barra. */
+.buscador{position:relative}
+.bq-pop{
+  position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:40;
+  background:#fff;color:var(--navy);border-radius:20px;padding:8px;
+  box-shadow:0 18px 44px rgba(17,24,39,.28);border:1px solid var(--linea-suave);
+  display:flex;flex-direction:column;gap:2px;text-align:left;
+  animation:bq-aparecer .14s ease both;
+}
+.bq-pop[hidden]{display:none}
+@keyframes bq-aparecer{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.bq-opcion{
+  display:flex;align-items:center;gap:12px;width:100%;min-height:44px;
+  padding:0 14px;border:0;border-radius:var(--r-full);background:none;
+  font-family:inherit;font-size:15px;color:var(--navy);text-align:left;cursor:pointer;
+}
+.bq-opcion:hover,.bq-opcion:focus-visible{background:var(--indigo-50);outline:none}
+.bq-punto{
+  width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--linea);transition:border-color .15s ease;
+}
+.bq-opcion[aria-pressed="true"]{font-weight:600;color:var(--indigo-700)}
+.bq-opcion[aria-pressed="true"] .bq-punto{border:5px solid var(--indigo)}
+
+/* Calendario */
+.bq-cal{padding:14px;gap:10px}
+.bq-cal-cab{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bq-cal-mes{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
+.bq-cal-nav{display:flex;gap:6px}
+.bq-circulo{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--linea);background:#fff;
+  display:grid;place-items:center;cursor:pointer;color:var(--navy);padding:0;
+}
+.bq-circulo:hover{border-color:var(--indigo);color:var(--indigo)}
+.bq-circulo:disabled{opacity:.35;cursor:not-allowed;border-color:var(--linea);color:var(--navy)}
+.bq-cal-grilla{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;justify-items:center}
+.bq-cal-dsem{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--texto-tenue);padding:4px 0}
+.bq-dia{
+  width:38px;height:38px;border-radius:50%;border:0;background:none;padding:0;
+  font-family:inherit;font-size:14px;color:var(--navy);cursor:pointer;
+}
+.bq-dia:hover:not(:disabled){background:var(--indigo-50);color:var(--indigo-700)}
+.bq-dia.hoy{box-shadow:inset 0 0 0 2px var(--indigo);font-weight:600}
+.bq-dia[aria-pressed="true"]{background:var(--grad);color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(99,91,255,.35)}
+.bq-dia:disabled{color:#CBD5E1;cursor:not-allowed}
+.bq-dia.fuera{visibility:hidden}
+.bq-cal-pie{display:flex;justify-content:space-between;gap:8px;padding-top:4px;border-top:1px solid var(--linea-suave)}
+.bq-texto-btn{
+  border:0;background:none;padding:8px 12px;border-radius:var(--r-full);cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:600;color:var(--indigo-700);
+}
+.bq-texto-btn:hover{background:var(--indigo-50)}
 .bq-evento:focus-within{outline:none}
 .bq-pildora:focus-within{box-shadow:0 0 0 3px #A8A3FF, 0 10px 28px rgba(0,0,0,.30)}
 
@@ -347,7 +402,11 @@ button{font-family:inherit}
   .bq-chip .bq-valor{display:block;max-width:none}
   .bq-chip:not(.tiene-valor) .bq-valor{color:var(--texto-tenue)}
   .bq-chevron{display:none}
-  .bq-seg:focus-within{outline:none;background:var(--indigo-50)}
+  .bq-chip.abierto,.bq-chip:focus-within{background:var(--indigo-50)}
+  .bq-abrir:focus-visible{outline:none}
+  /* En escritorio el panel sale debajo de su segmento */
+  .bq-pop{right:auto;width:280px;top:calc(100% + 18px)}
+  .bq-cal{width:320px}
 
   .bq-boton{width:auto;height:56px;padding:0 28px}
   .bq-boton-texto{display:inline}

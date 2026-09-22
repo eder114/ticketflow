@@ -291,29 +291,128 @@
       });
     });
 
-    /* Buscador del hero: cada chip muestra lo que se eligió en su control.
-       La fecha abre el calendario nativo al tocar cualquier parte del chip. */
-    var MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    /* Buscador del hero · listas y calendario propios.
+       Los controles del navegador (select y date) no se pueden estilizar:
+       en Windows se ven grises y cuadrados. Estos paneles siguen el diseño
+       de la página y funcionan igual en celular, tablet y escritorio. */
+    var MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+                 "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    var DSEM = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"];
+    var abierto = null;
+
+    function cerrarPanel(devolverFoco) {
+      if (!abierto) return;
+      abierto.pop.hidden = true;
+      abierto.chip.classList.remove("abierto");
+      abierto.boton.setAttribute("aria-expanded", "false");
+      if (devolverFoco) abierto.boton.focus();
+      abierto = null;
+    }
+
+    function fijarValor(chip, valor, texto) {
+      chip.querySelector("input[type=hidden]").value = valor;
+      chip.querySelector(".bq-valor").textContent = texto || chip.getAttribute("data-vacio");
+      chip.classList.toggle("tiene-valor", !!valor);
+    }
+
+    function iso(f) {
+      return f.getFullYear() + "-" + String(f.getMonth() + 1).padStart(2, "0") + "-" + String(f.getDate()).padStart(2, "0");
+    }
+
+    function pintarCalendario(chip, pop, mes) {
+      var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+      var elegido = chip.querySelector("input[type=hidden]").value;
+      var primero = new Date(mes.getFullYear(), mes.getMonth(), 1);
+      var diasMes = new Date(mes.getFullYear(), mes.getMonth() + 1, 0).getDate();
+      var esteMes = mes.getFullYear() === hoy.getFullYear() && mes.getMonth() === hoy.getMonth();
+
+      var html = '<div class="bq-cal-cab"><span class="bq-cal-mes" aria-live="polite">' +
+        MESES[mes.getMonth()].charAt(0).toUpperCase() + MESES[mes.getMonth()].slice(1) + " de " + mes.getFullYear() +
+        '</span><span class="bq-cal-nav">' +
+        '<button type="button" class="bq-circulo" data-mover="-1" aria-label="Mes anterior"' + (esteMes ? " disabled" : "") + '>' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>' +
+        '<button type="button" class="bq-circulo" data-mover="1" aria-label="Mes siguiente">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' +
+        '</span></div><div class="bq-cal-grilla">';
+      DSEM.forEach(function (d) { html += '<span class="bq-cal-dsem" aria-hidden="true">' + d + "</span>"; });
+      for (var i = 0; i < primero.getDay(); i++) html += '<span class="bq-dia fuera"></span>';
+      for (var d = 1; d <= diasMes; d++) {
+        var f = new Date(mes.getFullYear(), mes.getMonth(), d);
+        var clave = iso(f);
+        html += '<button type="button" class="bq-dia' + (f.getTime() === hoy.getTime() ? " hoy" : "") +
+          '" data-fecha="' + clave + '" aria-pressed="' + (clave === elegido) + '" aria-label="' +
+          d + " de " + MESES[mes.getMonth()] + " de " + mes.getFullYear() + '"' +
+          (f < hoy ? " disabled" : "") + ">" + d + "</button>";
+      }
+      html += '</div><div class="bq-cal-pie"><button type="button" class="bq-texto-btn" data-accion="borrar">Borrar</button>' +
+        '<button type="button" class="bq-texto-btn" data-accion="hoy">Hoy</button></div>';
+      pop.innerHTML = html;
+      pop.mes = mes;
+    }
+
     Array.prototype.forEach.call(document.querySelectorAll(".bq-chip"), function (chip) {
-      var control = chip.querySelector(".bq-control");
-      var valor = chip.querySelector(".bq-valor");
-      function pintar() {
-        var v = control.value;
-        if (v && control.type === "date") {
-          var p = v.split("-");
-          v = parseInt(p[2], 10) + " " + MESES[parseInt(p[1], 10) - 1];
+      var boton = chip.querySelector(".bq-abrir");
+      var pop = chip.querySelector(".bq-pop");
+      var esCalendario = pop.classList.contains("bq-cal");
+      var formulario = chip.closest(".buscador");
+
+      boton.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (abierto && abierto.chip === chip) { cerrarPanel(false); return; }
+        cerrarPanel(false);
+        if (esCalendario) {
+          var v = chip.querySelector("input[type=hidden]").value;
+          var base = v ? new Date(v + "T00:00:00") : new Date();
+          pintarCalendario(chip, pop, new Date(base.getFullYear(), base.getMonth(), 1));
         }
-        chip.classList.toggle("tiene-valor", !!v);
-        valor.textContent = v || chip.getAttribute("data-vacio");
-      }
-      control.addEventListener("change", pintar);
-      if (control.type === "date") {
-        control.addEventListener("click", function () {
-          try { control.showPicker(); } catch (e) { /* el navegador lo abre solo */ }
-        });
-      }
-      pintar();
+        // En celular el panel se ancla al formulario; en escritorio, al chip.
+        if (pop.parentNode !== (window.innerWidth >= 1024 ? chip : formulario)) {
+          (window.innerWidth >= 1024 ? chip : formulario).appendChild(pop);
+        }
+        pop.hidden = false;
+        chip.classList.add("abierto");
+        boton.setAttribute("aria-expanded", "true");
+        abierto = { chip: chip, pop: pop, boton: boton };
+        var foco = pop.querySelector('[aria-pressed="true"]:not(:disabled)') ||
+          pop.querySelector(".bq-dia.hoy:not(:disabled)") || pop.querySelector("button:not(:disabled)");
+        if (foco) foco.focus();
+      });
+
+      pop.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var b = e.target.closest("button");
+        if (!b || b.disabled) return;
+        if (b.classList.contains("bq-opcion")) {
+          Array.prototype.forEach.call(pop.querySelectorAll(".bq-opcion"), function (o) {
+            o.setAttribute("aria-pressed", String(o === b));
+          });
+          fijarValor(chip, b.getAttribute("data-valor"), b.getAttribute("data-valor"));
+          cerrarPanel(true);
+        } else if (b.hasAttribute("data-mover")) {
+          var m = pop.mes;
+          pintarCalendario(chip, pop, new Date(m.getFullYear(), m.getMonth() + parseInt(b.getAttribute("data-mover"), 10), 1));
+          var otra = pop.querySelector('[data-mover="' + b.getAttribute("data-mover") + '"]:not(:disabled)');
+          if (otra) otra.focus();
+        } else if (b.hasAttribute("data-fecha")) {
+          var p = b.getAttribute("data-fecha").split("-");
+          fijarValor(chip, b.getAttribute("data-fecha"), parseInt(p[2], 10) + " " + MESES[parseInt(p[1], 10) - 1].slice(0, 3));
+          cerrarPanel(true);
+        } else if (b.getAttribute("data-accion") === "borrar") {
+          fijarValor(chip, "", "");
+          cerrarPanel(true);
+        } else if (b.getAttribute("data-accion") === "hoy") {
+          var h = new Date();
+          fijarValor(chip, iso(h), h.getDate() + " " + MESES[h.getMonth()].slice(0, 3));
+          cerrarPanel(true);
+        }
+      });
     });
+
+    document.addEventListener("click", function () { cerrarPanel(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && abierto) cerrarPanel(true);
+    });
+    window.addEventListener("resize", function () { cerrarPanel(false); });
 
     var buscador = document.querySelector(".buscador");
     if (buscador) {

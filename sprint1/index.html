@@ -71,7 +71,8 @@
 
         <!-- Buscador «píldora compacta» (dirección B de Claude Design).
              Celular: una barra redondeada con el evento y el botón, y debajo
-             chips para ciudad, fecha y tipo. Desde 1024 px los mismos
+             chips para ciudad, fecha y tipo, que abren una lista o un calendario
+             propios (no los del navegador, que no se pueden estilizar). Desde 1024 px los mismos
              controles se acomodan en una sola barra: Evento | Ciudad | Fecha. -->
         <form class="buscador" role="search" aria-label="Buscar eventos">
           <div class="bq-pildora">
@@ -92,36 +93,48 @@
               <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span class="bq-textos">
                 <label for="q-ciudad" class="bq-etiqueta">Ciudad</label>
-                <span class="bq-valor" aria-hidden="true">Todas las ciudades</span>
+                <span class="bq-valor">Todas las ciudades</span>
               </span>
               <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-              <select id="q-ciudad" name="ciudad" class="bq-control">
-                <option value="">Todas las ciudades</option>
-                <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-                <option>Barranquilla</option><option>Tuluá</option><option>Palmira</option>
-              </select>
+              <button type="button" id="q-ciudad" class="bq-abrir" aria-haspopup="true" aria-expanded="false" aria-controls="pop-ciudad"></button>
+              <input type="hidden" name="ciudad" value="">
+              <div class="bq-pop" id="pop-ciudad" hidden>
+            <button type="button" class="bq-opcion" data-valor="" aria-pressed="true"><span class="bq-punto" aria-hidden="true"></span>Todas las ciudades</button>
+            <button type="button" class="bq-opcion" data-valor="Bogotá" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Bogotá</button>
+            <button type="button" class="bq-opcion" data-valor="Medellín" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Medellín</button>
+            <button type="button" class="bq-opcion" data-valor="Cali" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Cali</button>
+            <button type="button" class="bq-opcion" data-valor="Barranquilla" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Barranquilla</button>
+            <button type="button" class="bq-opcion" data-valor="Tuluá" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Tuluá</button>
+            <button type="button" class="bq-opcion" data-valor="Palmira" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Palmira</button>
+              </div>
             </div>
             <div class="bq-seg bq-chip" data-vacio="Cualquier fecha">
               <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
               <span class="bq-textos">
                 <label for="q-fecha" class="bq-etiqueta">Fecha</label>
-                <span class="bq-valor" aria-hidden="true">Cualquier fecha</span>
+                <span class="bq-valor">Cualquier fecha</span>
               </span>
               <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-              <input type="date" id="q-fecha" name="fecha" class="bq-control">
+              <button type="button" id="q-fecha" class="bq-abrir" aria-haspopup="dialog" aria-expanded="false" aria-controls="pop-fecha"></button>
+              <input type="hidden" name="fecha" value="">
+              <div class="bq-pop bq-cal" id="pop-fecha" role="dialog" aria-label="Elegir fecha" hidden></div>
             </div>
             <div class="bq-seg bq-chip bq-tipo" data-vacio="Todos">
               <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8" r="1.5"/></svg>
               <span class="bq-textos">
                 <label for="q-tipo" class="bq-etiqueta">Tipo</label>
-                <span class="bq-valor" aria-hidden="true">Todos</span>
+                <span class="bq-valor">Todos</span>
               </span>
               <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-              <select id="q-tipo" name="tipo" class="bq-control">
-                <option value="">Todos</option>
-                <option>Conciertos</option><option>Deportes</option>
-                <option>Teatro</option><option>Festivales</option>
-              </select>
+              <button type="button" id="q-tipo" class="bq-abrir" aria-haspopup="true" aria-expanded="false" aria-controls="pop-tipo"></button>
+              <input type="hidden" name="tipo" value="">
+              <div class="bq-pop" id="pop-tipo" hidden>
+            <button type="button" class="bq-opcion" data-valor="" aria-pressed="true"><span class="bq-punto" aria-hidden="true"></span>Todos</button>
+            <button type="button" class="bq-opcion" data-valor="Conciertos" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Conciertos</button>
+            <button type="button" class="bq-opcion" data-valor="Deportes" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Deportes</button>
+            <button type="button" class="bq-opcion" data-valor="Teatro" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Teatro</button>
+            <button type="button" class="bq-opcion" data-valor="Festivales" aria-pressed="false"><span class="bq-punto" aria-hidden="true"></span>Festivales</button>
+              </div>
             </div>
           </div>
         </form>
