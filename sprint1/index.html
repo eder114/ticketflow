@@ -69,24 +69,61 @@
         <p>Conciertos, teatro, deportes y festivales en Colombia. Reserva tu cupo en
            segundos y recibe tu entrada al instante.</p>
 
+        <!-- Buscador «píldora compacta» (dirección B de Claude Design).
+             Celular: una barra redondeada con el evento y el botón, y debajo
+             chips para ciudad, fecha y tipo. Desde 1024 px los mismos
+             controles se acomodan en una sola barra: Evento | Ciudad | Fecha. -->
         <form class="buscador" role="search" aria-label="Buscar eventos">
-          <div class="campo">
-            <label for="q-evento">Evento</label>
-            <input type="search" id="q-evento" name="evento" placeholder="Artista, obra o equipo">
+          <div class="bq-pildora">
+            <div class="bq-seg bq-evento">
+              <svg class="bq-ico" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <span class="bq-textos">
+                <label for="q-evento" class="bq-etiqueta">Evento</label>
+                <input type="search" id="q-evento" name="evento" placeholder="Artista, obra o ciudad">
+              </span>
+            </div>
+            <button type="submit" class="bq-boton" aria-label="Buscar">
+              <svg class="bq-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="bq-boton-texto">Buscar</span>
+            </button>
           </div>
-          <div class="campo">
-            <label for="q-ciudad">Ciudad</label>
-            <select id="q-ciudad" name="ciudad">
-              <option value="">Todas</option>
-              <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-              <option>Barranquilla</option><option>Tuluá</option><option>Palmira</option>
-            </select>
+
+          <div class="bq-filtros">
+            <div class="bq-seg bq-chip" data-vacio="Todas las ciudades">
+              <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span class="bq-textos">
+                <label for="q-ciudad" class="bq-etiqueta">Ciudad</label>
+                <span class="bq-valor" aria-hidden="true">Todas las ciudades</span>
+              </span>
+              <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              <select id="q-ciudad" name="ciudad" class="bq-control">
+                <option value="">Todas las ciudades</option>
+                <option>Bogotá</option><option>Medellín</option><option>Cali</option>
+                <option>Barranquilla</option><option>Tuluá</option><option>Palmira</option>
+              </select>
+            </div>
+            <div class="bq-seg bq-chip" data-vacio="Cualquier fecha">
+              <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+              <span class="bq-textos">
+                <label for="q-fecha" class="bq-etiqueta">Fecha</label>
+                <span class="bq-valor" aria-hidden="true">Cualquier fecha</span>
+              </span>
+              <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              <input type="date" id="q-fecha" name="fecha" class="bq-control">
+            </div>
+            <div class="bq-seg bq-chip bq-tipo" data-vacio="Todos">
+              <svg class="bq-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8" r="1.5"/></svg>
+              <span class="bq-textos">
+                <label for="q-tipo" class="bq-etiqueta">Tipo</label>
+                <span class="bq-valor" aria-hidden="true">Todos</span>
+              </span>
+              <svg class="bq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              <select id="q-tipo" name="tipo" class="bq-control">
+                <option value="">Todos</option>
+                <option>Conciertos</option><option>Deportes</option>
+                <option>Teatro</option><option>Festivales</option>
+              </select>
+            </div>
           </div>
-          <div class="campo">
-            <label for="q-fecha">Fecha</label>
-            <input type="date" id="q-fecha" name="fecha">
-          </div>
-          <button type="submit" class="btn btn-primario btn-lg">Buscar</button>
         </form>
 
         <div class="hero-datos">

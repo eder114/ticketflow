@@ -144,11 +144,17 @@ layout con `max-width`.
 
 | Punto de corte | Qué cambia |
 |---|---|
-| Base (360 px) | Menú desplegable, buscador compacto, eventos en 1 columna, categorías de a 2 |
+| Base (360 px) | Menú desplegable, buscador en píldora con chips de ciudad, fecha y tipo, eventos en 1 columna, categorías de a 2 |
 | `min-width: 576px` | Eventos y formularios en 2 columnas, pie en 2 columnas |
-| `min-width: 768px` | Buscador en una sola fila, categorías y pasos en fila, márgenes de 40 px |
-| `min-width: 1024px` | Barra de navegación completa, eventos en 3 columnas, pie en 4 columnas |
+| `min-width: 768px` | Categorías y pasos en fila, márgenes de 40 px |
+| `min-width: 1024px` | Barra de navegación completa, buscador en una sola barra (Evento · Ciudad · Fecha), eventos en 3 columnas, pie en 4 columnas |
 | 1280 px | Ancho máximo del contenido |
+
+El buscador del hero sigue la dirección **B · Píldora compacta** elegida en
+Claude Design: en celular, una barra redondeada con el evento y el botón, y
+debajo chips que abren el selector nativo de ciudad, fecha y tipo; en
+escritorio, una sola barra. Reemplaza la tarjeta blanca que tapaba la foto:
+el hero pasó de 743 a 500 px de alto en celular.
 
 Verificado sin desplazamiento horizontal a 360, 768, 1024 y 1440 px, y con
 el validador del W3C: **0 errores** en HTML y en CSS.

@@ -291,6 +291,41 @@
       });
     });
 
+    /* Buscador del hero: cada chip muestra lo que se eligió en su control.
+       La fecha abre el calendario nativo al tocar cualquier parte del chip. */
+    var MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    Array.prototype.forEach.call(document.querySelectorAll(".bq-chip"), function (chip) {
+      var control = chip.querySelector(".bq-control");
+      var valor = chip.querySelector(".bq-valor");
+      function pintar() {
+        var v = control.value;
+        if (v && control.type === "date") {
+          var p = v.split("-");
+          v = parseInt(p[2], 10) + " " + MESES[parseInt(p[1], 10) - 1];
+        }
+        chip.classList.toggle("tiene-valor", !!v);
+        valor.textContent = v || chip.getAttribute("data-vacio");
+      }
+      control.addEventListener("change", pintar);
+      if (control.type === "date") {
+        control.addEventListener("click", function () {
+          try { control.showPicker(); } catch (e) { /* el navegador lo abre solo */ }
+        });
+      }
+      pintar();
+    });
+
+    var buscador = document.querySelector(".buscador");
+    if (buscador) {
+      // Todavía no hay base de datos que filtrar (Sprint 2): la búsqueda
+      // lleva a los eventos destacados en vez de recargar la página.
+      buscador.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var destino = document.getElementById("eventos");
+        if (destino) destino.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
     /* Menú del encabezado en móvil · SDGE-3 + SDGE-10 */
     var menu = document.querySelector(".menu-btn");
     if (menu) {

@@ -241,27 +241,116 @@ button{font-family:inherit}
 .hero .overline{color:#A8A3FF;margin-bottom:var(--e3)}
 .hero-datos{justify-content:center}
 
-/* Tarjeta del buscador — sin recortes, dentro del flujo */
+/* Buscador · dirección B «píldora compacta» (Claude Design)
+   Celular: barra redondeada blanca con el evento y un botón circular, y
+   debajo tres chips translúcidos sobre la foto (ciudad, fecha, tipo).
+   El select y la fecha reales quedan transparentes encima de cada chip:
+   al tocar el chip se abre el control nativo del teléfono.
+   Tablet: igual que el celular, centrado. Desde 1024 px: una sola barra
+   Evento | Ciudad | Fecha | Buscar. */
 .buscador{
-  background:#fff;border-radius:var(--r-card-lg);padding:var(--e4);
-  box-shadow:var(--sombra-lg);display:grid;gap:var(--e3);
-  /* Celular: el evento y el botón a todo el ancho; ciudad y fecha, que
-     son cortos, comparten fila. Así el buscador no se come la pantalla. */
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  display:flex;flex-direction:column;gap:10px;
+  width:100%;max-width:560px;margin-inline:auto;
   text-align:left;   /* el hero va centrado; el formulario no */
 }
-.buscador .campo:first-child,
-.buscador .btn{grid-column:1 / -1;width:100%}
-.buscador input,.buscador select{padding:13px 12px}
-.buscador input[type="date"]{padding-inline:10px 8px}
-@media (min-width:768px){
+.bq-pildora{
+  display:flex;align-items:center;gap:10px;
+  height:56px;padding:6px 6px 6px 18px;
+  background:#fff;border-radius:var(--r-full);
+  box-shadow:0 10px 28px rgba(0,0,0,.30);
+}
+.bq-seg{position:relative;display:flex;align-items:center;gap:10px;min-width:0}
+.bq-evento{flex:1 1 auto}
+.bq-evento .bq-ico{color:var(--texto-suave);flex-shrink:0}
+.bq-textos{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1 1 auto}
+.bq-evento .bq-etiqueta{       /* en celular la etiqueta solo la leen los lectores de pantalla */
+  position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;
+}
+.bq-evento input{
+  width:100%;min-width:0;border:0;outline:none;background:transparent;padding:0;
+  font-family:inherit;font-size:16px;color:var(--navy);
+}
+.bq-evento input::placeholder{color:var(--texto-tenue)}
+.bq-boton{
+  flex-shrink:0;width:44px;height:44px;border:0;border-radius:var(--r-full);
+  background:var(--grad);color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:inherit;font-size:16px;font-weight:600;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.bq-boton:hover{box-shadow:0 6px 20px rgba(99,91,255,.45);transform:translateY(-1px)}
+.bq-boton-texto{display:none}
+
+/* Chips */
+.bq-filtros{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.bq-chip{
+  height:40px;padding:0 10px;gap:6px;border-radius:var(--r-full);
+  border:1px solid rgba(255,255,255,.28);color:#fff;
+  background:rgba(17,24,39,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  font-size:14px;font-weight:500;cursor:pointer;
+}
+.bq-chip .bq-ico{color:#A8A3FF;flex-shrink:0}
+.bq-chevron{color:#CBD5E1;flex-shrink:0}
+.bq-chip .bq-etiqueta{cursor:pointer;white-space:nowrap}
+.bq-chip .bq-valor{display:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:92px}
+/* Con un valor elegido, el chip muestra el valor en vez del nombre del filtro. */
+.bq-chip.tiene-valor{border-color:#A8A3FF;background:rgba(99,91,255,.35)}
+.bq-chip.tiene-valor .bq-etiqueta{
+  position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+}
+.bq-chip.tiene-valor .bq-valor{display:block}
+/* El control real, transparente y encima de todo el chip */
+.bq-control{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;cursor:pointer;border:0;margin:0;font-size:16px;
+}
+.bq-control option{color:var(--navy)}
+.bq-seg:focus-within{outline:3px solid #A8A3FF;outline-offset:2px}
+.bq-evento:focus-within{outline:none}
+.bq-pildora:focus-within{box-shadow:0 0 0 3px #A8A3FF, 0 10px 28px rgba(0,0,0,.30)}
+
+@media (min-width:1024px){
   .buscador{
-    padding:var(--e5);align-items:end;
-    grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) auto;
+    flex-direction:row;align-items:stretch;gap:0;max-width:900px;
+    height:72px;padding:8px 8px 8px 10px;
+    background:#fff;border-radius:var(--r-full);
+    box-shadow:0 16px 40px rgba(0,0,0,.32);
   }
-  .buscador .campo:first-child,
-  .buscador .btn{grid-column:auto;width:auto}
-  .buscador input,.buscador select{padding:15px 16px}
+  .buscador:focus-within{box-shadow:0 0 0 3px #A8A3FF, 0 16px 40px rgba(0,0,0,.32)}
+  /* Los dos grupos del celular desaparecen como cajas: sus controles pasan
+     a ser segmentos de una sola barra, y el botón va al final. */
+  .bq-pildora,.bq-filtros{display:contents}
+  .bq-pildora:focus-within{box-shadow:none}
+  .bq-seg{padding:0 18px;border-radius:var(--r-full)}
+  .bq-evento{flex:1.6 1 0;order:1}
+  .bq-filtros .bq-seg:nth-child(1){order:2}
+  .bq-filtros .bq-seg:nth-child(2){order:3}
+  .bq-boton{order:5}
+  .bq-tipo{display:none}   /* en escritorio las categorías están justo debajo */
+
+  .bq-seg + .bq-seg,.bq-filtros .bq-seg{border-left:1px solid var(--linea)}
+  .bq-evento .bq-ico,.bq-chip .bq-ico{color:var(--indigo)}
+  .bq-evento .bq-etiqueta,
+  .bq-chip .bq-etiqueta,
+  .bq-chip.tiene-valor .bq-etiqueta{
+    position:static;width:auto;height:auto;clip:auto;overflow:visible;
+    font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--texto-suave);
+  }
+  .bq-evento input{font-size:15px}
+
+  .bq-chip,.bq-chip.tiene-valor{
+    flex:1 1 0;height:auto;border:0;border-left:1px solid var(--linea);
+    background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    color:var(--navy);font-size:15px;border-radius:0;
+  }
+  .bq-chip .bq-valor{display:block;max-width:none}
+  .bq-chip:not(.tiene-valor) .bq-valor{color:var(--texto-tenue)}
+  .bq-chevron{display:none}
+  .bq-seg:focus-within{outline:none;background:var(--indigo-50)}
+
+  .bq-boton{width:auto;height:56px;padding:0 28px}
+  .bq-boton-texto{display:inline}
 }
 
 .hero-datos{
