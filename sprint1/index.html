@@ -12,30 +12,12 @@
 </head>
 <body>
 
-<!-- ==========================================================================
-     TicketFlow · Sprint 1
-     Aplicación de una sola página: las cinco pantallas viven en este archivo
-     y el enrutador de js/app.js muestra una a la vez.
-
-       #/inicio             SDGE-2, SDGE-3, SDGE-4, SDGE-11
-       #/iniciar-sesion     SDGE-1
-       #/registro-cliente   SDGE-7
-       #/registro-agente    SDGE-9
-       #/registro-admin     SDGE-6
-
-     Los identificadores de cada formulario van con prefijo (log-, cli-, ag-,
-     adm-) porque ahora todos comparten el mismo documento.
-     ========================================================================== -->
-
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-
-<!-- ####################################################################### -->
-<!-- ###  VISTA · INICIO                                                 ### -->
-<!-- ####################################################################### -->
+<!-- INICIO -->
 <div class="vista" id="vista-inicio">
 
-  <!-- SDGE-3 · Encabezado con navegación y botones de sesión -->
+  <!-- Encabezado -->
   <header class="encabezado">
     <div class="contenedor encabezado-fila">
       <a href="#/inicio" class="marca">
@@ -61,7 +43,7 @@
 
   <main id="contenido">
 
-    <!-- SDGE-4 · Sección hero con buscador de eventos -->
+    <!-- Hero -->
     <section class="hero">
       <div class="contenedor">
         <p class="overline">Más de 2.800 eventos en todo el país</p>
@@ -69,11 +51,6 @@
         <p>Conciertos, teatro, deportes y festivales en Colombia. Reserva tu cupo en
            segundos y recibe tu entrada al instante.</p>
 
-        <!-- Buscador «píldora compacta» (dirección B de Claude Design).
-             Celular: una barra redondeada con el evento y el botón, y debajo
-             chips para ciudad, fecha y tipo, que abren una lista o un calendario
-             propios (no los del navegador, que no se pueden estilizar). Desde 1024 px los mismos
-             controles se acomodan en una sola barra: Evento | Ciudad | Fecha. -->
         <form class="buscador" role="search" aria-label="Buscar eventos">
           <div class="bq-pildora">
             <div class="bq-seg bq-evento">
@@ -147,7 +124,7 @@
       </div>
     </section>
 
-    <!-- SDGE-11 · Categorías -->
+    <!-- Categorías -->
     <section class="seccion" id="categorias">
       <div class="contenedor">
         <div class="seccion-titulo">
@@ -180,7 +157,7 @@
       </div>
     </section>
 
-    <!-- SDGE-11 · Eventos destacados -->
+    <!-- Eventos destacados -->
     <section class="seccion" id="eventos" style="padding-top:0">
       <div class="contenedor">
         <div class="seccion-titulo">
@@ -306,7 +283,7 @@
       </div>
     </section>
 
-    <!-- SDGE-2 · Cómo funciona -->
+    <!-- Cómo funciona -->
     <section class="seccion" id="como-funciona">
       <div class="contenedor">
         <div class="seccion-titulo">
@@ -338,7 +315,7 @@
       </div>
     </section>
 
-    <!-- SDGE-2 · Llamado a los organizadores -->
+    <!-- Organizadores -->
     <section class="seccion">
       <div class="contenedor">
         <div class="llamado">
@@ -355,7 +332,7 @@
 
   </main>
 
-  <!-- SDGE-2 · Pie de página -->
+  <!-- Pie de página -->
   <footer class="pie">
     <div class="contenedor">
       <div class="pie-rejilla">
@@ -396,10 +373,7 @@
 
 </div>
 
-
-<!-- ####################################################################### -->
-<!-- ###  VISTA · INICIAR SESIÓN  ·  SDGE-1                              ### -->
-<!-- ####################################################################### -->
+<!-- INICIAR SESIÓN -->
 <div class="vista" id="vista-iniciar-sesion" data-titulo="Iniciar sesión" hidden>
   <div class="acceso">
     <div class="acceso-columna">
@@ -469,10 +443,7 @@
   </div>
 </div>
 
-
-<!-- ####################################################################### -->
-<!-- ###  VISTA · REGISTRO DE CLIENTE  ·  SDGE-7                         ### -->
-<!-- ####################################################################### -->
+<!-- REGISTRO CLIENTE -->
 <div class="vista" id="vista-registro-cliente" data-titulo="Crear cuenta de cliente" hidden>
   <div class="acceso">
     <div class="acceso-columna">
@@ -570,10 +541,7 @@
   </div>
 </div>
 
-
-<!-- ####################################################################### -->
-<!-- ###  VISTA · REGISTRO DE AGENTE  ·  SDGE-9                          ### -->
-<!-- ####################################################################### -->
+<!-- REGISTRO AGENTE -->
 <div class="vista" id="vista-registro-agente" data-titulo="Registrar organización" hidden>
   <div class="acceso">
     <div class="acceso-columna">
@@ -718,11 +686,7 @@
   </div>
 </div>
 
-
-<!-- ####################################################################### -->
-<!-- ###  VISTA · REGISTRO DE ADMINISTRADOR  ·  SDGE-6                   ### -->
-<!-- ###  Pantalla nueva: no existía en Figma, se diseñó en el Sprint 1. ### -->
-<!-- ####################################################################### -->
+<!-- REGISTRO ADMINISTRADOR -->
 <div class="vista" id="vista-registro-admin" data-titulo="Alta de administrador" hidden>
   <div class="acceso">
     <div class="acceso-columna">

@@ -1,36 +1,12 @@
-/* ==========================================================================
-   TicketFlow · Aplicación de una sola página
-   Sprint 1 · 9 – 28 de septiembre de 2026
-
-   Dos piezas:
-     1. ENRUTADOR  — todas las pantallas viven en index.html. Al hacer clic
-                     en "Iniciar sesión" no se recarga nada: se esconde una
-                     vista y se muestra otra. (SDGE-3)
-     2. VALIDACIÓN — cubre los cuatro formularios: inicio de sesión y los
-                     tres registros. Corre al salir del campo, no solo al
-                     enviar, para que el usuario no descubra todos los
-                     errores de golpe al final. (SDGE-8)
-
-   Las reglas se declaran en el HTML con atributos data-*, así que agregar
-   un campo nuevo no obliga a tocar este archivo.
-   ========================================================================== */
 (function () {
   "use strict";
 
-  /* ======================================================================
-     1. ENRUTADOR
-     ====================================================================== */
   var VISTA_INICIAL = "inicio";
 
   function vistas() {
     return document.querySelectorAll(".vista");
   }
 
-  // Se distinguen dos tipos de fragmento:
-  //   #/registro-cliente  -> RUTA, cambia de pantalla
-  //   #eventos            -> ANCLA, baja a una sección de la pantalla actual
-  // Sin esta distinción el enrutador se robaría los clics del menú y
-  // saltaría al inicio en vez de desplazarse a la sección.
   function esRuta() {
     var h = window.location.hash;
     return h === "" || /^#\//.test(h);
@@ -45,7 +21,6 @@
     opciones = opciones || {};
     var destino = document.getElementById("vista-" + nombre);
 
-    // Ruta desconocida: se vuelve al inicio en vez de dejar la página en blanco.
     if (!destino) {
       destino = document.getElementById("vista-" + VISTA_INICIAL);
       nombre = VISTA_INICIAL;
@@ -56,7 +31,6 @@
       v.hidden = v !== destino;
     });
 
-    // El encabezado móvil se cierra al cambiar de pantalla.
     var enc = document.querySelector(".encabezado.abierto");
     if (enc) {
       enc.classList.remove("abierto");
@@ -64,21 +38,16 @@
       if (b) b.setAttribute("aria-expanded", "false");
     }
 
-    // Cada pantalla empieza arriba, como si fuera una página nueva.
-    // Se omite cuando la URL trae un ancla, para no pisar su desplazamiento.
     if (!opciones.conservarScroll) window.scrollTo({ top: 0, behavior: "auto" });
 
-    // Se marca el enlace activo del menú.
     document.querySelectorAll(".nav a").forEach(function (a) {
       var suya = (a.getAttribute("href") || "").replace(/^#\/?/, "");
       a.classList.toggle("activo", suya === nombre);
     });
 
-    // El título de la pestaña acompaña a la pantalla.
     var t = destino.dataset.titulo;
     document.title = t ? t + " · TicketFlow" : "TicketFlow · Entradas para los mejores eventos de Colombia";
 
-    // Accesibilidad: el lector de pantalla anuncia la pantalla nueva.
     var h1 = destino.querySelector("h1");
     if (h1 && !opciones.conservarScroll) {
       h1.setAttribute("tabindex", "-1");
@@ -88,13 +57,10 @@
 
   function arrancarEnrutador() {
     window.addEventListener("hashchange", function () {
-      // Un ancla (#eventos) no cambia de pantalla: la maneja el navegador.
       if (!esRuta()) return;
       mostrar(nombreDeRuta());
     });
 
-    // Si alguien llega con un ancla directa (.../#eventos), se muestra el
-    // inicio sin tocar el scroll y el navegador se encarga del resto.
     if (esRuta()) {
       mostrar(nombreDeRuta());
     } else {
@@ -104,13 +70,7 @@
     }
   }
 
-  /* ======================================================================
-     2. VALIDACIÓN
-     ====================================================================== */
-
-  /* ---------- Reglas ---------- */
-  // Cada regla recibe (valor, campo) y devuelve null si pasa,
-  // o el mensaje de error si falla. El mensaje dice qué pasó y cómo se arregla.
+  // Reglas
   var reglas = {
     requerido: function (v) {
       return v.trim() === "" ? "Este campo es obligatorio." : null;
@@ -118,7 +78,6 @@
 
     correo: function (v) {
       if (v.trim() === "") return null; // de eso se encarga "requerido"
-      // Validación pragmática: algo@algo.algo, sin espacios.
       var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
       return ok ? null : "Escribe un correo válido, por ejemplo nombre@correo.com";
     },
@@ -174,7 +133,7 @@
     }
   };
 
-  /* ---------- Utilidades ---------- */
+  // Utilidades
   function cajaError(campo) {
     var id = campo.getAttribute("aria-describedby");
     return id ? document.getElementById(id) : null;
@@ -198,7 +157,6 @@
     }
   }
 
-  // Devuelve el primer mensaje de error del campo, o null si está bien.
   function revisar(campo) {
     var lista = (campo.dataset.reglas || "").split(/\s+/).filter(Boolean);
     var valor = campo.type === "checkbox" ? String(campo.checked) : campo.value;
@@ -222,7 +180,7 @@
     return true;
   }
 
-  /* ---------- Medidor de fuerza de contraseña ---------- */
+  // Medidor de fuerza de contraseña
   function nivelClave(v) {
     var n = 0;
     if (v.length >= 8) n++;
@@ -240,7 +198,7 @@
     });
   }
 
-  /* ---------- Arranque ---------- */
+  // Arranque
   document.addEventListener("DOMContentLoaded", function () {
     arrancarEnrutador();
 
@@ -250,13 +208,10 @@
       var campos = form.querySelectorAll("[data-reglas]");
 
       Array.prototype.forEach.call(campos, function (campo) {
-        // Al salir del campo: se valida.
         campo.addEventListener("blur", function () {
           validarCampo(campo);
         });
 
-        // Mientras escribe: solo se limpia el error ya mostrado,
-        // para no regañarlo en cada tecla.
         campo.addEventListener("input", function () {
           if (campo.getAttribute("aria-invalid") === "true") validarCampo(campo);
         });
@@ -278,7 +233,6 @@
           return;
         }
 
-        // Sprint 1 entrega la interfaz; la persistencia llega en el Sprint 2.
         var aviso = form.querySelector("[data-exito]");
         if (aviso) {
           aviso.hidden = false;
@@ -291,10 +245,6 @@
       });
     });
 
-    /* Buscador del hero · listas y calendario propios.
-       Los controles del navegador (select y date) no se pueden estilizar:
-       en Windows se ven grises y cuadrados. Estos paneles siguen el diseño
-       de la página y funcionan igual en celular, tablet y escritorio. */
     var MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
                  "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     var DSEM = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"];
@@ -365,7 +315,6 @@
           var base = v ? new Date(v + "T00:00:00") : new Date();
           pintarCalendario(chip, pop, new Date(base.getFullYear(), base.getMonth(), 1));
         }
-        // En celular el panel se ancla al formulario; en escritorio, al chip.
         if (pop.parentNode !== (window.innerWidth >= 1024 ? chip : formulario)) {
           (window.innerWidth >= 1024 ? chip : formulario).appendChild(pop);
         }
@@ -416,8 +365,6 @@
 
     var buscador = document.querySelector(".buscador");
     if (buscador) {
-      // Todavía no hay base de datos que filtrar (Sprint 2): la búsqueda
-      // lleva a los eventos destacados en vez de recargar la página.
       buscador.addEventListener("submit", function (e) {
         e.preventDefault();
         var destino = document.getElementById("eventos");
@@ -425,7 +372,6 @@
       });
     }
 
-    /* Menú del encabezado en móvil · SDGE-3 + SDGE-10 */
     var menu = document.querySelector(".menu-btn");
     if (menu) {
       menu.addEventListener("click", function () {
