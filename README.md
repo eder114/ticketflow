@@ -2,6 +2,16 @@
 
 Sistema web para la gestión de eventos, espectáculos y reservas. Proyecto Integrador 2026-2 — Bases de Datos y Programación en Ambiente Web I.
 
+## Ver la página
+
+**En línea:** https://eder114.github.io/ticketflow/sprint1/
+
+Se abre desde el celular, la tablet o el computador. También con este código QR:
+
+<img src="docs/capturas/qr-ticketflow.png" alt="Código QR de la página" width="180">
+
+**Sin internet:** abrir `sprint1/index.html` con doble clic.
+
 ## Descripción
 
 TicketFlow es una plataforma web inspirada en referentes de la industria (Tuboleta, Eventbrite, Ticketmaster) que permite:
