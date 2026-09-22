@@ -2,7 +2,7 @@
 """
 Arma la carpeta de entrega para el profesor en Descargas:
 
-  Entrega_TicketFlow_Sprint1/
+  Entrega_TicketFlow_22-sep/
     1_Codigo_HTML5_CSS3/      la página: index.html, css/, js/, img/
     2_Informe_Jira_GitHub_Scrum.docx
     3_Scrum_Daily_Sprint1.xlsx
@@ -23,7 +23,7 @@ from docx.oxml import OxmlElement
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 JIRA = sys.argv[1]
-DESTINO = os.path.join(os.path.expanduser("~"), "Downloads", "Entrega_TicketFlow_Sprint1")
+DESTINO = os.path.join(os.path.expanduser("~"), "Downloads", "Entrega_TicketFlow_22-sep")
 REPO = "https://github.com/eder114/ticketflow"
 PAGINA = "https://eder114.github.io/ticketflow/sprint1/"
 CAPTURAS = os.path.join(AQUI, "capturas")
@@ -31,6 +31,20 @@ CAPTURAS = os.path.join(AQUI, "capturas")
 AZUL = RGBColor(0x49, 0x3E, 0xE5)
 TINTA = RGBColor(0x19, 0x1C, 0x1E)
 GRIS = RGBColor(0x5A, 0x58, 0x68)
+
+PUNTOS = [
+    ("1. Maquetación Web Responsiva",
+     "Diseñar e implementar en HTML5 y CSS3 de la Home Page principal del Proyecto Integrador "
+     "alineada con la maquetación Mobile-First."),
+    ("2. Trazabilidad y Gestión en Jira",
+     "Modelar el trabajo en Jira mediante Historias de Usuario, Tareas y Subtareas asociadas al "
+     "maquetado de la interfaz."),
+    ("3. Control de Versiones en GitHub",
+     "Consolidar la estructura de carpetas y código fuente en un repositorio del equipo."),
+    ("4. Seguimiento Ágil (Scrum Daily)",
+     "Documentar la tabla de reuniones diarias integrando impedimentos, soluciones e indicadores "
+     "de avance."),
+]
 
 # ============================================================== carpeta ==
 # Se reemplaza cada parte por separado, sin borrar la carpeta entera: si el
@@ -160,11 +174,23 @@ def salto():
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
 
+def requisito(i):
+    """Recuadro con el texto exacto del punto que pidió el profesor."""
+    doc.add_heading(PUNTOS[i][0], level=1)
+    t = doc.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    c = t.rows[0].cells[0]; c.width = Cm(ANCHO); sombra(c, "F1F0FF")
+    par = c.paragraphs[0]; par.paragraph_format.space_after = Pt(2)
+    r = par.add_run("Lo que pide el profesor: "); r.bold = True; r.font.size = Pt(10); r.font.color.rgb = AZUL
+    r = par.add_run(PUNTOS[i][1]); r.italic = True; r.font.size = Pt(10)
+    p("", despues=2)
+    doc.add_heading("Cómo lo cumplimos", level=2)
+
+
 # --- portada -----------------------------------------------------------------
 for _ in range(5): doc.add_paragraph()
 p("TICKETFLOW", tam=30, negrita=True, color=AZUL, centro=True, despues=2)
-p("Entrega del Sprint 1", tam=16, negrita=True, centro=True, despues=4)
-p("Maquetación web responsiva Mobile-First de la página de inicio",
+p("Entrega de la actividad del 22 de septiembre", tam=16, negrita=True, centro=True, despues=4)
+p("Maquetación web responsiva, Jira, GitHub y Scrum Daily",
   tam=12, color=GRIS, centro=True, despues=30)
 p("Bases de Datos y Programación en Ambiente Web I · Proyecto Integrador 2026-2",
   tam=10.5, color=GRIS, centro=True, despues=26)
@@ -178,7 +204,19 @@ par = p("Repositorio: ", tam=11, centro=True); enlace(par, REPO)
 salto()
 
 # --- 0. contenido de la entrega ----------------------------------------------
-doc.add_heading("Contenido de la entrega", level=1)
+doc.add_heading("Resumen de la entrega", level=1)
+tabla(["Punto", "Qué entregamos", "Dónde está"],
+      [[PUNTOS[0][0], "Home Page en HTML5 y CSS3 escrita Mobile-First, publicada en línea, 0 errores en el validador W3C.",
+        "1_Codigo_HTML5_CSS3/ · página en línea · sección 1"],
+       [PUNTOS[1][0], "1 historia de usuario, 2 tareas y 28 subtareas en el proyecto SDGE, con puntos, duración, fechas y responsable.",
+        "Sección 2 · capturas de Jira"],
+       [PUNTOS[2][0], "Repositorio del equipo con la estructura de carpetas, el código y el historial de cambios.",
+        "Sección 3 · Repositorio_GitHub.url"],
+       [PUNTOS[3][0], "Tabla de reuniones diarias, burndown del sprint e impedimentos con su solución.",
+        "3_Scrum_Daily_Sprint1.xlsx · sección 4"]],
+      [4.2, 7.6, 4.6], tam=9)
+p("")
+doc.add_heading("Archivos de la carpeta", level=2)
 tabla(["Archivo o carpeta", "Qué contiene"],
       [["1_Codigo_HTML5_CSS3/", "La página: index.html (HTML5), css/estilos.css (CSS3), js/app.js e img/. Se abre con doble clic en index.html."],
        ["2_Informe_Jira_GitHub_Scrum.docx", "Este documento: trazabilidad en Jira, control de versiones y Scrum Daily."],
@@ -189,7 +227,7 @@ tabla(["Archivo o carpeta", "Qué contiene"],
       [5.4, 11.0], tam=9.5)
 
 # --- 1. maquetación ------------------------------------------------------------
-doc.add_heading("1. Maquetación web responsiva Mobile-First", level=1)
+requisito(0)
 p("La página de inicio está construida en HTML5 semántico (header, nav, main, section, "
   "article, footer, form con role=\"search\") y CSS3. La hoja de estilos está escrita "
   "primero para celular: los estilos base de cada bloque corresponden a una pantalla de "
@@ -215,21 +253,21 @@ p("Código QR de la página.", tam=9, cursiva=True, color=GRIS, centro=True, des
 
 # --- 2. jira -------------------------------------------------------------------
 salto()
-doc.add_heading("2. Trazabilidad y gestión en Jira", level=1)
-p("El trabajo se modeló en el proyecto SDGE, dentro del Sprint 1 (9 al 28 de septiembre de "
-  "2026). Para esta entrega se agregaron una historia de usuario y dos tareas, cada una con "
-  "sus subtareas, y se agregaron subtareas a las historias de la página de inicio que ya "
-  "existían. Los puntos siguen la escala del curso: XS = 1 (menos de 3 horas), S = 3 (1 día), "
+requisito(1)
+p("El trabajo del maquetado se modeló en el proyecto SDGE de Jira, dentro del sprint en curso "
+  "(9 al 28 de septiembre de 2026): una historia de usuario para la maquetación Mobile-First, "
+  "una tarea para el repositorio y otra para el Scrum Daily, cada una con sus subtareas. "
+  "Además se agregaron subtareas a las historias de la página de inicio que ya existían. Los puntos siguen la escala del curso: XS = 1 (menos de 3 horas), S = 3 (1 día), "
   "M = 5 (2 a 3 días), L = 8 (1 semana).")
 
-doc.add_heading("2.1. Actividades nuevas", level=2)
+doc.add_heading("Historia de usuario y tareas nuevas", level=2)
 tabla(["Clave", "Tipo", "Actividad", "Responsable", "SP", "Talla · duración", "Inicio", "Fin", "Estado"],
       [["SDGE-14", "Historia", "Maquetación Mobile-First de la página de inicio", "Jorge Marín", "3", "S · 1 día (7 h)", "22/09", "22/09", "Finalizada"],
        ["SDGE-21", "Tarea", "Consolidar la estructura del repositorio en GitHub", "Eder Rodríguez", "1", "XS · menos de 3 h", "22/09", "22/09", "Por hacer"],
        ["SDGE-26", "Tarea", "Documentar el Scrum Daily del Sprint 1", "Eduardo Benítez", "3", "S · 1 día, repartido", "09/09", "28/09", "Por hacer"]],
       [1.5, 1.4, 4.0, 2.0, 0.8, 2.4, 1.2, 1.2, 1.9], tam=8.5, centrar=(4, 6, 7))
 
-doc.add_heading("2.2. Subtareas", level=2)
+doc.add_heading("Subtareas", level=2)
 SUB = [
     ("SDGE-14", [("SDGE-15", "Pasar los estilos base a celular (360 px)", "Finalizada"),
                  ("SDGE-16", "Reescribir las media queries con min-width", "Finalizada"),
@@ -269,14 +307,14 @@ tabla(["Pertenece a", "Clave", "Subtarea", "Estado"], filas, [4.2, 1.8, 7.6, 2.8
 p("En Jira las subtareas no llevan puntos: los puntos van en la historia o tarea que las "
   "contiene.", tam=9.5, cursiva=True, color=GRIS, antes=4)
 
-doc.add_heading("2.3. El sprint completo", level=2)
+doc.add_heading("Puntos por integrante en el sprint", level=2)
 tabla(["Responsable", "Puntos del Sprint 1"],
       [["Eder Fabián Rodríguez Murillo", "14 SP"], ["Eduardo José Benítez Guevara", "16 SP"],
        ["Jorge Andrés Marín Díaz", "13 SP"], ["Samuel Uribe Naranjo", "13 SP"],
        ["Total · 14 historias y tareas, 29 subtareas", "56 SP"]],
       [10.0, 6.4], tam=9.5, centrar=(1,))
 
-doc.add_heading("2.4. Capturas de Jira", level=2)
+doc.add_heading("Evidencia: capturas de Jira", level=2)
 CAPJ = [("01-backlog-sprint1.jpg", "Figura 2. Backlog del Sprint 1: estado, fecha de vencimiento y puntos de cada actividad."),
         ("02-SDGE-14.jpg", "Figura 3. SDGE-14: descripción paso a paso, talla, puntos, duración, fechas y responsable."),
         ("03-SDGE-14-subtareas.jpg", "Figura 4. Las 6 subtareas de SDGE-14, todas finalizadas."),
@@ -289,7 +327,7 @@ for archivo, pie in CAPJ:
 
 # --- 3. github -----------------------------------------------------------------
 salto()
-doc.add_heading("3. Control de versiones en GitHub", level=1)
+requisito(2)
 par = p("Repositorio del equipo: "); enlace(par, REPO)
 p("Estructura de carpetas:")
 estructura = ("ticketflow/\n"
@@ -314,12 +352,12 @@ log = subprocess.run(["git", "-C", RAIZ, "log", "--format=%h|%ad|%s", "--date=fo
 tabla(["Commit", "Fecha", "Descripción"], [l.split("|", 2) for l in log], [1.8, 3.0, 11.6], tam=9, centrar=(0,))
 
 # --- 4. scrum ------------------------------------------------------------------
-doc.add_heading("4. Seguimiento ágil · Scrum Daily", level=1)
+requisito(3)
 p("La tabla completa está en 3_Scrum_Daily_Sprint1.xlsx, con cuatro hojas: el registro "
   "diario por integrante (14 días hábiles × 4 personas), el burndown, los impedimentos y "
   "un resumen. Los puntos terminados salen de la fecha en que cada historia pasó a "
   "Finalizada en Jira.")
-doc.add_heading("4.1. Indicador de avance", level=2)
+doc.add_heading("Indicador de avance", level=2)
 tabla(["Día", "Fecha", "Alcance", "Terminados", "Pendientes reales", "Pendientes ideales", "Avance"],
       [["1", "09/09", "49", "0", "49", "49,0", "0 %"], ["4", "14/09", "49", "14", "35", "37,7", "29 %"],
        ["8", "18/09", "49", "29", "20", "22,6", "59 %"], ["10", "22/09", "56", "47", "9", "15,1", "84 %"]],
@@ -328,7 +366,7 @@ p("El 22/09 el alcance subió de 49 a 56 SP al entrar SDGE-14, SDGE-21 y SDGE-26
   "fecha el sprint va en 84 %, por delante de la línea ideal: quedan 9 SP (SDGE-10, SDGE-21 "
   "y SDGE-26).", antes=4)
 
-doc.add_heading("4.2. Impedimentos y soluciones", level=2)
+doc.add_heading("Impedimentos y soluciones", level=2)
 tabla(["Impedimento", "Solución", "Estado"],
       [["Samuel no aparecía en el proyecto de Jira y sus historias no tenían responsable.", "Se le invitó y se repartió el sprint entre los cuatro.", "Resuelto"],
        ["La pantalla de registro de administrador no existía en Figma.", "Se diseñó sobre el mismo sistema, con código de invitación.", "Resuelto"],
