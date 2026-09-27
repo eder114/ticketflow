@@ -12,7 +12,10 @@ Esquema en PostgreSQL · Sprint 2.
 | `DER_Chen_TicketFlow.svg` | Imagen vectorial, no se pixela al ampliar |
 | `DER_Chen_TicketFlow.drawio` | Editable en [draw.io](https://app.diagrams.net) |
 | `der_chen.py` | Genera los tres archivos anteriores |
-| `Modelo_Relacional_TicketFlow.docx` | Paso del modelo E-R al modelo relacional, siguiendo los pasos de la asignatura |
+| `Diagrama_Relacional_TicketFlow.png` | Las 10 tablas con sus llaves y las flechas de llave foránea |
+| `Diagrama_Relacional_TicketFlow.svg` | El mismo diagrama en vectorial |
+| `diagrama_relacional.py` | Genera el diagrama relacional |
+| `Modelo_Relacional_TicketFlow.docx` | Documento de entrega: los dos diagramas y las tablas |
 | `modelo_relacional.py` | Genera el documento anterior |
 
 Notación: rectángulo = entidad · rectángulo doble = entidad débil · rombo =
@@ -67,11 +70,13 @@ de cruce y se convierte en una entidad propia.
 
 ## Paso al modelo relacional
 
-El documento `Modelo_Relacional_TicketFlow.docx` aplica los siete pasos vistos
-en clase (entidades fuertes, entidad débil, 1:N, 1:1 y subtipos, N:M,
-atributos multivaluados y relaciones n-arias), y termina con el esquema de las
-diez tablas, sus llaves foráneas, las restricciones de integridad y el
-`CREATE TABLE` para PostgreSQL.
+Siguiendo los pasos vistos en clase, las diez entidades pasaron a diez tablas:
+cada relación 1:N se convirtió en una llave foránea, el teléfono quedó como
+tabla aparte con llave primaria compuesta, y cliente, agente y administrador
+quedaron como tablas separadas que comparten la identificación de la persona.
+
+El documento `Modelo_Relacional_TicketFlow.docx` reúne los dos diagramas y el
+esquema de las tablas.
 
 ## Estados
 
