@@ -124,11 +124,14 @@ p("Modelo relacional de TicketFlow", tam=24, negrita=True, centro=True, despues=
 p("Del diagrama entidad-relación a las tablas", tam=13, color=GRIS, centro=True, despues=34)
 p("Bases de Datos y Programación en Ambiente Web I", tam=11.5, centro=True, despues=2)
 p("Proyecto Integrador 2026-2", tam=11.5, color=GRIS, centro=True, despues=26)
-for n in ("Eder Fabián Rodríguez Murillo", "Eduardo José Benítez Guevara",
-          "Jorge Andrés Marín Díaz", "Samuel Uribe Naranjo"):
-    p(n, tam=11.5, centro=True, despues=2)
+for n, cod in (("Eder Fabián Rodríguez Murillo", "230251029"),
+               ("Alex Andrés Cruz Rueda", "230251088"),
+               ("Jorge Andrés Marín Díaz", "230251073"),
+               ("Samuel Uribe Naranjo", "230251048"),
+               ("Eduardo José Benítez Guevara", "")):
+    p(n + (" · " + cod if cod else ""), tam=11.5, centro=True, despues=2)
 p("Unidad Central del Valle del Cauca", tam=11, negrita=True, centro=True, antes=26, despues=2)
-p("Tuluá · Septiembre de 2026", tam=11, color=GRIS, centro=True)
+p("Tuluá · 27 de septiembre de 2026", tam=11, color=GRIS, centro=True)
 salto()
 
 # ============================================================ 1 ===========
