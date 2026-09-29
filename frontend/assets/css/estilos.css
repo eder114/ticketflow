@@ -225,6 +225,9 @@ button{font-family:inherit}
   font-family:inherit;font-size:16px;color:var(--navy);
 }
 .bq-evento input::placeholder{color:var(--texto-tenue)}
+/* contorno propio del campo, para que el foco no dependa solo del resalte
+   de la píldora que lo rodea */
+.bq-evento input:focus-visible{outline:3px solid #A8A3FF;outline-offset:3px;border-radius:6px}
 .bq-boton{
   flex-shrink:0;width:44px;height:44px;border:0;border-radius:var(--r-full);
   background:var(--grad);color:#fff;cursor:pointer;
@@ -350,7 +353,8 @@ button{font-family:inherit}
   .bq-chip:not(.tiene-valor) .bq-valor{color:var(--texto-tenue)}
   .bq-chevron{display:none}
   .bq-chip.abierto,.bq-chip:focus-within{background:var(--indigo-50)}
-  .bq-abrir:focus-visible{outline:none}
+  /* el foco se ve con contorno, no solo con un cambio de fondo */
+  .bq-chip:focus-within{outline:3px solid #A8A3FF;outline-offset:-2px}
   .bq-pop{right:auto;width:280px;top:calc(100% + 18px)}
   .bq-cal{width:320px}
 

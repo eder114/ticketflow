@@ -9,7 +9,7 @@ var EnrutadorControlador = (function () {
     });
 
     if (RutasModelo.esRuta()) {
-      PantallaVista.mostrar(RutasModelo.actual());
+      PantallaVista.mostrar(RutasModelo.actual(), { sinFoco: true });
     } else {
       // Llegó con un ancla (.../#eventos): inicio sin mover el scroll
       PantallaVista.mostrar(RutasModelo.INICIAL, { conservarScroll: true });

@@ -32,8 +32,10 @@ var PantallaVista = (function () {
     var t = destino.dataset.titulo;
     document.title = t ? t + " · TicketFlow" : "TicketFlow · Entradas para los mejores eventos de Colombia";
 
+    // El foco se mueve al título solo cuando se cambia de pantalla. Al cargar
+    // se deja quieto, para que el primer Tab llegue a "Saltar al contenido".
     var h1 = destino.querySelector("h1");
-    if (h1 && !opciones.conservarScroll) {
+    if (h1 && !opciones.conservarScroll && !opciones.sinFoco) {
       h1.setAttribute("tabindex", "-1");
       h1.focus({ preventScroll: true });
     }
