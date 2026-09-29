@@ -25,9 +25,9 @@
         TicketFlow
       </a>
 
-      <button class="menu-btn" type="button" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">☰</button>
 
-      <nav class="nav" aria-label="Navegación principal">
+      <nav class="nav" id="nav-principal" aria-label="Navegación principal">
         <a href="#/inicio" class="activo">Inicio</a>
         <a href="#eventos">Eventos</a>
         <a href="#categorias">Categorías</a>
@@ -44,10 +44,10 @@
   <main id="contenido">
 
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero" aria-labelledby="titulo-inicio">
       <div class="contenedor">
         <p class="overline">Más de 2.800 eventos en todo el país</p>
-        <h1>Tu próximo plan empieza aquí</h1>
+        <h1 id="titulo-inicio">Tu próximo plan empieza aquí</h1>
         <p>Conciertos, teatro, deportes y festivales en Colombia. Reserva tu cupo en
            segundos y recibe tu entrada al instante.</p>
 
@@ -125,12 +125,12 @@
     </section>
 
     <!-- Categorías -->
-    <section class="seccion" id="categorias">
+    <section class="seccion" id="categorias" aria-labelledby="titulo-categorias">
       <div class="contenedor">
         <div class="seccion-titulo">
           <div>
             <p class="overline">Explora</p>
-            <h2>Categorías</h2>
+            <h2 id="titulo-categorias">Categorías</h2>
             <p>Encuentra el plan que se te antoje, desde un concierto multitudinario
                hasta una obra de teatro en tu ciudad.</p>
           </div>
@@ -158,12 +158,12 @@
     </section>
 
     <!-- Eventos destacados -->
-    <section class="seccion" id="eventos" style="padding-top:0">
+    <section class="seccion" id="eventos" style="padding-top:0" aria-labelledby="titulo-eventos">
       <div class="contenedor">
         <div class="seccion-titulo">
           <div>
             <p class="overline">Lo más buscado</p>
-            <h2>Eventos destacados</h2>
+            <h2 id="titulo-eventos">Eventos destacados</h2>
             <p>Los planes con más reservas esta semana en Colombia.</p>
           </div>
           <a href="#eventos" class="btn btn-secundario">Ver todo el catálogo</a>
@@ -284,12 +284,12 @@
     </section>
 
     <!-- Cómo funciona -->
-    <section class="seccion" id="como-funciona">
+    <section class="seccion" id="como-funciona" aria-labelledby="titulo-como-funciona">
       <div class="contenedor">
         <div class="seccion-titulo">
           <div>
             <p class="overline">En tres pasos</p>
-            <h2>Cómo funciona</h2>
+            <h2 id="titulo-como-funciona">Cómo funciona</h2>
             <p>Sin filas, sin transferencias a cuentas desconocidas y sin quedarte
                sin puesto por no alcanzar a responder un mensaje.</p>
           </div>
@@ -333,7 +333,7 @@
   </main>
 
   <!-- Pie de página -->
-  <footer class="pie">
+  <footer class="pie" aria-label="Pie de página">
     <div class="contenedor">
       <div class="pie-rejilla">
         <div>
@@ -419,7 +419,7 @@
                   <a href="#/iniciar-sesion" style="font-size:14px;color:var(--indigo-700);font-weight:600">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <p class="aviso" data-exito hidden>
+                <p class="aviso" data-exito role="status" hidden>
                   Los datos son válidos. El inicio de sesión real se conecta en el Sprint 2,
                   cuando exista la tabla de usuarios en PostgreSQL.
                 </p>
@@ -525,7 +525,7 @@
                   <p class="error" id="err-cli-terminos" role="alert"></p>
                 </div>
 
-                <p class="aviso" data-exito hidden>
+                <p class="aviso" data-exito role="status" hidden>
                   Todos los datos son válidos. La cuenta queda activa de inmediato en cuanto
                   exista la base de datos, en el Sprint 2.
                 </p>
@@ -670,7 +670,7 @@
                   <p class="error" id="err-ag-terminos" role="alert"></p>
                 </div>
 
-                <p class="aviso" data-exito hidden>
+                <p class="aviso" data-exito role="status" hidden>
                   Todos los datos son válidos. La solicitud quedará en estado pendiente
                   hasta que el administrador la apruebe, desde el Sprint 2.
                 </p>
@@ -778,7 +778,7 @@
                   <p class="error" id="err-adm-terminos" role="alert"></p>
                 </div>
 
-                <p class="aviso" data-exito hidden>
+                <p class="aviso" data-exito role="status" hidden>
                   Todos los datos son válidos. La verificación del código contra la base
                   de datos se implementa en el Sprint 2.
                 </p>

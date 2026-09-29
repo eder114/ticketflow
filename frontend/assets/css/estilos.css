@@ -10,12 +10,12 @@
   --azul-50:#EFF6FF;   --azul-600:#2563EB;
   --navy-800:#1E293B;  --navy-700:#334155;
   --blanco:#fff; --linea:#E2E8F0; --linea-suave:#EEF2F7; --gris-100:#F1F5F9;
-  --exito-100:#DCFCE7; --exito-600:#16A34A;
-  --alerta:#F59E0B;    --alerta-100:#FEF3C7; --alerta-600:#D97706;
-  --error-50:#FEF2F2;  --error-100:#FEE2E2;  --error-600:#DC2626;
+  --exito-100:#DCFCE7; --exito-600:#15803D;
+  --alerta:#F59E0B;    --alerta-100:#FEF3C7; --alerta-600:#96470A;
+  --error-50:#FEF2F2;  --error-100:#FEE2E2;  --error-600:#B91C1C;
 
   /* Semánticos */
-  --texto:var(--navy); --texto-suave:var(--texto-2); --texto-tenue:#94A3B8;
+  --texto:var(--navy); --texto-suave:var(--texto-2); --texto-tenue:#64748B;
 
   --estado-reservada-bg:var(--alerta-100);  --estado-reservada-fg:var(--alerta-600);
   --estado-confirmada-bg:var(--exito-100);  --estado-confirmada-fg:var(--exito-600);

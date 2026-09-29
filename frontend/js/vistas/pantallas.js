@@ -22,7 +22,11 @@ var PantallaVista = (function () {
 
     document.querySelectorAll(".nav a").forEach(function (a) {
       var suya = (a.getAttribute("href") || "").replace(/^#\/?/, "");
-      a.classList.toggle("activo", suya === nombre);
+      var activo = suya === nombre;
+      a.classList.toggle("activo", activo);
+      // el lector de pantalla anuncia cuál es la pantalla actual
+      if (activo) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
     });
 
     var t = destino.dataset.titulo;
