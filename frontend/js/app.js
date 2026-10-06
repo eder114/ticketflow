@@ -7,4 +7,5 @@ document.addEventListener("DOMContentLoaded", function () {
   MenuControlador.iniciar();
   CatalogoControlador.iniciar();
   EventoControlador.iniciar();
+  AccesoControlador.iniciar();
 });

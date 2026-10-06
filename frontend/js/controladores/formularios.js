@@ -51,6 +51,15 @@ var FormularioControlador = (function () {
           FormularioVista.enfocar(primerFallo);
           return;
         }
+
+        FormularioVista.limpiarMensaje(form);
+
+        // Los formularios conectados a la API se encargan del envio; los demas
+        // se quedan con el aviso de que los datos son validos.
+        if (form.dataset.envio) {
+          form.dispatchEvent(new CustomEvent("ticketflow:validado"));
+          return;
+        }
         FormularioVista.mostrarExito(form);
       });
     });

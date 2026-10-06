@@ -81,8 +81,13 @@ var SesionModelo = (function () {
     return MENU[perfil()] || MENU.visitante;
   }
 
+  function token() {
+    return actual && actual.token ? actual.token : null;
+  }
+
   return {
     guardar: guardar,
+    token: token,
     cerrar: function () { guardar(null); },
     usuario: usuario,
     perfil: perfil,

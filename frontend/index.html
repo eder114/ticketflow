@@ -394,7 +394,7 @@
         <div class="tarjeta-cuerpo">
           <p class="acceso-sub">Entra a tu cuenta para ver tus reservas y tus entradas.</p>
 
-      <form data-validar class="form-pila" novalidate>
+      <form data-validar data-envio="sesion" class="form-pila" novalidate>
 
                 <div class="campo">
                   <label for="log-correo">Correo electrónico</label>
@@ -464,14 +464,30 @@
         <div class="tarjeta-cuerpo">
           <p class="acceso-sub">Cuatro datos y listo. Después reservas en dos clics.</p>
 
-      <form data-validar class="form-pila" novalidate>
+      <form data-validar data-envio="registro-cliente" class="form-pila" novalidate>
 
                 <div class="campo">
-                  <label for="cli-nombre">Nombre completo</label>
-                  <input type="text" id="cli-nombre" name="nombre"
-                         placeholder="Como aparece en tu documento" autocomplete="name"
-                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-cli-nombre">
-                  <p class="error" id="err-cli-nombre" role="alert"></p>
+                  <label for="cli-identificacion">Número de identificación</label>
+                  <input type="text" id="cli-identificacion" name="identificacion"
+                         placeholder="Cédula o pasaporte" autocomplete="off" inputmode="numeric"
+                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-cli-identificacion">
+                  <p class="error" id="err-cli-identificacion" role="alert"></p>
+                </div>
+
+                <div class="campo">
+                  <label for="cli-nombres">Nombres</label>
+                  <input type="text" id="cli-nombres" name="nombres"
+                         placeholder="Como aparece en tu documento" autocomplete="given-name"
+                         data-reglas="requerido minimo" data-minimo="2" aria-describedby="err-cli-nombres">
+                  <p class="error" id="err-cli-nombres" role="alert"></p>
+                </div>
+
+                <div class="campo">
+                  <label for="cli-apellidos">Apellidos</label>
+                  <input type="text" id="cli-apellidos" name="apellidos"
+                         placeholder="Como aparece en tu documento" autocomplete="family-name"
+                         data-reglas="requerido minimo" data-minimo="2" aria-describedby="err-cli-apellidos">
+                  <p class="error" id="err-cli-apellidos" role="alert"></p>
                 </div>
 
                 <div class="campo">
@@ -485,11 +501,11 @@
 
                 <div class="campo">
                   <label for="cli-ciudad">Ciudad</label>
-                  <select id="cli-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-cli-ciudad">
+                  <select id="cli-ciudad" name="ciudad" data-ciudades data-reglas="requerido" aria-describedby="err-cli-ciudad">
                     <option value="">Elige tu ciudad</option>
-                    <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-                    <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
-                    <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
+                    <option value="5">Bogotá</option><option value="6">Medellín</option><option value="1">Cali</option>
+                    <option value="8">Barranquilla</option><option value="10">Cartagena</option><option value="9">Bucaramanga</option>
+                    <option value="2">Tuluá</option><option value="3">Palmira</option><option value="4">Buga</option>
                   </select>
                   <p class="error" id="err-cli-ciudad" role="alert"></p>
                   <p class="ayuda">La usamos para mostrarte primero los eventos cerca de ti.</p>
@@ -562,16 +578,41 @@
         <div class="tarjeta-cuerpo">
           <p class="acceso-sub">Publica eventos y controla tus ventas desde un solo panel.</p>
 
-      <form data-validar class="form-pila" novalidate>
+      <form data-validar data-envio="registro-agente" class="form-pila" novalidate>
 
                 <p class="overline" style="margin-top:8px">Datos del responsable</p>
 
-                <div class="campo">
-                  <label for="ag-nombre">Nombre completo</label>
-                  <input type="text" id="ag-nombre" name="nombre"
-                         placeholder="Quien administra la cuenta" autocomplete="name"
-                         data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-ag-nombre">
-                  <p class="error" id="err-ag-nombre" role="alert"></p>
+                <div class="fila">
+                  <div class="campo">
+                    <label for="ag-identificacion">Número de identificación</label>
+                    <input type="text" id="ag-identificacion" name="identificacion"
+                           placeholder="Cédula o pasaporte" autocomplete="off" inputmode="numeric"
+                           data-reglas="requerido minimo" data-minimo="5" aria-describedby="err-ag-identificacion">
+                    <p class="error" id="err-ag-identificacion" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="ag-experiencia">Años organizando eventos</label>
+                    <input type="number" id="ag-experiencia" name="experiencia" min="0" max="60"
+                           placeholder="3" data-reglas="requerido" aria-describedby="err-ag-experiencia">
+                    <p class="error" id="err-ag-experiencia" role="alert"></p>
+                  </div>
+                </div>
+
+                <div class="fila">
+                  <div class="campo">
+                    <label for="ag-nombres">Nombres</label>
+                    <input type="text" id="ag-nombres" name="nombres"
+                           placeholder="Quien administra la cuenta" autocomplete="given-name"
+                           data-reglas="requerido minimo" data-minimo="2" aria-describedby="err-ag-nombres">
+                    <p class="error" id="err-ag-nombres" role="alert"></p>
+                  </div>
+                  <div class="campo">
+                    <label for="ag-apellidos">Apellidos</label>
+                    <input type="text" id="ag-apellidos" name="apellidos"
+                           placeholder="Quien administra la cuenta" autocomplete="family-name"
+                           data-reglas="requerido minimo" data-minimo="2" aria-describedby="err-ag-apellidos">
+                    <p class="error" id="err-ag-apellidos" role="alert"></p>
+                  </div>
                 </div>
 
                 <div class="fila">
@@ -610,11 +651,11 @@
                   </div>
                   <div class="campo">
                     <label for="ag-ciudad">Ciudad de operación</label>
-                    <select id="ag-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-ag-ciudad">
+                    <select id="ag-ciudad" name="ciudad" data-ciudades data-reglas="requerido" aria-describedby="err-ag-ciudad">
                       <option value="">Elige la ciudad</option>
-                      <option>Bogotá</option><option>Medellín</option><option>Cali</option>
-                      <option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option>
-                      <option>Tuluá</option><option>Palmira</option><option>Buga</option><option>Otra</option>
+                      <option value="5">Bogotá</option><option value="6">Medellín</option><option value="1">Cali</option>
+                      <option value="8">Barranquilla</option><option value="10">Cartagena</option><option value="9">Bucaramanga</option>
+                      <option value="2">Tuluá</option><option value="3">Palmira</option><option value="4">Buga</option>
                     </select>
                     <p class="error" id="err-ag-ciudad" role="alert"></p>
                   </div>
@@ -1359,6 +1400,7 @@
 <!-- Modelos -->
 <script src="js/modelos/rutas.js"></script>
 <script src="js/modelos/sesion.js"></script>
+<script src="js/modelos/api.js"></script>
 <script src="js/modelos/validacion.js"></script>
 <script src="js/modelos/calendario.js"></script>
 <script src="js/modelos/catalogo.js"></script>
@@ -1378,6 +1420,7 @@
 <script src="js/controladores/sesion.js"></script>
 <script src="js/controladores/catalogo.js"></script>
 <script src="js/controladores/evento.js"></script>
+<script src="js/controladores/acceso.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

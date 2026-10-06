@@ -46,7 +46,47 @@ var FormularioVista = (function () {
     });
   }
 
+  // Mensaje general del formulario, para lo que no corresponde a un campo:
+  // por ejemplo que el correo y la contrasena no coincidan.
+  function mostrarMensaje(form, texto) {
+    var caja = form.querySelector("[data-mensaje]");
+    if (!caja) {
+      caja = document.createElement("p");
+      caja.className = "aviso aviso-error";
+      caja.setAttribute("role", "alert");
+      caja.dataset.mensaje = "";
+      var boton = form.querySelector("button[type=submit]");
+      form.insertBefore(caja, boton);
+    }
+    caja.textContent = texto;
+    caja.hidden = false;
+    caja.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  function limpiarMensaje(form) {
+    var caja = form.querySelector("[data-mensaje]");
+    if (caja) caja.hidden = true;
+  }
+
+  // Mientras la peticion esta en camino el boton queda bloqueado, para que no
+  // se envie dos veces.
+  function ocupado(form, si) {
+    form.querySelectorAll("button[type=submit]").forEach(function (b) {
+      if (si) {
+        b.dataset.textoOriginal = b.dataset.textoOriginal || b.textContent;
+        b.disabled = true;
+        b.textContent = "Enviando...";
+      } else {
+        b.disabled = false;
+        if (b.dataset.textoOriginal) b.textContent = b.dataset.textoOriginal;
+      }
+    });
+  }
+
   return {
+    mostrarMensaje: mostrarMensaje,
+    limpiarMensaje: limpiarMensaje,
+    ocupado: ocupado,
     mostrarError: mostrarError,
     limpiarError: limpiarError,
     pintarMedidor: pintarMedidor,
