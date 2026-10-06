@@ -27,14 +27,14 @@
 
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">☰</button>
 
-      <nav class="nav" id="nav-principal" aria-label="Navegación principal">
+      <nav class="nav" id="nav-principal" data-fijo aria-label="Navegación principal">
         <a href="#/inicio" class="activo">Inicio</a>
         <a href="#eventos">Eventos</a>
         <a href="#categorias">Categorías</a>
         <a href="#como-funciona">Cómo funciona</a>
       </nav>
 
-      <div class="acciones">
+      <div class="acciones" data-acciones-sesion>
         <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
         <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
       </div>
@@ -799,20 +799,585 @@
   </div>
 </div>
 
+<!-- CATÁLOGO DE EVENTOS -->
+<div class="vista" id="vista-catalogo" data-titulo="Catálogo de eventos" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-catalogo" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-catalogo" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo" class="activo">Catálogo</a>
+        <a href="#/evento">Detalle</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-catalogo" hidden>
+    <section class="catalogo" aria-labelledby="titulo-catalogo">
+      <div class="contenedor">
+
+        <div class="catalogo-cabecera">
+          <div>
+            <p class="overline">Catálogo completo</p>
+            <h1 id="titulo-catalogo">Todos los eventos</h1>
+          </div>
+          <p class="catalogo-conteo" data-conteo role="status">12 eventos disponibles</p>
+        </div>
+
+        <form class="filtros" role="search" aria-labelledby="titulo-filtros" data-filtros>
+          <h2 id="titulo-filtros" class="solo-lectores">Filtrar el catálogo</h2>
+
+          <div class="filtro">
+            <label for="f-ciudad">Ciudad</label>
+            <select id="f-ciudad" name="ciudad">
+              <option value="">Todas las ciudades</option>
+              <option>Cali</option>
+              <option>Tuluá</option>
+              <option>Bogotá</option>
+              <option>Medellín</option>
+              <option>Barranquilla</option>
+              <option>Bucaramanga</option>
+              <option>Cartagena</option>
+            </select>
+          </div>
+
+          <div class="filtro">
+            <label for="f-categoria">Categoría</label>
+            <select id="f-categoria" name="categoria">
+              <option value="">Todas</option>
+              <option>Festival</option>
+              <option>Concierto</option>
+              <option>Teatro</option>
+              <option>Deporte</option>
+            </select>
+          </div>
+
+          <div class="filtro">
+            <label for="f-desde">Desde</label>
+            <input type="date" id="f-desde" name="desde">
+          </div>
+
+          <div class="filtro">
+            <label for="f-precio">Precio máximo</label>
+            <select id="f-precio" name="precio">
+              <option value="">Cualquiera</option>
+              <option value="50000">Hasta $50.000</option>
+              <option value="100000">Hasta $100.000</option>
+              <option value="200000">Hasta $200.000</option>
+            </select>
+          </div>
+
+          <div class="filtro filtro-botones">
+            <button type="submit" class="btn btn-primario">Filtrar</button>
+            <button type="reset" class="btn btn-secundario">Limpiar</button>
+          </div>
+        </form>
+
+        <div class="rejilla rejilla-3" data-lista-eventos>
+
+          <article class="evento" data-ciudad="Cali" data-categoria="Festival" data-precio="120000">
+            <div class="evento-img">
+              <img src="assets/img/festival-noche.jpg" alt="Público con las manos en alto en un festival nocturno">
+              <span class="evento-cat cat-festival">Festival</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-boleteria">En boletería</span>
+              <h3>Festival de Música Cali Vive</h3>
+              <div class="evento-meta">
+                <span>Estadio Pascual Guerrero · Cali</span>
+                <span>14 de noviembre de 2026 · 6:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$120.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Cali" data-categoria="Concierto" data-precio="85000">
+            <div class="evento-img">
+              <img src="assets/img/concierto-artista.jpg" alt="Artista cantando frente al público">
+              <span class="evento-cat cat-concierto">Concierto</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-boleteria">En boletería</span>
+              <h3>Noche de Salsa Brava</h3>
+              <div class="evento-meta">
+                <span>Teatro Jorge Isaacs · Cali</span>
+                <span>28 de noviembre de 2026 · 8:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$85.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Tuluá" data-categoria="Festival" data-precio="60000">
+            <div class="evento-img">
+              <img src="assets/img/festival-dia.jpg" alt="Asistentes de día en un festival al aire libre">
+              <span class="evento-cat cat-festival">Festival</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-programado">Programado</span>
+              <h3>Tuluá Rock Fest</h3>
+              <div class="evento-meta">
+                <span>Coliseo Cubierto · Tuluá</span>
+                <span>5 de diciembre de 2026 · 4:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$60.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Cali" data-categoria="Teatro" data-precio="45000">
+            <div class="evento-img">
+              <img src="assets/img/teatro-sala.jpg" alt="Sala de teatro con las butacas vacías antes de la función">
+              <span class="evento-cat cat-teatro">Teatro</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-programado">Programado</span>
+              <h3>Sinfónica del Valle · Temporada de Navidad</h3>
+              <div class="evento-meta">
+                <span>Teatro Municipal · Cali</span>
+                <span>18 de diciembre de 2026 · 7:30 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$45.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Bogotá" data-categoria="Teatro" data-precio="95000">
+            <div class="evento-img">
+              <img src="assets/img/teatro-drama.jpg" alt="Actores en escena durante una obra de teatro">
+              <span class="evento-cat cat-teatro">Teatro</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-programado">Programado</span>
+              <h3>Comedia en Vivo · Especial de Fin de Año</h3>
+              <div class="evento-meta">
+                <span>Teatro Nacional Fanny Mikey · Bogotá</span>
+                <span>20 de diciembre de 2026 · 8:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$95.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Medellín" data-categoria="Deporte" data-precio="70000">
+            <div class="evento-img">
+              <img src="assets/img/futbol-seleccion.jpg" alt="Hinchada en las tribunas durante un partido de fútbol">
+              <span class="evento-cat cat-deporte">Deporte</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-boleteria">En boletería</span>
+              <h3>Clásico Paisa · Nacional vs Medellín</h3>
+              <div class="evento-meta">
+                <span>Estadio Atanasio Girardot · Medellín</span>
+                <span>22 de noviembre de 2026 · 5:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$70.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Barranquilla" data-categoria="Festival" data-precio="180000">
+            <div class="evento-img">
+              <img src="assets/img/evento-ambiente.jpg" alt="Luces y humo en el escenario de un evento masivo">
+              <span class="evento-cat cat-festival">Festival</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-vivo">En vivo</span>
+              <h3>Carnaval Electrónico Barranquilla</h3>
+              <div class="evento-meta">
+                <span>Parque Puerta de Oro · Barranquilla</span>
+                <span>21 de noviembre de 2026 · 2:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$180.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Bucaramanga" data-categoria="Teatro" data-precio="50000">
+            <div class="evento-img">
+              <img src="assets/img/teatro-epoca.jpg" alt="Escena de una obra de teatro de época">
+              <span class="evento-cat cat-teatro">Teatro</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-finalizado">Finalizado</span>
+              <h3>Festival Internacional de Teatro</h3>
+              <div class="evento-meta">
+                <span>Teatro Santander · Bucaramanga</span>
+                <span>10 al 18 de octubre de 2026</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$50.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-secundario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="evento" data-ciudad="Cartagena" data-categoria="Teatro" data-precio="110000">
+            <div class="evento-img">
+              <img src="assets/img/teatro-sala.jpg" alt="Interior de un teatro histórico">
+              <span class="evento-cat cat-teatro">Teatro</span>
+            </div>
+            <div class="evento-cuerpo">
+              <span class="estado-chip estado-programado">Programado</span>
+              <h3>Hay Festival Cartagena · Noche inaugural</h3>
+              <div class="evento-meta">
+                <span>Teatro Adolfo Mejía · Cartagena</span>
+                <span>28 de enero de 2027 · 7:00 p. m.</span>
+              </div>
+              <div class="evento-pie">
+                <div class="precio">$110.000<small>COP · DESDE</small></div>
+                <a href="#/evento" class="btn btn-primario">Ver evento</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="vacio" data-sin-resultados hidden role="status">
+          Ningún evento coincide con los filtros. Prueba quitando alguno.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+        <a href="#/iniciar-sesion">Iniciar sesión</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
+<!-- DETALLE DEL EVENTO -->
+<div class="vista" id="vista-evento" data-titulo="Detalle del evento" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-evento" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-evento" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+        <a href="#/evento" class="activo">Detalle</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-evento" hidden>
+    <nav class="migas" aria-label="Dónde estoy">
+      <div class="contenedor">
+        <a href="#/inicio">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <a href="#/catalogo">Catálogo</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Festival de Música Cali Vive</span>
+      </div>
+    </nav>
+
+    <section class="detalle" aria-labelledby="titulo-evento">
+      <div class="contenedor detalle-rejilla">
+
+        <div class="detalle-principal">
+          <figure class="detalle-foto">
+            <img src="assets/img/festival-noche.jpg"
+                 alt="Público con las manos en alto frente al escenario principal del festival">
+          </figure>
+
+          <span class="estado-chip estado-boleteria">En boletería</span>
+          <h1 id="titulo-evento">Festival de Música Cali Vive</h1>
+
+          <dl class="detalle-datos">
+            <div><dt>Lugar</dt><dd>Estadio Pascual Guerrero</dd></div>
+            <div><dt>Ciudad</dt><dd>Cali, Valle del Cauca</dd></div>
+            <div><dt>Comienza</dt><dd>14 de noviembre de 2026 · 6:00 p. m.</dd></div>
+            <div><dt>Termina</dt><dd>15 de noviembre de 2026 · 2:00 a. m.</dd></div>
+            <div><dt>Capacidad</dt><dd>25.000 personas</dd></div>
+            <div><dt>Organiza</dt><dd>Carolina Mejía Arango</dd></div>
+          </dl>
+
+          <h2>Sobre el evento</h2>
+          <p>Tres escenarios con artistas nacionales de salsa, rock y música urbana.
+             Las puertas abren dos horas antes del primer concierto y el recinto
+             cuenta con zona de comidas, puntos de hidratación y acceso para
+             personas con movilidad reducida.</p>
+
+          <h2>Antes de comprar</h2>
+          <ul class="lista-puntos">
+            <li>La entrada es personal e intransferible y se valida con el documento.</li>
+            <li>Los menores de 10 años entran acompañados de un adulto responsable.</li>
+            <li>La reserva queda en estado <strong>Reservada</strong> hasta que el organizador la confirma.</li>
+          </ul>
+        </div>
+
+        <aside class="detalle-compra" aria-labelledby="titulo-compra">
+          <h2 id="titulo-compra">Reserva tus entradas</h2>
+
+          <p class="detalle-precio">$120.000 <small>COP por entrada</small></p>
+
+          <p class="detalle-cupos" data-cupos role="status">
+            Quedan <strong>24.994</strong> cupos de 25.000
+          </p>
+
+          <div class="campo">
+            <label for="ev-entradas">Número de entradas</label>
+            <input type="number" id="ev-entradas" name="entradas" value="1" min="1" max="10"
+                   aria-describedby="ayuda-entradas">
+            <p class="ayuda" id="ayuda-entradas">Máximo 10 entradas por reserva.</p>
+          </div>
+
+          <p class="detalle-total">Total estimado: <strong data-total>$120.000</strong></p>
+
+          <a href="#/iniciar-sesion" class="btn btn-primario btn-lg btn-bloque">Reservar</a>
+          <p class="ayuda" style="text-align:center">
+            Hay que iniciar sesión para reservar.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+        <a href="#/iniciar-sesion">Iniciar sesión</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
+<!-- CREAR O EDITAR EVENTO (AGENTE) -->
+<div class="vista" id="vista-crear-evento" data-titulo="Registrar evento" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-crear" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-crear" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+        <a href="#/crear-evento" class="activo">Registrar evento</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-crear" hidden>
+    <section class="panel" aria-labelledby="titulo-crear">
+      <div class="contenedor">
+
+        <div class="panel-cabecera">
+          <div>
+            <p class="overline">Panel del organizador</p>
+            <h1 id="titulo-crear">Registrar un evento</h1>
+          </div>
+        </div>
+
+        <form data-validar class="form-evento" novalidate>
+
+          <fieldset>
+            <legend>Datos del evento</legend>
+
+            <div class="campo campo-ancho">
+              <label for="nv-nombre">Nombre del evento</label>
+              <input type="text" id="nv-nombre" name="nombre" placeholder="Festival de Música Cali Vive"
+                     data-reglas="requerido" aria-describedby="err-nv-nombre">
+              <p class="error" id="err-nv-nombre" role="alert"></p>
+            </div>
+
+            <div class="campo campo-ancho">
+              <label for="nv-descripcion">Descripción</label>
+              <textarea id="nv-descripcion" name="descripcion" rows="4"
+                        placeholder="Qué va a pasar, quiénes se presentan y qué incluye la entrada."
+                        data-reglas="requerido" aria-describedby="err-nv-descripcion"></textarea>
+              <p class="error" id="err-nv-descripcion" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="nv-teatro">Teatro o recinto</label>
+              <input type="text" id="nv-teatro" name="teatro" placeholder="Estadio Pascual Guerrero"
+                     data-reglas="requerido" aria-describedby="err-nv-teatro">
+              <p class="error" id="err-nv-teatro" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="nv-ciudad">Ciudad de realización</label>
+              <select id="nv-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-nv-ciudad">
+                <option value="">Elige una ciudad</option>
+                <option value="1">Cali · Valle del Cauca</option>
+                <option value="2">Tuluá · Valle del Cauca</option>
+                <option value="3">Palmira · Valle del Cauca</option>
+                <option value="5">Bogotá · Cundinamarca</option>
+                <option value="6">Medellín · Antioquia</option>
+                <option value="8">Barranquilla · Atlántico</option>
+                <option value="9">Bucaramanga · Santander</option>
+                <option value="10">Cartagena · Bolívar</option>
+              </select>
+              <p class="error" id="err-nv-ciudad" role="alert"></p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Fechas y aforo</legend>
+
+            <div class="campo">
+              <label for="nv-inicio">Fecha y hora de inicio</label>
+              <input type="datetime-local" id="nv-inicio" name="inicio"
+                     data-reglas="requerido" aria-describedby="err-nv-inicio">
+              <p class="error" id="err-nv-inicio" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="nv-fin">Fecha y hora de finalización</label>
+              <input type="datetime-local" id="nv-fin" name="fin"
+                     data-reglas="requerido" aria-describedby="err-nv-fin">
+              <p class="error" id="err-nv-fin" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="nv-capacidad">Capacidad total</label>
+              <input type="number" id="nv-capacidad" name="capacidad" min="1" placeholder="25000"
+                     data-reglas="requerido" aria-describedby="err-nv-capacidad">
+              <p class="error" id="err-nv-capacidad" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="nv-precio">Precio base de la entrada (COP)</label>
+              <input type="number" id="nv-precio" name="precio" min="0" step="1000" placeholder="120000"
+                     data-reglas="requerido" aria-describedby="err-nv-precio">
+              <p class="error" id="err-nv-precio" role="alert"></p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Estado y observaciones</legend>
+
+            <div class="campo">
+              <label for="nv-estado">Estado del evento</label>
+              <select id="nv-estado" name="estado" data-reglas="requerido" aria-describedby="err-nv-estado">
+                <option value="Programado" selected>Programado</option>
+                <option value="En Boleteria">En boletería</option>
+                <option value="En Vivo">En vivo</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+              <p class="error" id="err-nv-estado" role="alert"></p>
+            </div>
+
+            <div class="campo campo-ancho">
+              <label for="nv-observaciones">Observaciones</label>
+              <textarea id="nv-observaciones" name="observaciones" rows="3"
+                        placeholder="Condiciones especiales, restricciones de edad, accesos."></textarea>
+            </div>
+
+            <div class="campo campo-ancho" data-campo-causa hidden>
+              <label for="nv-causa">Causa de la cancelación</label>
+              <textarea id="nv-causa" name="causa" rows="2"
+                        placeholder="Por qué se canceló el evento."
+                        aria-describedby="err-nv-causa"></textarea>
+              <p class="error" id="err-nv-causa" role="alert"></p>
+              <p class="ayuda">Se exige cuando el estado es Cancelado, porque el reporte
+                 de eventos cancelados la necesita.</p>
+            </div>
+          </fieldset>
+
+          <p class="aviso" data-exito role="status" hidden>
+            Todos los datos son válidos. El guardado contra la base de datos entra
+            con la historia de la API de eventos.
+          </p>
+
+          <div class="form-evento-pie">
+            <a href="#/catalogo" class="btn btn-secundario">Cancelar</a>
+            <button type="submit" class="btn btn-primario btn-lg">Guardar evento</button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+        <a href="#/iniciar-sesion">Iniciar sesión</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
 <!-- Modelos -->
 <script src="js/modelos/rutas.js"></script>
+<script src="js/modelos/sesion.js"></script>
 <script src="js/modelos/validacion.js"></script>
 <script src="js/modelos/calendario.js"></script>
+<script src="js/modelos/catalogo.js"></script>
 <!-- Vistas -->
 <script src="js/vistas/menu.js"></script>
 <script src="js/vistas/pantallas.js"></script>
 <script src="js/vistas/formularios.js"></script>
 <script src="js/vistas/buscador.js"></script>
+<script src="js/vistas/sesion.js"></script>
+<script src="js/vistas/catalogo.js"></script>
+<script src="js/vistas/evento.js"></script>
 <!-- Controladores -->
 <script src="js/controladores/enrutador.js"></script>
 <script src="js/controladores/formularios.js"></script>
 <script src="js/controladores/buscador.js"></script>
 <script src="js/controladores/menu.js"></script>
+<script src="js/controladores/sesion.js"></script>
+<script src="js/controladores/catalogo.js"></script>
+<script src="js/controladores/evento.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

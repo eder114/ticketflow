@@ -49,6 +49,10 @@
 /* Base */
 *{box-sizing:border-box;margin:0;padding:0}
 
+/* El atributo hidden tiene que ganarle a cualquier display que pongamos
+   después; si no, una tarjeta con display:flex se sigue viendo. */
+[hidden]{display:none!important}
+
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -651,3 +655,193 @@ button{font-family:inherit}
   background:var(--indigo);color:#fff;padding:12px 18px;border-radius:0 0 var(--r-btn) 0;
 }
 .saltar:focus{left:0}
+
+
+/* ============================================================== CATÁLOGO === */
+
+.catalogo{padding-block:var(--e8)}
+
+.catalogo-cabecera{
+  display:flex;flex-direction:column;gap:var(--e2);
+  margin-bottom:var(--e6);
+}
+.catalogo-cabecera h1{font-size:28px;line-height:1.2}
+.catalogo-conteo{font-size:14px;color:var(--texto-suave)}
+
+.filtros{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:var(--sombra-sm);
+  padding:var(--e4);margin-bottom:var(--e6);
+  display:grid;gap:var(--e3);grid-template-columns:1fr;
+}
+.filtro{display:flex;flex-direction:column;gap:6px;min-width:0}
+.filtro label{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-suave);
+}
+.filtro select,.filtro input{
+  width:100%;padding:11px 12px;font:inherit;font-size:14.5px;
+  border:1px solid var(--linea);border-radius:var(--r-btn);
+  background:#fff;color:var(--texto);
+}
+.filtro select:focus,.filtro input:focus{
+  outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.16);
+}
+.filtro-botones{flex-direction:row;gap:var(--e2);align-items:end}
+.filtro-botones .btn{flex:1}
+
+.estado-chip{
+  align-self:flex-start;
+  padding:4px 10px;border-radius:var(--r-full);
+  font-size:11.5px;font-weight:700;letter-spacing:.03em;
+}
+.estado-programado{background:var(--indigo-50);  color:var(--indigo-700)}
+.estado-boleteria {background:var(--exito-100);  color:var(--exito-600)}
+.estado-vivo      {background:var(--error-100);  color:var(--error-600)}
+.estado-finalizado{background:var(--gris-100);   color:var(--navy-700)}
+.estado-cancelado {background:var(--alerta-100); color:var(--alerta-600)}
+
+.vacio{
+  padding:var(--e10) var(--e4);text-align:center;
+  color:var(--texto-suave);font-size:15px;
+  border:1px dashed var(--linea);border-radius:var(--r-card);
+}
+
+@media (min-width:576px){
+  .filtros{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:768px){
+  .catalogo{padding-block:var(--e10)}
+  .catalogo-cabecera{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .catalogo-cabecera h1{font-size:34px}
+}
+@media (min-width:1024px){
+  .filtros{grid-template-columns:repeat(5,minmax(0,1fr));align-items:end}
+}
+
+
+/* ====================================================== DETALLE DEL EVENTO === */
+
+.migas{padding-block:var(--e4);font-size:13.5px;color:var(--texto-suave)}
+.migas .contenedor{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.migas a{color:var(--texto-suave)}
+.migas a:hover{color:var(--indigo-700)}
+.migas [aria-current="page"]{color:var(--texto);font-weight:600}
+
+.detalle{padding-block:0 var(--e10)}
+.detalle-rejilla{display:grid;gap:var(--e6);grid-template-columns:1fr}
+
+.detalle-principal{display:flex;flex-direction:column;gap:var(--e3);min-width:0}
+.detalle-principal h1{font-size:26px;line-height:1.2}
+.detalle-principal h2{font-size:18px;margin-top:var(--e4)}
+.detalle-principal p{color:var(--texto-suave);line-height:1.65;max-width:66ch}
+
+.detalle-foto{border-radius:var(--r-card-lg);overflow:hidden;background:var(--gris-100)}
+.detalle-foto img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+
+.detalle-datos{
+  display:grid;gap:var(--e3);grid-template-columns:1fr;
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  padding:var(--e4);margin-top:var(--e2);
+}
+.detalle-datos dt{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-suave);margin-bottom:3px;
+}
+.detalle-datos dd{font-size:15px;color:var(--texto)}
+
+.lista-puntos{display:flex;flex-direction:column;gap:8px;padding-left:20px}
+.lista-puntos li{color:var(--texto-suave);line-height:1.6}
+
+.detalle-compra{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-card-lg);
+  box-shadow:var(--sombra-md);
+  padding:var(--e5);display:flex;flex-direction:column;gap:var(--e3);
+  height:fit-content;
+}
+.detalle-compra h2{font-size:17px}
+.detalle-precio{
+  font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;
+  color:var(--navy);line-height:1.1;
+}
+.detalle-precio small{
+  display:block;font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:600;color:var(--texto-suave);letter-spacing:.03em;
+}
+.detalle-cupos{
+  font-size:14px;color:var(--exito-600);background:var(--exito-100);
+  padding:9px 12px;border-radius:var(--r-btn);
+}
+.detalle-total{font-size:15px;color:var(--texto-suave)}
+.detalle-total strong{color:var(--texto);font-size:17px}
+
+@media (min-width:576px){
+  .detalle-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:768px){
+  .detalle-principal h1{font-size:32px}
+}
+@media (min-width:1024px){
+  .detalle-rejilla{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:var(--e8);align-items:start}
+  .detalle-compra{position:sticky;top:var(--e5)}
+}
+
+
+/* ============================================ FORMULARIO DE EVENTO (AGENTE) === */
+
+.panel{padding-block:var(--e8) var(--e10)}
+.panel-cabecera{margin-bottom:var(--e6)}
+.panel-cabecera h1{font-size:28px;line-height:1.2}
+
+.form-evento{display:flex;flex-direction:column;gap:var(--e5)}
+.form-evento fieldset{
+  border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  background:#fff;padding:var(--e4);
+  display:grid;gap:var(--e4);grid-template-columns:1fr;
+}
+.form-evento legend{
+  padding:0 8px;font-size:12px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--indigo-700);
+}
+.form-evento .campo-ancho{grid-column:1/-1}
+.form-evento textarea{resize:vertical;min-height:84px}
+
+.form-evento-pie{
+  display:flex;flex-direction:column-reverse;gap:var(--e3);
+}
+.form-evento-pie .btn{width:100%;justify-content:center}
+
+@media (min-width:768px){
+  .panel{padding-block:var(--e10) var(--e12)}
+  .panel-cabecera h1{font-size:34px}
+  .form-evento fieldset{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    padding:var(--e5) var(--e6) var(--e6);
+  }
+  .form-evento-pie{flex-direction:row;justify-content:flex-end}
+  .form-evento-pie .btn{width:auto}
+}
+
+
+/* ============================================= PIE CORTO DE LAS PANTALLAS === */
+
+.pie-fila{
+  display:flex;flex-direction:column;gap:var(--e3);
+  align-items:flex-start;
+}
+.pie-fila nav{display:flex;flex-wrap:wrap;gap:var(--e4)}
+.pie-fila nav a{margin-bottom:0}
+
+@media (min-width:768px){
+  .pie-fila{flex-direction:row;align-items:center;justify-content:space-between}
+}
+
+
+/* ============================================ ESTADO DE SESIÓN EN EL MENÚ === */
+
+.sesion-nombre{font-weight:600;font-size:14.5px;color:var(--texto)}
+.sesion-perfil{
+  padding:3px 9px;border-radius:var(--r-full);
+  background:var(--indigo-50);color:var(--indigo-700);
+  font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}

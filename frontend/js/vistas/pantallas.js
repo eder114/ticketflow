@@ -12,8 +12,13 @@ var PantallaVista = (function () {
     }
 
     Array.prototype.forEach.call(document.querySelectorAll(".vista"), function (v) {
-      v.classList.toggle("activa", v === destino);
-      v.hidden = v !== destino;
+      var activa = v === destino;
+      v.classList.toggle("activa", activa);
+      v.hidden = !activa;
+
+      // Solo puede haber un <main> visible a la vez: el de la pantalla activa.
+      var cuerpo = v.querySelector("main");
+      if (cuerpo) cuerpo.hidden = !activa;
     });
 
     MenuVista.cerrar();
