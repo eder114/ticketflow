@@ -4,23 +4,23 @@ Los tres diagramas UML del sistema. Responden al primer objetivo específico
 del enunciado: representar la estructura, el comportamiento y el alcance de
 TicketFlow.
 
-| Diagrama | Qué representa | Archivos |
-|---|---|---|
-| **Casos de uso** | El alcance: los tres actores y lo que puede hacer cada uno | `Casos_de_Uso_TicketFlow.png` · `.svg` |
-| **Clases** | La estructura: las clases del dominio, sus atributos, sus métodos y cómo se relacionan | `Diagrama_Clases_TicketFlow.png` · `.svg` |
-| **Secuencia** | El comportamiento: el recorrido completo de una reserva de entradas | `Diagrama_Secuencia_Reserva_TicketFlow.png` · `.svg` |
+| Diagrama | Qué representa |
+|---|---|
+| **Casos de uso** | El alcance: los tres actores y lo que puede hacer cada uno |
+| **Clases** | La estructura: las clases del dominio, sus atributos, sus métodos y cómo se relacionan |
+| **Secuencia** | El comportamiento: el recorrido completo de una reserva de entradas |
 
-Cada diagrama se genera con su propio script de Python:
+Cada diagrama viene en tres formatos:
 
-```bash
-python casos_uso.py
-python diagrama_clases.py
-python diagrama_secuencia.py
-```
+| Archivo | Para qué sirve |
+|---|---|
+| `.drawio` | **Para editarlo.** Se abre en [draw.io](https://app.diagrams.net) o en la extensión de draw.io |
+| `.png` | Para pegar en los documentos de entrega |
+| `.svg` | Imagen vectorial, no se pixela al ampliarla |
 
-Cada uno escribe un `.svg` (vectorial, no se pixela al ampliarlo) y, si hay
-Chrome instalado, también un `.png` para pegar en los documentos de entrega.
-`comun.py` tiene los colores y la conversión a PNG que comparten los tres.
+Para cambiar un diagrama: abrir el `.drawio` en draw.io, mover o editar lo que
+haga falta, guardar, y exportar de nuevo el PNG y el SVG desde
+**Archivo → Exportar como**.
 
 ## Casos de uso
 
