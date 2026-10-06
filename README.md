@@ -38,8 +38,18 @@ ticketflow/
 │       ├── vistas/              Todo lo que cambia la pantalla
 │       ├── controladores/       Eventos del usuario: unen modelos y vistas
 │       └── app.js               Arranque de la aplicación
-├── backend/                     API REST · Sprint 2
-├── database/                    Esquema PostgreSQL · Sprint 2
+├── backend/                     API REST (Node + Express + TypeScript)
+│   └── src/
+│       ├── configuracion/       Variables de entorno
+│       ├── datos/               Conexión a PostgreSQL y transacciones
+│       ├── modelos/             Los tipos del dominio
+│       ├── servicios/           Las reglas del negocio
+│       ├── controladores/       Leen la petición y arman la respuesta
+│       ├── rutas/               El mapa de rutas y los permisos
+│       └── middleware/          Errores, validación y sesión
+├── database/                    Modelo de datos y esquema PostgreSQL
+│   └── sql/                     schema.sql · vistas.sql · seed.sql
+├── uml/                         Casos de uso, clases y secuencia
 └── index.html                   Entrada de GitHub Pages: abre el frontend
 ```
 
@@ -57,13 +67,20 @@ que muestre o borre el error.
 
 ## Pantallas y rutas
 
-| Ruta | Pantalla |
-|------|----------|
-| `#/inicio` | Página de inicio |
-| `#/iniciar-sesion` | Inicio de sesión |
-| `#/registro-cliente` | Registro de cliente |
-| `#/registro-agente` | Registro de organizador |
-| `#/registro-admin` | Alta de administrador |
+| Ruta | Pantalla | Quién la ve |
+|------|----------|-------------|
+| `#/inicio` | Página de inicio | Todos |
+| `#/catalogo` | Catálogo de eventos con filtros | Todos |
+| `#/evento` | Detalle del evento | Todos |
+| `#/iniciar-sesion` | Inicio de sesión | Sin sesión |
+| `#/registro-cliente` | Registro de cliente | Sin sesión |
+| `#/registro-agente` | Registro de organizador | Sin sesión |
+| `#/registro-admin` | Alta de administrador | Sin sesión |
+| `#/crear-evento` | Registrar o editar un evento | Agente y administrador |
+
+El menú y los botones del encabezado cambian según el perfil que inició
+sesión, y si alguien entra a una ruta que no le corresponde, el enrutador lo
+devuelve al inicio de sesión o a la portada.
 
 ## Maquetación Mobile-First
 
@@ -108,9 +125,15 @@ Validador del W3C: **0 errores** en HTML y en CSS.
 
 ## Estado del proyecto
 
-Sprint 1 (9 – 28 de septiembre de 2026): interfaz de la página de inicio y de
-las pantallas de acceso. Los formularios validan en el navegador pero todavía
-no guardan nada; el backend y la base de datos entran en el Sprint 2.
+**Sprint 1** (9 – 28 de septiembre de 2026): interfaz de la página de inicio y
+de las pantallas de acceso, maquetadas Mobile-First.
+
+**Sprint 2** (6 – 19 de octubre de 2026): modelado UML, base de datos en
+PostgreSQL, API REST con autenticación por rol y las pantallas de catálogo,
+detalle del evento y registro de eventos.
+
+**Sprint 3** (20 de octubre – 3 de noviembre de 2026): reservas, los reportes
+del dashboard del administrador y el resto de las pantallas del diseño.
 
 ## Licencia
 
