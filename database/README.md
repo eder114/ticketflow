@@ -8,20 +8,36 @@ Esquema en PostgreSQL · Sprint 2.
 
 | Archivo | Para qué sirve |
 |---|---|
+| `DER_Chen_TicketFlow.drawio` | **Para editarlo**, en [draw.io](https://app.diagrams.net) |
 | `DER_Chen_TicketFlow.png` | Imagen para el documento de entrega |
 | `DER_Chen_TicketFlow.svg` | Imagen vectorial, no se pixela al ampliar |
-| `DER_Chen_TicketFlow.drawio` | Editable en [draw.io](https://app.diagrams.net) |
-| `der_chen.py` | Genera los tres archivos anteriores |
+| `Diagrama_Relacional_TicketFlow.drawio` | **Para editarlo**, en draw.io |
 | `Diagrama_Relacional_TicketFlow.png` | Las 10 tablas con sus llaves y las flechas de llave foránea |
 | `Diagrama_Relacional_TicketFlow.svg` | El mismo diagrama en vectorial |
-| `diagrama_relacional.py` | Genera el diagrama relacional |
 | `Modelo_Relacional_TicketFlow.docx` | Documento de entrega: los dos diagramas y las tablas |
-| `modelo_relacional.py` | Genera el documento anterior |
+
+Para cambiar un diagrama: abrir el `.drawio` en draw.io, editarlo, y exportar
+de nuevo el PNG y el SVG desde **Archivo → Exportar como**.
 
 Notación: rectángulo = entidad · rectángulo doble = entidad débil · rombo =
 relación · rombo doble = relación identificadora · elipse = atributo ·
 elipse punteada = atributo derivado · subrayado = clave primaria ·
 subrayado punteado = clave parcial · línea doble = participación total.
+
+## Esquema en PostgreSQL
+
+| Archivo | Para qué sirve |
+|---|---|
+| `sql/schema.sql` | Crea las diez tablas con sus llaves, restricciones e índices |
+| `sql/vistas.sql` | Las dos vistas de los atributos derivados |
+| `sql/seed.sql` | Datos de prueba: ciudades, personas, 12 eventos y 12 reservas |
+
+```bash
+createdb -U postgres ticketflow
+psql -U postgres -d ticketflow -f sql/schema.sql
+psql -U postgres -d ticketflow -f sql/vistas.sql
+psql -U postgres -d ticketflow -f sql/seed.sql
+```
 
 ## Entidades y atributos
 
