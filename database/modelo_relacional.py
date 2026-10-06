@@ -175,7 +175,7 @@ esquema("PAIS", [("id_pais", "pk"), ("nombre", "")])
 esquema("DEPARTAMENTO", [("id_departamento", "pk"), ("nombre", ""), ("id_pais", "fk")])
 esquema("CIUDAD", [("id_ciudad", "pk"), ("nombre", ""), ("id_departamento", "fk")])
 esquema("PERSONA", [("identificacion", "pk"), ("nombres", ""), ("apellidos", ""), ("correo", ""),
-                    ("direccion", ""), ("id_ciudad", "fk")])
+                    ("contrasena", ""), ("direccion", ""), ("id_ciudad", "fk")])
 esquema("TELEFONO", [("identificacion", "pkfk"), ("numero", "pk")])
 esquema("CLIENTE", [("identificacion", "pkfk"), ("puntos", ""), ("ve_publicidad", "")])
 esquema("AGENTE", [("identificacion", "pkfk"), ("comision", ""), ("experiencia", "")])
@@ -183,10 +183,11 @@ esquema("ADMINISTRADOR", [("identificacion", "pkfk"), ("salario", ""), ("horario
 esquema("EVENTO", [("codigo_evento", "pk"), ("nombre", ""), ("descripcion", ""), ("teatro", ""),
                    ("fecha_hora_inicio", ""), ("fecha_hora_fin", ""), ("capacidad_total", ""),
                    ("precio_base", ""), ("observaciones", ""), ("estado", ""),
-                   ("id_ciudad", "fk"), ("identificacion_agente", "fk")])
+                   ("causa_cancelacion", ""), ("id_ciudad", "fk"),
+                   ("identificacion_agente", "fk")])
 esquema("RESERVA", [("id_reserva", "pk"), ("fecha_hora", ""), ("numero_entradas", ""),
-                    ("observaciones", ""), ("estado", ""), ("identificacion_cliente", "fk"),
-                    ("codigo_evento", "fk")])
+                    ("observaciones", ""), ("estado", ""), ("causa_cancelacion", ""),
+                    ("identificacion_cliente", "fk"), ("codigo_evento", "fk")])
 
 doc.add_heading("Llaves foráneas", level=2)
 tabla(["Tabla", "Llave foránea", "Apunta a"],
@@ -202,6 +203,12 @@ tabla(["Tabla", "Llave foránea", "Apunta a"],
        ["reserva", "identificacion_cliente", "cliente (identificacion)"],
        ["reserva", "codigo_evento", "evento (codigo_evento)"]],
       [4.6, 5.6, 6.0])
+
+p("Al pasar el modelo a PostgreSQL agregamos tres columnas que el diagrama inicial no "
+  "tenía. La contraseña de la persona, porque el enunciado pide iniciar sesión con correo y "
+  "contraseña y sin ella no se podía; se guarda cifrada, nunca en texto plano. Y la causa de "
+  "la cancelación en evento y en reserva, porque dos de los reportes que pide el enunciado son "
+  "justamente las reservas canceladas y su causa, y los eventos cancelados y su causa.", antes=10)
 
 p("Hay dos datos que no pusimos como columnas: los cupos disponibles de un evento y el valor "
   "total de una reserva. Los dos se pueden calcular, el primero restándole a la capacidad las "

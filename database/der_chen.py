@@ -111,6 +111,7 @@ ATRIBUTOS = [
     ("PERSONA", "nombre_completo", 420, 660, "comp"),
     ("PERSONA", "correo", 700, 420, ""),
     ("PERSONA", "direccion", 990, 420, ""),
+    ("PERSONA", "contrasena", 1245, 280, ""),
 
     ("TELEFONO", "numero", 1000, 1380, "parcial"),
 

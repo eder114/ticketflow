@@ -10,6 +10,7 @@
 <line x1="895.0" y1="692.8" x2="522.9" y2="667.1" stroke="#64748B" stroke-width="2"/>
 <line x1="962.5" y1="665.0" x2="726.1" y2="444.4" stroke="#64748B" stroke-width="2"/>
 <line x1="998.8" y1="665.0" x2="990.9" y2="446.0" stroke="#64748B" stroke-width="2"/>
+<line x1="1020.4" y1="665.0" x2="1230.1" y2="305.5" stroke="#64748B" stroke-width="2"/>
 <line x1="1000.0" y1="1215.0" x2="1000.0" y2="1354.0" stroke="#64748B" stroke-width="2"/>
 <line x1="1672.8" y1="965.0" x2="1579.5" y2="845.1" stroke="#64748B" stroke-width="2"/>
 <line x1="1757.5" y1="965.0" x2="1891.0" y2="883.7" stroke="#64748B" stroke-width="2"/>
@@ -133,6 +134,8 @@
 <text x="700" y="427" text-anchor="middle" font-size="19" fill="#111827">correo</text>
 <ellipse cx="990" cy="420" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
 <text x="990" y="427" text-anchor="middle" font-size="19" fill="#111827">direccion</text>
+<ellipse cx="1245" cy="280" rx="79" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
+<text x="1245" y="287" text-anchor="middle" font-size="19" fill="#111827">contrasena</text>
 <ellipse cx="1000" cy="1380" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>
 <text x="1000" y="1387" text-anchor="middle" font-size="19" fill="#111827" style="text-decoration:underline;text-decoration-style:dashed">numero</text>
 <ellipse cx="1560" cy="820" rx="75" ry="26" fill="#E7F4F2" stroke="#0F766E" stroke-width="2"/>

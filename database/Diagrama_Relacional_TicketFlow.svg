@@ -5,8 +5,8 @@
 <circle cx="60.0" cy="377.0" r="4" fill="#B45309"/>
 <polyline points="60.0,607.0 20.0,607.0 20.0,281.0 60.0,281.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
 <circle cx="60.0" cy="607.0" r="4" fill="#B45309"/>
-<polyline points="600.0,267.0 520.0,267.0 520.0,511.0 360.0,511.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
-<circle cx="600.0" cy="267.0" r="4" fill="#B45309"/>
+<polyline points="600.0,297.0 520.0,297.0 520.0,511.0 360.0,511.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
+<circle cx="600.0" cy="297.0" r="4" fill="#B45309"/>
 <polyline points="600.0,407.0 560.0,407.0 560.0,81.0 600.0,81.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
 <circle cx="600.0" cy="407.0" r="4" fill="#B45309"/>
 <polyline points="600.0,607.0 540.0,607.0 540.0,81.0 600.0,81.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
@@ -15,14 +15,14 @@
 <circle cx="600.0" cy="827.0" r="4" fill="#B45309"/>
 <polyline points="600.0,1047.0 500.0,1047.0 500.0,81.0 600.0,81.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
 <circle cx="600.0" cy="1047.0" r="4" fill="#B45309"/>
-<polyline points="1400.0,417.0 1340.0,417.0 1340.0,511.0 360.0,511.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
-<circle cx="1400.0" cy="417.0" r="4" fill="#B45309"/>
-<polyline points="1400.0,447.0 1360.0,447.0 1360.0,791.0 889.0,791.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
+<polyline points="1400.0,447.0 1340.0,447.0 1340.0,511.0 360.0,511.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
 <circle cx="1400.0" cy="447.0" r="4" fill="#B45309"/>
-<polyline points="1400.0,827.0 1320.0,827.0 1320.0,571.0 889.0,571.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
-<circle cx="1400.0" cy="827.0" r="4" fill="#B45309"/>
-<polyline points="1773.0,857.0 2140.0,857.0 2140.0,81.0 1763.0,81.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
-<circle cx="1773.0" cy="857.0" r="4" fill="#B45309"/>
+<polyline points="1400.0,477.0 1360.0,477.0 1360.0,791.0 889.0,791.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
+<circle cx="1400.0" cy="477.0" r="4" fill="#B45309"/>
+<polyline points="1400.0,857.0 1320.0,857.0 1320.0,571.0 889.0,571.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
+<circle cx="1400.0" cy="857.0" r="4" fill="#B45309"/>
+<polyline points="1773.0,887.0 2140.0,887.0 2140.0,81.0 1763.0,81.0" fill="none" stroke="#B45309" stroke-width="2.4" marker-end="url(#punta)"/>
+<circle cx="1773.0" cy="887.0" r="4" fill="#B45309"/>
 <rect x="60" y="60" width="280" height="102" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
 <path d="M60 102 h280 v0 a10,10 0 0 1 -10,10 h-260 a10,10 0 0 1 -10,-10 z" fill="#E3E1FF"/>
 <rect x="60" y="60" width="280" height="42" rx="10" fill="#E3E1FF"/>
@@ -59,7 +59,7 @@
 <line x1="68" y1="592" x2="352" y2="592" stroke="#CBD5E1" stroke-width="1"/>
 <text x="76" y="613" font-size="17" font-weight="400" fill="#111827">id_departamento</text>
 <text x="346" y="612" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
-<rect x="600" y="60" width="289" height="222" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
+<rect x="600" y="60" width="289" height="252" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
 <path d="M600 102 h289 v0 a10,10 0 0 1 -10,10 h-269 a10,10 0 0 1 -10,-10 z" fill="#E3E1FF"/>
 <rect x="600" y="60" width="289" height="42" rx="10" fill="#E3E1FF"/>
 <rect x="600" y="92" width="289" height="10" fill="#E3E1FF"/>
@@ -74,10 +74,12 @@
 <line x1="608" y1="192" x2="881" y2="192" stroke="#CBD5E1" stroke-width="1"/>
 <text x="616" y="213" font-size="17" font-weight="400" fill="#111827">correo</text>
 <line x1="608" y1="222" x2="881" y2="222" stroke="#CBD5E1" stroke-width="1"/>
-<text x="616" y="243" font-size="17" font-weight="400" fill="#111827">direccion</text>
+<text x="616" y="243" font-size="17" font-weight="400" fill="#111827">contrasena</text>
 <line x1="608" y1="252" x2="881" y2="252" stroke="#CBD5E1" stroke-width="1"/>
-<text x="616" y="273" font-size="17" font-weight="400" fill="#111827">id_ciudad</text>
-<text x="875" y="272" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
+<text x="616" y="273" font-size="17" font-weight="400" fill="#111827">direccion</text>
+<line x1="608" y1="282" x2="881" y2="282" stroke="#CBD5E1" stroke-width="1"/>
+<text x="616" y="303" font-size="17" font-weight="400" fill="#111827">id_ciudad</text>
+<text x="875" y="302" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
 <rect x="600" y="350" width="289" height="102" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
 <path d="M600 392 h289 v0 a10,10 0 0 1 -10,10 h-269 a10,10 0 0 1 -10,-10 z" fill="#E3E1FF"/>
 <rect x="600" y="350" width="289" height="42" rx="10" fill="#E3E1FF"/>
@@ -125,7 +127,7 @@
 <text x="616" y="1083" font-size="17" font-weight="400" fill="#111827">salario</text>
 <line x1="608" y1="1092" x2="881" y2="1092" stroke="#CBD5E1" stroke-width="1"/>
 <text x="616" y="1113" font-size="17" font-weight="400" fill="#111827">horario</text>
-<rect x="1400" y="60" width="363" height="402" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
+<rect x="1400" y="60" width="363" height="432" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
 <path d="M1400 102 h363 v0 a10,10 0 0 1 -10,10 h-343 a10,10 0 0 1 -10,-10 z" fill="#E3E1FF"/>
 <rect x="1400" y="60" width="363" height="42" rx="10" fill="#E3E1FF"/>
 <rect x="1400" y="92" width="363" height="10" fill="#E3E1FF"/>
@@ -152,12 +154,14 @@
 <line x1="1408" y1="372" x2="1755" y2="372" stroke="#CBD5E1" stroke-width="1"/>
 <text x="1416" y="393" font-size="17" font-weight="400" fill="#111827">estado</text>
 <line x1="1408" y1="402" x2="1755" y2="402" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1416" y="423" font-size="17" font-weight="400" fill="#111827">id_ciudad</text>
-<text x="1749" y="422" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
+<text x="1416" y="423" font-size="17" font-weight="400" fill="#111827">causa_cancelacion</text>
 <line x1="1408" y1="432" x2="1755" y2="432" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1416" y="453" font-size="17" font-weight="400" fill="#111827">identificacion_agente</text>
+<text x="1416" y="453" font-size="17" font-weight="400" fill="#111827">id_ciudad</text>
 <text x="1749" y="452" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
-<rect x="1400" y="620" width="373" height="252" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
+<line x1="1408" y1="462" x2="1755" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1416" y="483" font-size="17" font-weight="400" fill="#111827">identificacion_agente</text>
+<text x="1749" y="482" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
+<rect x="1400" y="620" width="373" height="282" rx="10" fill="#fff" stroke="#493EE5" stroke-width="2"/>
 <path d="M1400 662 h373 v0 a10,10 0 0 1 -10,10 h-353 a10,10 0 0 1 -10,-10 z" fill="#E3E1FF"/>
 <rect x="1400" y="620" width="373" height="42" rx="10" fill="#E3E1FF"/>
 <rect x="1400" y="652" width="373" height="10" fill="#E3E1FF"/>
@@ -174,11 +178,13 @@
 <line x1="1408" y1="782" x2="1765" y2="782" stroke="#CBD5E1" stroke-width="1"/>
 <text x="1416" y="803" font-size="17" font-weight="400" fill="#111827">estado</text>
 <line x1="1408" y1="812" x2="1765" y2="812" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1416" y="833" font-size="17" font-weight="400" fill="#111827">identificacion_cliente</text>
-<text x="1759" y="832" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
+<text x="1416" y="833" font-size="17" font-weight="400" fill="#111827">causa_cancelacion</text>
 <line x1="1408" y1="842" x2="1765" y2="842" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1416" y="863" font-size="17" font-weight="400" fill="#111827">codigo_evento</text>
+<text x="1416" y="863" font-size="17" font-weight="400" fill="#111827">identificacion_cliente</text>
 <text x="1759" y="862" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
+<line x1="1408" y1="872" x2="1765" y2="872" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1416" y="893" font-size="17" font-weight="400" fill="#111827">codigo_evento</text>
+<text x="1759" y="892" font-size="13" font-weight="700" text-anchor="end" fill="#B45309">FK</text>
 <rect x="1400" y="1120" width="700" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
 <text x="1422" y="1154" font-size="19" font-weight="700" fill="#111827">Cómo se lee</text>
 <text x="1422" y="1186" font-size="17" fill="#5A5868">PK = llave primaria (subrayada) · FK = llave foránea</text>

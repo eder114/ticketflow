@@ -32,7 +32,8 @@ TABLAS = {
     "departamento": (60, 260, [("id_departamento", "pk"), ("nombre", ""), ("id_pais", "fk")]),
     "ciudad": (60, 490, [("id_ciudad", "pk"), ("nombre", ""), ("id_departamento", "fk")]),
     "persona": (600, 60, [("identificacion", "pk"), ("nombres", ""), ("apellidos", ""),
-                          ("correo", ""), ("direccion", ""), ("id_ciudad", "fk")]),
+                          ("correo", ""), ("contrasena", ""), ("direccion", ""),
+                          ("id_ciudad", "fk")]),
     "telefono": (600, 350, [("identificacion", "pkfk"), ("numero", "pk")]),
     "cliente": (600, 550, [("identificacion", "pkfk"), ("puntos", ""), ("ve_publicidad", "")]),
     "agente": (600, 770, [("identificacion", "pkfk"), ("comision", ""), ("experiencia", "")]),
@@ -40,9 +41,10 @@ TABLAS = {
     "evento": (1400, 60, [("codigo_evento", "pk"), ("nombre", ""), ("descripcion", ""),
                           ("teatro", ""), ("fecha_hora_inicio", ""), ("fecha_hora_fin", ""),
                           ("capacidad_total", ""), ("precio_base", ""), ("observaciones", ""),
-                          ("estado", ""), ("id_ciudad", "fk"), ("identificacion_agente", "fk")]),
+                          ("estado", ""), ("causa_cancelacion", ""),
+                          ("id_ciudad", "fk"), ("identificacion_agente", "fk")]),
     "reserva": (1400, 620, [("id_reserva", "pk"), ("fecha_hora", ""), ("numero_entradas", ""),
-                            ("observaciones", ""), ("estado", ""),
+                            ("observaciones", ""), ("estado", ""), ("causa_cancelacion", ""),
                             ("identificacion_cliente", "fk"), ("codigo_evento", "fk")]),
 }
 
