@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1180" width="1760" height="1180" font-family="Segoe UI, Arial, sans-serif">
+<rect width="1760" height="1180" fill="#FFFFFF"/>
+<defs><marker id="flecha" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8" fill="none" stroke="#B45309" stroke-width="1.8"/></marker></defs>
+<rect x="300" y="60" width="1150" height="980" rx="18" fill="#FBFBFF" stroke="#493EE5" stroke-width="2.5"/>
+<text x="875.0" y="96.0" font-size="23" font-weight="700" fill="#493EE5" text-anchor="middle">TicketFlow</text>
+<line x1="130" y1="480" x2="426.7" y2="192.1" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="130" y1="480" x2="397.5" y2="338.4" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="130" y1="480" x2="337.3" y2="449.5" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="130" y1="480" x2="367.4" y2="553.3" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="130" y1="480" x2="414.5" y2="689.2" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="380" x2="592.8" y2="174.6" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="380" x2="1413.3" y2="328.3" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="380" x2="1431.0" y2="409.5" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="380" x2="1362.3" y2="545.1" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="830" x2="1419.2" y2="786.1" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="1620" y1="830" x2="1425.2" y2="866.5" stroke="#5A5868" stroke-width="1.8"/>
+<line x1="513.9" y1="543.0" x2="881.1" y2="192.0" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="618.0" y1="585.0" x2="777.0" y2="585.0" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="503.6" y1="687.1" x2="891.4" y2="192.9" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="1211.7" y1="264.7" x2="1013.3" y2="185.3" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="1263.3" y1="542.4" x2="961.7" y2="192.6" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="1273.4" y1="716.7" x2="951.6" y2="193.3" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="1278.0" y1="846.5" x2="947.0" y2="193.5" stroke="#B45309" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="969.9" y1="738.1" x2="1255.1" y2="471.9" stroke="#493EE5" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<line x1="998.5" y1="741.8" x2="1226.5" y2="623.2" stroke="#493EE5" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#flecha)"/>
+<ellipse cx="470" cy="150" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="470.0" y="139.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Registrarse en</text>
+<text x="470.0" y="160.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">la plataforma</text>
+<ellipse cx="925" cy="150" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="925.0" y="150.0" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Iniciar sesión</text>
+<ellipse cx="470" cy="300" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="470.0" y="289.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Consultar el</text>
+<text x="470.0" y="310.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">catálogo de eventos</text>
+<ellipse cx="470" cy="430" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="470.0" y="419.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Ver el detalle</text>
+<text x="470.0" y="440.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">de un evento</text>
+<ellipse cx="470" cy="585" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="470.0" y="585.0" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Reservar entradas</text>
+<ellipse cx="470" cy="730" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="470.0" y="719.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Consultar mis</text>
+<text x="470.0" y="740.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">reservas y su estado</text>
+<ellipse cx="925" cy="585" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="925.0" y="574.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Verificar los cupos</text>
+<text x="925.0" y="595.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">disponibles</text>
+<ellipse cx="925" cy="780" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="925.0" y="769.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Registrar la causa</text>
+<text x="925.0" y="790.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">de la cancelación</text>
+<ellipse cx="1300" cy="300" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1300.0" y="289.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Registrar un</text>
+<text x="1300.0" y="310.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">evento</text>
+<ellipse cx="1300" cy="430" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1300.0" y="419.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Administrar el</text>
+<text x="1300.0" y="440.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">estado del evento</text>
+<ellipse cx="1300" cy="585" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1300.0" y="574.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Administrar las</text>
+<text x="1300.0" y="595.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">reservas del evento</text>
+<ellipse cx="1300" cy="760" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1300.0" y="749.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Consultar los</text>
+<text x="1300.0" y="770.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">reportes del sistema</text>
+<ellipse cx="1300" cy="890" rx="148" ry="44" fill="#fff" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1300.0" y="879.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">Administrar los</text>
+<text x="1300.0" y="900.5" font-size="16" font-weight="600" fill="#111827" text-anchor="middle">datos del sistema</text>
+<rect x="588.6" y="423.7" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="624.1" y="437.7" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="630.2" y="571.0" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="665.7" y="585.0" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="584.4" y="524.9" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="619.9" y="538.9" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="1116.7" y="226.9" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1152.2" y="240.9" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="1137.3" y="423.5" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1172.8" y="437.5" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="1141.4" y="545.7" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1176.9" y="559.7" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="1143.2" y="636.6" width="71" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1178.7" y="650.6" font-size="13" font-weight="600" fill="#B45309" text-anchor="middle">«include»</text>
+<rect x="1080.5" y="591.0" width="64" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1112.5" y="605.0" font-size="13" font-weight="600" fill="#493EE5" text-anchor="middle">«extend»</text>
+<rect x="1080.5" y="668.5" width="64" height="18" rx="4" fill="#fff" opacity="0.92"/>
+<text x="1112.5" y="682.5" font-size="13" font-weight="600" fill="#493EE5" text-anchor="middle">«extend»</text>
+<circle cx="130" cy="426" r="19" fill="#fff" stroke="#111827" stroke-width="3"/>
+<line x1="130" y1="445" x2="130" y2="498" stroke="#111827" stroke-width="3"/>
+<line x1="100" y1="466" x2="160" y2="466" stroke="#111827" stroke-width="3"/>
+<line x1="130" y1="498" x2="106" y2="538" stroke="#111827" stroke-width="3"/>
+<line x1="130" y1="498" x2="154" y2="538" stroke="#111827" stroke-width="3"/>
+<text x="130.0" y="566.0" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">Cliente</text>
+<circle cx="1620" cy="326" r="19" fill="#fff" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="345" x2="1620" y2="398" stroke="#111827" stroke-width="3"/>
+<line x1="1590" y1="366" x2="1650" y2="366" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="398" x2="1596" y2="438" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="398" x2="1644" y2="438" stroke="#111827" stroke-width="3"/>
+<text x="1620.0" y="466.0" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">Agente</text>
+<circle cx="1620" cy="776" r="19" fill="#fff" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="795" x2="1620" y2="848" stroke="#111827" stroke-width="3"/>
+<line x1="1590" y1="816" x2="1650" y2="816" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="848" x2="1596" y2="888" stroke="#111827" stroke-width="3"/>
+<line x1="1620" y1="848" x2="1644" y2="888" stroke="#111827" stroke-width="3"/>
+<text x="1620.0" y="916.0" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">Administrador</text>
+<rect x="340" y="920" width="700" height="86" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="362.0" y="952.0" font-size="18" font-weight="700" fill="#111827" text-anchor="start">Cómo se lee</text>
+<text x="362.0" y="982.0" font-size="16" font-weight="400" fill="#5A5868" text-anchor="start">«include»: el caso base siempre ejecuta al incluido.</text>
+<text x="362.0" y="996.0" font-size="16" font-weight="400" fill="#5A5868" text-anchor="start">«extend»: el caso extendido pasa solo en ciertas condiciones.</text>
+<text x="60.0" y="1122.0" font-size="26" font-weight="700" fill="#111827" text-anchor="start">TicketFlow · Diagrama de casos de uso</text>
+<text x="60.0" y="1150.0" font-size="17" font-weight="400" fill="#5A5868" text-anchor="start">Proyecto Integrador 2026-2 · Programación en Ambiente Web I</text>
+</svg>

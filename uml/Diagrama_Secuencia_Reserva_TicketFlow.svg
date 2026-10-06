@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2060 1800" width="2060" height="1800" font-family="Segoe UI, Arial, sans-serif">
+<rect width="2060" height="1800" fill="#FFFFFF"/>
+<defs><marker id="cerrada" markerWidth="13" markerHeight="13" refX="11" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9 z" fill="#111827"/></marker><marker id="abierta" markerWidth="13" markerHeight="13" refX="11" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9" fill="none" stroke="#5A5868" stroke-width="1.8"/></marker></defs>
+<line x1="140" y1="172" x2="140" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<line x1="450" y1="172" x2="450" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<line x1="790" y1="172" x2="790" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<line x1="1130" y1="172" x2="1130" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<line x1="1470" y1="172" x2="1470" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<line x1="1830" y1="172" x2="1830" y2="1500" stroke="#CBD5E1" stroke-width="1.6" stroke-dasharray="9 7"/>
+<rect x="444" y="234" width="12" height="1226" fill="#E3E1FF" stroke="#493EE5" stroke-width="1.5"/>
+<rect x="784" y="408" width="12" height="1022" fill="#E3E1FF" stroke="#493EE5" stroke-width="1.5"/>
+<rect x="1124" y="466" width="12" height="934" fill="#E3E1FF" stroke="#493EE5" stroke-width="1.5"/>
+<rect x="1464" y="524" width="12" height="846" fill="#E3E1FF" stroke="#493EE5" stroke-width="1.5"/>
+<rect x="1824" y="582" width="12" height="90" fill="#E3E1FF" stroke="#493EE5" stroke-width="1.5"/>
+<line x1="146" y1="250" x2="440" y2="250" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="295.0" y="240.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">1. escoge el número de entradas</text>
+<polyline points="456,308 520,308 520,334 460,334" fill="none" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="532.0" y="314.0" font-size="15" font-weight="400" fill="#111827" text-anchor="start">2. calcula el total a pagar</text>
+<line x1="146" y1="392" x2="440" y2="392" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="295.0" y="382.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">3. confirmar la reserva</text>
+<line x1="456" y1="450" x2="780" y2="450" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="620.0" y="440.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">4. reservar(codigoEvento, numeroEntradas)</text>
+<line x1="796" y1="508" x2="1120" y2="508" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="960.0" y="498.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">5. POST /api/reservas  (token de sesión)</text>
+<line x1="1136" y1="566" x2="1460" y2="566" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="1300.0" y="556.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">6. crearReserva(cliente, evento, n)</text>
+<line x1="1476" y1="624" x2="1820" y2="624" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="1650.0" y="614.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">7. SELECT cupos_disponibles FROM vista_evento</text>
+<line x1="1824" y1="682" x2="1480" y2="682" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="1650.0" y="672.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">8. cupos disponibles</text>
+<rect x="70" y="750" width="1840" height="674" fill="none" stroke="#493EE5" stroke-width="2"/>
+<path d="M70 784 h86 l16,-16 v-18 h-102 z" fill="#E3E1FF" stroke="#493EE5" stroke-width="2"/>
+<text x="88.0" y="775.0" font-size="17" font-weight="700" fill="#493EE5" text-anchor="start">alt</text>
+<text x="188.0" y="790.0" font-size="15" font-weight="600" fill="#493EE5" text-anchor="start">[ el evento tiene cupos suficientes ]</text>
+<line x1="1476" y1="808" x2="1820" y2="808" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="1650.0" y="798.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">9. INSERT INTO reserva (estado = 'Reservada')</text>
+<line x1="1824" y1="866" x2="1480" y2="866" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="1650.0" y="856.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">10. id_reserva</text>
+<line x1="1464" y1="924" x2="1140" y2="924" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="1300.0" y="914.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">11. reserva creada</text>
+<line x1="1124" y1="982" x2="800" y2="982" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="960.0" y="972.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">12. 201 { id_reserva, valor_total }</text>
+<line x1="784" y1="1040" x2="460" y2="1040" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="620.0" y="1030.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">13. mostrarConfirmacion(reserva)</text>
+<line x1="444" y1="1098" x2="150" y2="1098" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="295.0" y="1088.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">14. número de la reserva y valor total</text>
+<line x1="70" y1="1162" x2="1910" y2="1162" stroke="#493EE5" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="188.0" y="1190.0" font-size="15" font-weight="600" fill="#493EE5" text-anchor="start">[ ya no quedan cupos ]</text>
+<line x1="1464" y1="1208" x2="1140" y2="1208" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="1300.0" y="1198.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">15. no alcanzan los cupos</text>
+<line x1="1124" y1="1266" x2="800" y2="1266" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="960.0" y="1256.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">16. 409 { error }</text>
+<line x1="784" y1="1324" x2="460" y2="1324" stroke="#111827" stroke-width="2" marker-end="url(#cerrada)"/>
+<text x="620.0" y="1314.0" font-size="15" font-weight="600" fill="#111827" text-anchor="middle">17. mostrarError(mensaje)</text>
+<line x1="444" y1="1382" x2="150" y2="1382" stroke="#5A5868" stroke-width="1.8" stroke-dasharray="8 5" marker-end="url(#abierta)"/>
+<text x="295.0" y="1372.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="middle">18. «Ya no quedan cupos suficientes»</text>
+<circle cx="140" cy="96" r="13" fill="#fff" stroke="#111827" stroke-width="2.5"/>
+<line x1="140" y1="109" x2="140" y2="132" stroke="#111827" stroke-width="2.5"/>
+<line x1="123" y1="118" x2="157" y2="118" stroke="#111827" stroke-width="2.5"/>
+<line x1="140" y1="132" x2="127" y2="152" stroke="#111827" stroke-width="2.5"/>
+<line x1="140" y1="132" x2="153" y2="152" stroke="#111827" stroke-width="2.5"/>
+<text x="140.0" y="180.0" font-size="18" font-weight="700" fill="#111827" text-anchor="middle">Cliente</text>
+<rect x="328" y="110" width="243" height="62" rx="8" fill="#E3E1FF" stroke="#493EE5" stroke-width="2.2"/>
+<text x="450.0" y="148.0" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">:DetalleEventoVista</text>
+<rect x="668" y="110" width="243" height="62" rx="8" fill="#E3E1FF" stroke="#493EE5" stroke-width="2.2"/>
+<text x="790.0" y="148.0" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">:ReservaControlador</text>
+<rect x="1019" y="110" width="221" height="62" rx="8" fill="#E3E1FF" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1130.0" y="148.0" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">API /api/reservas</text>
+<rect x="1360" y="110" width="220" height="62" rx="8" fill="#E3E1FF" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1470.0" y="148.0" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">:ReservaServicio</text>
+<rect x="1720" y="110" width="220" height="62" rx="8" fill="#E3E1FF" stroke="#493EE5" stroke-width="2.2"/>
+<text x="1830.0" y="148.0" font-size="17" font-weight="700" fill="#111827" text-anchor="middle">BD PostgreSQL</text>
+<rect x="70" y="1568" width="880" height="96" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="92.0" y="1598.0" font-size="18" font-weight="700" fill="#111827" text-anchor="start">Cómo se lee</text>
+<text x="92.0" y="1626.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="start">Flecha llena: llamado · Flecha punteada: respuesta.</text>
+<text x="92.0" y="1648.0" font-size="15" font-weight="400" fill="#5A5868" text-anchor="start">El marco alt separa los dos finales posibles del caso de uso.</text>
+<text x="60.0" y="1742.0" font-size="26" font-weight="700" fill="#111827" text-anchor="start">TicketFlow · Secuencia de la reserva de entradas</text>
+<text x="60.0" y="1770.0" font-size="17" font-weight="400" fill="#5A5868" text-anchor="start">Proyecto Integrador 2026-2 · Programación en Ambiente Web I</text>
+</svg>
