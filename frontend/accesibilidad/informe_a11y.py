@@ -140,6 +140,56 @@ tabla(["", "Antes", "Después"],
 p("")
 p("Los cambios están publicados y el código fuente está en el repositorio del equipo.", tam=10, color=GRIS)
 
+salto()
+doc.add_heading("Marco teórico", level=1)
+p("Los conceptos que usamos en el taller son los vistos en clase, en la presentación "
+  "«Accesibilidad y tecnologías para la Web».")
+
+doc.add_heading("Qué es la accesibilidad (a11y)", level=2)
+p("Es la práctica continua de asegurarnos de que todo lo que creamos para la web se pueda "
+  "usar, interpretar y operar por personas en distintas situaciones: personas en situación de "
+  "discapacidad, el cumplimiento de las normas y leyes de cada país, y de paso la mejora de la "
+  "usabilidad para todos.")
+
+doc.add_heading("WCAG y sus niveles", level=2)
+p("Las WCAG (Pautas de Accesibilidad para el Contenido Web) las crearon la W3C y la WAI. "
+  "Tienen criterios de conformidad organizados en tres niveles:")
+tabla(["Nivel", "Qué significa", "Nuestro caso"],
+      [["A", "Nivel básico. Garantiza una accesibilidad mínima.", "Se cumple"],
+       ["AA", "Nivel intermedio. Es el que se exige normalmente.", "Es el que tomamos como meta del taller"],
+       ["AAA", "Nivel avanzado. Lo usan sobre todo gobiernos y universidades.", "Se cumple en la mayoría de los colores, pero no lo exigimos"]],
+      [2.2, 7.6, 6.6])
+p("Trabajamos contra el nivel AA, que para texto normal exige una relación de contraste de "
+  "4.5:1, y ese fue el criterio con el que corregimos los colores.", tam=10, color=GRIS)
+
+doc.add_heading("Los cuatro principios: POUR", level=2)
+tabla(["Principio", "Qué exige"],
+      [["Perceptible", "Todo lo que se presenta debe poder ser percibido por el usuario."],
+       ["Operable", "El sitio no debe depender del mouse: debe poder operarse de otras formas."],
+       ["Comprensible (Understandable)", "El usuario debe entender qué hace el sitio, cómo operarlo y qué información le pide."],
+       ["Robusto", "Debe funcionar en navegadores nuevos y también en versiones anteriores."]],
+      [5.0, 11.4])
+
+doc.add_heading("Tecnologías asistivas que tuvimos en cuenta", level=2)
+tabla(["Tipo", "Tecnología", "Qué implica para nuestra página"],
+      [["Visual", "Lectores de pantalla", "Cada elemento necesita un nombre accesible, y el orden de los títulos debe tener sentido al escucharlo."],
+       ["Visual", "Extensiones que manipulan el CSS para agrandar", "El diseño no puede romperse al aumentar el tamaño del texto; por eso usamos unidades relativas y Mobile-First."],
+       ["Motora", "Varilla bucal", "Todo debe alcanzarse con Tab, sin depender de movimientos finos del mouse."],
+       ["Motora", "Switch (interruptor o sensor)", "El recorrido del foco debe ser corto y en orden lógico, porque cada paso cuesta una pulsación."]],
+      [2.4, 5.4, 8.6])
+p("Estas dos últimas son la razón práctica de la Fase 3: si el recorrido con Tab está mal "
+  "ordenado o el foco no se ve, la página queda inutilizable para alguien que navega con una "
+  "varilla bucal o un switch.", tam=10, color=GRIS)
+
+doc.add_heading("Herramientas usadas", level=2)
+tabla(["Herramienta", "Para qué", "Cómo la usamos"],
+      [["Lighthouse", "Auditoría automática", "Categoría Accessibility, sobre la página publicada"],
+       ["Validador de contraste (WCAG AA)", "Medir la relación de contraste", "Calculamos los 15 pares de color del sistema de diseño"],
+       ["Simuladores de daltonismo (tipo Color Oracle)", "Ver la página como la ve una persona con daltonismo", "Aplicamos las matrices de simulación sobre capturas de la Home"],
+       ["Revisión del árbol de accesibilidad", "Ver lo que recibe un lector de pantalla", "Revisamos nombres, roles y estados de cada elemento"],
+       ["Validador del W3C", "Comprobar que el código sea robusto", "HTML y CSS, sin errores"]],
+      [5.0, 5.2, 6.2])
+
 # ============================================================== FASE 1 ====
 salto()
 doc.add_heading("Fase 1 · Auditoría automática con Lighthouse", level=1)
@@ -241,8 +291,17 @@ p("No hay ningún elemento con tabindex positivo, así que el orden del foco es 
 
 # ============================================================== FASE 4 ====
 doc.add_heading("Fase 4 · Lectores de pantalla", level=1)
-p("Revisamos el árbol de accesibilidad de la página, que es la información que recibe un "
-  "lector como NVDA, ChromeVox o VoiceOver.")
+p("Un lector de pantalla es un software que recorre la página y la lee en voz alta. Cada "
+  "lector se usa normalmente con un navegador:")
+tabla(["Lector de pantalla", "Navegador", "Sistema"],
+      [["NVDA", "Mozilla Firefox", "Windows"],
+       ["JAWS", "Internet Explorer", "Windows"],
+       ["VoiceOver", "Google Chrome", "macOS / iOS"],
+       ["ChromeVox", "Google Chrome", "Extensión de Chrome"]],
+      [5.4, 5.6, 5.4])
+p("")
+p("Revisamos el árbol de accesibilidad de la página, que es exactamente la información que "
+  "reciben estos programas.")
 tabla(["Qué revisamos", "Resultado"],
       [["Idioma de la página", "lang=\"es\", así el lector usa la pronunciación en español"],
        ["Regiones (landmarks)", "header, nav («Navegación principal»), main, footer («Pie de página») y cuatro secciones con su título asociado"],
@@ -269,6 +328,27 @@ tabla(["Etiqueta", "Para qué se usa"],
        ["<form role=\"search\">", "Buscador del hero"],
        ["<footer>", "Pie de página"]],
       [4.4, 12.0])
+
+p("Así se ve la diferencia en el encabezado de nuestra página:", antes=8)
+tabla(["Sin HTML semántico", "Con HTML semántico (lo que usamos)"],
+      [['<div id="header">\n  <div class="menu">…</div>\n</div>\n<div id="content">…</div>\n<div id="footer">…</div>',
+        '<header>\n  <nav aria-label="Navegación principal">…</nav>\n</header>\n<main>…</main>\n<footer>…</footer>']],
+      [8.2, 8.2], tam=9)
+p("Con las etiquetas de la derecha, el lector de pantalla puede saltar directamente al "
+  "contenido principal o listar las regiones de la página. Con los <div> de la izquierda no, "
+  "porque para el lector son todos iguales.", tam=10, color=GRIS, antes=4)
+
+doc.add_heading("Atributos ARIA: roles, propiedades y estados", level=2)
+p("ARIA es un conjunto de atributos creados por la W3C a través de la WAI. Se agrupan en tres "
+  "tipos, y así quedaron los nuestros:")
+tabla(["Tipo", "Qué hace", "Los que usamos"],
+      [["Roles", "Dicen qué es un elemento cuando la etiqueta no alcanza a decirlo",
+        'role="search" en el buscador, role="dialog" en el calendario, role="alert" en los errores y role="status" en los mensajes de éxito'],
+       ["Propiedades", "Agregan información esencial que normalmente solo se transmite a la vista",
+        'aria-label, aria-labelledby, aria-describedby, aria-controls, aria-haspopup'],
+       ["Estados", "Comunican el estado del elemento y sus cambios",
+        'aria-expanded, aria-current, aria-pressed, aria-hidden, aria-invalid']],
+      [3.0, 5.6, 7.8])
 
 doc.add_heading("Atributos ARIA agregados", level=2)
 tabla(["Atributo", "Dónde", "Para qué"],
@@ -321,6 +401,19 @@ tabla(["Integrante", "Código", "Firma"],
       [7.0, 3.4, 6.0])
 for fila in doc.tables[-1].rows[1:]:
     fila.height = Cm(1.1)
+
+salto()
+doc.add_heading("Bibliografía", level=1)
+for ref in ("W3C · Web Content Accessibility Guidelines (WCAG): https://www.w3.org/WAI/standards-guidelines/wcag",
+            "SIDAR · Traducción al español de las WCAG 2.0: http://www.sidar.org/traducciones/wcag20/es",
+            "W3C · WAI-ARIA, estados y propiedades: https://www.w3.org/TR/wai-aria-1.0/states_and_properties",
+            "W3C · Cuándo usar roles estructurales: https://www.w3.org/WAI/ARIA/apg/practices/structural-roles",
+            "web.dev · Semántica y ARIA: https://web.dev/articles/semantics-aria",
+            "web.dev · Etiquetas y relaciones de ARIA: https://web.dev/articles/aria-labels-and-relationships",
+            "HTML5 Doctor · Etiquetas semánticas: https://html5doctor.com",
+            "Machado, Oliveira y Fernandes (2009) · Modelo de simulación de daltonismo usado por Color Oracle",
+            "Rodríguez Martínez, J. · Accesibilidad y tecnologías para la Web (presentación del curso Ambiente Web I)"):
+    vineta(ref)
 
 # --------------------------------------------------- número de página ----
 par_pie = doc.sections[0].footer.paragraphs[0]
