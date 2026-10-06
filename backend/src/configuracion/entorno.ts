@@ -20,6 +20,10 @@ function opcional(nombre: string, porDefecto: string): string {
 export const entorno = {
   puerto: Number(opcional("PUERTO", "4000")),
   bd: {
+    // En el computador se usan los cuatro datos sueltos. Los servicios que
+    // publican la base de datos en internet entregan una sola cadena de
+    // conexión, y entonces esa manda.
+    url: process.env.BD_URL || null,
     host: opcional("BD_HOST", "localhost"),
     puerto: Number(opcional("BD_PUERTO", "5432")),
     nombre: opcional("BD_NOMBRE", "ticketflow"),

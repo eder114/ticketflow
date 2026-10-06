@@ -2,15 +2,25 @@
 import { Pool, PoolClient, QueryResultRow } from "pg";
 import { entorno } from "../configuracion/entorno";
 
-const pool = new Pool({
-  host: entorno.bd.host,
-  port: entorno.bd.puerto,
-  database: entorno.bd.nombre,
-  user: entorno.bd.usuario,
-  password: entorno.bd.contrasena,
-  max: 10,
-  idleTimeoutMillis: 30000
-});
+const pool = new Pool(
+  entorno.bd.url
+    ? {
+        // Base de datos publicada: viene una sola cadena y pide conexión cifrada.
+        connectionString: entorno.bd.url,
+        ssl: { rejectUnauthorized: false },
+        max: 10,
+        idleTimeoutMillis: 30000
+      }
+    : {
+        host: entorno.bd.host,
+        port: entorno.bd.puerto,
+        database: entorno.bd.nombre,
+        user: entorno.bd.usuario,
+        password: entorno.bd.contrasena,
+        max: 10,
+        idleTimeoutMillis: 30000
+      }
+);
 
 pool.on("error", (error) => {
   console.error("Error inesperado en el pool de PostgreSQL:", error.message);
