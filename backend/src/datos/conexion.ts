@@ -5,9 +5,11 @@ import { entorno } from "../configuracion/entorno";
 const pool = new Pool(
   entorno.bd.url
     ? {
-        // Base de datos publicada: viene una sola cadena y pide conexión cifrada.
+        // Base de datos publicada: viene una sola cadena, que ya trae dentro
+        // cómo cifrar la conexión (sslmode). No se desactiva la verificación
+        // del certificado: Neon tiene uno válido y comprobarlo es lo que evita
+        // que alguien se haga pasar por el servidor.
         connectionString: entorno.bd.url,
-        ssl: { rejectUnauthorized: false },
         max: 10,
         idleTimeoutMillis: 30000
       }
