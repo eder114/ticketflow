@@ -1,24 +1,20 @@
-# Publicar la API y la base de datos en Render (https://render.com).
+# Publicar la API de TicketFlow en Render (https://render.com).
 #
-# Render lee este archivo y arma los dos servicios solo. Lo unico que hay que
-# hacer a mano es crear la cuenta y conectar el repositorio.
+# La base de datos NO se crea aqui: vive en Neon. Render solo corre la API y
+# se conecta a Neon con la cadena BD_URL, que se escribe en el panel de Render
+# al momento de desplegar (no queda guardada en el repositorio).
 #
 # Cuando termine, Render da una direccion parecida a
 #   https://ticketflow-api.onrender.com
-# Esa direccion se escribe en frontend/js/configuracion.js y la pagina de
-# GitHub Pages queda hablando con la base de datos.
-
-databases:
-  - name: ticketflow-bd
-    databaseName: ticketflow
-    user: ticketflow
-    plan: free
+# Esa direccion se escribe en frontend/js/configuracion.js y con eso la pagina
+# publicada en GitHub Pages queda hablando con la base de datos de Neon.
 
 services:
   - type: web
     name: ticketflow-api
     runtime: node
     plan: free
+    region: ohio          # la misma region de la base de datos en Neon
     rootDir: backend
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -26,10 +22,10 @@ services:
     envVars:
       - key: PUERTO
         value: 10000
+      # La cadena de conexion de Neon. sync: false hace que Render la pida
+      # al desplegar, en vez de leerla de este archivo.
       - key: BD_URL
-        fromDatabase:
-          name: ticketflow-bd
-          property: connectionString
+        sync: false
       - key: JWT_SECRETO
         generateValue: true
       - key: JWT_HORAS
