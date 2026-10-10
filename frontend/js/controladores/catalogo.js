@@ -16,9 +16,21 @@ var CatalogoControlador = (function () {
     CatalogoVista.mostrar(visibles);
   }
 
+  // Las tarjetas de categoría de la portada llevan al catálogo ya filtrado.
+  function conectarCategorias(form) {
+    document.addEventListener("click", function (e) {
+      var tarjeta = e.target.closest("[data-ir-categoria]");
+      if (!tarjeta || !form.elements.categoria) return;
+      form.elements.categoria.value = tarjeta.dataset.irCategoria;
+      form.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  }
+
   function iniciar() {
     var form = document.querySelector("[data-filtros]");
     if (!form) return;
+
+    conectarCategorias(form);
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();

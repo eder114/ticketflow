@@ -125,40 +125,8 @@
     </section>
 
     <!-- Categorías -->
-    <section class="seccion" id="categorias" aria-labelledby="titulo-categorias">
-      <div class="contenedor">
-        <div class="seccion-titulo">
-          <div>
-            <p class="overline">Explora</p>
-            <h2 id="titulo-categorias">Categorías</h2>
-            <p>Encuentra el plan que se te antoje, desde un concierto multitudinario
-               hasta una obra de teatro en tu ciudad.</p>
-          </div>
-        </div>
-
-        <div class="rejilla rejilla-4">
-          <a href="#eventos" class="categoria">
-            <span class="categoria-icono" aria-hidden="true">♪</span>
-            <h3>Conciertos</h3><p>1.240 eventos</p>
-          </a>
-          <a href="#eventos" class="categoria">
-            <span class="categoria-icono" aria-hidden="true">⚽</span>
-            <h3>Deportes</h3><p>480 eventos</p>
-          </a>
-          <a href="#eventos" class="categoria">
-            <span class="categoria-icono" aria-hidden="true">◎</span>
-            <h3>Teatro</h3><p>320 eventos</p>
-          </a>
-          <a href="#eventos" class="categoria">
-            <span class="categoria-icono" aria-hidden="true">✦</span>
-            <h3>Festivales</h3><p>180 eventos</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- Eventos destacados -->
-    <section class="seccion" id="eventos" style="padding-top:0" aria-labelledby="titulo-eventos">
+    <section class="seccion" id="eventos" aria-labelledby="titulo-eventos">
       <div class="contenedor">
         <div class="seccion-titulo">
           <div>
@@ -166,7 +134,7 @@
             <h2 id="titulo-eventos">Eventos destacados</h2>
             <p>Los planes con más reservas esta semana en Colombia.</p>
           </div>
-          <a href="#eventos" class="btn btn-secundario">Ver todo el catálogo</a>
+          <a href="#/catalogo" class="btn btn-secundario">Ver todo el catálogo</a>
         </div>
 
         <div class="rejilla rejilla-3">
@@ -284,6 +252,56 @@
     </section>
 
     <!-- Cómo funciona -->
+    <!-- Categorías -->
+    <section class="seccion" id="categorias" aria-labelledby="titulo-categorias">
+      <div class="contenedor">
+        <div class="seccion-titulo">
+          <div>
+            <p class="overline">Explora</p>
+            <h2 id="titulo-categorias">Categorías</h2>
+            <p>Encuentra el plan que se te antoje, desde un concierto multitudinario
+               hasta una obra de teatro en tu ciudad.</p>
+          </div>
+          <a href="#/catalogo" class="btn btn-secundario">Ver todo el catálogo</a>
+        </div>
+
+        <div class="rejilla rejilla-4 categorias">
+          <a href="#/catalogo" class="categoria" data-ir-categoria="Concierto">
+            <img src="assets/img/concierto-artista.jpg" alt="">
+            <span class="categoria-velo" aria-hidden="true"></span>
+            <span class="categoria-texto">
+              <strong>Conciertos</strong>
+              <small>1.240 eventos</small>
+            </span>
+          </a>
+          <a href="#/catalogo" class="categoria" data-ir-categoria="Deporte">
+            <img src="assets/img/futbol-seleccion.jpg" alt="">
+            <span class="categoria-velo" aria-hidden="true"></span>
+            <span class="categoria-texto">
+              <strong>Deportes</strong>
+              <small>480 eventos</small>
+            </span>
+          </a>
+          <a href="#/catalogo" class="categoria" data-ir-categoria="Teatro">
+            <img src="assets/img/teatro-drama.jpg" alt="">
+            <span class="categoria-velo" aria-hidden="true"></span>
+            <span class="categoria-texto">
+              <strong>Teatro</strong>
+              <small>320 eventos</small>
+            </span>
+          </a>
+          <a href="#/catalogo" class="categoria" data-ir-categoria="Festival">
+            <img src="assets/img/festival-noche.jpg" alt="">
+            <span class="categoria-velo" aria-hidden="true"></span>
+            <span class="categoria-texto">
+              <strong>Festivales</strong>
+              <small>180 eventos</small>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="seccion" id="como-funciona" aria-labelledby="titulo-como-funciona">
       <div class="contenedor">
         <div class="seccion-titulo">
