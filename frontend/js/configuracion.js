@@ -8,5 +8,8 @@
 // con eso la página de GitHub queda hablando con la base de datos de verdad:
 //
 //   window.TICKETFLOW_API = "https://ticketflow-api.onrender.com/api";
+//
+// La API está publicada en Render y la base de datos en Neon. En el
+// computador conviene dejarla en null para trabajar contra el backend local.
 
-window.TICKETFLOW_API = null;
+window.TICKETFLOW_API = "https://ticketflow-api-vafd.onrender.com/api";
