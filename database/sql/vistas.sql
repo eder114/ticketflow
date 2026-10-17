@@ -12,8 +12,8 @@ DROP VIEW IF EXISTS vista_evento;
 
 
 -- Evento con su ubicacion completa, el agente que lo registro y los cupos que
--- le quedan. Solo descuentan las reservas confirmadas: una reserva cancelada
--- devuelve el cupo.
+-- le quedan. Descuentan las reservas activas, o sea las reservadas y las
+-- confirmadas: una reserva cancelada devuelve el cupo.
 CREATE VIEW vista_evento AS
 SELECT
   e.codigo_evento,
@@ -35,16 +35,16 @@ SELECT
   pa.nombre AS pais,
   e.identificacion_agente,
   pe.nombres || ' ' || pe.apellidos AS agente,
-  e.capacidad_total - COALESCE(r.entradas_confirmadas, 0) AS cupos_disponibles
+  e.capacidad_total - COALESCE(r.entradas_activas, 0) AS cupos_disponibles
 FROM evento e
   JOIN ciudad       c  ON c.id_ciudad = e.id_ciudad
   JOIN departamento d  ON d.id_departamento = c.id_departamento
   JOIN pais         pa ON pa.id_pais = d.id_pais
   JOIN persona      pe ON pe.identificacion = e.identificacion_agente
   LEFT JOIN (
-    SELECT codigo_evento, SUM(numero_entradas) AS entradas_confirmadas
+    SELECT codigo_evento, SUM(numero_entradas) AS entradas_activas
     FROM reserva
-    WHERE estado = 'Confirmada'
+    WHERE estado IN ('Reservada', 'Confirmada')
     GROUP BY codigo_evento
   ) r ON r.codigo_evento = e.codigo_evento;
 

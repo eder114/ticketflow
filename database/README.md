@@ -57,7 +57,7 @@ psql -U postgres -d ticketflow -f sql/seed.sql
 **Atributo compuesto:** `nombre_completo` se divide en nombres y apellidos.
 
 **Atributos derivados:** `cupos_disponibles` = capacidad_total − entradas de las
-reservas confirmadas. `valor_total` = numero_entradas × precio_base del evento.
+reservas activas (reservadas y confirmadas). `valor_total` = numero_entradas × precio_base del evento.
 No se guardan: se calculan.
 
 **Entidad débil:** `TELEFONO` no existe sin su persona y su número solo

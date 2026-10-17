@@ -5,11 +5,15 @@ import { conPerfil, conSesion } from "../middleware/sesion";
 import * as autenticacion from "../controladores/autenticacion";
 import * as personas from "../controladores/personas";
 import * as ubicacion from "../controladores/ubicacion";
+import * as eventos from "../controladores/eventos";
+import * as reservas from "../controladores/reservas";
+import * as reportes from "../controladores/reportes";
 
 const rutas = Router();
 
 const soloAdmin = conPerfil("administrador");
 const adminOAgente = conPerfil("administrador", "agente");
+const soloCliente = conPerfil("cliente");
 
 // ---------------------------------------------------------- autenticación --
 
@@ -65,5 +69,42 @@ rutas.get("/administradores/:identificacion", soloAdmin, atrapar(personas.obtene
 rutas.post("/administradores", soloAdmin, atrapar(personas.crearAdministrador));
 rutas.put("/administradores/:identificacion", soloAdmin, atrapar(personas.actualizarAdministrador));
 rutas.delete("/administradores/:identificacion", soloAdmin, atrapar(personas.eliminarAdministrador));
+
+// ---------------------------------------------------------------- eventos --
+// El catálogo es público. Crear y modificar es del agente (los suyos) y del
+// administrador (todos).
+
+rutas.get("/eventos", atrapar(eventos.listar));
+rutas.get("/eventos/mios", adminOAgente, atrapar(eventos.listarMios));
+rutas.get("/eventos/:codigo", atrapar(eventos.obtener));
+rutas.post("/eventos", adminOAgente, atrapar(eventos.crear));
+rutas.put("/eventos/:codigo", adminOAgente, atrapar(eventos.actualizar));
+rutas.patch("/eventos/:codigo/estado", adminOAgente, atrapar(eventos.cambiarEstado));
+rutas.delete("/eventos/:codigo", soloAdmin, atrapar(eventos.eliminar));
+
+// --------------------------------------------------------------- reservas --
+// Cada perfil ve lo suyo: el cliente sus reservas, el agente las de sus
+// eventos y el administrador todas.
+
+rutas.get("/reservas", conSesion, atrapar(reservas.listar));
+rutas.get("/reservas/:id", conSesion, atrapar(reservas.obtener));
+rutas.post("/reservas", soloCliente, atrapar(reservas.crear));
+rutas.patch("/reservas/:id/estado", conSesion, atrapar(reservas.cambiarEstado));
+rutas.delete("/reservas/:id", soloAdmin, atrapar(reservas.eliminar));
+
+// --------------------------------------------------------------- reportes --
+// Son los del enunciado y los ve solo el administrador.
+
+rutas.get("/reportes/tablero", soloAdmin, atrapar(reportes.tablero));
+rutas.get("/reportes/general", soloAdmin, atrapar(reportes.general));
+rutas.get("/reportes/ingresos-por-agente", soloAdmin, atrapar(reportes.ingresosPorAgente));
+rutas.get("/reportes/ingresos-por-cliente", soloAdmin, atrapar(reportes.ingresosPorCliente));
+rutas.get("/reportes/ingresos-por-mes", soloAdmin, atrapar(reportes.ingresosPorMes));
+rutas.get("/reportes/reservas-por-evento", soloAdmin, atrapar(reportes.reservasPorEventoYMes));
+rutas.get("/reportes/eventos-por-agente", soloAdmin, atrapar(reportes.eventosPorAgenteYCiudad));
+rutas.get("/reportes/eventos-por-ubicacion", soloAdmin, atrapar(reportes.eventosPorUbicacion));
+rutas.get("/reportes/historial/:identificacion", soloAdmin, atrapar(reportes.historialDeCliente));
+rutas.get("/reportes/reservas-canceladas", soloAdmin, atrapar(reportes.reservasCanceladas));
+rutas.get("/reportes/eventos-cancelados", soloAdmin, atrapar(reportes.eventosCancelados));
 
 export default rutas;

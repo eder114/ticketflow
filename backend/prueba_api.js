@@ -1,8 +1,9 @@
 // Prueba de la API de punta a punta.
 //
-// Recorre lo que entregamos en el Sprint 2: el inicio de sesion, los permisos
-// por perfil, las listas de ubicacion y el CRUD de personas. No usa ninguna
-// libreria: solo fetch, que ya viene en Node.
+// Recorre todo lo que entregamos: el inicio de sesion, los permisos por
+// perfil, las listas de ubicacion, el CRUD de personas, el catalogo de
+// eventos, las reservas con su control de aforo y los reportes. No usa
+// ninguna libreria: solo fetch, que ya viene en Node.
 //
 //   node prueba_api.js
 //
@@ -211,6 +212,258 @@ async function principal() {
     method: "DELETE", token: admin.cuerpo.token
   });
   revisar("se borra la persona de prueba", borrada.estado === 204);
+
+  // ----------------------------------------------------------- eventos ----
+  console.log("\nCatalogo de eventos");
+  const catalogo = await pedir("/eventos");
+  revisar("el catalogo se ve sin necesidad de sesion",
+          catalogo.estado === 200 && catalogo.cuerpo.length >= 12);
+  revisar("cada evento trae su ciudad, su agente y los cupos que le quedan",
+          !!catalogo.cuerpo[0]?.ciudad && !!catalogo.cuerpo[0]?.agente &&
+          catalogo.cuerpo[0]?.cupos_disponibles !== undefined);
+
+  const porCiudad = await pedir("/eventos?ciudad=1");
+  revisar("filtra los eventos por ciudad",
+          porCiudad.estado === 200 && porCiudad.cuerpo.every((e) => e.id_ciudad === 1));
+
+  const porTexto = await pedir("/eventos?texto=salsa");
+  revisar("busca por nombre del evento o del teatro",
+          porTexto.estado === 200 && porTexto.cuerpo.length >= 1);
+
+  const conCupos = await pedir("/eventos?conCupos=true");
+  revisar("puede dejar solo los que todavia tienen cupos",
+          conCupos.cuerpo.every((e) => Number(e.cupos_disponibles) > 0));
+
+  const eventoNoExiste = await pedir("/eventos/999999");
+  revisar("un evento que no existe da 404", eventoNoExiste.estado === 404);
+
+  // Se crea un evento chiquito, de cinco puestos, para probar el aforo.
+  const nuevoEvento = await pedir("/eventos", {
+    method: "POST", token: agente.cuerpo.token,
+    body: JSON.stringify({
+      nombre: "Evento de prueba automatica",
+      descripcion: "Lo crea la prueba y lo borra al final.",
+      teatro: "Sala de pruebas",
+      fecha_hora_inicio: "2027-06-10 19:00",
+      fecha_hora_fin: "2027-06-10 22:00",
+      capacidad_total: 5, precio_base: 20000, id_ciudad: 1
+    })
+  });
+  revisar("el agente registra un evento nuevo", nuevoEvento.estado === 201, nuevoEvento.cuerpo?.error);
+  const codigo = nuevoEvento.cuerpo?.codigo_evento;
+  revisar("queda a nombre del agente que lo creo",
+          nuevoEvento.cuerpo?.identificacion_agente === "94567123");
+  revisar("y arranca con todos los cupos libres",
+          Number(nuevoEvento.cuerpo?.cupos_disponibles) === 5);
+
+  const fechasAlReves = await pedir("/eventos", {
+    method: "POST", token: agente.cuerpo.token,
+    body: JSON.stringify({
+      nombre: "Fechas al reves", teatro: "Sala de pruebas",
+      fecha_hora_inicio: "2027-06-10 22:00", fecha_hora_fin: "2027-06-10 19:00",
+      capacidad_total: 10, precio_base: 1000, id_ciudad: 1
+    })
+  });
+  revisar("no deja que el evento termine antes de empezar",
+          fechasAlReves.estado === 400 && !!fechasAlReves.cuerpo?.detalles?.fecha_hora_fin);
+
+  revisar("un cliente no puede crear eventos",
+          (await pedir("/eventos", { method: "POST", token: cliente.cuerpo.token,
+                                     body: JSON.stringify({ nombre: "No" }) })).estado === 403);
+
+  const mios = await pedir("/eventos/mios", { token: agente.cuerpo.token });
+  revisar("el agente solo ve los eventos suyos",
+          mios.estado === 200 && mios.cuerpo.every((e) => e.identificacion_agente === "94567123"));
+
+  // ---------------------------------------------------------- reservas ----
+  console.log("\nReservas y control de aforo");
+  const reserva = await pedir("/reservas", {
+    method: "POST", token: cliente.cuerpo.token,
+    body: JSON.stringify({ codigo_evento: codigo, numero_entradas: 2,
+                           observaciones: "Prueba automatica." })
+  });
+  revisar("el cliente reserva dos entradas", reserva.estado === 201, reserva.cuerpo?.error);
+  revisar("el valor total es las entradas por el precio base",
+          Number(reserva.cuerpo?.valor_total) === 40000);
+  revisar("y la reserva nace en estado Reservada", reserva.cuerpo?.estado === "Reservada");
+
+  const idReserva = reserva.cuerpo?.id_reserva;
+
+  const trasReservar = await pedir("/eventos/" + codigo);
+  revisar("los cupos del evento bajan de una vez",
+          Number(trasReservar.cuerpo?.cupos_disponibles) === 3);
+
+  const sinCupo = await pedir("/reservas", {
+    method: "POST", token: cliente.cuerpo.token,
+    body: JSON.stringify({ codigo_evento: codigo, numero_entradas: 4 })
+  });
+  revisar("no vende mas entradas de las que caben", sinCupo.estado === 409);
+  revisar("y dice cuantas quedan", /quedan 3/.test(sinCupo.cuerpo?.error || ""), sinCupo.cuerpo?.error);
+
+  revisar("un agente no puede reservar a nombre propio",
+          (await pedir("/reservas", { method: "POST", token: agente.cuerpo.token,
+                                      body: JSON.stringify({ codigo_evento: codigo, numero_entradas: 1 })
+                                    })).estado === 403);
+
+  // Los codigos del catalogo cambian segun la base, asi que se buscan por estado.
+  const unoCancelado = catalogo.cuerpo.find((e) => e.estado === "Cancelado");
+  const eventoCancelado = await pedir("/reservas", {
+    method: "POST", token: cliente.cuerpo.token,
+    body: JSON.stringify({ codigo_evento: unoCancelado.codigo_evento, numero_entradas: 1 })
+  });
+  revisar("no se reserva en un evento cancelado", eventoCancelado.estado === 409);
+
+  const unoFinalizado = catalogo.cuerpo.find((e) => e.estado === "Finalizado");
+  const eventoViejo = await pedir("/reservas", {
+    method: "POST", token: cliente.cuerpo.token,
+    body: JSON.stringify({ codigo_evento: unoFinalizado.codigo_evento, numero_entradas: 1 })
+  });
+  revisar("ni en uno que ya paso", eventoViejo.estado === 409);
+
+  const mias = await pedir("/reservas", { token: cliente.cuerpo.token });
+  revisar("el cliente solo ve sus reservas",
+          mias.estado === 200 &&
+          mias.cuerpo.every((r) => r.identificacion_cliente === "1115789021"));
+
+  const delAgente = await pedir("/reservas", { token: agente.cuerpo.token });
+  revisar("el agente ve las de sus eventos",
+          delAgente.estado === 200 &&
+          delAgente.cuerpo.every((r) => r.identificacion_agente === "94567123"));
+
+  revisar("un cliente no puede confirmar su propia reserva",
+          (await pedir("/reservas/" + idReserva + "/estado", {
+            method: "PATCH", token: cliente.cuerpo.token,
+            body: JSON.stringify({ estado: "Confirmada" })
+          })).estado === 403);
+
+  const sinCausa = await pedir("/reservas/" + idReserva + "/estado", {
+    method: "PATCH", token: cliente.cuerpo.token,
+    body: JSON.stringify({ estado: "Cancelada" })
+  });
+  revisar("para cancelar hay que decir la causa",
+          sinCausa.estado === 400 && !!sinCausa.cuerpo?.detalles?.causa_cancelacion);
+
+  const antes = await pedir("/clientes/1115789021", { token: agente.cuerpo.token });
+  const confirmada = await pedir("/reservas/" + idReserva + "/estado", {
+    method: "PATCH", token: agente.cuerpo.token,
+    body: JSON.stringify({ estado: "Confirmada" })
+  });
+  revisar("el agente confirma la reserva",
+          confirmada.estado === 200 && confirmada.cuerpo.estado === "Confirmada");
+  const despues = await pedir("/clientes/1115789021", { token: agente.cuerpo.token });
+  revisar("al confirmar, el cliente gana un punto por entrada",
+          Number(despues.cuerpo?.puntos) === Number(antes.cuerpo?.puntos) + 2);
+
+  const cancelada = await pedir("/reservas/" + idReserva + "/estado", {
+    method: "PATCH", token: cliente.cuerpo.token,
+    body: JSON.stringify({ estado: "Cancelada", causa_cancelacion: "Prueba de cancelacion." })
+  });
+  revisar("el cliente si puede cancelar lo suyo",
+          cancelada.estado === 200 && cancelada.cuerpo.estado === "Cancelada");
+  revisar("y queda guardada la causa",
+          cancelada.cuerpo?.causa_cancelacion === "Prueba de cancelacion.");
+
+  const devueltos = await pedir("/eventos/" + codigo);
+  revisar("la reserva cancelada devuelve los cupos",
+          Number(devueltos.cuerpo?.cupos_disponibles) === 5);
+
+  revisar("una reserva cancelada ya no se puede volver a mover",
+          (await pedir("/reservas/" + idReserva + "/estado", {
+            method: "PATCH", token: agente.cuerpo.token,
+            body: JSON.stringify({ estado: "Confirmada" })
+          })).estado === 409);
+
+  // ------------------------------------------- cancelar un evento entero ----
+  console.log("\nCancelacion de un evento");
+  const otra = await pedir("/reservas", {
+    method: "POST", token: cliente.cuerpo.token,
+    body: JSON.stringify({ codigo_evento: codigo, numero_entradas: 1 })
+  });
+  revisar("se hace otra reserva para probar la cancelacion", otra.estado === 201);
+
+  const estadoSinCausa = await pedir("/eventos/" + codigo + "/estado", {
+    method: "PATCH", token: agente.cuerpo.token,
+    body: JSON.stringify({ estado: "Cancelado" })
+  });
+  revisar("cancelar un evento tambien exige la causa",
+          estadoSinCausa.estado === 400 && !!estadoSinCausa.cuerpo?.detalles?.causa_cancelacion);
+
+  const eventoCanceladoOk = await pedir("/eventos/" + codigo + "/estado", {
+    method: "PATCH", token: agente.cuerpo.token,
+    body: JSON.stringify({ estado: "Cancelado", causa_cancelacion: "Prueba automatica." })
+  });
+  revisar("el agente cancela su evento con la causa",
+          eventoCanceladoOk.estado === 200 && eventoCanceladoOk.cuerpo.estado === "Cancelado");
+
+  const arrastradas = await pedir("/reservas?evento=" + codigo, { token: agente.cuerpo.token });
+  revisar("al cancelar el evento se cancelan sus reservas",
+          arrastradas.cuerpo.every((r) => r.estado === "Cancelada"));
+  revisar("y la causa de la reserva explica que fue por el evento",
+          /El evento fue cancelado/.test(
+            arrastradas.cuerpo.find((r) => r.id_reserva === otra.cuerpo.id_reserva)?.causa_cancelacion || ""
+          ));
+
+  // ---------------------------------------------------------- reportes ----
+  console.log("\nReportes del administrador");
+  revisar("un cliente no puede ver los reportes",
+          (await pedir("/reportes/general", { token: cliente.cuerpo.token })).estado === 403);
+  revisar("un agente tampoco",
+          (await pedir("/reportes/general", { token: agente.cuerpo.token })).estado === 403);
+
+  const general = await pedir("/reportes/general", { token: admin.cuerpo.token });
+  revisar("el reporte general cuenta los registros del sistema",
+          general.estado === 200 && general.cuerpo.clientes >= 4 && general.cuerpo.eventos >= 12);
+
+  const ingAgente = await pedir("/reportes/ingresos-por-agente", { token: admin.cuerpo.token });
+  revisar("hay ingresos y promedio por agente",
+          ingAgente.estado === 200 &&
+          ingAgente.cuerpo.some((f) => f.identificacion === "94567123" &&
+                                       f.promedio_por_evento !== undefined));
+
+  const ingCliente = await pedir("/reportes/ingresos-por-cliente", { token: admin.cuerpo.token });
+  revisar("y promedio de gasto por cliente",
+          ingCliente.estado === 200 && ingCliente.cuerpo.length >= 4);
+
+  const porMes = await pedir("/reportes/ingresos-por-mes?anio=2026", { token: admin.cuerpo.token });
+  revisar("los ingresos salen mes a mes",
+          porMes.estado === 200 && porMes.cuerpo.every((f) => Number(f.mes) >= 1 && Number(f.mes) <= 12));
+
+  const reservasMes = await pedir("/reportes/reservas-por-evento", { token: admin.cuerpo.token });
+  revisar("se cuentan las reservas por evento y por mes", reservasMes.estado === 200);
+
+  const porAgenteCiudad = await pedir("/reportes/eventos-por-agente", { token: admin.cuerpo.token });
+  revisar("los eventos se agrupan por agente y ciudad",
+          porAgenteCiudad.estado === 200 && porAgenteCiudad.cuerpo.length >= 1);
+
+  const porUbicacion = await pedir("/reportes/eventos-por-ubicacion", { token: admin.cuerpo.token });
+  revisar("y por pais, departamento y ciudad",
+          porUbicacion.estado === 200 && !!porUbicacion.cuerpo[0]?.pais);
+
+  const historial = await pedir("/reportes/historial/1115789021", { token: admin.cuerpo.token });
+  revisar("se puede ver el historial de un cliente",
+          historial.estado === 200 && historial.cuerpo.length >= 1);
+
+  const canceladas = await pedir("/reportes/reservas-canceladas", { token: admin.cuerpo.token });
+  revisar("las reservas canceladas salen con su causa",
+          canceladas.estado === 200 && canceladas.cuerpo.every((r) => !!r.causa_cancelacion));
+
+  const eventosCancelados = await pedir("/reportes/eventos-cancelados", { token: admin.cuerpo.token });
+  revisar("los eventos cancelados tambien",
+          eventosCancelados.estado === 200 &&
+          eventosCancelados.cuerpo.every((e) => !!e.causa_cancelacion));
+
+  const tablero = await pedir("/reportes/tablero", { token: admin.cuerpo.token });
+  revisar("el tablero trae todo junto en una sola llamada",
+          tablero.estado === 200 && !!tablero.cuerpo.resumen && Array.isArray(tablero.cuerpo.porAgente));
+
+  // limpieza: se borran las reservas y el evento de prueba
+  for (const r of arrastradas.cuerpo) {
+    await pedir("/reservas/" + r.id_reserva, { method: "DELETE", token: admin.cuerpo.token });
+  }
+  const eventoBorrado = await pedir("/eventos/" + codigo, {
+    method: "DELETE", token: admin.cuerpo.token
+  });
+  revisar("se borra el evento de prueba", eventoBorrado.estado === 204, eventoBorrado.cuerpo?.error);
 
   // ------------------------------------------------------------ cierre ----
   console.log("\n" + "-".repeat(56));
