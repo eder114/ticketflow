@@ -191,6 +191,23 @@ var ReservaControlador = (function () {
       if (select) select.value = select.dataset.estadoAnterior;
     });
 
+    // Borrar un evento. La base no deja borrar uno que todavia tiene
+    // reservas, y ahi la API responde que esta relacionado con otros.
+    document.addEventListener("click", function (e) {
+      var boton = e.target.closest("[data-borrar-evento]");
+      if (!boton) return;
+
+      if (!window.confirm("¿Eliminar el evento " + boton.dataset.nombre + "?")) return;
+
+      aviso("[data-pa-mensaje]", "");
+      ApiModelo.eliminarEvento(boton.dataset.borrarEvento).then(function () {
+        aviso("[data-pa-mensaje]", "Se eliminó el evento " + boton.dataset.nombre + ".");
+        cargarPanel();
+      }).catch(function (error) {
+        aviso("[data-pa-mensaje]", error.message, true);
+      });
+    });
+
     document.addEventListener("submit", function (e) {
       var form = e.target.closest("[data-causa-evento]");
       if (!form) return;

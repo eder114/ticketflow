@@ -1284,7 +1284,7 @@
         <div class="panel-cabecera">
           <div>
             <p class="overline">Panel del organizador</p>
-            <h1 id="titulo-crear">Registrar un evento</h1>
+            <h1 id="titulo-crear" data-titulo-evento>Registrar un evento</h1>
           </div>
         </div>
 
@@ -1533,6 +1533,7 @@
                 <th scope="col">Cupos</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Cambiar estado</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody data-pa-eventos></tbody>
@@ -1706,6 +1707,133 @@
 </div>
 
 
+
+<!-- GESTIÓN DE DATOS (ADMINISTRADOR) -->
+<div class="vista" id="vista-gestion" data-titulo="Gestión de datos" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-gestion" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-gestion" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-gestion" hidden>
+    <section class="panel" aria-labelledby="titulo-gestion">
+      <div class="contenedor">
+
+        <div class="panel-cabecera">
+          <div>
+            <p class="overline">Panel del administrador</p>
+            <h1 id="titulo-gestion">Gestión de datos</h1>
+            <p>Las personas registradas y la ubicación geográfica del sistema:
+               países, departamentos y ciudades.</p>
+          </div>
+          <a href="#/panel-admin" class="btn btn-secundario">Ver reportes</a>
+        </div>
+
+        <p class="aviso" data-ge-mensaje role="status" hidden></p>
+
+        <h2 class="panel-subtitulo">Personas registradas</h2>
+
+        <div class="filtro filtro-solo">
+          <label for="ge-buscar">Buscar persona</label>
+          <input type="search" id="ge-buscar" name="buscar" placeholder="Nombre, correo o identificación">
+        </div>
+
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Personas registradas">
+          <table class="tabla">
+            <caption class="solo-lectores">Personas registradas con su perfil y su ciudad</caption>
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Identificación</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Perfiles</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody data-ge-personas></tbody>
+          </table>
+        </div>
+
+        <h2 class="panel-subtitulo">Ubicación geográfica</h2>
+
+        <div class="gestion-rejilla">
+
+          <section class="gestion-caja" aria-labelledby="titulo-paises">
+            <h3 id="titulo-paises">Países</h3>
+            <ul class="lista-simple" data-ge-paises></ul>
+            <form class="form-simple" data-ge-nuevo="paises">
+              <label for="ge-pais-nombre">Nuevo país</label>
+              <input type="text" id="ge-pais-nombre" name="nombre" maxlength="60" required
+                     placeholder="Nombre del país">
+              <button type="submit" class="btn btn-primario">Agregar</button>
+            </form>
+          </section>
+
+          <section class="gestion-caja" aria-labelledby="titulo-departamentos">
+            <h3 id="titulo-departamentos">Departamentos</h3>
+            <ul class="lista-simple" data-ge-departamentos></ul>
+            <form class="form-simple" data-ge-nuevo="departamentos">
+              <label for="ge-depto-pais">País</label>
+              <select id="ge-depto-pais" name="id_pais" data-ge-select-paises required></select>
+              <label for="ge-depto-nombre">Nuevo departamento</label>
+              <input type="text" id="ge-depto-nombre" name="nombre" maxlength="60" required
+                     placeholder="Nombre del departamento">
+              <button type="submit" class="btn btn-primario">Agregar</button>
+            </form>
+          </section>
+
+          <section class="gestion-caja" aria-labelledby="titulo-ciudades">
+            <h3 id="titulo-ciudades">Ciudades</h3>
+            <ul class="lista-simple" data-ge-ciudades></ul>
+            <form class="form-simple" data-ge-nuevo="ciudades">
+              <label for="ge-ciudad-depto">Departamento</label>
+              <select id="ge-ciudad-depto" name="id_departamento" data-ge-select-departamentos required></select>
+              <label for="ge-ciudad-nombre">Nueva ciudad</label>
+              <input type="text" id="ge-ciudad-nombre" name="nombre" maxlength="60" required
+                     placeholder="Nombre de la ciudad">
+              <button type="submit" class="btn btn-primario">Agregar</button>
+            </form>
+          </section>
+
+        </div>
+
+        <p class="ayuda">
+          No se puede borrar un país que todavía tiene departamentos, ni una
+          ciudad donde hay personas o eventos: la base de datos no deja quedar
+          registros sueltos.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
 <!-- Modelos -->
 <script src="js/configuracion.js"></script>
 <script src="js/modelos/rutas.js"></script>
@@ -1725,6 +1853,7 @@
 <script src="js/vistas/evento.js"></script>
 <script src="js/vistas/reservas.js"></script>
 <script src="js/vistas/reportes.js"></script>
+<script src="js/vistas/gestion.js"></script>
 <!-- Controladores -->
 <script src="js/controladores/enrutador.js"></script>
 <script src="js/controladores/formularios.js"></script>
@@ -1736,6 +1865,7 @@
 <script src="js/controladores/acceso.js"></script>
 <script src="js/controladores/reservas.js"></script>
 <script src="js/controladores/reportes.js"></script>
+<script src="js/controladores/gestion.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

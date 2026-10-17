@@ -131,6 +131,47 @@ var ApiModelo = (function () {
     // ----------------------------------------------------------- reportes --
     tablero: function () {
       return pedir("/reportes/tablero");
+    },
+
+    // ------------------------------------------- ubicacion geografica --
+    // Las tres listas se manejan igual, así que una sola función arma la ruta:
+    // /paises, /departamentos o /ciudades.
+    paises: function () {
+      return pedir("/paises");
+    },
+    departamentos: function () {
+      return pedir("/departamentos");
+    },
+    crearUbicacion: function (tipo, datos) {
+      return pedir("/" + tipo, { metodo: "POST", datos: datos });
+    },
+    actualizarUbicacion: function (tipo, id, datos) {
+      return pedir("/" + tipo + "/" + id, { metodo: "PUT", datos: datos });
+    },
+    eliminarUbicacion: function (tipo, id) {
+      return pedir("/" + tipo + "/" + id, { metodo: "DELETE" });
+    },
+
+    // ----------------------------------------------------------- personas --
+    personas: function () {
+      return pedir("/personas");
+    },
+    persona: function (identificacion) {
+      return pedir("/personas/" + identificacion);
+    },
+    actualizarPersona: function (identificacion, datos) {
+      return pedir("/personas/" + identificacion, { metodo: "PUT", datos: datos });
+    },
+    eliminarPersona: function (identificacion) {
+      return pedir("/personas/" + identificacion, { metodo: "DELETE" });
+    },
+
+    // ------------------------------------------------- eventos (edicion) --
+    actualizarEvento: function (codigo, datos) {
+      return pedir("/eventos/" + codigo, { metodo: "PUT", datos: datos });
+    },
+    eliminarEvento: function (codigo) {
+      return pedir("/eventos/" + codigo, { metodo: "DELETE" });
     }
   };
 })();

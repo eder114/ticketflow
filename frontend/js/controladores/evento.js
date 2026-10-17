@@ -9,6 +9,9 @@ var EventoControlador = (function () {
 
   var evento = null;
 
+  // Cuál evento se está editando en el formulario, o null si es uno nuevo.
+  var editando = null;
+
   function precio() {
     return evento ? Number(evento.precio_base) : PRECIO_EJEMPLO;
   }
@@ -211,7 +214,11 @@ var EventoControlador = (function () {
 
     FormularioVista.ocupado(form, true);
 
-    ApiModelo.crearEvento(datos).then(function (creado) {
+    var guardado = editando
+      ? ApiModelo.actualizarEvento(editando, datos)
+      : ApiModelo.crearEvento(datos);
+
+    guardado.then(function (creado) {
       if (estado && estado !== creado.estado) {
         return ApiModelo.estadoDeEvento(creado.codigo_evento, estado, causa)
           .then(function (actualizado) { return actualizado; });
@@ -219,12 +226,18 @@ var EventoControlador = (function () {
       return creado;
     }).then(function (creado) {
       FormularioVista.ocupado(form, false);
-      form.reset();
-      EventoVista.alternarCausa("Programado");
+      var era = editando;
+
+      if (!era) {
+        form.reset();
+        EventoVista.alternarCausa("Programado");
+      }
       FormularioVista.mostrarMensaje(
         form,
-        "Quedó registrado el evento " + creado.nombre + " con código " +
-        creado.codigo_evento + ".",
+        era
+          ? "Quedaron guardados los cambios del evento " + creado.nombre + "."
+          : "Quedó registrado el evento " + creado.nombre + " con código " +
+            creado.codigo_evento + ".",
         false
       );
     }).catch(function (error) {
@@ -263,6 +276,25 @@ var EventoControlador = (function () {
     var form = estado.closest("form");
     form.addEventListener("ticketflow:validado", function () {
       guardar(form);
+    });
+
+    // Al entrar a #/crear-evento/5 el formulario se llena con ese evento.
+    document.addEventListener("ticketflow:pantalla", function (e) {
+      if (e.detail.pantalla !== "crear-evento") return;
+
+      FormularioVista.limpiarMensaje(form);
+      editando = e.detail.parametro ? Number(e.detail.parametro) : null;
+      EventoVista.modoDelFormulario(editando !== null);
+
+      if (!editando) {
+        EventoVista.limpiarFormulario();
+        return;
+      }
+      ApiModelo.evento(editando).then(function (datos) {
+        EventoVista.llenarFormulario(datos);
+      }).catch(function (error) {
+        FormularioVista.mostrarMensaje(form, error.message);
+      });
     });
   }
 

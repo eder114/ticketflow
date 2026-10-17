@@ -1024,3 +1024,67 @@ button{font-family:inherit}
 .tabla-caja:focus-visible{
   outline:3px solid var(--indigo);outline-offset:2px;
 }
+
+
+/* ====================== GESTIÓN DE DATOS (ADMINISTRADOR) ================== */
+
+.btn-chico{padding:7px 12px;font-size:13px}
+.btn-peligro{
+  background:var(--error-50);border:1px solid var(--error-100);color:var(--error-600);
+}
+.btn-peligro:hover{background:var(--error-100)}
+
+.filtro-solo{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:var(--sombra-sm);padding:var(--e4);margin-bottom:var(--e4);
+  max-width:520px;
+}
+
+.celda-acciones{display:flex;flex-wrap:wrap;gap:var(--e2)}
+
+.gestion-rejilla{display:grid;gap:var(--e4);grid-template-columns:1fr}
+
+.gestion-caja{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:var(--sombra-sm);padding:var(--e4);
+  display:flex;flex-direction:column;gap:var(--e3);
+}
+.gestion-caja h3{font-size:17px;line-height:1.3}
+
+.lista-simple{
+  list-style:none;display:flex;flex-direction:column;gap:var(--e2);
+  max-height:260px;overflow-y:auto;
+}
+.lista-simple li{
+  display:flex;flex-wrap:wrap;gap:var(--e2);
+  align-items:center;justify-content:space-between;
+  padding:10px 12px;border:1px solid var(--linea-suave);border-radius:var(--r-btn);
+  font-size:14px;
+}
+.lista-simple-nombre{min-width:0;overflow-wrap:anywhere}
+.lista-simple-acciones{display:flex;gap:var(--e2)}
+.lista-simple-vacia{color:var(--texto-suave);border-style:dashed;justify-content:center}
+.lista-simple form{flex:1 0 100%}
+
+.form-simple{display:flex;flex-direction:column;gap:var(--e2)}
+.form-simple label{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-suave);
+}
+.form-simple input,.form-simple select{
+  width:100%;padding:11px 12px;font:inherit;font-size:14.5px;
+  border:1px solid var(--linea);border-radius:var(--r-btn);
+  background:#fff;color:var(--texto);
+}
+.form-simple input:focus,.form-simple select:focus{
+  outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.16);
+}
+.form-simple .campo{display:flex;flex-direction:column;gap:6px}
+
+@media (min-width:768px){
+  .form-ancho{display:grid;gap:var(--e3);grid-template-columns:repeat(2,minmax(0,1fr))}
+  .form-ancho .form-causa-pie{grid-column:1/-1}
+}
+@media (min-width:1024px){
+  .gestion-rejilla{grid-template-columns:repeat(3,minmax(0,1fr))}
+}

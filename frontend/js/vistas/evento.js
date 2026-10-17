@@ -150,6 +150,45 @@ var EventoVista = (function () {
     caja.textContent = texto;
   }
 
+  // El mismo formulario sirve para registrar y para editar: cuando se edita,
+  // se llena con lo que ya tiene el evento.
+  function llenarFormulario(evento) {
+    var form = document.querySelector("#vista-crear-evento form");
+    if (!form) return;
+
+    form.elements.nombre.value = evento.nombre;
+    form.elements.descripcion.value = evento.descripcion || "";
+    form.elements.teatro.value = evento.teatro;
+    form.elements.ciudad.value = String(evento.id_ciudad);
+    form.elements.inicio.value = String(evento.fecha_hora_inicio).slice(0, 16);
+    form.elements.fin.value = String(evento.fecha_hora_fin).slice(0, 16);
+    form.elements.capacidad.value = String(evento.capacidad_total);
+    form.elements.precio.value = String(Number(evento.precio_base));
+    form.elements.observaciones.value = evento.observaciones || "";
+    form.elements.estado.value = evento.estado;
+    if (form.elements.causa) form.elements.causa.value = evento.causa_cancelacion || "";
+    alternarCausa(evento.estado);
+  }
+
+  function limpiarFormulario() {
+    var form = document.querySelector("#vista-crear-evento form");
+    if (!form) return;
+    form.reset();
+    alternarCausa("Programado");
+  }
+
+  // El título y el botón dicen si se está registrando o editando.
+  function modoDelFormulario(editando) {
+    var titulo = document.querySelector("[data-titulo-evento]");
+    if (titulo) titulo.textContent = editando ? "Editar el evento" : "Registrar un evento";
+
+    var boton = document.querySelector("#vista-crear-evento button[type=submit]");
+    if (boton) {
+      boton.textContent = editando ? "Guardar los cambios" : "Guardar evento";
+      boton.dataset.textoOriginal = boton.textContent;
+    }
+  }
+
   // ------------------------------------------------- tabla del agente --
 
   function celda(fila, texto) {
@@ -190,7 +229,7 @@ var EventoVista = (function () {
     fila.hidden = true;
 
     var celdaAncha = document.createElement("td");
-    celdaAncha.colSpan = 6;
+    celdaAncha.colSpan = 7;
 
     var form = document.createElement("form");
     form.className = "form-causa";
@@ -273,6 +312,28 @@ var EventoVista = (function () {
       cambio.appendChild(selectorDeEstado(evento));
       fila.appendChild(cambio);
 
+      var acciones = document.createElement("td");
+      acciones.className = "celda-acciones";
+
+      var editar = document.createElement("a");
+      editar.href = "#/crear-evento/" + evento.codigo_evento;
+      editar.className = "btn btn-chico btn-secundario";
+      editar.textContent = "Editar";
+      acciones.appendChild(editar);
+
+      // Borrar un evento es cosa del administrador; el agente lo cancela,
+      // que es lo que deja rastro de por que no se hizo.
+      if (SesionModelo.perfil() === "administrador") {
+        var borrar = document.createElement("button");
+        borrar.type = "button";
+        borrar.className = "btn btn-chico btn-peligro";
+        borrar.dataset.borrarEvento = String(evento.codigo_evento);
+        borrar.dataset.nombre = evento.nombre;
+        borrar.textContent = "Eliminar";
+        acciones.appendChild(borrar);
+      }
+
+      fila.appendChild(acciones);
       cuerpo.appendChild(fila);
       if (evento.estado !== "Cancelado") cuerpo.appendChild(filaDeCausa(evento));
     });
@@ -290,6 +351,9 @@ var EventoVista = (function () {
     ayuda: ayuda,
     envolver: envolver,
     mensaje: mensaje,
+    llenarFormulario: llenarFormulario,
+    limpiarFormulario: limpiarFormulario,
+    modoDelFormulario: modoDelFormulario,
     pintarMisEventos: pintarMisEventos,
     mostrarCausaDeEvento: mostrarCausaDeEvento
   };

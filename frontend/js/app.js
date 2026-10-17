@@ -10,4 +10,5 @@ document.addEventListener("DOMContentLoaded", function () {
   AccesoControlador.iniciar();
   ReservaControlador.iniciar();
   ReporteControlador.iniciar();
+  GestionControlador.iniciar();
 });

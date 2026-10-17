@@ -103,9 +103,15 @@ export class Revision {
       if (obligatorio) this.errores[campo] = `${etiqueta} es obligatoria.`;
       return this;
     }
-    const fecha = new Date(String(bruto));
-    if (Number.isNaN(fecha.getTime())) this.errores[campo] = `${etiqueta} no es una fecha válida.`;
-    else this.limpio[campo] = fecha.toISOString();
+    // Se revisa que sea una fecha de verdad, pero se guarda tal como la
+    // escribieron: son horas de Colombia y pasarlas a UTC las corre cinco
+    // horas cuando el servidor trabaja en otra zona.
+    const texto = String(bruto).trim();
+    if (Number.isNaN(new Date(texto).getTime())) {
+      this.errores[campo] = `${etiqueta} no es una fecha válida.`;
+    } else {
+      this.limpio[campo] = texto.replace("T", " ").slice(0, 19);
+    }
     return this;
   }
 

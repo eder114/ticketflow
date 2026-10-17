@@ -77,9 +77,11 @@ que muestre o borre el error.
 | `#/registro-agente` | Registro de organizador | Sin sesión |
 | `#/registro-admin` | Alta de administrador | Sin sesión |
 | `#/crear-evento` | Registrar un evento | Agente y administrador |
+| `#/crear-evento/:codigo` | Editar un evento que ya existe | Agente y administrador |
 | `#/mis-reservas` | Reservas del cliente, con cancelación | Cliente |
 | `#/panel-agente` | Eventos del organizador y reservas de su público | Agente y administrador |
 | `#/panel-admin` | Reportes del sistema | Administrador |
+| `#/gestion` | Personas y ubicación geográfica | Administrador |
 
 El menú y los botones del encabezado cambian según el perfil que inició
 sesión, y si alguien entra a una ruta que no le corresponde, el enrutador lo
@@ -175,6 +177,11 @@ del evento y la reserva descuenta cupos de una vez; el organizador confirma o
 cancela esas reservas y mueve el estado de sus eventos, y cancelar siempre
 pide la causa; el administrador ve los reportes que pide el enunciado. La
 prueba `backend/prueba_api.js` recorre todo eso con 90 comprobaciones.
+
+El CRUD que pide el enunciado quedó completo en pantalla: las personas y la
+ubicación geográfica se manejan desde `#/gestion`, los eventos desde el panel
+del organizador (registrar, editar, cambiar estado y eliminar) y las reservas
+desde el detalle del evento, "Mis reservas" y ese mismo panel.
 
 ## Licencia
 

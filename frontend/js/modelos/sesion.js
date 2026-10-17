@@ -9,6 +9,7 @@ var SesionModelo = (function () {
     "crear-evento": ["agente", "administrador"],
     "panel-agente": ["agente", "administrador"],
     "panel-admin": ["administrador"],
+    "gestion": ["administrador"],
     "mis-reservas": ["cliente"]
   };
 
@@ -32,9 +33,10 @@ var SesionModelo = (function () {
     administrador: [
       { ruta: "#/inicio", texto: "Inicio" },
       { ruta: "#/catalogo", texto: "Catálogo" },
-      { ruta: "#/panel-agente", texto: "Eventos y reservas" },
-      { ruta: "#/crear-evento", texto: "Registrar evento" },
-      { ruta: "#/panel-admin", texto: "Reportes" }
+      { ruta: "#/panel-agente", texto: "Reservas" },
+      { ruta: "#/crear-evento", texto: "Nuevo evento" },
+      { ruta: "#/panel-admin", texto: "Reportes" },
+      { ruta: "#/gestion", texto: "Datos" }
     ]
   };
 
