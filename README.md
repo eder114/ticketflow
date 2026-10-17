@@ -133,6 +133,10 @@ Cuando la base está publicada en Neon y no hay `psql` a mano:
 node aplicar_sql.js ../database/sql/vistas.sql
 ```
 
+> Los archivos `.css` y `.js` se enlazan con `?v=fecha`. Cuando se cambia algo
+> hay que subir esa fecha: así el navegador no se queda con la versión vieja
+> guardada en caché.
+
 ## Stack tecnológico
 
 | Parte | Tecnología |
