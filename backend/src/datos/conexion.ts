@@ -1,6 +1,13 @@
 // Conexión a PostgreSQL. Un solo pool para toda la aplicación.
-import { Pool, PoolClient, QueryResultRow } from "pg";
+import { Pool, PoolClient, QueryResultRow, types } from "pg";
 import { entorno } from "../configuracion/entorno";
+
+// Las fechas de los eventos se guardan sin zona horaria: son la hora de
+// Colombia, la que ve la gente. Si se dejan convertir a Date, el servidor de
+// internet (que trabaja en UTC) las corre cinco horas. Por eso se devuelven
+// tal como están escritas en la base.
+const TIMESTAMP_SIN_ZONA = 1114;
+types.setTypeParser(TIMESTAMP_SIN_ZONA, (valor: string) => valor.replace(" ", "T"));
 
 const pool = new Pool(
   entorno.bd.url
