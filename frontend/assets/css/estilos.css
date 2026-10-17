@@ -1019,3 +1019,8 @@ button{font-family:inherit}
 @media (min-width:1024px){
   .tarjetas-dato{grid-template-columns:repeat(6,minmax(0,1fr))}
 }
+
+/* La tabla recibe el foco del teclado para poderla rodar de lado sin mouse. */
+.tabla-caja:focus-visible{
+  outline:3px solid var(--indigo);outline-offset:2px;
+}

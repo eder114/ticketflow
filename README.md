@@ -57,9 +57,9 @@ ticketflow/
 
 | Capa | Archivos | Qué hace |
 |---|---|---|
-| **Modelo** | `rutas.js`, `validacion.js`, `calendario.js` | Guarda las reglas y los datos. No toca la página. |
-| **Vista** | `pantallas.js`, `formularios.js`, `buscador.js`, `menu.js` | Muestra y esconde pantallas, pinta errores, paneles y el calendario. |
-| **Controlador** | `enrutador.js`, `formularios.js`, `buscador.js`, `menu.js` | Escucha clics y cambios, le pide los datos al modelo y le dice a la vista qué mostrar. |
+| **Modelo** | `api.js`, `sesion.js`, `rutas.js`, `validacion.js`, `calendario.js`, `catalogo.js`, `formato.js` | Habla con la API, guarda la sesión y las reglas. No toca la página. |
+| **Vista** | `pantallas.js`, `formularios.js`, `buscador.js`, `menu.js`, `sesion.js`, `catalogo.js`, `evento.js`, `reservas.js`, `reportes.js` | Muestra y esconde pantallas, pinta las tarjetas, las tablas y los errores. |
+| **Controlador** | `enrutador.js`, `formularios.js`, `buscador.js`, `menu.js`, `sesion.js`, `acceso.js`, `catalogo.js`, `evento.js`, `reservas.js`, `reportes.js` | Escucha clics y cambios, le pide los datos al modelo y le dice a la vista qué mostrar. |
 
 Ejemplo: al salir de un campo, el **controlador** de formularios le pregunta al
 **modelo** de validación si el valor cumple las reglas, y le pide a la **vista**
@@ -71,12 +71,15 @@ que muestre o borre el error.
 |------|----------|-------------|
 | `#/inicio` | Página de inicio | Todos |
 | `#/catalogo` | Catálogo de eventos con filtros | Todos |
-| `#/evento` | Detalle del evento | Todos |
+| `#/evento/:codigo` | Detalle del evento y reserva de entradas | Todos |
 | `#/iniciar-sesion` | Inicio de sesión | Sin sesión |
 | `#/registro-cliente` | Registro de cliente | Sin sesión |
 | `#/registro-agente` | Registro de organizador | Sin sesión |
 | `#/registro-admin` | Alta de administrador | Sin sesión |
-| `#/crear-evento` | Registrar o editar un evento | Agente y administrador |
+| `#/crear-evento` | Registrar un evento | Agente y administrador |
+| `#/mis-reservas` | Reservas del cliente, con cancelación | Cliente |
+| `#/panel-agente` | Eventos del organizador y reservas de su público | Agente y administrador |
+| `#/panel-admin` | Reportes del sistema | Administrador |
 
 El menú y los botones del encabezado cambian según el perfil que inició
 sesión, y si alguien entra a una ruta que no le corresponde, el enrutador lo
@@ -96,6 +99,37 @@ encima solo con `@media (min-width: …)`.
 | 1280 px | Ancho máximo del contenido |
 
 Validador del W3C: **0 errores** en HTML y en CSS.
+
+## Cómo levantarlo en el computador
+
+La página publicada ya habla con la API de Render y con la base de Neon, así
+que para verla no hay que instalar nada. Para trabajar en local:
+
+```bash
+cd backend
+npm install
+npm run dev            # la API queda en http://localhost:4000/api
+node prueba_api.js     # recorre la API de punta a punta
+```
+
+La página se abre con cualquier servidor estático sobre la carpeta del
+proyecto (por ejemplo `npx http-server . -p 5500`) y en `localhost` busca sola
+la API del puerto 4000.
+
+Si la base de datos está vacía:
+
+```bash
+cd backend
+npm run bd:crear       # las tablas
+npm run bd:vistas      # las vistas de los atributos derivados
+npm run bd:datos       # los datos de prueba
+```
+
+Cuando la base está publicada en Neon y no hay `psql` a mano:
+
+```bash
+node aplicar_sql.js ../database/sql/vistas.sql
+```
 
 ## Stack tecnológico
 
@@ -132,8 +166,15 @@ de las pantallas de acceso, maquetadas Mobile-First.
 PostgreSQL, API REST con autenticación por rol y las pantallas de catálogo,
 detalle del evento y registro de eventos.
 
-**Sprint 3** (20 de octubre – 3 de noviembre de 2026): reservas, los reportes
-del dashboard del administrador y el resto de las pantallas del diseño.
+**Sprint 3** (20 de octubre – 3 de noviembre de 2026): reservas con control de
+aforo, panel del organizador, reportes del administrador y la página completa
+hablando con la base de datos publicada en Neon.
+
+Lo que quedó funcionando de punta a punta: el cliente reserva desde el detalle
+del evento y la reserva descuenta cupos de una vez; el organizador confirma o
+cancela esas reservas y mueve el estado de sus eventos, y cancelar siempre
+pide la causa; el administrador ve los reportes que pide el enunciado. La
+prueba `backend/prueba_api.js` recorre todo eso con 90 comprobaciones.
 
 ## Licencia
 

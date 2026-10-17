@@ -82,6 +82,56 @@ Todas cuelgan de `/api`. Las marcadas con candado piden la cabecera
 | GET | `/agentes`, `/administradores` | 🔒 administrador |
 | POST, PUT, DELETE | `/clientes`, `/agentes`, `/administradores` | 🔒 administrador |
 
+### Eventos
+
+| Método | Ruta | Quién | Qué hace |
+|---|---|---|---|
+| GET | `/eventos` | público | El catálogo, con la ciudad, el agente y los cupos que quedan |
+| GET | `/eventos?ciudad=1&estado=Programado&texto=salsa&conCupos=true` | público | El mismo catálogo, filtrado |
+| GET | `/eventos/:codigo` | público | Un evento |
+| GET | `/eventos/mios` | 🔒 agente o administrador | Los eventos del agente que tiene la sesión |
+| POST | `/eventos` | 🔒 agente o administrador | Registra un evento |
+| PUT | `/eventos/:codigo` | 🔒 agente (los suyos) o administrador | Lo modifica |
+| PATCH | `/eventos/:codigo/estado` | 🔒 agente (los suyos) o administrador | Cambia el estado; Cancelado exige la causa |
+| DELETE | `/eventos/:codigo` | 🔒 administrador | Lo borra |
+
+Cancelar un evento cancela sus reservas y les deja escrito que fue por el
+evento, con la causa que dio el organizador.
+
+### Reservas
+
+| Método | Ruta | Quién | Qué hace |
+|---|---|---|---|
+| GET | `/reservas` | 🔒 cualquiera | El cliente ve las suyas, el agente las de sus eventos, el administrador todas |
+| GET | `/reservas/:id` | 🔒 cualquiera | Una reserva, si le corresponde |
+| POST | `/reservas` | 🔒 cliente | Reserva entradas de un evento |
+| PATCH | `/reservas/:id/estado` | 🔒 cualquiera | El cliente cancela lo suyo; confirmar es del agente o del administrador |
+| DELETE | `/reservas/:id` | 🔒 administrador | La borra |
+
+**El control del aforo es la regla principal del sistema.** La reserva se crea
+dentro de una transacción que bloquea el evento con `SELECT … FOR UPDATE`
+mientras cuenta las entradas reservadas y confirmadas. Así, si dos personas
+reservan al mismo tiempo, no se llevan las mismas entradas. Un evento solo
+recibe reservas mientras esté Programado o En Boletería y no haya empezado.
+
+### Reportes
+
+Todos son del administrador y cuelgan de `/reportes`.
+
+| Ruta | Qué muestra |
+|---|---|
+| `/reportes/general` | Cuántos clientes, agentes, eventos, reservas e ingresos hay |
+| `/reportes/ingresos-por-agente` | Ingresos, promedio por evento y comisión de cada agente |
+| `/reportes/ingresos-por-cliente` | Cuánto gasta en promedio cada cliente |
+| `/reportes/ingresos-por-mes?anio=2026` | Ingresos mes a mes |
+| `/reportes/reservas-por-evento` | Reservas por evento y por mes |
+| `/reportes/eventos-por-agente` | Eventos de cada agente por ciudad |
+| `/reportes/eventos-por-ubicacion` | Eventos por país, departamento y ciudad |
+| `/reportes/historial/:identificacion` | Historial de reservas de un cliente |
+| `/reportes/reservas-canceladas` | Reservas canceladas y su causa |
+| `/reportes/eventos-cancelados` | Eventos cancelados y su causa |
+| `/reportes/tablero` | Todos los anteriores en una sola llamada, que es lo que pinta el panel |
+
 ## Cómo responde
 
 Todo sale en JSON. Los errores siempre tienen la misma forma:
@@ -115,6 +165,12 @@ Todos entran con la contraseña **Ticket2026\***.
 | `carolina.mejia@ticketflow.com` | Agente |
 | `hernan.ocampo@ticketflow.com` | Administrador |
 
-## Lo que falta
+## Cuando la base está publicada
 
-Los CRUD de eventos y reservas y los reportes entran en el Sprint 3.
+Con `BD_URL` apuntando a Neon la API se conecta allá y los cuatro datos de la
+base local se ignoran. Para aplicar un archivo `.sql` en esa base sin tener
+`psql` a mano:
+
+```bash
+node aplicar_sql.js ../database/sql/vistas.sql
+```
