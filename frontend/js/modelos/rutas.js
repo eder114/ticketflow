@@ -1,4 +1,4 @@
-// Modelo: rutas de la aplicación (#/inicio, #/iniciar-sesion, ...)
+// Modelo: rutas de la aplicación (#/inicio, #/iniciar-sesion, #/evento/5, ...)
 var RutasModelo = (function () {
   "use strict";
 
@@ -10,14 +10,27 @@ var RutasModelo = (function () {
     return h === "" || /^#\//.test(h);
   }
 
-  function actual() {
+  function partes() {
     var h = window.location.hash.replace(/^#\/?/, "").trim();
-    return h === "" ? INICIAL : h;
+    return h === "" ? [INICIAL] : h.split("/");
+  }
+
+  // La pantalla es la primera parte: de #/evento/5 sale "evento".
+  function actual() {
+    return partes()[0] || INICIAL;
+  }
+
+  // Lo que viene después, cuando la pantalla habla de algo puntual: el código
+  // del evento en #/evento/5.
+  function parametro() {
+    var p = partes()[1];
+    return p ? decodeURIComponent(p) : null;
   }
 
   return {
     INICIAL: INICIAL,
     esRuta: esRuta,
-    actual: actual
+    actual: actual,
+    parametro: parametro
   };
 })();

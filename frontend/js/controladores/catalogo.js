@@ -1,6 +1,8 @@
-// Controlador: escucha los filtros del catálogo
+// Controlador: trae el catálogo de la API y escucha los filtros
 var CatalogoControlador = (function () {
   "use strict";
+
+  var cargado = false;
 
   function filtroActual(form) {
     return {
@@ -26,6 +28,25 @@ var CatalogoControlador = (function () {
     });
   }
 
+  // Los eventos salen de la base de datos. Si no hay API levantada se quedan
+  // las tarjetas de ejemplo que ya trae el HTML, que fue como entregamos la
+  // maquetación.
+  function cargar(form) {
+    if (cargado || !ApiModelo.hayApi()) return;
+    cargado = true;
+
+    ApiModelo.eventos().then(function (eventos) {
+      var cartelera = eventos.filter(CatalogoModelo.enCartelera);
+      CatalogoVista.pintar(cartelera);
+      CatalogoVista.pintarCiudades(cartelera);
+      CatalogoVista.pintarDestacados(cartelera.slice(0, 3));
+      aplicar(form);
+    }).catch(function () {
+      cargado = false;
+      CatalogoVista.mensaje("No se pudo conectar con el servidor. Estos son eventos de ejemplo.");
+    });
+  }
+
   function iniciar() {
     var form = document.querySelector("[data-filtros]");
     if (!form) return;
@@ -48,6 +69,7 @@ var CatalogoControlador = (function () {
     });
 
     aplicar(form);
+    cargar(form);
   }
 
   return { iniciar: iniciar };

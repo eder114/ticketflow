@@ -4,6 +4,13 @@ import { consultar, consultarUno } from "../datos/conexion";
 
 const ANIO_POR_DEFECTO = 2026;
 
+// Los meses se nombran aqui y no con TO_CHAR, porque TO_CHAR los escribe en el
+// idioma que tenga configurado el servidor y la base publicada responde en
+// ingles.
+const NOMBRE_DEL_MES =
+  `(ARRAY['enero','febrero','marzo','abril','mayo','junio','julio','agosto',
+          'septiembre','octubre','noviembre','diciembre'])[mes]`;
+
 // ------------------------------------------- 1. reporte general de registros --
 
 export interface ReporteGeneral {
@@ -106,15 +113,18 @@ export const ingresosPorCliente = () =>
 export const ingresosPorMes = (anio = ANIO_POR_DEFECTO) =>
   consultar<{ mes: string; nombre_mes: string; reservas: string; entradas: string; ingresos: string }>(
     `SELECT
-       EXTRACT(MONTH FROM fecha_hora)::int::text AS mes,
-       TRIM(TO_CHAR(fecha_hora, 'TMMonth')) AS nombre_mes,
+       mes::text,
+       ${NOMBRE_DEL_MES} AS nombre_mes,
        COUNT(*)::text AS reservas,
        COALESCE(SUM(numero_entradas), 0)::text AS entradas,
        COALESCE(SUM(valor_total), 0)::text AS ingresos
-     FROM vista_reserva
-     WHERE estado = 'Confirmada' AND EXTRACT(YEAR FROM fecha_hora) = $1
-     GROUP BY 1, 2
-     ORDER BY 1`,
+     FROM (
+       SELECT EXTRACT(MONTH FROM fecha_hora)::int AS mes, numero_entradas, valor_total
+       FROM vista_reserva
+       WHERE estado = 'Confirmada' AND EXTRACT(YEAR FROM fecha_hora) = $1
+     ) r
+     GROUP BY r.mes
+     ORDER BY r.mes`,
     [anio]
   );
 
@@ -131,14 +141,18 @@ export const reservasPorEventoYMes = (anio = ANIO_POR_DEFECTO) =>
     `SELECT
        codigo_evento::text,
        evento,
-       EXTRACT(MONTH FROM fecha_hora)::int::text AS mes,
-       TRIM(TO_CHAR(fecha_hora, 'TMMonth')) AS nombre_mes,
+       mes::text,
+       ${NOMBRE_DEL_MES} AS nombre_mes,
        COUNT(*)::text AS reservas,
        COALESCE(SUM(numero_entradas), 0)::text AS entradas
-     FROM vista_reserva
-     WHERE EXTRACT(YEAR FROM fecha_hora) = $1
-     GROUP BY 1, 2, 3, 4
-     ORDER BY 3, 2`,
+     FROM (
+       SELECT codigo_evento, evento, numero_entradas,
+              EXTRACT(MONTH FROM fecha_hora)::int AS mes
+       FROM vista_reserva
+       WHERE EXTRACT(YEAR FROM fecha_hora) = $1
+     ) r
+     GROUP BY r.codigo_evento, r.evento, r.mes
+     ORDER BY r.mes, r.evento`,
     [anio]
   );
 

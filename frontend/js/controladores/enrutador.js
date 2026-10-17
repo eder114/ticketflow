@@ -17,6 +17,12 @@ var EnrutadorControlador = (function () {
     }
     PantallaVista.mostrar(pantalla, opciones);
     SesionVista.actualizar(pantalla);
+
+    // Las pantallas que traen datos de la API escuchan este aviso para
+    // recargarlos cada vez que se entra a ellas.
+    document.dispatchEvent(new CustomEvent("ticketflow:pantalla", {
+      detail: { pantalla: pantalla, parametro: RutasModelo.parametro() }
+    }));
   }
 
   function iniciar() {

@@ -5,8 +5,8 @@ var AccesoControlador = (function () {
   // Dónde lleva cada perfil después de entrar.
   var DESTINO = {
     cliente: "#/catalogo",
-    agente: "#/crear-evento",
-    administrador: "#/catalogo"
+    agente: "#/panel-agente",
+    administrador: "#/panel-admin"
   };
 
   function valor(form, nombre) {
@@ -130,7 +130,11 @@ var AccesoControlador = (function () {
   function iniciar() {
     cargarCiudades();
 
+    // Solo los de acceso: el de registrar eventos lo maneja su controlador.
+    var MIOS = ["sesion", "registro-cliente", "registro-agente"];
+
     document.querySelectorAll("form[data-envio]").forEach(function (form) {
+      if (MIOS.indexOf(form.dataset.envio) === -1) return;
       form.addEventListener("ticketflow:validado", function () {
         enviar(form, form.dataset.envio);
       });

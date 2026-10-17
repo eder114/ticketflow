@@ -137,7 +137,7 @@
           <a href="#/catalogo" class="btn btn-secundario">Ver todo el catálogo</a>
         </div>
 
-        <div class="rejilla rejilla-3">
+        <div class="rejilla rejilla-3" data-destacados>
 
           <article class="evento">
             <div class="evento-img">
@@ -1166,7 +1166,7 @@
         <span aria-hidden="true">›</span>
         <a href="#/catalogo">Catálogo</a>
         <span aria-hidden="true">›</span>
-        <span aria-current="page">Festival de Música Cali Vive</span>
+        <span aria-current="page" data-ev-miga>Festival de Música Cali Vive</span>
       </div>
     </nav>
 
@@ -1175,25 +1175,25 @@
 
         <div class="detalle-principal">
           <figure class="detalle-foto">
-            <img src="assets/img/festival-noche.jpg"
+            <img src="assets/img/festival-noche.jpg" data-ev-foto
                  alt="Público con las manos en alto frente al escenario principal del festival">
           </figure>
 
-          <span class="estado-chip estado-boleteria">En boletería</span>
-          <h1 id="titulo-evento">Festival de Música Cali Vive</h1>
+          <span class="estado-chip estado-boleteria" data-ev-estado>En boletería</span>
+          <h1 id="titulo-evento" data-ev-nombre>Festival de Música Cali Vive</h1>
 
           <dl class="detalle-datos">
-            <div><dt>Lugar</dt><dd>Estadio Pascual Guerrero</dd></div>
-            <div><dt>Ciudad</dt><dd>Cali, Valle del Cauca</dd></div>
-            <div><dt>Comienza</dt><dd>14 de noviembre de 2026 · 6:00 p. m.</dd></div>
-            <div><dt>Termina</dt><dd>15 de noviembre de 2026 · 2:00 a. m.</dd></div>
-            <div><dt>Capacidad</dt><dd>25.000 personas</dd></div>
-            <div><dt>Organiza</dt><dd>Carolina Mejía Arango</dd></div>
+            <div><dt>Lugar</dt><dd data-ev-teatro>Estadio Pascual Guerrero</dd></div>
+            <div><dt>Ciudad</dt><dd data-ev-ciudad>Cali, Valle del Cauca</dd></div>
+            <div><dt>Comienza</dt><dd data-ev-inicio>14 de noviembre de 2026 · 6:00 p. m.</dd></div>
+            <div><dt>Termina</dt><dd data-ev-fin>15 de noviembre de 2026 · 2:00 a. m.</dd></div>
+            <div><dt>Capacidad</dt><dd data-ev-capacidad>25.000 personas</dd></div>
+            <div><dt>Organiza</dt><dd data-ev-agente>Carolina Mejía Arango</dd></div>
           </dl>
 
           <h2>Sobre el evento</h2>
-          <p>Tres escenarios con artistas nacionales de salsa, rock y música urbana.
-             Las puertas abren dos horas antes del primer concierto y el recinto
+          <p data-ev-descripcion>Tres escenarios con artistas nacionales de salsa, rock y música
+             urbana. Las puertas abren dos horas antes del primer concierto y el recinto
              cuenta con zona de comidas, puntos de hidratación y acceso para
              personas con movilidad reducida.</p>
 
@@ -1208,7 +1208,7 @@
         <aside class="detalle-compra" aria-labelledby="titulo-compra">
           <h2 id="titulo-compra">Reserva tus entradas</h2>
 
-          <p class="detalle-precio">$120.000 <small>COP por entrada</small></p>
+          <p class="detalle-precio"><span data-ev-precio>$120.000</span> <small>COP por entrada</small></p>
 
           <p class="detalle-cupos" data-cupos role="status">
             Quedan <strong>24.994</strong> cupos de 25.000
@@ -1223,10 +1223,14 @@
 
           <p class="detalle-total">Total estimado: <strong data-total>$120.000</strong></p>
 
-          <a href="#/iniciar-sesion" class="btn btn-primario btn-lg btn-bloque">Reservar</a>
-          <p class="ayuda" style="text-align:center">
-            Hay que iniciar sesión para reservar.
-          </p>
+          <p class="aviso" data-ev-mensaje role="status" hidden></p>
+
+          <div data-ev-accion>
+            <a href="#/iniciar-sesion" class="btn btn-primario btn-lg btn-bloque">Reservar</a>
+            <p class="ayuda" style="text-align:center">
+              Hay que iniciar sesión para reservar.
+            </p>
+          </div>
         </aside>
 
       </div>
@@ -1279,7 +1283,7 @@
           </div>
         </div>
 
-        <form data-validar class="form-evento" novalidate>
+        <form data-validar data-envio="evento" class="form-evento" novalidate>
 
           <fieldset>
             <legend>Datos del evento</legend>
@@ -1308,7 +1312,7 @@
 
             <div class="campo">
               <label for="nv-ciudad">Ciudad de realización</label>
-              <select id="nv-ciudad" name="ciudad" data-reglas="requerido" aria-describedby="err-nv-ciudad">
+              <select id="nv-ciudad" name="ciudad" data-ciudades data-reglas="requerido" aria-describedby="err-nv-ciudad">
                 <option value="">Elige una ciudad</option>
                 <option value="1">Cali · Valle del Cauca</option>
                 <option value="2">Tuluá · Valle del Cauca</option>
@@ -1388,8 +1392,8 @@
           </fieldset>
 
           <p class="aviso" data-exito role="status" hidden>
-            Todos los datos son válidos. El guardado contra la base de datos entra
-            con la historia de la API de eventos.
+            Todos los datos son válidos. Sin el servidor levantado el evento no
+            se puede guardar, pero el formulario ya los revisó todos.
           </p>
 
           <div class="form-evento-pie">
@@ -1415,6 +1419,288 @@
 </div>
 
 
+
+<!-- MIS RESERVAS (CLIENTE) -->
+<div class="vista" id="vista-mis-reservas" data-titulo="Mis reservas" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-mis-reservas" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-mis-reservas" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-mis-reservas" hidden>
+    <section class="panel" aria-labelledby="titulo-mis-reservas">
+      <div class="contenedor">
+
+        <div class="panel-cabecera">
+          <div>
+            <p class="overline">Mi cuenta</p>
+            <h1 id="titulo-mis-reservas">Mis reservas</h1>
+            <p>Aquí quedan las entradas que has reservado. La reserva pasa a
+               Confirmada cuando el organizador la revisa.</p>
+          </div>
+          <a href="#/catalogo" class="btn btn-secundario">Buscar más eventos</a>
+        </div>
+
+        <p class="aviso" data-mr-mensaje role="status" hidden></p>
+
+        <div class="lista-reservas" data-mr-lista aria-live="polite"></div>
+
+        <p class="vacio" data-mr-vacio hidden>
+          Todavía no tienes reservas. Mira el catálogo y aparta tus entradas.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
+<!-- PANEL DEL AGENTE -->
+<div class="vista" id="vista-panel-agente" data-titulo="Mis eventos y reservas" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel-agente" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-panel-agente" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-panel-agente" hidden>
+    <section class="panel" aria-labelledby="titulo-panel-agente">
+      <div class="contenedor">
+
+        <div class="panel-cabecera">
+          <div>
+            <p class="overline">Panel del organizador</p>
+            <h1 id="titulo-panel-agente">Mis eventos y sus reservas</h1>
+            <p>Cambia el estado de tus eventos y responde las reservas de tu
+               público. Cancelar siempre pide la causa.</p>
+          </div>
+          <a href="#/crear-evento" class="btn btn-primario">Registrar evento</a>
+        </div>
+
+        <p class="aviso" data-pa-mensaje role="status" hidden></p>
+
+        <h2 class="panel-subtitulo">Mis eventos</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Eventos registrados por mí, con sus cupos y su estado</caption>
+            <thead>
+              <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Cuándo</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Cupos</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Cambiar estado</th>
+              </tr>
+            </thead>
+            <tbody data-pa-eventos></tbody>
+          </table>
+        </div>
+        <p class="vacio" data-pa-sin-eventos hidden>
+          Todavía no has registrado eventos.
+        </p>
+
+        <h2 class="panel-subtitulo">Reservas de mis eventos</h2>
+        <div class="lista-reservas" data-pa-reservas aria-live="polite"></div>
+        <p class="vacio" data-pa-sin-reservas hidden>
+          Tus eventos todavía no tienen reservas.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
+<!-- PANEL DEL ADMINISTRADOR -->
+<div class="vista" id="vista-panel-admin" data-titulo="Reportes" hidden>
+
+  <header class="encabezado">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel-admin" aria-label="Abrir menú">☰</button>
+      <nav class="nav" id="nav-panel-admin" aria-label="Navegación principal">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+      <div class="acciones" data-acciones-sesion>
+        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
+        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-panel-admin" hidden>
+    <section class="panel" aria-labelledby="titulo-panel-admin">
+      <div class="contenedor">
+
+        <div class="panel-cabecera">
+          <div>
+            <p class="overline">Panel del administrador</p>
+            <h1 id="titulo-panel-admin">Reportes del sistema</h1>
+            <p>Los reportes que pide el proyecto, sacados de la base de datos en
+               el momento en que se abre la pantalla.</p>
+          </div>
+        </div>
+
+        <p class="aviso" data-rp-mensaje role="status" hidden></p>
+
+        <h2 class="panel-subtitulo">Resumen general</h2>
+        <div class="tarjetas-dato" data-rp-resumen></div>
+
+        <h2 class="panel-subtitulo">Ingresos por agente</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Ingresos, promedio por evento y comisión de cada agente</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agente</th>
+                <th scope="col">Eventos</th>
+                <th scope="col">Reservas confirmadas</th>
+                <th scope="col">Ingresos</th>
+                <th scope="col">Promedio por evento</th>
+                <th scope="col">Comisión estimada</th>
+              </tr>
+            </thead>
+            <tbody data-rp-agentes></tbody>
+          </table>
+        </div>
+
+        <h2 class="panel-subtitulo">Promedio de gasto por cliente</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas, entradas, gasto total y puntos de cada cliente</caption>
+            <thead>
+              <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">Reservas</th>
+                <th scope="col">Entradas</th>
+                <th scope="col">Total gastado</th>
+                <th scope="col">Promedio por reserva</th>
+                <th scope="col">Puntos</th>
+              </tr>
+            </thead>
+            <tbody data-rp-clientes></tbody>
+          </table>
+        </div>
+
+        <h2 class="panel-subtitulo">Ingresos mes a mes</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas confirmadas, entradas e ingresos de cada mes</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mes</th>
+                <th scope="col">Reservas</th>
+                <th scope="col">Entradas</th>
+                <th scope="col">Ingresos</th>
+              </tr>
+            </thead>
+            <tbody data-rp-meses></tbody>
+          </table>
+        </div>
+
+        <h2 class="panel-subtitulo">Cobertura por ubicación</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Eventos por país, departamento y ciudad</caption>
+            <thead>
+              <tr>
+                <th scope="col">País</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Eventos</th>
+                <th scope="col">En cartelera</th>
+                <th scope="col">Cancelados</th>
+              </tr>
+            </thead>
+            <tbody data-rp-ubicacion></tbody>
+          </table>
+        </div>
+
+        <h2 class="panel-subtitulo">Eventos cancelados y su causa</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <caption class="solo-lectores">Eventos cancelados, con la causa y las reservas afectadas</caption>
+            <thead>
+              <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Cuándo era</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Reservas afectadas</th>
+                <th scope="col">Causa</th>
+              </tr>
+            </thead>
+            <tbody data-rp-cancelados></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
 <!-- Modelos -->
 <script src="js/configuracion.js"></script>
 <script src="js/modelos/rutas.js"></script>
@@ -1423,6 +1709,7 @@
 <script src="js/modelos/validacion.js"></script>
 <script src="js/modelos/calendario.js"></script>
 <script src="js/modelos/catalogo.js"></script>
+<script src="js/modelos/formato.js"></script>
 <!-- Vistas -->
 <script src="js/vistas/menu.js"></script>
 <script src="js/vistas/pantallas.js"></script>
@@ -1431,6 +1718,8 @@
 <script src="js/vistas/sesion.js"></script>
 <script src="js/vistas/catalogo.js"></script>
 <script src="js/vistas/evento.js"></script>
+<script src="js/vistas/reservas.js"></script>
+<script src="js/vistas/reportes.js"></script>
 <!-- Controladores -->
 <script src="js/controladores/enrutador.js"></script>
 <script src="js/controladores/formularios.js"></script>
@@ -1440,6 +1729,8 @@
 <script src="js/controladores/catalogo.js"></script>
 <script src="js/controladores/evento.js"></script>
 <script src="js/controladores/acceso.js"></script>
+<script src="js/controladores/reservas.js"></script>
+<script src="js/controladores/reportes.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

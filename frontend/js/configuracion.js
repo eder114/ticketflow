@@ -12,4 +12,9 @@
 // La API está publicada en Render y la base de datos en Neon. En el
 // computador conviene dejarla en null para trabajar contra el backend local.
 
-window.TICKETFLOW_API = "https://ticketflow-api-vafd.onrender.com/api";
+// En el computador se trabaja contra el backend local; la pagina publicada
+// habla con la API de Render.
+window.TICKETFLOW_API =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:4000/api"
+    : "https://ticketflow-api-vafd.onrender.com/api";

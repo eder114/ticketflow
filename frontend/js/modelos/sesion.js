@@ -26,11 +26,13 @@ var SesionModelo = (function () {
     agente: [
       { ruta: "#/inicio", texto: "Inicio" },
       { ruta: "#/catalogo", texto: "Catálogo" },
+      { ruta: "#/panel-agente", texto: "Mis eventos" },
       { ruta: "#/crear-evento", texto: "Registrar evento" }
     ],
     administrador: [
       { ruta: "#/inicio", texto: "Inicio" },
       { ruta: "#/catalogo", texto: "Catálogo" },
+      { ruta: "#/panel-agente", texto: "Eventos y reservas" },
       { ruta: "#/crear-evento", texto: "Registrar evento" },
       { ruta: "#/panel-admin", texto: "Reportes" }
     ]

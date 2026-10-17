@@ -47,17 +47,24 @@ var FormularioVista = (function () {
   }
 
   // Mensaje general del formulario, para lo que no corresponde a un campo:
-  // por ejemplo que el correo y la contrasena no coincidan.
-  function mostrarMensaje(form, texto) {
+  // por ejemplo que el correo y la contrasena no coincidan, o que el evento
+  // quedo guardado.
+  function mostrarMensaje(form, texto, esError) {
+    if (esError === undefined) esError = true;
+
     var caja = form.querySelector("[data-mensaje]");
     if (!caja) {
       caja = document.createElement("p");
-      caja.className = "aviso aviso-error";
       caja.setAttribute("role", "alert");
       caja.dataset.mensaje = "";
-      var boton = form.querySelector("button[type=submit]");
-      form.insertBefore(caja, boton);
+
+      // El boton puede estar dentro de un div; el mensaje se mete justo antes
+      // de lo que cuelga directamente del formulario.
+      var ancla = form.querySelector("button[type=submit]");
+      while (ancla && ancla.parentNode !== form) ancla = ancla.parentNode;
+      form.insertBefore(caja, ancla);
     }
+    caja.className = esError ? "aviso aviso-error" : "aviso";
     caja.textContent = texto;
     caja.hidden = false;
     caja.scrollIntoView({ block: "center", behavior: "smooth" });

@@ -64,6 +64,17 @@ var ApiModelo = (function () {
     );
   }
 
+  // Arma el ?ciudad=1&estado=... dejando por fuera lo que viene vacio.
+  function consulta(filtros) {
+    var partes = [];
+    Object.keys(filtros || {}).forEach(function (llave) {
+      var valor = filtros[llave];
+      if (valor === "" || valor === null || valor === undefined) return;
+      partes.push(encodeURIComponent(llave) + "=" + encodeURIComponent(valor));
+    });
+    return partes.length ? "?" + partes.join("&") : "";
+  }
+
   return {
     hayApi: hayApi,
     base: function () { return BASE; },
@@ -81,6 +92,45 @@ var ApiModelo = (function () {
     },
     ciudades: function () {
       return pedir("/ciudades?conUbicacion=true");
+    },
+
+    // ------------------------------------------------------------ eventos --
+    eventos: function (filtros) {
+      return pedir("/eventos" + consulta(filtros));
+    },
+    evento: function (codigo) {
+      return pedir("/eventos/" + codigo);
+    },
+    eventosMios: function () {
+      return pedir("/eventos/mios");
+    },
+    crearEvento: function (datos) {
+      return pedir("/eventos", { metodo: "POST", datos: datos });
+    },
+    estadoDeEvento: function (codigo, estado, causa) {
+      return pedir("/eventos/" + codigo + "/estado", {
+        metodo: "PATCH",
+        datos: { estado: estado, causa_cancelacion: causa || null }
+      });
+    },
+
+    // ----------------------------------------------------------- reservas --
+    reservas: function (filtros) {
+      return pedir("/reservas" + consulta(filtros));
+    },
+    crearReserva: function (datos) {
+      return pedir("/reservas", { metodo: "POST", datos: datos });
+    },
+    estadoDeReserva: function (id, estado, causa) {
+      return pedir("/reservas/" + id + "/estado", {
+        metodo: "PATCH",
+        datos: { estado: estado, causa_cancelacion: causa || null }
+      });
+    },
+
+    // ----------------------------------------------------------- reportes --
+    tablero: function () {
+      return pedir("/reportes/tablero");
     }
   };
 })();
