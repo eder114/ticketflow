@@ -32,41 +32,7 @@ var ReporteVista = (function () {
     });
   }
 
-  // Las tarjetas con los totales del sistema.
-  function pintarResumen(caja, resumen) {
-    if (!caja) return;
-
-    var datos = [
-      { titulo: "Clientes", valor: FormatoModelo.numero(resumen.clientes) },
-      { titulo: "Agentes", valor: FormatoModelo.numero(resumen.agentes) },
-      { titulo: "Eventos", valor: FormatoModelo.numero(resumen.eventos) },
-      { titulo: "Reservas", valor: FormatoModelo.numero(resumen.reservas) },
-      { titulo: "Entradas confirmadas", valor: FormatoModelo.numero(resumen.entradas_confirmadas) },
-      { titulo: "Ingresos confirmados", valor: FormatoModelo.pesos(resumen.ingresos_confirmados) }
-    ];
-
-    caja.textContent = "";
-    datos.forEach(function (dato) {
-      var tarjeta = document.createElement("div");
-      tarjeta.className = "tarjeta-dato";
-
-      var titulo = document.createElement("p");
-      titulo.className = "tarjeta-dato-titulo";
-      titulo.textContent = dato.titulo;
-
-      var valor = document.createElement("p");
-      valor.className = "tarjeta-dato-valor";
-      valor.textContent = dato.valor;
-
-      tarjeta.appendChild(titulo);
-      tarjeta.appendChild(valor);
-      caja.appendChild(tarjeta);
-    });
-  }
-
   function pintarTablero(tablero) {
-    pintarResumen(document.querySelector("[data-rp-resumen]"), tablero.resumen);
-
     pintarTabla(document.querySelector("[data-rp-agentes]"), tablero.porAgente, function (f) {
       return [
         f.agente,

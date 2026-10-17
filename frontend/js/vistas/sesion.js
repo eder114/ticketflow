@@ -64,10 +64,13 @@ var SesionVista = (function () {
   // Se llama en cada cambio de pantalla, para que todos los encabezados queden
   // mostrando lo mismo.
   function actualizar(rutaActual) {
-    document.querySelectorAll(".encabezado .nav").forEach(function (nav) {
+    // Los encabezados de las pantallas normales y las barras laterales de los
+    // paneles muestran el mismo menú del perfil.
+    document.querySelectorAll(".encabezado .nav, [data-menu-sesion]").forEach(function (nav) {
       pintarMenu(nav, rutaActual);
     });
     document.querySelectorAll("[data-acciones-sesion]").forEach(pintarAcciones);
+    TableroVista.pintarUsuario();
   }
 
   return { actualizar: actualizar };

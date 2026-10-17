@@ -979,7 +979,8 @@ button{font-family:inherit}
 }
 .tabla thead th{
   font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--texto-suave);background:var(--gris-100);
+  /* navy-700 sobre gris-100 pasa el contraste AA; el gris claro no lo pasaba */
+  color:var(--navy-700);background:var(--gris-100);
   white-space:nowrap;
 }
 .tabla tbody th{font-weight:600;color:var(--texto)}
@@ -1087,4 +1088,203 @@ button{font-family:inherit}
 }
 @media (min-width:1024px){
   .gestion-rejilla{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+
+/* ========================= PANELES CON BARRA LATERAL ====================== */
+
+/* En celular la barra lateral es una tira arriba; desde 1024 px se queda
+   fija a la izquierda, como en el diseño. */
+.tablero{display:flex;flex-direction:column;min-height:100vh;background:#F7F9FB}
+
+.tablero-lateral{
+  background:#fff;border-bottom:1px solid var(--linea-suave);
+  padding:var(--e4) var(--margen);
+  display:flex;flex-direction:column;gap:var(--e3);
+}
+.tablero-lateral .marca{font-size:20px}
+.tablero-rol{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--texto-tenue);
+}
+
+.tablero-usuario{display:flex;align-items:center;gap:var(--e3)}
+.tablero-avatar{
+  width:40px;height:40px;flex:0 0 40px;border-radius:var(--r-full);
+  background:var(--indigo);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;letter-spacing:.02em;
+}
+.tablero-usuario-datos{display:flex;flex-direction:column;min-width:0}
+.tablero-usuario-nombre{font-weight:600;font-size:14.5px;color:var(--texto);overflow-wrap:anywhere}
+.tablero-usuario-perfil{font-size:12px;color:var(--texto-suave)}
+
+.tablero-nav{
+  display:flex;gap:var(--e2);overflow-x:auto;
+  padding-bottom:4px;
+}
+.tablero-nav a{
+  flex:0 0 auto;
+  padding:9px 14px;border-radius:var(--r-btn);
+  font-size:14px;font-weight:500;color:var(--texto-suave);
+  text-decoration:none;white-space:nowrap;
+}
+.tablero-nav a:hover{background:var(--gris-100);color:var(--texto)}
+.tablero-nav a.activo{background:var(--indigo);color:#fff;font-weight:600}
+
+.tablero-salir{display:flex;flex-wrap:wrap;gap:var(--e2)}
+.tablero-salir .btn{flex:1 0 auto;justify-content:center}
+.tablero-salir .sesion-nombre,.tablero-salir .sesion-perfil{display:none}
+
+.tablero-cuerpo{
+  flex:1;min-width:0;
+  padding:var(--e6) var(--margen) var(--e10);
+  display:flex;flex-direction:column;gap:var(--e5);
+}
+
+.tablero-cabecera{display:flex;flex-direction:column;gap:var(--e3)}
+.tablero-cabecera h1{font-size:28px;line-height:1.2}
+.tablero-cabecera p{color:var(--texto-suave);font-size:15px;max-width:62ch}
+.tablero-cabecera .btn{align-self:flex-start}
+
+/* --- tarjetas de cifras --- */
+
+.kpis{display:grid;gap:var(--e3);grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.kpi{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:var(--sombra-sm);padding:var(--e4);
+  display:flex;flex-direction:column;gap:6px;
+}
+.kpi-icono{
+  width:36px;height:36px;border-radius:var(--r-btn);
+  background:var(--indigo-50);color:var(--indigo-700);
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+}
+.kpi-titulo{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-suave);
+}
+.kpi-valor{
+  font-family:"Space Grotesk",sans-serif;font-size:26px;font-weight:700;
+  color:var(--navy);line-height:1.1;
+}
+.kpi-nota{font-size:12.5px;color:var(--texto-suave)}
+
+.kpi-destacada{background:var(--indigo);border-color:var(--indigo)}
+.kpi-destacada .kpi-icono{background:rgba(255,255,255,.18);color:#fff}
+.kpi-destacada .kpi-titulo,.kpi-destacada .kpi-nota{color:#fff}
+.kpi-destacada .kpi-valor{color:#fff}
+
+/* --- tarjetas de contenido --- */
+
+.panel-tarjeta{
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:var(--sombra-sm);padding:var(--e4);
+  display:flex;flex-direction:column;gap:var(--e3);min-width:0;
+}
+.panel-tarjeta h2{font-size:18px;line-height:1.3}
+.panel-nota{font-size:13.5px;color:var(--texto-suave);margin-top:-6px}
+.panel-tarjeta .tabla-caja{box-shadow:none}
+
+.tablero-rejilla{display:grid;gap:var(--e4);grid-template-columns:1fr}
+
+/* --- gráficas --- */
+
+.grafica{width:100%;height:auto;display:block}
+.grafica-guia{stroke:var(--linea-suave);stroke-width:1}
+.grafica-aro{stroke:var(--gris-100)}
+.grafica-etiqueta{
+  font-family:"Inter",sans-serif;font-size:12px;fill:var(--texto-suave);
+}
+.grafica-centro{
+  font-family:"Space Grotesk",sans-serif;font-size:26px;font-weight:700;fill:var(--navy);
+}
+.grafica-centro-nota{
+  font-family:"Inter",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.08em;fill:var(--texto-suave);
+}
+.grafica-caja{display:flex;flex-direction:column;gap:var(--e3);align-items:center}
+.grafica-caja .grafica{max-width:260px}
+
+.grafica-leyenda{list-style:none;display:flex;flex-direction:column;gap:8px;width:100%}
+.grafica-leyenda li{display:flex;align-items:center;gap:var(--e2);font-size:14px}
+.grafica-punto{width:10px;height:10px;flex:0 0 10px;border-radius:var(--r-full)}
+.grafica-leyenda-nombre{flex:1;min-width:0;color:var(--texto-suave)}
+.grafica-leyenda-valor{font-weight:600;color:var(--texto);font-variant-numeric:tabular-nums}
+.grafica-vacia{
+  padding:var(--e8) var(--e3);text-align:center;
+  color:var(--texto-suave);font-size:14px;
+  border:1px dashed var(--linea);border-radius:var(--r-card);
+}
+
+/* --- actividad reciente --- */
+
+.actividad{list-style:none;display:flex;flex-direction:column;gap:var(--e3)}
+.actividad-item{display:flex;gap:var(--e3);align-items:flex-start}
+.actividad-punto{
+  width:10px;height:10px;flex:0 0 10px;margin-top:6px;border-radius:var(--r-full);
+  background:var(--indigo);
+}
+.actividad-punto.es-confirmada{background:var(--exito-600)}
+.actividad-punto.es-cancelada{background:var(--error-600)}
+.actividad-titulo{font-size:14.5px;font-weight:600;color:var(--texto);line-height:1.35}
+.actividad-detalle{font-size:13.5px;color:var(--texto-suave);line-height:1.4}
+.actividad-cuando{
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-tenue);margin-top:2px;
+}
+
+/* --- próximo evento del cliente --- */
+
+.proximo{
+  border:1px solid var(--linea-suave);border-radius:var(--r-card-lg);overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.proximo-foto{position:relative;aspect-ratio:16/9;background:var(--gris-100)}
+.proximo-foto img{width:100%;height:100%;object-fit:cover}
+.proximo-foto h3{
+  position:absolute;left:16px;right:16px;bottom:14px;
+  color:#fff;font-size:21px;line-height:1.2;
+  text-shadow:0 2px 12px rgba(10,12,30,.6);
+}
+.proximo-foto .evento-cat{position:absolute;top:12px;left:12px}
+.proximo-lado{padding:var(--e4);display:flex;flex-direction:column;gap:var(--e3)}
+.proximo-datos{display:grid;gap:var(--e3);grid-template-columns:1fr;font-size:14px}
+.proximo-datos dt{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto-suave);margin-bottom:2px;
+}
+.proximo-datos dd{color:var(--texto);line-height:1.45}
+
+@media (min-width:576px){
+  .proximo-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tablero-cabecera{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .tablero-cabecera .btn{align-self:auto;flex:0 0 auto}
+}
+
+@media (min-width:768px){
+  .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tablero-cabecera h1{font-size:32px}
+  .panel-tarjeta{padding:var(--e5)}
+  .proximo{flex-direction:row}
+  .proximo-foto{flex:1 1 55%;aspect-ratio:auto;min-height:260px}
+  .proximo-lado{flex:1 1 45%}
+}
+
+@media (min-width:1024px){
+  .tablero{flex-direction:row}
+  .tablero-lateral{
+    position:sticky;top:0;align-self:flex-start;
+    width:252px;flex:0 0 252px;height:100vh;
+    border-bottom:0;border-right:1px solid var(--linea-suave);
+    padding:var(--e5) var(--e4);
+    overflow-y:auto;
+  }
+  .tablero-nav{flex-direction:column;overflow:visible;gap:4px;margin-top:var(--e2)}
+  .tablero-nav a{white-space:normal}
+  .tablero-salir{margin-top:auto;flex-direction:column}
+  .tablero-cuerpo{padding:var(--e8) var(--e8) var(--e12);gap:var(--e6)}
+  .tablero-rejilla{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+  .tablero-rejilla-ancha{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
 }

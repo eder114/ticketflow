@@ -1425,103 +1425,102 @@
 
 
 
-<!-- MIS RESERVAS (CLIENTE) -->
+<!-- PANEL DEL CLIENTE -->
 <div class="vista" id="vista-mis-reservas" data-titulo="Mis reservas" hidden>
+  <div class="tablero">
 
-  <header class="encabezado">
-    <div class="contenedor encabezado-fila">
+    <aside class="tablero-lateral">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-mis-reservas" aria-label="Abrir menú">☰</button>
-      <nav class="nav" id="nav-mis-reservas" aria-label="Navegación principal">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-      <div class="acciones" data-acciones-sesion>
-        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
-        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
-      </div>
-    </div>
-  </header>
+      <p class="tablero-rol">Panel de cliente</p>
+      <div class="tablero-usuario" data-usuario-sesion></div>
+      <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
+      <div class="tablero-salir" data-acciones-sesion></div>
+    </aside>
 
-  <main id="contenido-mis-reservas" hidden>
-    <section class="panel" aria-labelledby="titulo-mis-reservas">
-      <div class="contenedor">
+    <main id="contenido-mis-reservas" class="tablero-cuerpo" hidden>
 
-        <div class="panel-cabecera">
-          <div>
-            <p class="overline">Mi cuenta</p>
-            <h1 id="titulo-mis-reservas">Mis reservas</h1>
-            <p>Aquí quedan las entradas que has reservado. La reserva pasa a
-               Confirmada cuando el organizador la revisa.</p>
-          </div>
-          <a href="#/catalogo" class="btn btn-secundario">Buscar más eventos</a>
+      <div class="tablero-cabecera">
+        <div>
+          <p class="overline">Mi cuenta</p>
+          <h1 id="titulo-mis-reservas">Mis reservas</h1>
+          <p>Aquí quedan las entradas que has reservado. La reserva pasa a
+             Confirmada cuando el organizador la revisa.</p>
         </div>
+        <a href="#/catalogo" class="btn btn-secundario">Buscar más eventos</a>
+      </div>
 
-        <p class="aviso" data-mr-mensaje role="status" hidden></p>
+      <p class="aviso" data-mr-mensaje role="status" hidden></p>
 
+      <div class="kpis" data-mr-cifras></div>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-proximo">
+        <h2 id="titulo-proximo">Tu próximo evento</h2>
+        <div data-mr-proximo></div>
+      </section>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-historial">
+        <h2 id="titulo-historial">Todas tus reservas</h2>
         <div class="lista-reservas" data-mr-lista aria-live="polite"></div>
-
         <p class="vacio" data-mr-vacio hidden>
           Todavía no tienes reservas. Mira el catálogo y aparta tus entradas.
         </p>
+      </section>
 
-      </div>
-    </section>
-  </main>
-
-  <footer class="pie" aria-label="Información del sitio">
-    <div class="contenedor pie-fila">
-      <p>TicketFlow · Proyecto Integrador 2026-2</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
+  </div>
 </div>
 
 
-<!-- PANEL DEL AGENTE -->
+<!-- PANEL DEL ORGANIZADOR -->
 <div class="vista" id="vista-panel-agente" data-titulo="Mis eventos y reservas" hidden>
+  <div class="tablero">
 
-  <header class="encabezado">
-    <div class="contenedor encabezado-fila">
+    <aside class="tablero-lateral">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel-agente" aria-label="Abrir menú">☰</button>
-      <nav class="nav" id="nav-panel-agente" aria-label="Navegación principal">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-      <div class="acciones" data-acciones-sesion>
-        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
-        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
-      </div>
-    </div>
-  </header>
+      <p class="tablero-rol">Panel del organizador</p>
+      <div class="tablero-usuario" data-usuario-sesion></div>
+      <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
+      <div class="tablero-salir" data-acciones-sesion></div>
+    </aside>
 
-  <main id="contenido-panel-agente" hidden>
-    <section class="panel" aria-labelledby="titulo-panel-agente">
-      <div class="contenedor">
+    <main id="contenido-panel-agente" class="tablero-cuerpo" hidden>
 
-        <div class="panel-cabecera">
-          <div>
-            <p class="overline">Panel del organizador</p>
-            <h1 id="titulo-panel-agente">Mis eventos y sus reservas</h1>
-            <p>Cambia el estado de tus eventos y responde las reservas de tu
-               público. Cancelar siempre pide la causa.</p>
-          </div>
-          <a href="#/crear-evento" class="btn btn-primario">Registrar evento</a>
+      <div class="tablero-cabecera">
+        <div>
+          <p class="overline">Ventas</p>
+          <h1 id="titulo-panel-agente">Mis eventos y sus reservas</h1>
+          <p>Cómo van las reservas de tus eventos y qué hay que responder hoy.
+             Cancelar siempre pide la causa.</p>
         </div>
+        <a href="#/crear-evento" class="btn btn-primario">Registrar evento</a>
+      </div>
 
-        <p class="aviso" data-pa-mensaje role="status" hidden></p>
+      <p class="aviso" data-pa-mensaje role="status" hidden></p>
 
-        <h2 class="panel-subtitulo">Mis eventos</h2>
+      <div class="kpis" data-pa-cifras></div>
+
+      <div class="tablero-rejilla">
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-barras">
+          <h2 id="titulo-pa-barras">Comportamiento de las reservas</h2>
+          <p class="panel-nota">Entradas de tus eventos, mes a mes.</p>
+          <div data-pa-barras></div>
+        </section>
+
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-dona">
+          <h2 id="titulo-pa-dona">Estado de las reservas</h2>
+          <p class="panel-nota">Cómo están repartidas las reservas de tus eventos.</p>
+          <div class="grafica-caja" data-pa-dona></div>
+        </section>
+      </div>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-pa-eventos">
+        <h2 id="titulo-pa-eventos">Mis eventos</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Mis eventos">
           <table class="tabla">
             <caption class="solo-lectores">Eventos registrados por mí, con sus cupos y su estado</caption>
@@ -1542,69 +1541,88 @@
         <p class="vacio" data-pa-sin-eventos hidden>
           Todavía no has registrado eventos.
         </p>
+      </section>
 
-        <h2 class="panel-subtitulo">Reservas de mis eventos</h2>
-        <div class="lista-reservas" data-pa-reservas aria-live="polite"></div>
-        <p class="vacio" data-pa-sin-reservas hidden>
-          Tus eventos todavía no tienen reservas.
-        </p>
+      <div class="tablero-rejilla tablero-rejilla-ancha">
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-reservas">
+          <h2 id="titulo-pa-reservas">Reservas de mis eventos</h2>
+          <div class="lista-reservas" data-pa-reservas aria-live="polite"></div>
+          <p class="vacio" data-pa-sin-reservas hidden>
+            Tus eventos todavía no tienen reservas.
+          </p>
+        </section>
 
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-actividad">
+          <h2 id="titulo-pa-actividad">Actividad reciente</h2>
+          <div data-pa-actividad></div>
+        </section>
       </div>
-    </section>
-  </main>
 
-  <footer class="pie" aria-label="Información del sitio">
-    <div class="contenedor pie-fila">
-      <p>TicketFlow · Proyecto Integrador 2026-2</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
+  </div>
 </div>
 
 
 <!-- PANEL DEL ADMINISTRADOR -->
 <div class="vista" id="vista-panel-admin" data-titulo="Reportes" hidden>
+  <div class="tablero">
 
-  <header class="encabezado">
-    <div class="contenedor encabezado-fila">
+    <aside class="tablero-lateral">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel-admin" aria-label="Abrir menú">☰</button>
-      <nav class="nav" id="nav-panel-admin" aria-label="Navegación principal">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-      <div class="acciones" data-acciones-sesion>
-        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
-        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
-      </div>
-    </div>
-  </header>
+      <p class="tablero-rol">Panel de control</p>
+      <div class="tablero-usuario" data-usuario-sesion></div>
+      <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
+      <div class="tablero-salir" data-acciones-sesion></div>
+    </aside>
 
-  <main id="contenido-panel-admin" hidden>
-    <section class="panel" aria-labelledby="titulo-panel-admin">
-      <div class="contenedor">
+    <main id="contenido-panel-admin" class="tablero-cuerpo" hidden>
 
-        <div class="panel-cabecera">
-          <div>
-            <p class="overline">Panel del administrador</p>
-            <h1 id="titulo-panel-admin">Reportes del sistema</h1>
-            <p>Los reportes que pide el proyecto, sacados de la base de datos en
-               el momento en que se abre la pantalla.</p>
-          </div>
+      <div class="tablero-cabecera">
+        <div>
+          <p class="overline">Supervisión</p>
+          <h1 id="titulo-panel-admin">Reportes analíticos</h1>
+          <p>Los reportes que pide el proyecto, sacados de la base de datos en
+             el momento en que se abre la pantalla.</p>
         </div>
+        <a href="#/gestion" class="btn btn-secundario">Gestión de datos</a>
+      </div>
 
-        <p class="aviso" data-rp-mensaje role="status" hidden></p>
+      <p class="aviso" data-rp-mensaje role="status" hidden></p>
 
-        <h2 class="panel-subtitulo">Resumen general</h2>
-        <div class="tarjetas-dato" data-rp-resumen></div>
+      <div class="kpis" data-rp-cifras></div>
 
-        <h2 class="panel-subtitulo">Ingresos por agente</h2>
+      <div class="tablero-rejilla">
+        <section class="panel-tarjeta" aria-labelledby="titulo-rp-linea">
+          <h2 id="titulo-rp-linea">Evolución de los ingresos</h2>
+          <p class="panel-nota">Reservas confirmadas de 2026, mes a mes.</p>
+          <div data-rp-linea></div>
+        </section>
+
+        <section class="panel-tarjeta" aria-labelledby="titulo-rp-dona">
+          <h2 id="titulo-rp-dona">Usuarios por tipo</h2>
+          <p class="panel-nota">Quiénes están registrados en la plataforma.</p>
+          <div class="grafica-caja" data-rp-dona></div>
+        </section>
+      </div>
+
+      <div class="tablero-rejilla">
+        <section class="panel-tarjeta" aria-labelledby="titulo-rp-eventos">
+          <h2 id="titulo-rp-eventos">Eventos por estado</h2>
+          <p class="panel-nota">En cartelera y cancelados, por ciudad.</p>
+          <div data-rp-estados></div>
+        </section>
+
+        <section class="panel-tarjeta" aria-labelledby="titulo-rp-actividad">
+          <h2 id="titulo-rp-actividad">Últimas reservas</h2>
+          <div data-rp-actividad></div>
+        </section>
+      </div>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-agentes">
+        <h2 id="titulo-rp-agentes">Ingresos por agente</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Ingresos por agente">
           <table class="tabla">
             <caption class="solo-lectores">Ingresos, promedio por evento y comisión de cada agente</caption>
@@ -1621,8 +1639,10 @@
             <tbody data-rp-agentes></tbody>
           </table>
         </div>
+      </section>
 
-        <h2 class="panel-subtitulo">Promedio de gasto por cliente</h2>
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-clientes">
+        <h2 id="titulo-rp-clientes">Promedio de gasto por cliente</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Promedio de gasto por cliente">
           <table class="tabla">
             <caption class="solo-lectores">Reservas, entradas, gasto total y puntos de cada cliente</caption>
@@ -1639,8 +1659,10 @@
             <tbody data-rp-clientes></tbody>
           </table>
         </div>
+      </section>
 
-        <h2 class="panel-subtitulo">Ingresos mes a mes</h2>
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-meses">
+        <h2 id="titulo-rp-meses">Ingresos mes a mes</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Ingresos mes a mes">
           <table class="tabla">
             <caption class="solo-lectores">Reservas confirmadas, entradas e ingresos de cada mes</caption>
@@ -1655,8 +1677,10 @@
             <tbody data-rp-meses></tbody>
           </table>
         </div>
+      </section>
 
-        <h2 class="panel-subtitulo">Cobertura por ubicación</h2>
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-ubicacion">
+        <h2 id="titulo-rp-ubicacion">Cobertura por ubicación</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Cobertura por ubicación">
           <table class="tabla">
             <caption class="solo-lectores">Eventos por país, departamento y ciudad</caption>
@@ -1673,9 +1697,11 @@
             <tbody data-rp-ubicacion></tbody>
           </table>
         </div>
+      </section>
 
-        <h2 class="panel-subtitulo">Eventos cancelados y su causa</h2>
-        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Eventos cancelados y su causa">
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-cancelados">
+        <h2 id="titulo-rp-cancelados">Eventos cancelados y su causa</h2>
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Eventos cancelados">
           <table class="tabla">
             <caption class="solo-lectores">Eventos cancelados, con la causa y las reservas afectadas</caption>
             <thead>
@@ -1690,62 +1716,44 @@
             <tbody data-rp-cancelados></tbody>
           </table>
         </div>
+      </section>
 
-      </div>
-    </section>
-  </main>
-
-  <footer class="pie" aria-label="Información del sitio">
-    <div class="contenedor pie-fila">
-      <p>TicketFlow · Proyecto Integrador 2026-2</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
+  </div>
 </div>
-
 
 
 <!-- GESTIÓN DE DATOS (ADMINISTRADOR) -->
 <div class="vista" id="vista-gestion" data-titulo="Gestión de datos" hidden>
+  <div class="tablero">
 
-  <header class="encabezado">
-    <div class="contenedor encabezado-fila">
+    <aside class="tablero-lateral">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-gestion" aria-label="Abrir menú">☰</button>
-      <nav class="nav" id="nav-gestion" aria-label="Navegación principal">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-      <div class="acciones" data-acciones-sesion>
-        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
-        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
-      </div>
-    </div>
-  </header>
+      <p class="tablero-rol">Panel de control</p>
+      <div class="tablero-usuario" data-usuario-sesion></div>
+      <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
+      <div class="tablero-salir" data-acciones-sesion></div>
+    </aside>
 
-  <main id="contenido-gestion" hidden>
-    <section class="panel" aria-labelledby="titulo-gestion">
-      <div class="contenedor">
+    <main id="contenido-gestion" class="tablero-cuerpo" hidden>
 
-        <div class="panel-cabecera">
-          <div>
-            <p class="overline">Panel del administrador</p>
-            <h1 id="titulo-gestion">Gestión de datos</h1>
-            <p>Las personas registradas y la ubicación geográfica del sistema:
-               países, departamentos y ciudades.</p>
-          </div>
-          <a href="#/panel-admin" class="btn btn-secundario">Ver reportes</a>
+      <div class="tablero-cabecera">
+        <div>
+          <p class="overline">Configuración</p>
+          <h1 id="titulo-gestion">Gestión de datos</h1>
+          <p>Las personas registradas y la ubicación geográfica del sistema:
+             países, departamentos y ciudades.</p>
         </div>
+        <a href="#/panel-admin" class="btn btn-secundario">Ver reportes</a>
+      </div>
 
-        <p class="aviso" data-ge-mensaje role="status" hidden></p>
+      <p class="aviso" data-ge-mensaje role="status" hidden></p>
 
-        <h2 class="panel-subtitulo">Personas registradas</h2>
+      <section class="panel-tarjeta" aria-labelledby="titulo-ge-personas">
+        <h2 id="titulo-ge-personas">Personas registradas</h2>
 
         <div class="filtro filtro-solo">
           <label for="ge-buscar">Buscar persona</label>
@@ -1768,8 +1776,10 @@
             <tbody data-ge-personas></tbody>
           </table>
         </div>
+      </section>
 
-        <h2 class="panel-subtitulo">Ubicación geográfica</h2>
+      <section class="panel-tarjeta" aria-labelledby="titulo-ge-ubicacion">
+        <h2 id="titulo-ge-ubicacion">Ubicación geográfica</h2>
 
         <div class="gestion-rejilla">
 
@@ -1817,20 +1827,10 @@
           ciudad donde hay personas o eventos: la base de datos no deja quedar
           registros sueltos.
         </p>
+      </section>
 
-      </div>
-    </section>
-  </main>
-
-  <footer class="pie" aria-label="Información del sitio">
-    <div class="contenedor pie-fila">
-      <p>TicketFlow · Proyecto Integrador 2026-2</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
+  </div>
 </div>
 
 
@@ -1853,6 +1853,8 @@
 <script src="js/vistas/evento.js?v=2026-10-17"></script>
 <script src="js/vistas/reservas.js?v=2026-10-17"></script>
 <script src="js/vistas/reportes.js?v=2026-10-17"></script>
+<script src="js/vistas/graficas.js?v=2026-10-17"></script>
+<script src="js/vistas/tablero.js?v=2026-10-17"></script>
 <script src="js/vistas/gestion.js?v=2026-10-17"></script>
 <!-- Controladores -->
 <script src="js/controladores/enrutador.js?v=2026-10-17"></script>
