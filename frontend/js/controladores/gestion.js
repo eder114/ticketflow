@@ -122,6 +122,17 @@ var GestionControlador = (function () {
     if (tipo === "departamentos") datos.id_pais = Number(form.elements.id_pais.value);
     if (tipo === "ciudades") datos.id_departamento = Number(form.elements.id_departamento.value);
 
+    // Los desplegables se llenan desde la base; si todavía no hay a quién
+    // asignarle el registro, no se manda nada.
+    if (tipo === "departamentos" && !datos.id_pais) {
+      GestionVista.mensaje("Primero hay que registrar un país.", true);
+      return;
+    }
+    if (tipo === "ciudades" && !datos.id_departamento) {
+      GestionVista.mensaje("Primero hay que registrar un departamento.", true);
+      return;
+    }
+
     GestionVista.mensaje("");
     ApiModelo.crearUbicacion(tipo, datos).then(function () {
       GestionVista.mensaje("Quedó registrado " + datos.nombre + ".");
