@@ -41,6 +41,7 @@ var CatalogoVista = (function () {
     art.dataset.categoria = categoria;
     art.dataset.precio = String(evento.precio_base);
     art.dataset.fecha = FormatoModelo.fechaDeFiltro(evento.fecha_hora_inicio);
+    art.dataset.busqueda = [evento.nombre, evento.teatro, evento.ciudad, categoria].join(" ");
 
     var caja = document.createElement("div");
     caja.className = "evento-img";

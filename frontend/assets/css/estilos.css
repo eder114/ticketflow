@@ -762,7 +762,7 @@ button{font-family:inherit}
   .catalogo-cabecera h1{font-size:34px}
 }
 @media (min-width:1024px){
-  .filtros{grid-template-columns:repeat(5,minmax(0,1fr));align-items:end}
+  .filtros{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end}
 }
 
 

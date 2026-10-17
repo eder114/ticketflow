@@ -63,6 +63,45 @@ var BuscadorControlador = (function () {
     });
   }
 
+  // Los desplegables del catálogo traen las ciudades como están en la base
+  // (Bogota, sin tilde) y el buscador las muestra con tilde, así que se busca
+  // la opción que diga lo mismo en vez de asignar el texto tal cual.
+  function pasar(filtros, nombre, valor) {
+    var campo = filtros.elements[nombre];
+    if (!campo) return;
+
+    if (!valor) { campo.value = ""; return; }
+
+    if (campo.tagName === "SELECT") {
+      var buscado = CatalogoModelo.llano(valor);
+      var opcion = Array.prototype.filter.call(campo.options, function (o) {
+        return CatalogoModelo.llano(o.value || o.textContent) === buscado;
+      })[0];
+      campo.value = opcion ? opcion.value : "";
+      return;
+    }
+    campo.value = valor;
+  }
+
+  // Lo que se eligió arriba se copia en los filtros del catálogo, que son los
+  // que de verdad esconden y muestran las tarjetas.
+  function llevarAlCatalogo(buscador) {
+    var filtros = document.querySelector("[data-filtros]");
+    if (!filtros) {
+      PantallaVista.irA("eventos", true);
+      return;
+    }
+
+    pasar(filtros, "texto", buscador.elements.evento.value);
+    pasar(filtros, "ciudad", buscador.elements.ciudad.value);
+    pasar(filtros, "desde", buscador.elements.fecha.value);
+    pasar(filtros, "categoria",
+          CatalogoModelo.categoriaDelBuscador(buscador.elements.tipo.value));
+
+    window.location.hash = "#/catalogo";
+    filtros.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
   function iniciar() {
     Array.prototype.forEach.call(document.querySelectorAll(".bq-chip"), conectarChip);
 
@@ -74,10 +113,10 @@ var BuscadorControlador = (function () {
 
     var buscador = document.querySelector(".buscador");
     if (buscador) {
-      // Todavía no hay base de datos: buscar lleva a los eventos destacados
+      // Buscar lleva al catálogo con los filtros ya puestos.
       buscador.addEventListener("submit", function (e) {
         e.preventDefault();
-        PantallaVista.irA("eventos", true);
+        llevarAlCatalogo(buscador);
       });
     }
   }

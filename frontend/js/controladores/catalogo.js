@@ -9,7 +9,8 @@ var CatalogoControlador = (function () {
       ciudad: form.elements.ciudad ? form.elements.ciudad.value : "",
       categoria: form.elements.categoria ? form.elements.categoria.value : "",
       precio: form.elements.precio ? form.elements.precio.value : "",
-      desde: form.elements.desde ? form.elements.desde.value : ""
+      desde: form.elements.desde ? form.elements.desde.value : "",
+      texto: form.elements.texto ? form.elements.texto.value : ""
     };
   }
 
@@ -61,6 +62,11 @@ var CatalogoControlador = (function () {
     // Filtrar al cambiar cualquier campo, sin esperar al botón.
     form.addEventListener("change", function () {
       aplicar(form);
+    });
+
+    // El campo de texto filtra mientras se escribe.
+    form.addEventListener("input", function (e) {
+      if (e.target.name === "texto") aplicar(form);
     });
 
     form.addEventListener("reset", function () {
