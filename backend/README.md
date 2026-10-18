@@ -164,6 +164,7 @@ Todos entran con la contraseña **Ticket2026\***.
 | `laura.gonzalez@correo.com` | Cliente |
 | `carolina.mejia@ticketflow.com` | Agente |
 | `hernan.ocampo@ticketflow.com` | Administrador |
+| `eder.rodriguez@uceva.edu.co` | Administrador (el del lider del equipo) |
 
 ## Cuando la base está publicada
 
