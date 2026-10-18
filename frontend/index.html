@@ -1798,6 +1798,87 @@
         </div>
       </section>
 
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-por-evento">
+        <h2 id="titulo-rp-por-evento">Reservas por evento y por mes</h2>
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Reservas por evento y por mes">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas y entradas de cada evento, mes a mes</caption>
+            <thead>
+              <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Mes</th>
+                <th scope="col">Reservas</th>
+                <th scope="col">Entradas</th>
+              </tr>
+            </thead>
+            <tbody data-rp-por-evento></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-agente-ciudad">
+        <h2 id="titulo-rp-agente-ciudad">Eventos por agente y por ciudad</h2>
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Eventos por agente y por ciudad">
+          <table class="tabla">
+            <caption class="solo-lectores">Eventos que ha creado cada agente en cada ciudad</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agente</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Eventos</th>
+                <th scope="col">Capacidad</th>
+              </tr>
+            </thead>
+            <tbody data-rp-agente-ciudad></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-historial">
+        <h2 id="titulo-rp-historial">Historial de reservas por cliente</h2>
+
+        <div class="filtro filtro-solo">
+          <label for="rp-cliente">Cliente</label>
+          <select id="rp-cliente" data-rp-clientes-lista></select>
+        </div>
+
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Historial del cliente">
+          <table class="tabla">
+            <caption class="solo-lectores">Todas las reservas del cliente elegido</caption>
+            <thead>
+              <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Cuándo reservó</th>
+                <th scope="col">Entradas</th>
+                <th scope="col">Total</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody data-rp-historial></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel-tarjeta" aria-labelledby="titulo-rp-canceladas">
+        <h2 id="titulo-rp-canceladas">Reservas canceladas y su causa</h2>
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Reservas canceladas">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas canceladas, con el cliente y la causa</caption>
+            <thead>
+              <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">Evento</th>
+                <th scope="col">Entradas</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Causa</th>
+              </tr>
+            </thead>
+            <tbody data-rp-canceladas></tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="panel-tarjeta" aria-labelledby="titulo-rp-cancelados">
         <h2 id="titulo-rp-cancelados">Eventos cancelados y su causa</h2>
         <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Eventos cancelados">

@@ -142,6 +142,23 @@ var ReporteControlador = (function () {
     });
   }
 
+  // El historial se pide aparte, porque depende del cliente que se elija.
+  function cargarHistorial() {
+    var select = document.querySelector("[data-rp-clientes-lista]");
+    if (!select || !select.value) return;
+
+    ApiModelo.historialDe(select.value).then(function (filas) {
+      ReporteVista.pintarHistorial(filas);
+    }).catch(function (error) {
+      aviso(error.message, true);
+    });
+  }
+
+  function conectarHistorial() {
+    var select = document.querySelector("[data-rp-clientes-lista]");
+    if (select) select.addEventListener("change", cargarHistorial);
+  }
+
   function cargar() {
     if (!ApiModelo.hayApi()) {
       aviso("No hay conexión con el servidor, así que no se pueden calcular los reportes.", true);
@@ -157,6 +174,8 @@ var ReporteControlador = (function () {
       pintarUsuarios(tablero.resumen);
       pintarEstados(tablero.porUbicacion);
       pintarUltimas();
+      ReporteVista.pintarClientes(tablero.porCliente);
+      cargarHistorial();
       aviso("");
     }).catch(function (error) {
       aviso(error.message, true);
@@ -165,6 +184,8 @@ var ReporteControlador = (function () {
 
   function iniciar() {
     if (!document.querySelector("[data-rp-cifras]")) return;
+
+    conectarHistorial();
 
     document.addEventListener("ticketflow:pantalla", function (e) {
       if (e.detail.pantalla === "panel-admin") cargar();

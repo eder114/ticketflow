@@ -75,6 +75,35 @@ var ReporteVista = (function () {
       ];
     });
 
+    pintarTabla(document.querySelector("[data-rp-por-evento]"), tablero.porEventoYMes || [], function (f) {
+      return [
+        f.evento,
+        f.nombre_mes,
+        FormatoModelo.numero(f.reservas),
+        FormatoModelo.numero(f.entradas)
+      ];
+    });
+
+    pintarTabla(document.querySelector("[data-rp-agente-ciudad]"), tablero.porAgenteYCiudad || [], function (f) {
+      return [
+        f.agente,
+        f.ciudad,
+        f.departamento,
+        FormatoModelo.numero(f.eventos),
+        FormatoModelo.numero(f.capacidad)
+      ];
+    });
+
+    pintarTabla(document.querySelector("[data-rp-canceladas]"), tablero.reservasCanceladas || [], function (f) {
+      return [
+        f.cliente,
+        f.evento,
+        FormatoModelo.numero(f.numero_entradas),
+        FormatoModelo.pesos(f.valor_total),
+        f.causa_cancelacion
+      ];
+    });
+
     pintarTabla(document.querySelector("[data-rp-cancelados]"), tablero.cancelados, function (f) {
       return [
         f.nombre,
@@ -86,7 +115,38 @@ var ReporteVista = (function () {
     });
   }
 
+  // La lista de clientes del selector del historial.
+  function pintarClientes(porCliente) {
+    var select = document.querySelector("[data-rp-clientes-lista]");
+    if (!select) return;
+
+    var elegido = select.value;
+    select.textContent = "";
+
+    porCliente.forEach(function (c) {
+      var opcion = document.createElement("option");
+      opcion.value = c.identificacion;
+      opcion.textContent = c.cliente;
+      select.appendChild(opcion);
+    });
+    if (elegido) select.value = elegido;
+  }
+
+  function pintarHistorial(filas) {
+    pintarTabla(document.querySelector("[data-rp-historial]"), filas, function (f) {
+      return [
+        f.evento,
+        FormatoModelo.fechaCorta(f.fecha_hora),
+        FormatoModelo.numero(f.numero_entradas),
+        FormatoModelo.pesos(f.valor_total),
+        f.estado
+      ];
+    });
+  }
+
   return {
-    pintarTablero: pintarTablero
+    pintarTablero: pintarTablero,
+    pintarClientes: pintarClientes,
+    pintarHistorial: pintarHistorial
   };
 })();

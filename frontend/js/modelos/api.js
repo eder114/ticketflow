@@ -132,6 +132,9 @@ var ApiModelo = (function () {
     tablero: function () {
       return pedir("/reportes/tablero");
     },
+    historialDe: function (identificacion) {
+      return pedir("/reportes/historial/" + identificacion);
+    },
 
     // ------------------------------------------- ubicacion geografica --
     // Las tres listas se manejan igual, así que una sola función arma la ruta:

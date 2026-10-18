@@ -231,13 +231,22 @@ export const eventosCancelados = () =>
 
 /** Todo junto, para pintar el tablero del administrador de una sola llamada. */
 export async function tablero(anio = ANIO_POR_DEFECTO) {
-  const [resumen, porAgente, porCliente, porMes, porUbicacion, cancelados] = await Promise.all([
+  const [
+    resumen, porAgente, porCliente, porMes, porUbicacion, cancelados,
+    porEventoYMes, porAgenteYCiudad, reservasSinEfecto
+  ] = await Promise.all([
     general(),
     ingresosPorAgente(),
     ingresosPorCliente(),
     ingresosPorMes(anio),
     eventosPorUbicacion(),
-    eventosCancelados()
+    eventosCancelados(),
+    reservasPorEventoYMes(anio),
+    eventosPorAgenteYCiudad(),
+    reservasCanceladas()
   ]);
-  return { anio, resumen, porAgente, porCliente, porMes, porUbicacion, cancelados };
+  return {
+    anio, resumen, porAgente, porCliente, porMes, porUbicacion, cancelados,
+    porEventoYMes, porAgenteYCiudad, reservasCanceladas: reservasSinEfecto
+  };
 }
