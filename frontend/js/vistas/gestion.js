@@ -100,6 +100,32 @@ var GestionVista = (function () {
     cajaCiudad.appendChild(select);
     form.appendChild(cajaCiudad);
 
+    // Cada perfil tiene sus propios datos: el cliente sus puntos, el agente
+    // su comisión, el administrador su salario y su horario.
+    var DEL_PERFIL = {
+      cliente: [
+        { nombre: "puntos", etiqueta: "Puntos", tipo: "number" },
+        { nombre: "ve_publicidad", etiqueta: "Ve publicidad (sí o no)", tipo: "text" }
+      ],
+      agente: [
+        { nombre: "comision", etiqueta: "Comisión (%)", tipo: "number" },
+        { nombre: "experiencia", etiqueta: "Años de experiencia", tipo: "number" }
+      ],
+      administrador: [
+        { nombre: "salario", etiqueta: "Salario (COP)", tipo: "number" },
+        { nombre: "horario", etiqueta: "Horario", tipo: "text" }
+      ]
+    };
+
+    (persona.perfiles || []).forEach(function (perfil) {
+      (DEL_PERFIL[perfil] || []).forEach(function (dato) {
+        var entrada = campo(dato.nombre, dato.etiqueta, "", dato.tipo);
+        entrada.dataset.perfil = perfil;
+        entrada.dataset.cargando = "";
+        entrada.placeholder = "Cargando...";
+      });
+    });
+
     var pie = document.createElement("div");
     pie.className = "form-causa-pie";
     var guardar = document.createElement("button");

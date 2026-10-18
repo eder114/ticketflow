@@ -65,6 +65,58 @@ var GestionControlador = (function () {
 
   // ---------------------------------------------------------- personas --
 
+  // Al abrir la edición se piden los datos del perfil y se llenan los campos.
+  function llenarPerfil(identificacion) {
+    var form = document.querySelector('[data-guardar-persona="' + identificacion + '"]');
+    if (!form) return;
+
+    var campos = form.querySelectorAll("[data-perfil]");
+    var perfiles = [];
+    campos.forEach(function (campo) {
+      if (perfiles.indexOf(campo.dataset.perfil) === -1) perfiles.push(campo.dataset.perfil);
+    });
+
+    perfiles.forEach(function (perfil) {
+      ApiModelo.perfilDe(perfil + "s", identificacion).then(function (datos) {
+        campos.forEach(function (campo) {
+          if (campo.dataset.perfil !== perfil) return;
+          var valor = datos[campo.name];
+          campo.value = typeof valor === "boolean" ? (valor ? "sí" : "no")
+                      : valor === null || valor === undefined ? "" : String(valor);
+          campo.placeholder = "";
+          delete campo.dataset.cargando;
+        });
+      }).catch(function () {
+        // Si no se puede leer, los campos se quedan vacíos y no se mandan.
+      });
+    });
+  }
+
+  // Lo que se cambió en los campos del perfil se manda aparte, a su propia
+  // ruta: /clientes, /agentes o /administradores.
+  function guardarPerfiles(form, identificacion) {
+    var porPerfil = {};
+
+    form.querySelectorAll("[data-perfil]").forEach(function (campo) {
+      if (campo.dataset.cargando !== undefined) return;
+
+      var perfil = campo.dataset.perfil;
+      porPerfil[perfil] = porPerfil[perfil] || {};
+
+      if (campo.name === "ve_publicidad") {
+        porPerfil[perfil][campo.name] = /^s[ií]|^true|^1/i.test(campo.value.trim());
+      } else if (campo.type === "number") {
+        porPerfil[perfil][campo.name] = Number(campo.value);
+      } else {
+        porPerfil[perfil][campo.name] = campo.value.trim();
+      }
+    });
+
+    return Promise.all(Object.keys(porPerfil).map(function (perfil) {
+      return ApiModelo.actualizarPerfil(perfil + "s", identificacion, porPerfil[perfil]);
+    }));
+  }
+
   function guardarPersona(form) {
     var identificacion = form.dataset.guardarPersona;
     var telefonos = form.elements.telefonos.value
@@ -81,6 +133,8 @@ var GestionControlador = (function () {
       direccion: form.elements.direccion.value.trim() || null,
       id_ciudad: Number(form.elements.id_ciudad.value),
       telefonos: telefonos
+    }).then(function (persona) {
+      return guardarPerfiles(form, identificacion).then(function () { return persona; });
     }).then(function (persona) {
       GestionVista.mensaje("Quedaron guardados los datos de " + persona.nombres + " " +
                            persona.apellidos + ".");
@@ -189,7 +243,11 @@ var GestionControlador = (function () {
   function conectar() {
     document.addEventListener("click", function (e) {
       var editar = e.target.closest("[data-editar-persona]");
-      if (editar) { GestionVista.mostrarEdicion(editar.dataset.editarPersona, true); return; }
+      if (editar) {
+        GestionVista.mostrarEdicion(editar.dataset.editarPersona, true);
+        llenarPerfil(editar.dataset.editarPersona);
+        return;
+      }
 
       var cerrar = e.target.closest("[data-cerrar-edicion]");
       if (cerrar) { GestionVista.mostrarEdicion(cerrar.dataset.cerrarEdicion, false); return; }

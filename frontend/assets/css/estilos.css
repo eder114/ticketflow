@@ -965,6 +965,8 @@ button{font-family:inherit}
   outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.16);
 }
 .fila-causa td{background:var(--indigo-50)}
+/* sobre el lila de la fila abierta, las etiquetas necesitan más contraste */
+
 
 /* --- tarjetas de totales del administrador --- */
 
@@ -1744,3 +1746,8 @@ body.con-cajon{overflow:hidden}
   .tabla-cabecera{flex-direction:row;align-items:flex-end;justify-content:space-between}
   .tabla-filtros{grid-template-columns:minmax(0,220px) minmax(0,160px)}
 }
+
+/* Las etiquetas de la fila que se abre, sobre el lila, necesitan más
+   contraste que el gris normal. */
+.fila-causa .form-simple label,.fila-causa label,
+.fila-causa .dato-etiqueta{color:var(--navy-700)}

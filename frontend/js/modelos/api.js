@@ -166,6 +166,15 @@ var ApiModelo = (function () {
       return pedir("/personas/" + identificacion, { metodo: "DELETE" });
     },
 
+    // Los datos propios de cada perfil: puntos del cliente, comisión del
+    // agente, salario del administrador.
+    perfilDe: function (tipo, identificacion) {
+      return pedir("/" + tipo + "/" + identificacion);
+    },
+    actualizarPerfil: function (tipo, identificacion, datos) {
+      return pedir("/" + tipo + "/" + identificacion, { metodo: "PUT", datos: datos });
+    },
+
     // ------------------------------------------------- eventos (edicion) --
     actualizarEvento: function (codigo, datos) {
       return pedir("/eventos/" + codigo, { metodo: "PUT", datos: datos });
