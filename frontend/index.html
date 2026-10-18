@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/estilos.css?v=2026-10-18">
+<link rel="stylesheet" href="assets/css/estilos.css?v=2026-10-18b">
 </head>
 <body>
 
@@ -1191,13 +1191,22 @@
       <div class="contenedor detalle-rejilla">
 
         <div class="detalle-principal">
+          <!-- La foto lleva encima la categoría, el nombre y lo básico del
+               evento, como en el diseño. -->
           <figure class="detalle-foto">
             <img src="assets/img/festival-noche.jpg" data-ev-foto
                  alt="Público con las manos en alto frente al escenario principal del festival">
+            <figcaption class="detalle-encima">
+              <span class="evento-cat" data-ev-categoria>Festival</span>
+              <h1 id="titulo-evento" data-ev-nombre>Festival de Música Cali Vive</h1>
+              <p class="detalle-linea">
+                <span><span aria-hidden="true">📅</span> <span data-ev-cuando>14 de noviembre de 2026</span></span>
+                <span><span aria-hidden="true">📍</span> <span data-ev-donde>Cali, Valle del Cauca</span></span>
+              </p>
+            </figcaption>
           </figure>
 
           <span class="estado-chip estado-boleteria" data-ev-estado>En boletería</span>
-          <h1 id="titulo-evento" data-ev-nombre>Festival de Música Cali Vive</h1>
 
           <dl class="detalle-datos">
             <div><dt>Lugar</dt><dd data-ev-teatro>Estadio Pascual Guerrero</dd></div>
@@ -1223,7 +1232,7 @@
         </div>
 
         <aside class="detalle-compra" aria-labelledby="titulo-compra">
-          <h2 id="titulo-compra">Reserva tus entradas</h2>
+          <h2 id="titulo-compra" class="overline">Precio desde</h2>
 
           <p class="detalle-precio"><span data-ev-precio>$120.000</span> <small>COP por entrada</small></p>
 
@@ -1231,11 +1240,17 @@
             Quedan <strong>24.994</strong> cupos de 25.000
           </p>
 
-          <div class="campo">
-            <label for="ev-entradas">Número de entradas</label>
-            <input type="number" id="ev-entradas" name="entradas" value="1" min="1" max="10"
-                   aria-describedby="ayuda-entradas">
-            <p class="ayuda" id="ayuda-entradas">Máximo 10 entradas por reserva.</p>
+          <div class="contador">
+            <span class="contador-texto">
+              <label class="contador-titulo" for="ev-entradas">Cantidad</label>
+              <span class="contador-precio" id="ayuda-entradas">Máximo 10 entradas por reserva.</span>
+            </span>
+            <span class="contador-botones">
+              <button type="button" class="contador-btn" data-ev-menos aria-label="Quitar una entrada">−</button>
+              <input type="number" id="ev-entradas" name="entradas" value="1" min="1" max="10"
+                     aria-describedby="ayuda-entradas">
+              <button type="button" class="contador-btn" data-ev-mas aria-label="Agregar una entrada">+</button>
+            </span>
           </div>
 
           <p class="detalle-total">Total estimado: <strong data-total>$120.000</strong></p>
@@ -1248,6 +1263,11 @@
               Hay que iniciar sesión para reservar.
             </p>
           </div>
+
+          <ul class="sellos">
+            <li><span aria-hidden="true">🛡</span> Reserva sin pagar en línea</li>
+            <li><span aria-hidden="true">🎟</span> Entradas digitales</li>
+          </ul>
         </aside>
 
       </div>
@@ -2152,7 +2172,7 @@
 <div class="cajon" id="cajon-menu" data-cajon hidden>
   <div class="cajon-fondo" data-cerrar-cajon></div>
 
-  <aside class="cajon-panel" role="dialog" aria-modal="true" aria-label="Menú de TicketFlow" tabindex="-1">
+  <div class="cajon-panel" role="dialog" aria-modal="true" aria-label="Menú de TicketFlow" tabindex="-1">
     <div class="cajon-cabecera">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
@@ -2168,47 +2188,47 @@
     <div class="cajon-acciones" data-acciones-sesion="cajon"></div>
 
     <p class="cajon-pie">TicketFlow · Proyecto Integrador 2026-2</p>
-  </aside>
+  </div>
 </div>
 
 
 <!-- Modelos -->
-<script src="js/configuracion.js?v=2026-10-18"></script>
-<script src="js/modelos/rutas.js?v=2026-10-18"></script>
-<script src="js/modelos/sesion.js?v=2026-10-18"></script>
-<script src="js/modelos/api.js?v=2026-10-18"></script>
-<script src="js/modelos/validacion.js?v=2026-10-18"></script>
-<script src="js/modelos/calendario.js?v=2026-10-18"></script>
-<script src="js/modelos/catalogo.js?v=2026-10-18"></script>
-<script src="js/modelos/formato.js?v=2026-10-18"></script>
+<script src="js/configuracion.js?v=2026-10-18b"></script>
+<script src="js/modelos/rutas.js?v=2026-10-18b"></script>
+<script src="js/modelos/sesion.js?v=2026-10-18b"></script>
+<script src="js/modelos/api.js?v=2026-10-18b"></script>
+<script src="js/modelos/validacion.js?v=2026-10-18b"></script>
+<script src="js/modelos/calendario.js?v=2026-10-18b"></script>
+<script src="js/modelos/catalogo.js?v=2026-10-18b"></script>
+<script src="js/modelos/formato.js?v=2026-10-18b"></script>
 <!-- Vistas -->
-<script src="js/vistas/menu.js?v=2026-10-18"></script>
-<script src="js/vistas/pantallas.js?v=2026-10-18"></script>
-<script src="js/vistas/formularios.js?v=2026-10-18"></script>
-<script src="js/vistas/buscador.js?v=2026-10-18"></script>
-<script src="js/vistas/sesion.js?v=2026-10-18"></script>
-<script src="js/vistas/catalogo.js?v=2026-10-18"></script>
-<script src="js/vistas/evento.js?v=2026-10-18"></script>
-<script src="js/vistas/reservas.js?v=2026-10-18"></script>
-<script src="js/vistas/reportes.js?v=2026-10-18"></script>
-<script src="js/vistas/graficas.js?v=2026-10-18"></script>
-<script src="js/vistas/tablero.js?v=2026-10-18"></script>
-<script src="js/vistas/selector.js?v=2026-10-18"></script>
-<script src="js/vistas/gestion.js?v=2026-10-18"></script>
+<script src="js/vistas/menu.js?v=2026-10-18b"></script>
+<script src="js/vistas/pantallas.js?v=2026-10-18b"></script>
+<script src="js/vistas/formularios.js?v=2026-10-18b"></script>
+<script src="js/vistas/buscador.js?v=2026-10-18b"></script>
+<script src="js/vistas/sesion.js?v=2026-10-18b"></script>
+<script src="js/vistas/catalogo.js?v=2026-10-18b"></script>
+<script src="js/vistas/evento.js?v=2026-10-18b"></script>
+<script src="js/vistas/reservas.js?v=2026-10-18b"></script>
+<script src="js/vistas/reportes.js?v=2026-10-18b"></script>
+<script src="js/vistas/graficas.js?v=2026-10-18b"></script>
+<script src="js/vistas/tablero.js?v=2026-10-18b"></script>
+<script src="js/vistas/selector.js?v=2026-10-18b"></script>
+<script src="js/vistas/gestion.js?v=2026-10-18b"></script>
 <!-- Controladores -->
-<script src="js/controladores/enrutador.js?v=2026-10-18"></script>
-<script src="js/controladores/formularios.js?v=2026-10-18"></script>
-<script src="js/controladores/buscador.js?v=2026-10-18"></script>
-<script src="js/controladores/menu.js?v=2026-10-18"></script>
-<script src="js/controladores/sesion.js?v=2026-10-18"></script>
-<script src="js/controladores/catalogo.js?v=2026-10-18"></script>
-<script src="js/controladores/evento.js?v=2026-10-18"></script>
-<script src="js/controladores/acceso.js?v=2026-10-18"></script>
-<script src="js/controladores/reservas.js?v=2026-10-18"></script>
-<script src="js/controladores/reportes.js?v=2026-10-18"></script>
-<script src="js/controladores/gestion.js?v=2026-10-18"></script>
-<script src="js/controladores/selector.js?v=2026-10-18"></script>
-<script src="js/controladores/reserva.js?v=2026-10-18"></script>
-<script src="js/app.js?v=2026-10-18"></script>
+<script src="js/controladores/enrutador.js?v=2026-10-18b"></script>
+<script src="js/controladores/formularios.js?v=2026-10-18b"></script>
+<script src="js/controladores/buscador.js?v=2026-10-18b"></script>
+<script src="js/controladores/menu.js?v=2026-10-18b"></script>
+<script src="js/controladores/sesion.js?v=2026-10-18b"></script>
+<script src="js/controladores/catalogo.js?v=2026-10-18b"></script>
+<script src="js/controladores/evento.js?v=2026-10-18b"></script>
+<script src="js/controladores/acceso.js?v=2026-10-18b"></script>
+<script src="js/controladores/reservas.js?v=2026-10-18b"></script>
+<script src="js/controladores/reportes.js?v=2026-10-18b"></script>
+<script src="js/controladores/gestion.js?v=2026-10-18b"></script>
+<script src="js/controladores/selector.js?v=2026-10-18b"></script>
+<script src="js/controladores/reserva.js?v=2026-10-18b"></script>
+<script src="js/app.js?v=2026-10-18b"></script>
 </body>
 </html>

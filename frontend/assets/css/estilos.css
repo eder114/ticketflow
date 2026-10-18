@@ -1331,6 +1331,8 @@ body.con-cajon{overflow:hidden}
 }
 .cajon-usuario:empty{display:none}
 .cajon-usuario .tablero-avatar{background:var(--grad)}
+/* sobre el fondo lila del cajón el gris claro no alcanza el contraste AA */
+.cajon-usuario .tablero-usuario-perfil{color:var(--indigo-700)}
 
 .cajon-nav{display:flex;flex-direction:column;gap:4px}
 .cajon-nav a{
@@ -1631,4 +1633,44 @@ body.con-cajon{overflow:hidden}
   .compra{padding-block:var(--e8) var(--e12)}
   .compra-rejilla{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--e6)}
   .compra-resumen{position:sticky;top:var(--e5)}
+}
+
+
+/* ============== DETALLE DEL EVENTO: FOTO CON EL NOMBRE ENCIMA ============ */
+
+.detalle-foto{position:relative}
+.detalle-foto img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.detalle-foto::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(17,24,39,0) 35%, rgba(17,24,39,.82) 100%);
+}
+
+.detalle-encima{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:var(--e5) var(--e4) var(--e4);
+  display:flex;flex-direction:column;gap:10px;color:#fff;
+}
+.detalle-encima .evento-cat{position:static;align-self:flex-start}
+.detalle-encima h1{color:#fff;font-size:26px;line-height:1.18}
+.detalle-linea{
+  display:flex;flex-wrap:wrap;gap:var(--e4);
+  font-size:13.5px;color:rgba(255,255,255,.92);
+}
+.detalle-linea span{display:inline-flex;align-items:center;gap:6px}
+
+/* La tarjeta de la derecha */
+.detalle-compra .overline{margin-bottom:-6px}
+.detalle-compra .contador{background:#fff}
+.detalle-compra .contador-titulo{font-size:14px}
+
+.sellos{
+  list-style:none;display:flex;flex-wrap:wrap;gap:var(--e3);
+  border-top:1px solid var(--linea-suave);padding-top:var(--e3);
+  font-size:12.5px;color:var(--texto-suave);
+}
+.sellos li{display:inline-flex;align-items:center;gap:6px}
+
+@media (min-width:768px){
+  .detalle-encima{padding:var(--e8) var(--e6) var(--e5)}
+  .detalle-encima h1{font-size:34px}
 }

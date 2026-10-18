@@ -44,6 +44,9 @@ var EventoVista = (function () {
     var categoria = CatalogoModelo.categoriaDe(evento);
 
     escribir("[data-ev-miga]", evento.nombre);
+    escribir("[data-ev-categoria]", categoria);
+    escribir("[data-ev-cuando]", FormatoModelo.fechaLarga(evento.fecha_hora_inicio));
+    escribir("[data-ev-donde]", evento.ciudad + ", " + evento.departamento);
     escribir("[data-ev-nombre]", evento.nombre);
     escribir("[data-ev-teatro]", evento.teatro);
     escribir("[data-ev-ciudad]", evento.ciudad + ", " + evento.departamento);

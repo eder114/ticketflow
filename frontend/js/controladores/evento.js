@@ -151,7 +151,19 @@ var EventoControlador = (function () {
 
     document.addEventListener("click", function (e) {
       var boton = e.target.closest("[data-reservar]");
-      if (boton) reservar(boton);
+      if (boton) { reservar(boton); return; }
+
+      // Los botones de más y de menos del contador.
+      if (e.target.closest("[data-ev-menos]")) {
+        campo.value = String(Math.max(1, cantidad() - 1));
+        recalcular();
+        return;
+      }
+      if (e.target.closest("[data-ev-mas]")) {
+        var maximo = parseInt(campo.max, 10) || 10;
+        campo.value = String(Math.min(maximo, cantidad() + 1));
+        recalcular();
+      }
     });
 
     document.addEventListener("ticketflow:pantalla", function (e) {
