@@ -278,6 +278,10 @@ var EventoControlador = (function () {
       guardar(form);
     });
 
+    form.addEventListener("input", EventoVista.marcarPasos);
+    form.addEventListener("change", EventoVista.marcarPasos);
+    EventoVista.marcarPasos();
+
     // Al entrar a #/crear-evento/5 el formulario se llena con ese evento.
     document.addEventListener("ticketflow:pantalla", function (e) {
       if (e.detail.pantalla !== "crear-evento") return;
@@ -288,10 +292,12 @@ var EventoControlador = (function () {
 
       if (!editando) {
         EventoVista.limpiarFormulario();
+        EventoVista.marcarPasos();
         return;
       }
       ApiModelo.evento(editando).then(function (datos) {
         EventoVista.llenarFormulario(datos);
+        EventoVista.marcarPasos();
       }).catch(function (error) {
         FormularioVista.mostrarMensaje(form, error.message);
       });

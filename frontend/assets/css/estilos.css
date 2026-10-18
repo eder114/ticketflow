@@ -825,33 +825,11 @@ button{font-family:inherit}
 .panel-cabecera{margin-bottom:var(--e6)}
 .panel-cabecera h1{font-size:28px;line-height:1.2}
 
-.form-evento{display:flex;flex-direction:column;gap:var(--e5)}
-.form-evento fieldset{
-  border:1px solid var(--linea-suave);border-radius:var(--r-card);
-  background:#fff;padding:var(--e4);
-  display:grid;gap:var(--e4);grid-template-columns:1fr;
-}
-.form-evento legend{
-  padding:0 8px;font-size:12px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--indigo-700);
-}
-.form-evento .campo-ancho{grid-column:1/-1}
 .form-evento textarea{resize:vertical;min-height:84px}
-
-.form-evento-pie{
-  display:flex;flex-direction:column-reverse;gap:var(--e3);
-}
-.form-evento-pie .btn{width:100%;justify-content:center}
 
 @media (min-width:768px){
   .panel{padding-block:var(--e10) var(--e12)}
   .panel-cabecera h1{font-size:34px}
-  .form-evento fieldset{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    padding:var(--e5) var(--e6) var(--e6);
-  }
-  .form-evento-pie{flex-direction:row;justify-content:flex-end}
-  .form-evento-pie .btn{width:auto}
 }
 
 
@@ -1448,4 +1426,56 @@ body.con-cajon{overflow:hidden}
 
 @media (prefers-reduced-motion:reduce){
   .selector-flecha{transition:none}
+}
+
+
+/* ===================== FORMULARIO DE REGISTRAR EVENTO ==================== */
+
+/* Los pasos de arriba: dicen cuántas secciones hay y cuál está completa. */
+.pasos-evento{
+  list-style:none;display:flex;gap:var(--e2);
+  overflow-x:auto;padding-bottom:4px;
+}
+.paso{
+  flex:1 0 auto;min-width:132px;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px;border-radius:var(--r-card);
+  background:#fff;border:1px solid var(--linea-suave);
+}
+.paso-numero{
+  width:26px;height:26px;flex:0 0 26px;border-radius:var(--r-full);
+  background:var(--gris-100);color:var(--texto-suave);
+  display:grid;place-items:center;font-size:13px;font-weight:700;
+}
+.paso-texto{font-size:13.5px;font-weight:600;color:var(--texto-suave)}
+.paso.completo{border-color:var(--indigo)}
+.paso.completo .paso-numero{background:var(--indigo);color:#fff}
+.paso.completo .paso-texto{color:var(--texto)}
+
+.form-evento{display:flex;flex-direction:column;gap:var(--e4)}
+
+.tarjeta-titulo{display:flex;align-items:center;gap:10px}
+.tarjeta-icono{
+  width:32px;height:32px;flex:0 0 32px;border-radius:var(--r-btn);
+  background:var(--indigo-50);display:grid;place-items:center;font-size:15px;
+}
+
+.campos-dos{display:grid;gap:var(--e4);grid-template-columns:1fr}
+.campos-dos .campo-ancho{grid-column:1/-1}
+
+/* La barra de guardar se queda pegada abajo mientras se llena el formulario. */
+.barra-acciones{
+  position:sticky;bottom:0;z-index:20;
+  display:flex;flex-direction:column-reverse;gap:var(--e3);
+  padding:var(--e4);margin-top:var(--e2);
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:0 -6px 24px rgba(17,24,39,.06);
+}
+.barra-acciones .btn{width:100%;justify-content:center}
+
+@media (min-width:768px){
+  .campos-dos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .barra-acciones{flex-direction:row;justify-content:flex-end}
+  .barra-acciones .btn{width:auto}
 }

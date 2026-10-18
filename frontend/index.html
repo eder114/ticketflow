@@ -1267,48 +1267,60 @@
 </div>
 
 
-<!-- CREAR O EDITAR EVENTO (AGENTE) -->
+<!-- CREAR O EDITAR EVENTO (ORGANIZADOR) -->
 <div class="vista" id="vista-crear-evento" data-titulo="Registrar evento" hidden>
+  <div class="tablero">
 
-  <header class="encabezado">
-    <div class="contenedor encabezado-fila">
+    <aside class="tablero-lateral">
       <a href="#/inicio" class="marca">
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
-              aria-controls="cajon-menu" aria-label="Abrir el menú">
-        <span class="menu-btn-icono" aria-hidden="true">☰</span>
-        <span class="menu-btn-texto">Menú</span>
-      </button>
-      <nav class="nav" id="nav-crear" aria-label="Navegación principal">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-        <a href="#/crear-evento" class="activo">Registrar evento</a>
-      </nav>
-      <div class="acciones" data-acciones-sesion>
-        <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
-        <a href="#/registro-cliente" class="btn btn-primario">Registrarse</a>
-      </div>
-    </div>
-  </header>
+      <p class="tablero-rol">Panel del organizador</p>
+      <div class="tablero-usuario" data-usuario-sesion></div>
+      <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
+      <div class="tablero-salir" data-acciones-sesion></div>
+    </aside>
 
-  <main id="contenido-crear" hidden>
-    <section class="panel" aria-labelledby="titulo-crear">
-      <div class="contenedor">
+    <main id="contenido-crear" class="tablero-cuerpo" hidden>
 
-        <div class="panel-cabecera">
-          <div>
-            <p class="overline">Panel del organizador</p>
-            <h1 id="titulo-crear" data-titulo-evento>Registrar un evento</h1>
-          </div>
+      <div class="tablero-cabecera">
+        <div>
+          <p class="overline">Panel del organizador</p>
+          <h1 id="titulo-crear" data-titulo-evento>Registrar un evento</h1>
+          <p>Completa la información para publicar tu evento en TicketFlow.</p>
         </div>
+      </div>
 
-        <form data-validar data-envio="evento" class="form-evento" novalidate>
+      <!-- Los pasos marcan por dónde va el formulario. -->
+      <ol class="pasos-evento" data-pasos aria-label="Secciones del formulario">
+        <li class="paso" data-paso="informacion">
+          <span class="paso-numero" aria-hidden="true">1</span>
+          <span class="paso-texto">Información</span>
+        </li>
+        <li class="paso" data-paso="ubicacion">
+          <span class="paso-numero" aria-hidden="true">2</span>
+          <span class="paso-texto">Ubicación</span>
+        </li>
+        <li class="paso" data-paso="fechas">
+          <span class="paso-numero" aria-hidden="true">3</span>
+          <span class="paso-texto">Fechas y aforo</span>
+        </li>
+        <li class="paso" data-paso="estado">
+          <span class="paso-numero" aria-hidden="true">4</span>
+          <span class="paso-texto">Estado</span>
+        </li>
+      </ol>
 
-          <fieldset>
-            <legend>Datos del evento</legend>
+      <form data-validar data-envio="evento" class="form-evento" novalidate>
 
+        <section class="panel-tarjeta" id="seccion-informacion" aria-labelledby="titulo-informacion">
+          <div class="tarjeta-titulo">
+            <span class="tarjeta-icono" aria-hidden="true">📝</span>
+            <h2 id="titulo-informacion">Información básica</h2>
+          </div>
+
+          <div class="campos-dos">
             <div class="campo campo-ancho">
               <label for="nv-nombre">Nombre del evento</label>
               <input type="text" id="nv-nombre" name="nombre" placeholder="Festival de Música Cali Vive"
@@ -1323,7 +1335,16 @@
                         data-reglas="requerido" aria-describedby="err-nv-descripcion"></textarea>
               <p class="error" id="err-nv-descripcion" role="alert"></p>
             </div>
+          </div>
+        </section>
 
+        <section class="panel-tarjeta" id="seccion-ubicacion" aria-labelledby="titulo-ubicacion">
+          <div class="tarjeta-titulo">
+            <span class="tarjeta-icono" aria-hidden="true">📍</span>
+            <h2 id="titulo-ubicacion">Dónde se hace</h2>
+          </div>
+
+          <div class="campos-dos">
             <div class="campo">
               <label for="nv-teatro">Teatro o recinto</label>
               <input type="text" id="nv-teatro" name="teatro" placeholder="Estadio Pascual Guerrero"
@@ -1346,11 +1367,16 @@
               </select>
               <p class="error" id="err-nv-ciudad" role="alert"></p>
             </div>
-          </fieldset>
+          </div>
+        </section>
 
-          <fieldset>
-            <legend>Fechas y aforo</legend>
+        <section class="panel-tarjeta" id="seccion-fechas" aria-labelledby="titulo-fechas">
+          <div class="tarjeta-titulo">
+            <span class="tarjeta-icono" aria-hidden="true">📅</span>
+            <h2 id="titulo-fechas">Fechas y aforo</h2>
+          </div>
 
+          <div class="campos-dos">
             <div class="campo">
               <label for="nv-inicio">Fecha y hora de inicio</label>
               <input type="datetime-local" id="nv-inicio" name="inicio"
@@ -1368,21 +1394,28 @@
             <div class="campo">
               <label for="nv-capacidad">Capacidad total</label>
               <input type="number" id="nv-capacidad" name="capacidad" min="1" placeholder="25000"
-                     data-reglas="requerido" aria-describedby="err-nv-capacidad">
+                     data-reglas="requerido" aria-describedby="ayuda-capacidad err-nv-capacidad">
+              <p class="ayuda" id="ayuda-capacidad">Cuántas personas caben en el recinto.</p>
               <p class="error" id="err-nv-capacidad" role="alert"></p>
             </div>
 
             <div class="campo">
               <label for="nv-precio">Precio base de la entrada (COP)</label>
               <input type="number" id="nv-precio" name="precio" min="0" step="1000" placeholder="120000"
-                     data-reglas="requerido" aria-describedby="err-nv-precio">
+                     data-reglas="requerido" aria-describedby="ayuda-precio err-nv-precio">
+              <p class="ayuda" id="ayuda-precio">Escribe 0 si el evento es gratuito.</p>
               <p class="error" id="err-nv-precio" role="alert"></p>
             </div>
-          </fieldset>
+          </div>
+        </section>
 
-          <fieldset>
-            <legend>Estado y observaciones</legend>
+        <section class="panel-tarjeta" id="seccion-estado" aria-labelledby="titulo-estado">
+          <div class="tarjeta-titulo">
+            <span class="tarjeta-icono" aria-hidden="true">🏷</span>
+            <h2 id="titulo-estado">Estado y observaciones</h2>
+          </div>
 
+          <div class="campos-dos">
             <div class="campo">
               <label for="nv-estado">Estado del evento</label>
               <select id="nv-estado" name="estado" data-reglas="requerido" aria-describedby="err-nv-estado">
@@ -1405,40 +1438,29 @@
               <label for="nv-causa">Causa de la cancelación</label>
               <textarea id="nv-causa" name="causa" rows="2"
                         placeholder="Por qué se canceló el evento."
-                        aria-describedby="err-nv-causa"></textarea>
+                        aria-describedby="ayuda-causa err-nv-causa"></textarea>
               <p class="error" id="err-nv-causa" role="alert"></p>
-              <p class="ayuda">Se exige cuando el estado es Cancelado, porque el reporte
+              <p class="ayuda" id="ayuda-causa">Se exige cuando el estado es Cancelado, porque el reporte
                  de eventos cancelados la necesita.</p>
             </div>
-          </fieldset>
-
-          <p class="aviso" data-exito role="status" hidden>
-            Todos los datos son válidos. Sin el servidor levantado el evento no
-            se puede guardar, pero el formulario ya los revisó todos.
-          </p>
-
-          <div class="form-evento-pie">
-            <a href="#/catalogo" class="btn btn-secundario">Cancelar</a>
-            <button type="submit" class="btn btn-primario btn-lg">Guardar evento</button>
           </div>
-        </form>
+        </section>
 
-      </div>
-    </section>
-  </main>
+        <p class="aviso" data-exito role="status" hidden>
+          Todos los datos son válidos. Sin el servidor levantado el evento no
+          se puede guardar, pero el formulario ya los revisó todos.
+        </p>
 
-  <footer class="pie" aria-label="Información del sitio">
-    <div class="contenedor pie-fila">
-      <p>TicketFlow · Proyecto Integrador 2026-2</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
-        <a href="#/iniciar-sesion">Iniciar sesión</a>
-      </nav>
-    </div>
-  </footer>
+        <!-- La barra de acciones queda pegada abajo, como en el diseño. -->
+        <div class="barra-acciones">
+          <a href="#/panel-agente" class="btn btn-secundario">Cancelar</a>
+          <button type="submit" class="btn btn-primario btn-lg">Guardar evento</button>
+        </div>
+      </form>
+
+    </main>
+  </div>
 </div>
-
 
 
 <!-- PANEL DEL CLIENTE -->
