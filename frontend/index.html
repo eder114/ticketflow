@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/estilos.css?v=2026-10-18c">
+<link rel="stylesheet" href="assets/css/estilos.css?v=2026-10-18d">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
       <nav class="nav" id="nav-principal" aria-label="Navegación principal">
         <a href="#/inicio" class="activo">Inicio</a>
-        <a href="#eventos">Eventos</a>
+        <a href="#/catalogo">Eventos</a>
         <a href="#categorias">Categorías</a>
         <a href="#como-funciona">Cómo funciona</a>
       </nav>
@@ -862,7 +862,7 @@
 </div>
 
 <!-- CATÁLOGO DE EVENTOS -->
-<div class="vista" id="vista-catalogo" data-titulo="Catálogo de eventos" hidden>
+<div class="vista" id="vista-catalogo" data-titulo="Eventos" hidden>
 
   <header class="encabezado">
     <div class="contenedor encabezado-fila">
@@ -876,8 +876,7 @@
       </button>
       <nav class="nav" id="nav-catalogo" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo" class="activo">Catálogo</a>
-        <a href="#/evento">Detalle</a>
+        <a href="#/catalogo" class="activo">Eventos</a>
       </nav>
       <div class="acciones" data-acciones-sesion>
         <a href="#/iniciar-sesion" class="btn btn-secundario">Iniciar sesión</a>
@@ -887,249 +886,122 @@
   </header>
 
   <main id="contenido-catalogo" hidden>
-    <section class="catalogo" aria-labelledby="titulo-catalogo">
+
+    <section class="catalogo-hero" aria-labelledby="titulo-catalogo">
+      <div class="contenedor">
+        <h1 id="titulo-catalogo">Descubre tu próximo evento</h1>
+        <p>Explora conciertos, festivales, deportes, teatro y experiencias que
+           están sucediendo en Colombia.</p>
+        <p class="chip-cuenta" data-cat-total role="status">Cargando el catálogo…</p>
+      </div>
+    </section>
+
+    <section class="catalogo" aria-labelledby="titulo-filtros">
       <div class="contenedor">
 
-        <div class="catalogo-cabecera">
-          <div>
-            <p class="overline">Catálogo completo</p>
-            <h1 id="titulo-catalogo">Todos los eventos</h1>
-          </div>
-          <p class="catalogo-conteo" data-conteo role="status">12 eventos disponibles</p>
-        </div>
+        <form class="buscador-catalogo" role="search" aria-labelledby="titulo-filtros" data-filtros>
+          <h2 id="titulo-filtros" class="solo-lectores">Buscar y filtrar eventos</h2>
 
-        <form class="filtros" role="search" aria-labelledby="titulo-filtros" data-filtros>
-          <h2 id="titulo-filtros" class="solo-lectores">Filtrar el catálogo</h2>
-
-          <div class="filtro">
-            <label for="f-texto">Buscar</label>
-            <input type="search" id="f-texto" name="texto" placeholder="Artista, obra o teatro">
+          <div class="buscador-linea">
+            <div class="campo-busqueda">
+              <label for="f-texto" class="solo-lectores">Buscar</label>
+              <span class="campo-busqueda-icono" aria-hidden="true">🔍</span>
+              <input type="search" id="f-texto" name="texto"
+                     placeholder="Busca eventos, artistas, lugares o experiencias…">
+            </div>
+            <button type="submit" class="btn btn-primario btn-lg">Buscar</button>
           </div>
 
-          <div class="filtro">
-            <label for="f-ciudad">Ciudad</label>
-            <select id="f-ciudad" name="ciudad">
-              <option value="">Todas las ciudades</option>
-              <option>Cali</option>
-              <option>Tuluá</option>
-              <option>Bogotá</option>
-              <option>Medellín</option>
-              <option>Barranquilla</option>
-              <option>Bucaramanga</option>
-              <option>Cartagena</option>
-            </select>
+          <div class="filtros-linea">
+            <div class="filtro">
+              <label for="f-ciudad">Ubicación</label>
+              <select id="f-ciudad" name="ciudad">
+                <option value="">Toda Colombia</option>
+              </select>
+            </div>
+
+            <div class="filtro">
+              <label for="f-categoria">Categoría</label>
+              <select id="f-categoria" name="categoria">
+                <option value="">Todas las categorías</option>
+                <option>Festival</option>
+                <option>Concierto</option>
+                <option>Teatro</option>
+                <option>Deporte</option>
+              </select>
+            </div>
+
+            <div class="filtro">
+              <label for="f-desde">Fecha</label>
+              <input type="date" id="f-desde" name="desde">
+            </div>
+
+            <div class="filtro filtro-boton">
+              <button type="button" class="btn btn-secundario" data-mas-filtros
+                      aria-expanded="false" aria-controls="filtros-extra">
+                <span aria-hidden="true">⚙</span> Más filtros
+              </button>
+            </div>
           </div>
 
-          <div class="filtro">
-            <label for="f-categoria">Categoría</label>
-            <select id="f-categoria" name="categoria">
-              <option value="">Todas</option>
-              <option>Festival</option>
-              <option>Concierto</option>
-              <option>Teatro</option>
-              <option>Deporte</option>
-            </select>
-          </div>
+          <div class="filtros-extra" id="filtros-extra" hidden>
+            <div class="filtro">
+              <label for="f-precio">Precio máximo</label>
+              <select id="f-precio" name="precio">
+                <option value="">Cualquiera</option>
+                <option value="50000">Hasta $50.000</option>
+                <option value="100000">Hasta $100.000</option>
+                <option value="200000">Hasta $200.000</option>
+              </select>
+            </div>
 
-          <div class="filtro">
-            <label for="f-desde">Desde</label>
-            <input type="date" id="f-desde" name="desde">
-          </div>
+            <div class="filtro">
+              <label for="f-estado">Disponibilidad</label>
+              <select id="f-estado" name="disponibilidad">
+                <option value="">Todos los eventos</option>
+                <option value="con-cupos">Solo con entradas</option>
+              </select>
+            </div>
 
-          <div class="filtro">
-            <label for="f-precio">Precio máximo</label>
-            <select id="f-precio" name="precio">
-              <option value="">Cualquiera</option>
-              <option value="50000">Hasta $50.000</option>
-              <option value="100000">Hasta $100.000</option>
-              <option value="200000">Hasta $200.000</option>
-            </select>
-          </div>
-
-          <div class="filtro filtro-botones">
-            <button type="submit" class="btn btn-primario">Filtrar</button>
-            <button type="reset" class="btn btn-secundario">Limpiar</button>
+            <div class="filtro filtro-boton">
+              <button type="reset" class="btn btn-secundario">Limpiar filtros</button>
+            </div>
           </div>
         </form>
 
-        <div class="rejilla rejilla-3" data-lista-eventos>
+        <div class="resultados-cabecera">
+          <h2 id="titulo-resultados">Resultados de búsqueda</h2>
 
-          <article class="evento" data-ciudad="Cali" data-categoria="Festival" data-precio="120000">
-            <div class="evento-img">
-              <img src="assets/img/festival-noche.jpg" alt="Público con las manos en alto en un festival nocturno">
-              <span class="evento-cat cat-festival">Festival</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-boleteria">En boletería</span>
-              <h3>Festival de Música Cali Vive</h3>
-              <div class="evento-meta">
-                <span>Estadio Pascual Guerrero · Cali</span>
-                <span>14 de noviembre de 2026 · 6:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$120.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Cali" data-categoria="Concierto" data-precio="85000">
-            <div class="evento-img">
-              <img src="assets/img/concierto-artista.jpg" alt="Artista cantando frente al público">
-              <span class="evento-cat cat-concierto">Concierto</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-boleteria">En boletería</span>
-              <h3>Noche de Salsa Brava</h3>
-              <div class="evento-meta">
-                <span>Teatro Jorge Isaacs · Cali</span>
-                <span>28 de noviembre de 2026 · 8:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$85.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Tuluá" data-categoria="Festival" data-precio="60000">
-            <div class="evento-img">
-              <img src="assets/img/festival-dia.jpg" alt="Asistentes de día en un festival al aire libre">
-              <span class="evento-cat cat-festival">Festival</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-programado">Programado</span>
-              <h3>Tuluá Rock Fest</h3>
-              <div class="evento-meta">
-                <span>Coliseo Cubierto · Tuluá</span>
-                <span>5 de diciembre de 2026 · 4:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$60.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Cali" data-categoria="Teatro" data-precio="45000">
-            <div class="evento-img">
-              <img src="assets/img/teatro-sala.jpg" alt="Sala de teatro con las butacas vacías antes de la función">
-              <span class="evento-cat cat-teatro">Teatro</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-programado">Programado</span>
-              <h3>Sinfónica del Valle · Temporada de Navidad</h3>
-              <div class="evento-meta">
-                <span>Teatro Municipal · Cali</span>
-                <span>18 de diciembre de 2026 · 7:30 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$45.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Bogotá" data-categoria="Teatro" data-precio="95000">
-            <div class="evento-img">
-              <img src="assets/img/teatro-drama.jpg" alt="Actores en escena durante una obra de teatro">
-              <span class="evento-cat cat-teatro">Teatro</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-programado">Programado</span>
-              <h3>Comedia en Vivo · Especial de Fin de Año</h3>
-              <div class="evento-meta">
-                <span>Teatro Nacional Fanny Mikey · Bogotá</span>
-                <span>20 de diciembre de 2026 · 8:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$95.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Medellín" data-categoria="Deporte" data-precio="70000">
-            <div class="evento-img">
-              <img src="assets/img/futbol-seleccion.jpg" alt="Hinchada en las tribunas durante un partido de fútbol">
-              <span class="evento-cat cat-deporte">Deporte</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-boleteria">En boletería</span>
-              <h3>Clásico Paisa · Nacional vs Medellín</h3>
-              <div class="evento-meta">
-                <span>Estadio Atanasio Girardot · Medellín</span>
-                <span>22 de noviembre de 2026 · 5:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$70.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Barranquilla" data-categoria="Festival" data-precio="180000">
-            <div class="evento-img">
-              <img src="assets/img/evento-ambiente.jpg" alt="Luces y humo en el escenario de un evento masivo">
-              <span class="evento-cat cat-festival">Festival</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-vivo">En vivo</span>
-              <h3>Carnaval Electrónico Barranquilla</h3>
-              <div class="evento-meta">
-                <span>Parque Puerta de Oro · Barranquilla</span>
-                <span>21 de noviembre de 2026 · 2:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$180.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Bucaramanga" data-categoria="Teatro" data-precio="50000">
-            <div class="evento-img">
-              <img src="assets/img/teatro-epoca.jpg" alt="Escena de una obra de teatro de época">
-              <span class="evento-cat cat-teatro">Teatro</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-finalizado">Finalizado</span>
-              <h3>Festival Internacional de Teatro</h3>
-              <div class="evento-meta">
-                <span>Teatro Santander · Bucaramanga</span>
-                <span>10 al 18 de octubre de 2026</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$50.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-secundario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="evento" data-ciudad="Cartagena" data-categoria="Teatro" data-precio="110000">
-            <div class="evento-img">
-              <img src="assets/img/teatro-sala.jpg" alt="Interior de un teatro histórico">
-              <span class="evento-cat cat-teatro">Teatro</span>
-            </div>
-            <div class="evento-cuerpo">
-              <span class="estado-chip estado-programado">Programado</span>
-              <h3>Hay Festival Cartagena · Noche inaugural</h3>
-              <div class="evento-meta">
-                <span>Teatro Adolfo Mejía · Cartagena</span>
-                <span>28 de enero de 2027 · 7:00 p. m.</span>
-              </div>
-              <div class="evento-pie">
-                <div class="precio">$110.000<small>COP · DESDE</small></div>
-                <a href="#/evento" class="btn btn-primario">Ver evento</a>
-              </div>
-            </div>
-          </article>
-
+          <div class="orden">
+            <label for="f-orden">Ordenar por</label>
+            <select id="f-orden" name="orden">
+              <option value="fecha">Los más próximos</option>
+              <option value="precio">Precio, de menor a mayor</option>
+              <option value="nombre">Nombre, de la A a la Z</option>
+              <option value="cupos">Los que más cupos tienen</option>
+            </select>
+          </div>
         </div>
+
+        <p class="catalogo-conteo" data-conteo role="status">12 eventos disponibles</p>
+
+        <div class="rejilla-eventos" data-lista-eventos aria-live="polite"></div>
 
         <p class="vacio" data-sin-resultados hidden role="status">
           Ningún evento coincide con los filtros. Prueba quitando alguno.
         </p>
+
+        <nav class="paginacion" data-cat-paginas aria-label="Páginas del catálogo" hidden>
+          <button type="button" class="btn btn-chico btn-secundario" data-cat-anterior>‹ Anterior</button>
+          <span data-cat-pagina role="status"></span>
+          <button type="button" class="btn btn-chico btn-secundario" data-cat-siguiente>Siguiente ›</button>
+        </nav>
+
+        <section class="recomendados" aria-labelledby="titulo-recomendados">
+          <h2 id="titulo-recomendados">También te puede interesar</h2>
+          <p class="panel-nota">Los eventos que están más cerca de hacerse.</p>
+          <div class="rejilla-recomendados" data-cat-recomendados></div>
+        </section>
 
       </div>
     </section>
@@ -1140,7 +1012,7 @@
       <p>TicketFlow · Proyecto Integrador 2026-2</p>
       <nav aria-label="Enlaces del pie">
         <a href="#/inicio">Inicio</a>
-        <a href="#/catalogo">Catálogo</a>
+        <a href="#/catalogo">Eventos</a>
         <a href="#/iniciar-sesion">Iniciar sesión</a>
       </nav>
     </div>
@@ -2315,43 +2187,43 @@
 
 
 <!-- Modelos -->
-<script src="js/configuracion.js?v=2026-10-18c"></script>
-<script src="js/modelos/rutas.js?v=2026-10-18c"></script>
-<script src="js/modelos/sesion.js?v=2026-10-18c"></script>
-<script src="js/modelos/api.js?v=2026-10-18c"></script>
-<script src="js/modelos/validacion.js?v=2026-10-18c"></script>
-<script src="js/modelos/calendario.js?v=2026-10-18c"></script>
-<script src="js/modelos/catalogo.js?v=2026-10-18c"></script>
-<script src="js/modelos/formato.js?v=2026-10-18c"></script>
+<script src="js/configuracion.js?v=2026-10-18d"></script>
+<script src="js/modelos/rutas.js?v=2026-10-18d"></script>
+<script src="js/modelos/sesion.js?v=2026-10-18d"></script>
+<script src="js/modelos/api.js?v=2026-10-18d"></script>
+<script src="js/modelos/validacion.js?v=2026-10-18d"></script>
+<script src="js/modelos/calendario.js?v=2026-10-18d"></script>
+<script src="js/modelos/catalogo.js?v=2026-10-18d"></script>
+<script src="js/modelos/formato.js?v=2026-10-18d"></script>
 <!-- Vistas -->
-<script src="js/vistas/menu.js?v=2026-10-18c"></script>
-<script src="js/vistas/pantallas.js?v=2026-10-18c"></script>
-<script src="js/vistas/formularios.js?v=2026-10-18c"></script>
-<script src="js/vistas/buscador.js?v=2026-10-18c"></script>
-<script src="js/vistas/sesion.js?v=2026-10-18c"></script>
-<script src="js/vistas/catalogo.js?v=2026-10-18c"></script>
-<script src="js/vistas/evento.js?v=2026-10-18c"></script>
-<script src="js/vistas/reservas.js?v=2026-10-18c"></script>
-<script src="js/vistas/reportes.js?v=2026-10-18c"></script>
-<script src="js/vistas/graficas.js?v=2026-10-18c"></script>
-<script src="js/vistas/tablero.js?v=2026-10-18c"></script>
-<script src="js/vistas/ventas.js?v=2026-10-18c"></script>
-<script src="js/vistas/selector.js?v=2026-10-18c"></script>
-<script src="js/vistas/gestion.js?v=2026-10-18c"></script>
+<script src="js/vistas/menu.js?v=2026-10-18d"></script>
+<script src="js/vistas/pantallas.js?v=2026-10-18d"></script>
+<script src="js/vistas/formularios.js?v=2026-10-18d"></script>
+<script src="js/vistas/buscador.js?v=2026-10-18d"></script>
+<script src="js/vistas/sesion.js?v=2026-10-18d"></script>
+<script src="js/vistas/catalogo.js?v=2026-10-18d"></script>
+<script src="js/vistas/evento.js?v=2026-10-18d"></script>
+<script src="js/vistas/reservas.js?v=2026-10-18d"></script>
+<script src="js/vistas/reportes.js?v=2026-10-18d"></script>
+<script src="js/vistas/graficas.js?v=2026-10-18d"></script>
+<script src="js/vistas/tablero.js?v=2026-10-18d"></script>
+<script src="js/vistas/ventas.js?v=2026-10-18d"></script>
+<script src="js/vistas/selector.js?v=2026-10-18d"></script>
+<script src="js/vistas/gestion.js?v=2026-10-18d"></script>
 <!-- Controladores -->
-<script src="js/controladores/enrutador.js?v=2026-10-18c"></script>
-<script src="js/controladores/formularios.js?v=2026-10-18c"></script>
-<script src="js/controladores/buscador.js?v=2026-10-18c"></script>
-<script src="js/controladores/menu.js?v=2026-10-18c"></script>
-<script src="js/controladores/sesion.js?v=2026-10-18c"></script>
-<script src="js/controladores/catalogo.js?v=2026-10-18c"></script>
-<script src="js/controladores/evento.js?v=2026-10-18c"></script>
-<script src="js/controladores/acceso.js?v=2026-10-18c"></script>
-<script src="js/controladores/reservas.js?v=2026-10-18c"></script>
-<script src="js/controladores/reportes.js?v=2026-10-18c"></script>
-<script src="js/controladores/gestion.js?v=2026-10-18c"></script>
-<script src="js/controladores/selector.js?v=2026-10-18c"></script>
-<script src="js/controladores/reserva.js?v=2026-10-18c"></script>
-<script src="js/app.js?v=2026-10-18c"></script>
+<script src="js/controladores/enrutador.js?v=2026-10-18d"></script>
+<script src="js/controladores/formularios.js?v=2026-10-18d"></script>
+<script src="js/controladores/buscador.js?v=2026-10-18d"></script>
+<script src="js/controladores/menu.js?v=2026-10-18d"></script>
+<script src="js/controladores/sesion.js?v=2026-10-18d"></script>
+<script src="js/controladores/catalogo.js?v=2026-10-18d"></script>
+<script src="js/controladores/evento.js?v=2026-10-18d"></script>
+<script src="js/controladores/acceso.js?v=2026-10-18d"></script>
+<script src="js/controladores/reservas.js?v=2026-10-18d"></script>
+<script src="js/controladores/reportes.js?v=2026-10-18d"></script>
+<script src="js/controladores/gestion.js?v=2026-10-18d"></script>
+<script src="js/controladores/selector.js?v=2026-10-18d"></script>
+<script src="js/controladores/reserva.js?v=2026-10-18d"></script>
+<script src="js/app.js?v=2026-10-18d"></script>
 </body>
 </html>

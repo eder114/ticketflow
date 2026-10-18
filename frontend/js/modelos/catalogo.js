@@ -1,42 +1,19 @@
-// Modelo: reglas del filtro del catálogo
+// Modelo: las reglas del catálogo.
+//
+// Aquí vive lo que decide qué evento pasa los filtros, en qué orden van y de
+// qué categoría es cada uno. No toca la página: recibe los eventos como los
+// devuelve la API y responde con la lista ya lista para pintar.
 var CatalogoModelo = (function () {
   "use strict";
-
-  // Cada tarjeta trae sus datos en atributos data-, así el modelo no toca el DOM
-  // más allá de leerlos.
-  function datosDe(tarjeta) {
-    return {
-      ciudad: tarjeta.dataset.ciudad || "",
-      categoria: tarjeta.dataset.categoria || "",
-      precio: Number(tarjeta.dataset.precio || 0),
-      fecha: tarjeta.dataset.fecha || "",
-      busqueda: tarjeta.dataset.busqueda || tarjeta.textContent
-    };
-  }
 
   // Las ciudades del buscador vienen con tilde (Bogotá) y las de la base sin
   // ella (Bogota), así que se comparan sin tildes y sin distinguir mayúsculas.
   function llano(texto) {
     return String(texto)
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[̀-ͯ]/g, "")
       .toLowerCase()
       .trim();
-  }
-
-  function coincide(datos, filtro) {
-    if (filtro.ciudad && llano(datos.ciudad) !== llano(filtro.ciudad)) return false;
-    if (filtro.categoria && llano(datos.categoria) !== llano(filtro.categoria)) return false;
-    if (filtro.precio && datos.precio > Number(filtro.precio)) return false;
-    if (filtro.desde && datos.fecha && datos.fecha < filtro.desde) return false;
-    if (filtro.texto && llano(datos.busqueda).indexOf(llano(filtro.texto)) === -1) return false;
-    return true;
-  }
-
-  function filtrar(tarjetas, filtro) {
-    return Array.prototype.filter.call(tarjetas, function (t) {
-      return coincide(datosDe(t), filtro);
-    });
   }
 
   // La base de datos no guarda la categoría del evento: el enunciado no la
@@ -71,6 +48,47 @@ var CatalogoModelo = (function () {
            evento.estado === "En Vivo";
   }
 
+  // Cómo está el evento de entradas.
+  function disponibilidadDe(evento) {
+    var libres = Number(evento.cupos_disponibles);
+    var total = Number(evento.capacidad_total) || 1;
+
+    if (libres <= 0) return "agotado";
+    if (libres / total <= 0.1) return "ultimas";
+    return "disponible";
+  }
+
+  function coincide(evento, filtro) {
+    var categoria = categoriaDe(evento);
+
+    if (filtro.ciudad && llano(evento.ciudad) !== llano(filtro.ciudad)) return false;
+    if (filtro.categoria && llano(categoria) !== llano(filtro.categoria)) return false;
+    if (filtro.precio && Number(evento.precio_base) > Number(filtro.precio)) return false;
+    if (filtro.desde && FormatoModelo.fechaDeFiltro(evento.fecha_hora_inicio) < filtro.desde) return false;
+    if (filtro.disponibilidad === "con-cupos" && disponibilidadDe(evento) === "agotado") return false;
+
+    if (filtro.texto) {
+      var donde = [evento.nombre, evento.teatro, evento.ciudad, categoria].join(" ");
+      if (llano(donde).indexOf(llano(filtro.texto)) === -1) return false;
+    }
+    return true;
+  }
+
+  function filtrar(eventos, filtro) {
+    return eventos.filter(function (evento) {
+      return coincide(evento, filtro || {});
+    });
+  }
+
+  function ordenar(eventos, como) {
+    return eventos.slice().sort(function (a, b) {
+      if (como === "precio") return Number(a.precio_base) - Number(b.precio_base);
+      if (como === "nombre") return a.nombre.localeCompare(b.nombre, "es");
+      if (como === "cupos") return Number(b.cupos_disponibles) - Number(a.cupos_disponibles);
+      return new Date(a.fecha_hora_inicio) - new Date(b.fecha_hora_inicio);
+    });
+  }
+
   // El buscador del inicio habla en plural (Conciertos) y las tarjetas en
   // singular (Concierto).
   var EQUIVALENTES = {
@@ -85,13 +103,14 @@ var CatalogoModelo = (function () {
   }
 
   return {
-    datosDe: datosDe,
-    coincide: coincide,
     llano: llano,
-    categoriaDelBuscador: categoriaDelBuscador,
-    filtrar: filtrar,
     categoriaDe: categoriaDe,
+    categoriaDelBuscador: categoriaDelBuscador,
     imagenDe: imagenDe,
-    enCartelera: enCartelera
+    enCartelera: enCartelera,
+    disponibilidadDe: disponibilidadDe,
+    coincide: coincide,
+    filtrar: filtrar,
+    ordenar: ordenar
   };
 })();
