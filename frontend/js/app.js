@@ -12,4 +12,5 @@ document.addEventListener("DOMContentLoaded", function () {
   ReporteControlador.iniciar();
   GestionControlador.iniciar();
   SelectorControlador.iniciar();
+  ReservaPantallaControlador.iniciar();
 });

@@ -1872,6 +1872,282 @@
 </div>
 
 
+<!-- RESERVAR ENTRADAS (CLIENTE) -->
+<div class="vista" id="vista-reservar" data-titulo="Completa tu reserva" hidden>
+
+  <header class="encabezado encabezado-simple">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <p class="encabezado-nota">
+        <span aria-hidden="true">🔒</span> Tus datos salen de tu cuenta
+      </p>
+    </div>
+  </header>
+
+  <main id="contenido-reservar" hidden>
+    <section class="compra" aria-labelledby="titulo-reservar">
+      <div class="contenedor">
+
+        <a class="volver" data-volver-evento href="#/catalogo">← Volver al evento</a>
+
+        <ol class="pasos-compra" aria-label="Pasos de la reserva">
+          <li class="paso-compra completo">
+            <span class="paso-numero" aria-hidden="true">1</span>
+            <span class="paso-texto">Elegir evento</span>
+          </li>
+          <li class="paso-compra actual" aria-current="step">
+            <span class="paso-numero" aria-hidden="true">2</span>
+            <span class="paso-texto">Tus datos</span>
+          </li>
+          <li class="paso-compra">
+            <span class="paso-numero" aria-hidden="true">3</span>
+            <span class="paso-texto">Confirmación</span>
+          </li>
+        </ol>
+
+        <div class="compra-rejilla">
+
+          <div class="compra-principal">
+            <h1 id="titulo-reservar">Completa tu reserva</h1>
+            <p class="compra-nota">Revisa los datos y confirma cuántas entradas vas a apartar.</p>
+
+            <p class="aviso aviso-error" data-rv-mensaje role="alert" hidden></p>
+
+            <form class="compra-form" data-form-reserva novalidate>
+
+              <section class="panel-tarjeta" aria-labelledby="titulo-rv-datos">
+                <div class="tarjeta-titulo">
+                  <span class="tarjeta-icono" aria-hidden="true">👤</span>
+                  <h2 id="titulo-rv-datos">Datos de quien reserva</h2>
+                </div>
+
+                <div class="campos-dos" data-rv-datos></div>
+
+                <p class="ayuda">
+                  Son los datos de tu cuenta. Si algo está mal, se corrige desde
+                  el perfil y la reserva queda a nombre correcto.
+                </p>
+              </section>
+
+              <section class="panel-tarjeta" aria-labelledby="titulo-rv-entradas">
+                <div class="tarjeta-titulo">
+                  <span class="tarjeta-icono" aria-hidden="true">🎟</span>
+                  <h2 id="titulo-rv-entradas">Entradas</h2>
+                </div>
+
+                <div class="contador">
+                  <span class="contador-texto">
+                    <span class="contador-titulo">Entrada general</span>
+                    <span class="contador-precio" data-rv-precio></span>
+                  </span>
+                  <span class="contador-botones">
+                    <button type="button" class="contador-btn" data-rv-menos aria-label="Quitar una entrada">−</button>
+                    <input type="number" id="rv-entradas" name="entradas" value="1" min="1" max="10"
+                           aria-label="Número de entradas">
+                    <button type="button" class="contador-btn" data-rv-mas aria-label="Agregar una entrada">+</button>
+                  </span>
+                </div>
+
+                <p class="ayuda" data-rv-cupos role="status"></p>
+
+                <div class="campo">
+                  <label for="rv-observaciones">Observaciones para el organizador (opcional)</label>
+                  <textarea id="rv-observaciones" name="observaciones" rows="3" maxlength="500"
+                            placeholder="Por ejemplo: necesito sillas juntas o acceso para silla de ruedas."></textarea>
+                </div>
+              </section>
+
+              <section class="panel-tarjeta" aria-labelledby="titulo-rv-pago">
+                <div class="tarjeta-titulo">
+                  <span class="tarjeta-icono" aria-hidden="true">💳</span>
+                  <h2 id="titulo-rv-pago">Cómo vas a pagar</h2>
+                </div>
+
+                <fieldset class="opciones-pago">
+                  <legend class="solo-lectores">Forma de pago</legend>
+
+                  <label class="opcion-pago">
+                    <input type="radio" name="pago" value="taquilla" checked>
+                    <span class="opcion-cuerpo">
+                      <span class="opcion-titulo">En la taquilla del evento</span>
+                      <span class="opcion-detalle">Pagas el día del evento al presentar tu documento.</span>
+                    </span>
+                  </label>
+
+                  <label class="opcion-pago">
+                    <input type="radio" name="pago" value="transferencia">
+                    <span class="opcion-cuerpo">
+                      <span class="opcion-titulo">Transferencia al organizador</span>
+                      <span class="opcion-detalle">El organizador te escribe con los datos de la cuenta.</span>
+                    </span>
+                  </label>
+                </fieldset>
+
+                <p class="aviso">
+                  TicketFlow no cobra en línea: aparta el cupo y el organizador
+                  confirma la reserva cuando recibe el pago.
+                </p>
+              </section>
+
+            </form>
+          </div>
+
+          <aside class="compra-resumen" aria-labelledby="titulo-rv-resumen">
+            <h2 id="titulo-rv-resumen">Resumen</h2>
+
+            <div class="resumen-evento" data-rv-evento></div>
+
+            <dl class="resumen-cuentas">
+              <div>
+                <dt>Entradas</dt>
+                <dd data-rv-cantidad>1</dd>
+              </div>
+              <div>
+                <dt>Precio por entrada</dt>
+                <dd data-rv-unitario></dd>
+              </div>
+              <div class="resumen-total">
+                <dt>Total</dt>
+                <dd data-rv-total></dd>
+              </div>
+            </dl>
+
+            <button type="button" class="btn btn-primario btn-lg btn-bloque" data-rv-confirmar>
+              Confirmar la reserva
+            </button>
+            <p class="ayuda" style="text-align:center">
+              La reserva queda en estado Reservada hasta que el organizador la confirma.
+            </p>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
+<!-- RESERVA CONFIRMADA -->
+<div class="vista" id="vista-reserva-lista" data-titulo="Reserva creada" hidden>
+
+  <header class="encabezado encabezado-simple">
+    <div class="contenedor encabezado-fila">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+    </div>
+  </header>
+
+  <main id="contenido-reserva-lista" hidden>
+    <section class="compra" aria-labelledby="titulo-lista">
+      <div class="contenedor">
+
+        <ol class="pasos-compra" aria-label="Pasos de la reserva">
+          <li class="paso-compra completo">
+            <span class="paso-numero" aria-hidden="true">1</span>
+            <span class="paso-texto">Elegir evento</span>
+          </li>
+          <li class="paso-compra completo">
+            <span class="paso-numero" aria-hidden="true">2</span>
+            <span class="paso-texto">Tus datos</span>
+          </li>
+          <li class="paso-compra completo actual" aria-current="step">
+            <span class="paso-numero" aria-hidden="true">✓</span>
+            <span class="paso-texto">Confirmación</span>
+          </li>
+        </ol>
+
+        <div class="lista-cabecera">
+          <span class="lista-chulo" aria-hidden="true">✓</span>
+          <h1 id="titulo-lista">¡Tu reserva quedó hecha!</h1>
+          <p>Guarda el código: con él el organizador encuentra tu reserva.</p>
+        </div>
+
+        <div class="codigo-reserva">
+          <span class="codigo-titulo">Código de la reserva</span>
+          <strong data-lt-codigo>TF-2026-0000</strong>
+        </div>
+
+        <div class="compra-rejilla">
+          <div class="compra-principal">
+            <section class="panel-tarjeta" aria-labelledby="titulo-lt-evento">
+              <div class="tarjeta-titulo">
+                <span class="tarjeta-icono" aria-hidden="true">📅</span>
+                <h2 id="titulo-lt-evento">Detalles del evento</h2>
+              </div>
+              <div data-lt-evento></div>
+            </section>
+
+            <section class="panel-tarjeta" aria-labelledby="titulo-lt-entradas">
+              <div class="tarjeta-titulo">
+                <span class="tarjeta-icono" aria-hidden="true">🎟</span>
+                <h2 id="titulo-lt-entradas">Entradas reservadas</h2>
+              </div>
+              <dl class="resumen-cuentas" data-lt-cuentas></dl>
+            </section>
+          </div>
+
+          <aside class="compra-resumen" aria-labelledby="titulo-lt-pasos">
+            <h2 id="titulo-lt-pasos">Qué sigue</h2>
+            <ol class="lista-pasos">
+              <li>El organizador revisa la reserva y la confirma.</li>
+              <li>Cuando quede Confirmada, el cupo es tuyo.</li>
+              <li>Lleva tu documento el día del evento.</li>
+            </ol>
+
+            <a href="#/mis-reservas" class="btn btn-primario btn-lg btn-bloque">Ver mis reservas</a>
+            <a href="#/catalogo" class="btn btn-secundario btn-bloque">Seguir buscando eventos</a>
+          </aside>
+        </div>
+
+        <div class="tarjetas-info">
+          <div class="info-caja">
+            <span class="tarjeta-icono" aria-hidden="true">📱</span>
+            <h3>Reserva digital</h3>
+            <p>No hay que imprimir nada: el código queda en «Mis reservas».</p>
+          </div>
+          <div class="info-caja">
+            <span class="tarjeta-icono" aria-hidden="true">🚪</span>
+            <h3>Entrada al evento</h3>
+            <p>Las puertas abren dos horas antes. Llega temprano.</p>
+          </div>
+          <div class="info-caja">
+            <span class="tarjeta-icono" aria-hidden="true">💬</span>
+            <h3>¿Dudas con la reserva?</h3>
+            <p>Escríbele al organizador con el código de la reserva.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" aria-label="Información del sitio">
+    <div class="contenedor pie-fila">
+      <p>TicketFlow · Proyecto Integrador 2026-2</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="#/inicio">Inicio</a>
+        <a href="#/catalogo">Catálogo</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+
 <!-- CAJÓN DEL MENÚ -->
 <div class="cajon" id="cajon-menu" data-cajon hidden>
   <div class="cajon-fondo" data-cerrar-cajon></div>
@@ -1932,6 +2208,7 @@
 <script src="js/controladores/reportes.js?v=2026-10-18"></script>
 <script src="js/controladores/gestion.js?v=2026-10-18"></script>
 <script src="js/controladores/selector.js?v=2026-10-18"></script>
+<script src="js/controladores/reserva.js?v=2026-10-18"></script>
 <script src="js/app.js?v=2026-10-18"></script>
 </body>
 </html>

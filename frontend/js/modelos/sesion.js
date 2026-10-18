@@ -10,7 +10,9 @@ var SesionModelo = (function () {
     "panel-agente": ["agente", "administrador"],
     "panel-admin": ["administrador"],
     "gestion": ["administrador"],
-    "mis-reservas": ["cliente"]
+    "mis-reservas": ["cliente"],
+    "reservar": ["cliente"],
+    "reserva-lista": ["cliente"]
   };
 
   // Qué ve en el menú cada perfil

@@ -74,8 +74,10 @@ var EventoControlador = (function () {
       return;
     }
 
+    // El cliente sigue a la pantalla de reserva, que es donde revisa sus
+    // datos y confirma.
     EventoVista.pintarAccion(EventoVista.envolver([
-      EventoVista.boton("Reservar"),
+      EventoVista.enlace("Reservar", "#/reservar/" + evento.codigo_evento),
       EventoVista.ayuda("La reserva queda en estado Reservada hasta que el organizador la confirma.")
     ]));
   }
