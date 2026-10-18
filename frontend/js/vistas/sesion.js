@@ -5,8 +5,16 @@ var SesionVista = (function () {
   function enlace(item, rutaActual) {
     var a = document.createElement("a");
     a.href = item.ruta;
-    a.textContent = item.texto;
     a.dataset.deSesion = "";
+
+    if (item.icono) {
+      var icono = document.createElement("span");
+      icono.className = "menu-icono";
+      icono.setAttribute("aria-hidden", "true");
+      icono.textContent = item.icono;
+      a.appendChild(icono);
+    }
+    a.appendChild(document.createTextNode(item.texto));
     if (item.ruta.replace(/^#\/?/, "") === rutaActual) {
       a.className = "activo";
       a.setAttribute("aria-current", "page");

@@ -152,11 +152,19 @@ var TableroVista = (function () {
 
     var acciones = document.createElement("div");
     acciones.className = "proximo-acciones";
-    var ver = document.createElement("a");
-    ver.href = "#/evento/" + reserva.codigo_evento;
-    ver.className = "btn btn-primario btn-bloque";
-    ver.textContent = "Ver el evento";
-    acciones.appendChild(ver);
+
+    var entrada = document.createElement("a");
+    entrada.href = "#/reserva-lista/" + reserva.id_reserva;
+    entrada.className = "btn btn-primario btn-bloque";
+    entrada.textContent = "Ver mi reserva";
+
+    var detalle = document.createElement("a");
+    detalle.href = "#/evento/" + reserva.codigo_evento;
+    detalle.className = "btn btn-secundario btn-bloque";
+    detalle.textContent = "Detalles del evento";
+
+    acciones.appendChild(entrada);
+    acciones.appendChild(detalle);
 
     var lado = document.createElement("div");
     lado.className = "proximo-lado";

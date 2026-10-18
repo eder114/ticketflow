@@ -180,28 +180,6 @@ var EventoVista = (function () {
     alternarCausa("Programado");
   }
 
-  // Los pasos de arriba se van marcando a medida que se llenan las secciones.
-  var PASOS = {
-    informacion: ["nombre", "descripcion"],
-    ubicacion: ["teatro", "ciudad"],
-    fechas: ["inicio", "fin", "capacidad", "precio"],
-    estado: ["estado"]
-  };
-
-  function marcarPasos() {
-    var form = document.querySelector("#vista-crear-evento form");
-    if (!form) return;
-
-    Object.keys(PASOS).forEach(function (paso) {
-      var completo = PASOS[paso].every(function (nombre) {
-        var campo = form.elements[nombre];
-        return campo && String(campo.value).trim() !== "";
-      });
-      var marca = document.querySelector('[data-paso="' + paso + '"]');
-      if (marca) marca.classList.toggle("completo", completo);
-    });
-  }
-
   // El título y el botón dicen si se está registrando o editando.
   function modoDelFormulario(editando) {
     var titulo = document.querySelector("[data-titulo-evento]");
@@ -379,7 +357,6 @@ var EventoVista = (function () {
     llenarFormulario: llenarFormulario,
     limpiarFormulario: limpiarFormulario,
     modoDelFormulario: modoDelFormulario,
-    marcarPasos: marcarPasos,
     pintarMisEventos: pintarMisEventos,
     mostrarCausaDeEvento: mostrarCausaDeEvento
   };

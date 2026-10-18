@@ -15,30 +15,31 @@ var SesionModelo = (function () {
     "reserva-lista": ["cliente"]
   };
 
-  // Qué ve en el menú cada perfil
+  // Qué ve en el menú cada perfil. El icono es el que sale en la barra
+  // lateral de los paneles y en el cajon.
   var MENU = {
     visitante: [
-      { ruta: "#/inicio", texto: "Inicio" },
-      { ruta: "#/catalogo", texto: "Catálogo" }
+      { ruta: "#/inicio", texto: "Inicio", icono: "🏠" },
+      { ruta: "#/catalogo", texto: "Catálogo", icono: "🎫" }
     ],
     cliente: [
-      { ruta: "#/inicio", texto: "Inicio" },
-      { ruta: "#/catalogo", texto: "Catálogo" },
-      { ruta: "#/mis-reservas", texto: "Mis reservas" }
+      { ruta: "#/inicio", texto: "Inicio", icono: "🏠" },
+      { ruta: "#/catalogo", texto: "Catálogo", icono: "🎫" },
+      { ruta: "#/mis-reservas", texto: "Mis reservas", icono: "📋" }
     ],
     agente: [
-      { ruta: "#/inicio", texto: "Inicio" },
-      { ruta: "#/catalogo", texto: "Catálogo" },
-      { ruta: "#/panel-agente", texto: "Mis eventos" },
-      { ruta: "#/crear-evento", texto: "Registrar evento" }
+      { ruta: "#/inicio", texto: "Inicio", icono: "🏠" },
+      { ruta: "#/catalogo", texto: "Catálogo", icono: "🎫" },
+      { ruta: "#/panel-agente", texto: "Ventas", icono: "📊" },
+      { ruta: "#/crear-evento", texto: "Crear evento", icono: "➕" }
     ],
     administrador: [
-      { ruta: "#/inicio", texto: "Inicio" },
-      { ruta: "#/catalogo", texto: "Catálogo" },
-      { ruta: "#/panel-agente", texto: "Reservas" },
-      { ruta: "#/crear-evento", texto: "Nuevo evento" },
-      { ruta: "#/panel-admin", texto: "Reportes" },
-      { ruta: "#/gestion", texto: "Datos" }
+      { ruta: "#/inicio", texto: "Inicio", icono: "🏠" },
+      { ruta: "#/catalogo", texto: "Catálogo", icono: "🎫" },
+      { ruta: "#/panel-agente", texto: "Reservas", icono: "📋" },
+      { ruta: "#/crear-evento", texto: "Crear evento", icono: "➕" },
+      { ruta: "#/panel-admin", texto: "Estadísticas", icono: "📊" },
+      { ruta: "#/gestion", texto: "Datos", icono: "⚙" }
     ]
   };
 

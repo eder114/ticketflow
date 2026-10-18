@@ -27,8 +27,7 @@
 
       <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
               aria-controls="cajon-menu" aria-label="Abrir el menú">
-        <span class="menu-btn-icono" aria-hidden="true">☰</span>
-        <span class="menu-btn-texto">Menú</span>
+        <span aria-hidden="true">☰</span>
       </button>
 
       <nav class="nav" id="nav-principal" aria-label="Navegación principal">
@@ -873,8 +872,7 @@
       </a>
       <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
               aria-controls="cajon-menu" aria-label="Abrir el menú">
-        <span class="menu-btn-icono" aria-hidden="true">☰</span>
-        <span class="menu-btn-texto">Menú</span>
+        <span aria-hidden="true">☰</span>
       </button>
       <nav class="nav" id="nav-catalogo" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
@@ -1161,8 +1159,7 @@
       </a>
       <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
               aria-controls="cajon-menu" aria-label="Abrir el menú">
-        <span class="menu-btn-icono" aria-hidden="true">☰</span>
-        <span class="menu-btn-texto">Menú</span>
+        <span aria-hidden="true">☰</span>
       </button>
       <nav class="nav" id="nav-evento" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
@@ -1311,26 +1308,6 @@
           <p>Completa la información para publicar tu evento en TicketFlow.</p>
         </div>
       </div>
-
-      <!-- Los pasos marcan por dónde va el formulario. -->
-      <ol class="pasos-evento" data-pasos aria-label="Secciones del formulario">
-        <li class="paso" data-paso="informacion">
-          <span class="paso-numero" aria-hidden="true">1</span>
-          <span class="paso-texto">Información</span>
-        </li>
-        <li class="paso" data-paso="ubicacion">
-          <span class="paso-numero" aria-hidden="true">2</span>
-          <span class="paso-texto">Ubicación</span>
-        </li>
-        <li class="paso" data-paso="fechas">
-          <span class="paso-numero" aria-hidden="true">3</span>
-          <span class="paso-texto">Fechas y aforo</span>
-        </li>
-        <li class="paso" data-paso="estado">
-          <span class="paso-numero" aria-hidden="true">4</span>
-          <span class="paso-texto">Estado</span>
-        </li>
-      </ol>
 
       <form data-validar data-envio="evento" class="form-evento" novalidate>
 
@@ -1503,11 +1480,11 @@
       <div class="tablero-cabecera">
         <div>
           <p class="overline">Mi cuenta</p>
-          <h1 id="titulo-mis-reservas">Mis reservas</h1>
+          <h1 id="titulo-mis-reservas" data-mr-saludo>Mis reservas</h1>
           <p>Aquí quedan las entradas que has reservado. La reserva pasa a
              Confirmada cuando el organizador la revisa.</p>
         </div>
-        <a href="#/catalogo" class="btn btn-secundario">Buscar más eventos</a>
+        <a href="#/catalogo" class="btn btn-primario">Buscar más eventos</a>
       </div>
 
       <p class="aviso" data-mr-mensaje role="status" hidden></p>
@@ -1533,7 +1510,7 @@
 
 
 <!-- PANEL DEL ORGANIZADOR -->
-<div class="vista" id="vista-panel-agente" data-titulo="Mis eventos y reservas" hidden>
+<div class="vista" id="vista-panel-agente" data-titulo="Ventas" hidden>
   <div class="tablero">
 
     <aside class="tablero-lateral">
@@ -1541,7 +1518,6 @@
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <p class="tablero-rol">Panel del organizador</p>
       <div class="tablero-usuario" data-usuario-sesion></div>
       <nav class="tablero-nav" data-menu-sesion aria-label="Secciones de TicketFlow"></nav>
       <div class="tablero-salir" data-acciones-sesion></div>
@@ -1551,15 +1527,27 @@
 
       <div class="tablero-cabecera">
         <div>
-          <p class="overline">Ventas</p>
-          <h1 id="titulo-panel-agente">Mis eventos y sus reservas</h1>
-          <p>Cómo van las reservas de tus eventos y qué hay que responder hoy.
-             Cancelar siempre pide la causa.</p>
+          <p class="overline">Panel del organizador</p>
+          <h1 id="titulo-panel-agente">Ventas</h1>
+          <p>Cómo van las reservas de tus eventos y qué hay que responder hoy.</p>
         </div>
-        <a href="#/crear-evento" class="btn btn-primario">Registrar evento</a>
+        <a href="#/crear-evento" class="btn btn-primario">Crear evento</a>
       </div>
 
       <p class="aviso" data-pa-mensaje role="status" hidden></p>
+
+      <!-- Arriba: el evento que viene y, si hace falta, el aviso de cupos. -->
+      <div class="tablero-rejilla">
+        <section class="panel-tarjeta destacado-evento" aria-labelledby="titulo-pa-actual">
+          <h2 id="titulo-pa-actual" class="overline">Evento actual</h2>
+          <div data-pa-actual></div>
+        </section>
+
+        <section class="panel-tarjeta" data-pa-caja-aviso aria-labelledby="titulo-pa-inventario" hidden>
+          <h2 id="titulo-pa-inventario" class="overline">Aviso de aforo</h2>
+          <div data-pa-inventario></div>
+        </section>
+      </div>
 
       <div class="kpis" data-pa-cifras></div>
 
@@ -1570,12 +1558,80 @@
           <div data-pa-barras></div>
         </section>
 
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-actividad">
+          <h2 id="titulo-pa-actividad">Actividad reciente</h2>
+          <div data-pa-actividad></div>
+        </section>
+      </div>
+
+      <div class="tablero-rejilla">
         <section class="panel-tarjeta" aria-labelledby="titulo-pa-dona">
           <h2 id="titulo-pa-dona">Estado de las reservas</h2>
           <p class="panel-nota">Cómo están repartidas las reservas de tus eventos.</p>
           <div class="grafica-caja" data-pa-dona></div>
         </section>
+
+        <section class="panel-tarjeta" aria-labelledby="titulo-pa-cupos">
+          <h2 id="titulo-pa-cupos">Ocupación de cada evento</h2>
+          <p class="panel-nota">Qué parte del aforo ya está apartada.</p>
+          <div data-pa-ocupacion></div>
+        </section>
       </div>
+
+      <!-- Las reservas, en tabla, con su buscador y sus filtros. -->
+      <section class="panel-tarjeta" aria-labelledby="titulo-pa-reservas">
+        <div class="tabla-cabecera">
+          <div>
+            <h2 id="titulo-pa-reservas">Reservas de mis eventos</h2>
+            <p class="panel-nota" data-pa-conteo role="status"></p>
+          </div>
+
+          <div class="tabla-filtros">
+            <div class="filtro">
+              <label for="pa-buscar">Buscar</label>
+              <input type="search" id="pa-buscar" placeholder="Código, comprador o evento">
+            </div>
+            <div class="filtro">
+              <label for="pa-estado">Estado</label>
+              <select id="pa-estado">
+                <option value="">Todos</option>
+                <option value="Reservada">Reservada</option>
+                <option value="Confirmada">Confirmada</option>
+                <option value="Cancelada">Cancelada</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabla-caja" tabindex="0" role="region" aria-label="Tabla: Reservas de mis eventos">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas de mis eventos, con su comprador, su valor y su estado</caption>
+            <thead>
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Comprador</th>
+                <th scope="col">Evento</th>
+                <th scope="col">Cant.</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Total</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody data-pa-reservas></tbody>
+          </table>
+        </div>
+
+        <div class="paginacion" data-pa-paginas hidden>
+          <button type="button" class="btn btn-chico btn-secundario" data-pa-anterior>Anterior</button>
+          <span data-pa-pagina role="status"></span>
+          <button type="button" class="btn btn-chico btn-secundario" data-pa-siguiente>Siguiente</button>
+        </div>
+
+        <p class="vacio" data-pa-sin-reservas hidden>
+          Tus eventos todavía no tienen reservas.
+        </p>
+      </section>
 
       <section class="panel-tarjeta" aria-labelledby="titulo-pa-eventos">
         <h2 id="titulo-pa-eventos">Mis eventos</h2>
@@ -1600,21 +1656,6 @@
           Todavía no has registrado eventos.
         </p>
       </section>
-
-      <div class="tablero-rejilla tablero-rejilla-ancha">
-        <section class="panel-tarjeta" aria-labelledby="titulo-pa-reservas">
-          <h2 id="titulo-pa-reservas">Reservas de mis eventos</h2>
-          <div class="lista-reservas" data-pa-reservas aria-live="polite"></div>
-          <p class="vacio" data-pa-sin-reservas hidden>
-            Tus eventos todavía no tienen reservas.
-          </p>
-        </section>
-
-        <section class="panel-tarjeta" aria-labelledby="titulo-pa-actividad">
-          <h2 id="titulo-pa-actividad">Actividad reciente</h2>
-          <div data-pa-actividad></div>
-        </section>
-      </div>
 
     </main>
   </div>
@@ -2213,6 +2254,7 @@
 <script src="js/vistas/reportes.js?v=2026-10-18b"></script>
 <script src="js/vistas/graficas.js?v=2026-10-18b"></script>
 <script src="js/vistas/tablero.js?v=2026-10-18b"></script>
+<script src="js/vistas/ventas.js?v=2026-10-18b"></script>
 <script src="js/vistas/selector.js?v=2026-10-18b"></script>
 <script src="js/vistas/gestion.js?v=2026-10-18b"></script>
 <!-- Controladores -->

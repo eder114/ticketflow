@@ -16,6 +16,11 @@ var ReservaControlador = (function () {
   var MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
                "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
+  // Lo que se está viendo en la tabla del organizador.
+  var POR_PAGINA = 8;
+  var reservasDelPanel = [];
+  var pagina = 1;
+
   function activa(reserva) {
     return reserva.estado !== "Cancelada";
   }
@@ -118,6 +123,11 @@ var ReservaControlador = (function () {
 
   // Las cuatro cifras de arriba y la tarjeta del próximo evento.
   function pintarResumenDeCliente(reservas) {
+    // El saludo con el nombre, como en el diseño.
+    var usuario = SesionModelo.usuario();
+    var saludo = document.querySelector("[data-mr-saludo]");
+    if (saludo && usuario) saludo.textContent = "¡Hola, " + usuario.nombre.split(" ")[0] + "!";
+
     var vivas = reservas.filter(activa);
     var ahora = Date.now();
     var proximas = vivas.filter(function (r) {
@@ -164,16 +174,59 @@ var ReservaControlador = (function () {
         EventoVista.pintarMisEventos(document.querySelector("[data-pa-eventos]"), eventos);
         vacio("[data-pa-sin-eventos]", eventos.length === 0);
 
-        ReservaVista.pintar(document.querySelector("[data-pa-reservas]"), reservas, {
-          mostrarCliente: true,
-          acciones: accionesDeAgente
-        });
+        reservasDelPanel = reservas;
+        pintarTabla();
         vacio("[data-pa-sin-reservas]", reservas.length === 0);
 
+        VentasVista.pintarEventoActual(eventoActual(eventos));
+        VentasVista.pintarAviso(eventos);
+        VentasVista.pintarOcupacion(eventos);
         pintarResumenDeAgente(eventos, reservas);
       }).catch(function (error) {
         aviso("[data-pa-mensaje]", error.message, true);
       });
+  }
+
+  // El evento actual es el que está en cartelera y empieza primero.
+  function eventoActual(eventos) {
+    var proximos = eventos.filter(CatalogoModelo.enCartelera).sort(function (a, b) {
+      return new Date(a.fecha_hora_inicio) - new Date(b.fecha_hora_inicio);
+    });
+    return proximos[0] || null;
+  }
+
+  function filtros() {
+    var buscar = document.getElementById("pa-buscar");
+    var estado = document.getElementById("pa-estado");
+    return {
+      texto: buscar ? buscar.value : "",
+      estado: estado ? estado.value : ""
+    };
+  }
+
+  // La tabla se arma con lo que pasa el buscador y el filtro de estado, y se
+  // parte en páginas de ocho.
+  function pintarTabla() {
+    var f = filtros();
+    var buscado = CatalogoModelo.llano(f.texto);
+
+    var visibles = reservasDelPanel.filter(function (r) {
+      if (f.estado && r.estado !== f.estado) return false;
+      if (!buscado) return true;
+
+      var donde = [VentasVista.codigoDe(r), r.cliente, r.evento].join(" ");
+      return CatalogoModelo.llano(donde).indexOf(buscado) !== -1;
+    });
+
+    var paginas = Math.max(1, Math.ceil(visibles.length / POR_PAGINA));
+    if (pagina > paginas) pagina = paginas;
+
+    var desde = (pagina - 1) * POR_PAGINA;
+    var enPantalla = visibles.slice(desde, desde + POR_PAGINA);
+
+    VentasVista.pintarTabla(enPantalla, accionesDeAgente);
+    VentasVista.pintarConteo(enPantalla.length, visibles.length);
+    VentasVista.pintarPaginas(pagina, paginas);
   }
 
   function pintarResumenDeAgente(eventos, reservas) {
@@ -291,12 +344,50 @@ var ReservaControlador = (function () {
     });
   }
 
+  // El buscador, el filtro de estado y las flechas de página de la tabla.
+  function conectarTabla() {
+    var buscar = document.getElementById("pa-buscar");
+    if (buscar) {
+      buscar.addEventListener("input", function () {
+        pagina = 1;
+        pintarTabla();
+      });
+    }
+
+    var estado = document.getElementById("pa-estado");
+    if (estado) {
+      estado.addEventListener("change", function () {
+        pagina = 1;
+        pintarTabla();
+      });
+    }
+
+    var anterior = document.querySelector("[data-pa-anterior]");
+    if (anterior) {
+      anterior.addEventListener("click", function () {
+        pagina = Math.max(1, pagina - 1);
+        pintarTabla();
+      });
+    }
+
+    var siguiente = document.querySelector("[data-pa-siguiente]");
+    if (siguiente) {
+      siguiente.addEventListener("click", function () {
+        pagina = pagina + 1;
+        pintarTabla();
+      });
+    }
+  }
+
   function conectarBotones() {
     document.addEventListener("click", function (e) {
       var boton = e.target.closest("[data-estado][data-reserva-id]");
       if (boton) {
         if (boton.dataset.pideCausa !== undefined) {
-          ReservaVista.mostrarCausa(boton, true);
+          // En el panel del organizador las reservas están en una tabla; en
+          // "Mis reservas" del cliente, en tarjetas.
+          if (boton.closest("tr")) VentasVista.mostrarCausa(boton, true);
+          else ReservaVista.mostrarCausa(boton, true);
         } else {
           cambiar(Number(boton.dataset.reservaId), boton.dataset.estado, null);
         }
@@ -304,7 +395,10 @@ var ReservaControlador = (function () {
       }
 
       var volver = e.target.closest("[data-cerrar-causa]");
-      if (volver) ReservaVista.mostrarCausa(volver, false);
+      if (volver) {
+        if (volver.closest("tr")) VentasVista.mostrarCausa(volver, false);
+        else ReservaVista.mostrarCausa(volver, false);
+      }
     });
 
     // El formulario de la causa: cancelar siempre pide decir por qué.
@@ -411,6 +505,7 @@ var ReservaControlador = (function () {
   function iniciar() {
     if (!document.querySelector("[data-mr-lista]")) return;
 
+    conectarTabla();
     conectarBotones();
     conectarEstadosDeEvento();
 
