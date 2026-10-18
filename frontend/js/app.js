@@ -11,4 +11,5 @@ document.addEventListener("DOMContentLoaded", function () {
   ReservaControlador.iniciar();
   ReporteControlador.iniciar();
   GestionControlador.iniciar();
+  SelectorControlador.iniciar();
 });

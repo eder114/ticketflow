@@ -25,9 +25,13 @@
         TicketFlow
       </a>
 
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">☰</button>
+      <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
+              aria-controls="cajon-menu" aria-label="Abrir el menú">
+        <span class="menu-btn-icono" aria-hidden="true">☰</span>
+        <span class="menu-btn-texto">Menú</span>
+      </button>
 
-      <nav class="nav" id="nav-principal" data-fijo aria-label="Navegación principal">
+      <nav class="nav" id="nav-principal" aria-label="Navegación principal">
         <a href="#/inicio" class="activo">Inicio</a>
         <a href="#eventos">Eventos</a>
         <a href="#categorias">Categorías</a>
@@ -867,7 +871,11 @@
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-catalogo" aria-label="Abrir menú">☰</button>
+      <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
+              aria-controls="cajon-menu" aria-label="Abrir el menú">
+        <span class="menu-btn-icono" aria-hidden="true">☰</span>
+        <span class="menu-btn-texto">Menú</span>
+      </button>
       <nav class="nav" id="nav-catalogo" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
         <a href="#/catalogo" class="activo">Catálogo</a>
@@ -1151,7 +1159,11 @@
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-evento" aria-label="Abrir menú">☰</button>
+      <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
+              aria-controls="cajon-menu" aria-label="Abrir el menú">
+        <span class="menu-btn-icono" aria-hidden="true">☰</span>
+        <span class="menu-btn-texto">Menú</span>
+      </button>
       <nav class="nav" id="nav-evento" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
         <a href="#/catalogo">Catálogo</a>
@@ -1264,7 +1276,11 @@
         <span class="marca-logo" aria-hidden="true">◆</span>
         TicketFlow
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-crear" aria-label="Abrir menú">☰</button>
+      <button class="menu-btn" type="button" data-abrir-cajon aria-expanded="false"
+              aria-controls="cajon-menu" aria-label="Abrir el menú">
+        <span class="menu-btn-icono" aria-hidden="true">☰</span>
+        <span class="menu-btn-texto">Menú</span>
+      </button>
       <nav class="nav" id="nav-crear" aria-label="Navegación principal">
         <a href="#/inicio">Inicio</a>
         <a href="#/catalogo">Catálogo</a>
@@ -1834,6 +1850,30 @@
 </div>
 
 
+<!-- CAJÓN DEL MENÚ -->
+<div class="cajon" id="cajon-menu" data-cajon hidden>
+  <div class="cajon-fondo" data-cerrar-cajon></div>
+
+  <aside class="cajon-panel" role="dialog" aria-modal="true" aria-label="Menú de TicketFlow" tabindex="-1">
+    <div class="cajon-cabecera">
+      <a href="#/inicio" class="marca">
+        <span class="marca-logo" aria-hidden="true">◆</span>
+        TicketFlow
+      </a>
+      <button type="button" class="cajon-cerrar" data-cerrar-cajon aria-label="Cerrar el menú">✕</button>
+    </div>
+
+    <div class="cajon-usuario" data-usuario-sesion></div>
+
+    <nav class="cajon-nav" data-menu-sesion aria-label="Pantallas de TicketFlow"></nav>
+
+    <div class="cajon-acciones" data-acciones-sesion="cajon"></div>
+
+    <p class="cajon-pie">TicketFlow · Proyecto Integrador 2026-2</p>
+  </aside>
+</div>
+
+
 <!-- Modelos -->
 <script src="js/configuracion.js?v=2026-10-18"></script>
 <script src="js/modelos/rutas.js?v=2026-10-18"></script>
@@ -1855,6 +1895,7 @@
 <script src="js/vistas/reportes.js?v=2026-10-18"></script>
 <script src="js/vistas/graficas.js?v=2026-10-18"></script>
 <script src="js/vistas/tablero.js?v=2026-10-18"></script>
+<script src="js/vistas/selector.js?v=2026-10-18"></script>
 <script src="js/vistas/gestion.js?v=2026-10-18"></script>
 <!-- Controladores -->
 <script src="js/controladores/enrutador.js?v=2026-10-18"></script>
@@ -1868,6 +1909,7 @@
 <script src="js/controladores/reservas.js?v=2026-10-18"></script>
 <script src="js/controladores/reportes.js?v=2026-10-18"></script>
 <script src="js/controladores/gestion.js?v=2026-10-18"></script>
+<script src="js/controladores/selector.js?v=2026-10-18"></script>
 <script src="js/app.js?v=2026-10-18"></script>
 </body>
 </html>

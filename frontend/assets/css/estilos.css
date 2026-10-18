@@ -152,33 +152,19 @@ button{font-family:inherit}
   display:block;background:none;border:1px solid var(--linea);
   border-radius:var(--r-btn);padding:9px 12px;cursor:pointer;font-size:18px;line-height:1;
 }
-.encabezado-fila{flex-wrap:wrap}
-.nav,.acciones{
-  display:none;width:100%;
-  flex-direction:column;align-items:stretch;gap:0;
-}
-.encabezado.abierto .nav,.encabezado.abierto .acciones{display:flex}
-.nav a{
-  font-size:15px;font-weight:500;color:var(--texto-suave);
-  padding:13px 0;border-bottom:1px solid var(--linea-suave);
-}
+/* En celular solo se ven la marca y el botón del menú: lo demás vive en el
+   cajón que se despliega por el lado. */
+.nav,.acciones{display:none}
+.nav a{font-size:15px;font-weight:500;color:var(--texto-suave)}
 .nav a:hover{color:var(--navy)}
 .nav a.activo{color:var(--navy);font-weight:600}
-.acciones{padding-block:var(--e4);gap:var(--e3)}
-.acciones .btn{width:100%}
 
 @media (min-width:1024px){
-  .menu-btn{display:none}
-  .encabezado-fila{flex-wrap:nowrap}
-  .nav,.acciones,
-  .encabezado.abierto .nav,.encabezado.abierto .acciones{
-    display:flex;width:auto;flex-direction:row;align-items:center;
-  }
-  .nav{gap:var(--e8)}
+  .nav,.acciones{display:flex;align-items:center}
+  .nav{gap:var(--e6)}
   .nav a{padding:0 0 3px;border-bottom:2px solid transparent}
   .nav a.activo{border-bottom-color:var(--indigo)}
-  .acciones{gap:var(--e3);padding-block:0}
-  .acciones .btn{width:auto}
+  .acciones{gap:var(--e3)}
 }
 
 /* Hero con buscador */
@@ -1287,4 +1273,179 @@ button{font-family:inherit}
   .tablero-cuerpo{padding:var(--e8) var(--e8) var(--e12);gap:var(--e6)}
   .tablero-rejilla{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
   .tablero-rejilla-ancha{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+}
+
+
+/* ====================== CAJÓN DEL MENÚ Y BARRA DE ARRIBA ================== */
+
+/* La barra de arriba se queda con la marca, sus enlaces y el botón del menú;
+   todo lo del perfil se fue para el cajón. */
+.encabezado-fila{flex-wrap:nowrap}
+.nav{order:1}
+.acciones{order:2}
+.menu-btn{order:3}
+
+.menu-btn{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--linea);
+  border-radius:var(--r-full);padding:8px 14px;cursor:pointer;
+  font:inherit;font-size:14px;font-weight:600;color:var(--texto);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.menu-btn:hover{border-color:var(--indigo);box-shadow:var(--sombra-sm)}
+.menu-btn-icono{font-size:16px;line-height:1}
+.menu-btn-texto{display:none}
+
+.chip-usuario{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--linea);
+  border-radius:var(--r-full);padding:5px 12px 5px 5px;cursor:pointer;
+  font:inherit;transition:border-color .15s ease, box-shadow .15s ease;
+}
+.chip-usuario:hover{border-color:var(--indigo);box-shadow:var(--sombra-sm)}
+.chip-avatar{
+  width:30px;height:30px;border-radius:var(--r-full);
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;font-size:12px;font-weight:700;
+}
+.chip-nombre{font-size:14px;font-weight:600;color:var(--texto)}
+.chip-perfil{
+  padding:3px 9px;border-radius:var(--r-full);
+  background:var(--indigo-50);color:var(--indigo-700);
+  font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* El cajón */
+.cajon{position:fixed;inset:0;z-index:120}
+body.con-cajon{overflow:hidden}
+
+.cajon-fondo{
+  position:absolute;inset:0;
+  background:rgba(17,24,39,.45);
+  opacity:0;transition:opacity .2s ease;
+}
+.cajon.abierto .cajon-fondo{opacity:1}
+
+.cajon-panel{
+  position:absolute;top:0;right:0;bottom:0;
+  width:min(330px, 88vw);
+  background:#fff;border-left:1px solid var(--linea-suave);
+  box-shadow:-18px 0 50px rgba(17,24,39,.16);
+  padding:var(--e5) var(--e5) var(--e6);
+  display:flex;flex-direction:column;gap:var(--e4);
+  overflow-y:auto;
+  transform:translateX(100%);transition:transform .22s ease;
+}
+.cajon.abierto .cajon-panel{transform:translateX(0)}
+.cajon-panel:focus{outline:none}
+
+.cajon-cabecera{display:flex;align-items:center;justify-content:space-between;gap:var(--e3)}
+.cajon-cerrar{
+  width:38px;height:38px;flex:0 0 38px;
+  background:var(--gris-100);border:0;border-radius:var(--r-full);
+  cursor:pointer;font-size:15px;color:var(--texto-suave);
+}
+.cajon-cerrar:hover{background:var(--linea);color:var(--texto)}
+
+.cajon-usuario{
+  display:flex;align-items:center;gap:var(--e3);
+  padding:var(--e3);border-radius:var(--r-card);background:var(--indigo-50);
+}
+.cajon-usuario:empty{display:none}
+.cajon-usuario .tablero-avatar{background:var(--grad)}
+
+.cajon-nav{display:flex;flex-direction:column;gap:4px}
+.cajon-nav a{
+  display:block;padding:12px 14px;border-radius:var(--r-btn);
+  font-size:15px;font-weight:500;color:var(--texto-suave);
+}
+.cajon-nav a:hover{background:var(--gris-100);color:var(--texto)}
+.cajon-nav a.activo{background:var(--indigo);color:#fff;font-weight:600}
+
+.cajon-acciones{display:flex;flex-direction:column;gap:var(--e2);margin-top:var(--e2)}
+.cajon-acciones .btn{width:100%;justify-content:center}
+
+.cajon-pie{
+  margin-top:auto;padding-top:var(--e4);
+  border-top:1px solid var(--linea-suave);
+  font-size:12px;color:var(--texto-tenue);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cajon-panel,.cajon-fondo{transition:none}
+}
+
+@media (min-width:1024px){
+  .menu-btn{display:flex}
+  .menu-btn-texto{display:inline}
+}
+
+
+/* ===================== DESPLEGABLES CON ESTILO PROPIO ===================== */
+
+/* El select de verdad se queda debajo del botón: no se ve, pero sigue
+   recibiendo el valor, la validación y el envío del formulario. */
+.selector{position:relative}
+.selector-nativo{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;pointer-events:none;
+}
+
+.selector-boton{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--e3);
+  padding:12px 14px;font:inherit;font-size:15px;text-align:left;
+  color:var(--texto);background:#fff;
+  border:1px solid var(--linea);border-radius:var(--r-btn);
+  cursor:pointer;transition:border-color .15s ease, box-shadow .15s ease;
+}
+.selector-boton:hover{border-color:var(--indigo-300,#B7B3FF)}
+.selector-boton:focus-visible{
+  outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.18);
+}
+.selector.abierto .selector-boton{
+  border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.18);
+}
+.selector.sin-elegir .selector-valor{color:var(--texto-suave)}
+.selector.con-error .selector-boton{border-color:var(--error-600)}
+
+.selector-valor{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.selector-flecha{
+  flex:0 0 auto;font-size:15px;line-height:1;color:var(--texto-suave);
+  transition:transform .15s ease;
+}
+.selector.abierto .selector-flecha{transform:rotate(180deg)}
+
+.selector-panel{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;
+  background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
+  box-shadow:0 18px 40px rgba(17,24,39,.16);
+  padding:6px;max-height:280px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:2px;
+}
+
+.selector-opcion{
+  display:flex;align-items:center;gap:10px;width:100%;
+  padding:11px 12px;border:0;border-radius:var(--r-btn);
+  background:none;font:inherit;font-size:14.5px;text-align:left;color:var(--texto);
+  cursor:pointer;
+}
+.selector-opcion:hover{background:var(--gris-100)}
+.selector-opcion:focus-visible{
+  outline:none;background:var(--indigo-50);
+  box-shadow:inset 0 0 0 2px var(--indigo);
+}
+.selector-opcion[disabled]{opacity:.5;cursor:not-allowed}
+
+.selector-punto{
+  width:16px;height:16px;flex:0 0 16px;border-radius:var(--r-full);
+  border:2px solid var(--linea);background:#fff;
+}
+.selector-opcion.elegida{color:var(--indigo-700);font-weight:600}
+.selector-opcion.elegida .selector-punto{
+  border-color:var(--indigo);
+  background:radial-gradient(circle at center, var(--indigo) 0 4px, #fff 5px 100%);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .selector-flecha{transition:none}
 }
