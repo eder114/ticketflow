@@ -1,0 +1,245 @@
+/* ===========================================================================
+   Animaciones de TicketFlow
+   ---------------------------------------------------------------------------
+   Los efectos están tomados del catálogo de React Bits (reactbits.dev), pero
+   escritos otra vez en CSS y JavaScript puro, porque React Bits son
+   componentes de React con framer-motion y aquí el frontend es JavaScript sin
+   compilador. Lo que se copia es el movimiento, no el código ni los colores:
+   ningún efecto de este archivo cambia la paleta de la aplicación.
+
+     React Bits              Aquí
+     ------------------      -------------------------------------------------
+     Animated Content        entrada de secciones al asomar en pantalla
+     Fade Content            aparición suave con desenfoque
+     Animated List           tarjetas y filas que entran escalonadas
+     Split Text              el título del inicio entra palabra por palabra
+     Count Up                las cifras de los paneles cuentan hasta su valor
+     Spotlight Card          brillo que sigue al puntero sobre las tarjetas
+     Tilted Card             la tarjeta se inclina un poco hacia el puntero
+     Magnet                  el botón principal se acerca al puntero
+     Click Spark             chispas al pulsar un botón
+     Specular Button         destello que recorre el botón principal
+     Gradual Blur            el cambio de pantalla entra desenfocado
+     Scroll Reveal           las gráficas se dibujan cuando se ven
+
+   Todo queda quieto si el sistema pide menos movimiento (al final del
+   archivo) y nada depende de las animaciones para poder leerse: si el
+   JavaScript no corre, la clase "con-animaciones" no se pone y el contenido
+   se ve tal cual.
+   =========================================================================== */
+
+:root{
+  --an-corta:.34s;
+  --an-media:.58s;
+  --an-larga:.9s;
+  --an-curva:cubic-bezier(.22,1,.36,1);
+}
+
+/* --------------------------------------------- Animated / Fade Content --
+   El elemento espera oculto y entra cuando el observador lo ve. El retardo
+   lo pone el JavaScript en --an-retardo para que los hermanos salgan en
+   fila (Animated List). */
+
+html.con-animaciones .an-oculto{opacity:0}
+
+html.con-animaciones .an-visible{
+  animation:an-subir var(--an-media) var(--an-curva) var(--an-retardo,0s) both;
+}
+html.con-animaciones .an-visible.an-efecto-aparecer{
+  animation-name:an-aparecer;
+}
+html.con-animaciones .an-visible.an-efecto-escala{
+  animation-name:an-escala;
+}
+html.con-animaciones .an-visible.an-efecto-lado{
+  animation-name:an-lado;
+}
+
+@keyframes an-subir{
+  from{opacity:0;transform:translate3d(0,26px,0);filter:blur(6px)}
+  to  {opacity:1;transform:none;filter:none}
+}
+@keyframes an-aparecer{
+  from{opacity:0;filter:blur(8px)}
+  to  {opacity:1;filter:none}
+}
+@keyframes an-escala{
+  from{opacity:0;transform:scale(.93) translate3d(0,14px,0)}
+  to  {opacity:1;transform:none}
+}
+@keyframes an-lado{
+  from{opacity:0;transform:translate3d(-24px,0,0)}
+  to  {opacity:1;transform:none}
+}
+
+/* ------------------------------------------------------------ Split Text --
+   El título del inicio se parte en palabras y cada una sube por su cuenta. */
+
+.an-palabra{display:inline-block;white-space:pre}
+
+html.con-animaciones .an-palabra{
+  opacity:0;
+  animation:an-palabra .74s var(--an-curva) var(--an-retardo,0s) both;
+}
+@keyframes an-palabra{
+  from{opacity:0;transform:translate3d(0,.5em,0) rotate(1.5deg);filter:blur(5px)}
+  to  {opacity:1;transform:none;filter:none}
+}
+
+/* ---------------------------------------------------------- Gradual Blur --
+   El cambio de pantalla ya no es un simple "fade": entra desenfocado y
+   sube un poco, como el Gradual Blur de React Bits. */
+
+html.con-animaciones .vista.activa{
+  animation:an-pantalla .46s var(--an-curva) both;
+}
+@keyframes an-pantalla{
+  from{opacity:0;transform:translate3d(0,12px,0);filter:blur(7px)}
+  to  {opacity:1;transform:none;filter:none}
+}
+
+/* -------------------------------------------------------- Spotlight Card --
+   Un brillo blanco muy suave que sigue al puntero. Va en ::after, que se
+   pinta encima del contenido, y no toca ningún color de la tarjeta: es solo
+   blanco con poca opacidad. */
+
+.an-foco{position:relative}
+
+.an-foco::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  opacity:0;transition:opacity .28s ease;
+  background:radial-gradient(240px circle at var(--an-x,50%) var(--an-y,50%),
+             rgba(255,255,255,.22), rgba(255,255,255,0) 62%);
+}
+.an-foco:hover::after,
+.an-foco:focus-within::after{opacity:1}
+
+/* --------------------------------------------------------- Tilted Card --
+   La tarjeta se inclina hacia donde está el puntero. Las variables las
+   mueve el JavaScript; si no hay puntero encima valen cero. */
+
+.an-inclinar{
+  transform-style:preserve-3d;
+  transition:transform .2s var(--an-curva), box-shadow .2s ease;
+}
+html.con-animaciones .evento.an-inclinar:hover,
+html.con-animaciones .kpi.an-inclinar:hover,
+html.con-animaciones .tarjeta-acceso.an-inclinar:hover{
+  transform:perspective(760px)
+            rotateX(var(--an-rx,0deg)) rotateY(var(--an-ry,0deg))
+            translate3d(0,-4px,0);
+}
+
+/* -------------------------------------------------------------- Magnet --
+   El botón se corre unos pocos píxeles hacia el puntero. */
+
+.an-iman{transition:transform .18s var(--an-curva), box-shadow .18s ease}
+
+html.con-animaciones .btn.an-iman:hover{
+  transform:translate3d(var(--an-mx,0px), calc(var(--an-my,0px) - 1px), 0);
+}
+
+/* ---------------------------------------------------- Specular Button --
+   Un destello recorre el botón principal cuando el puntero entra. */
+
+.btn{position:relative;overflow:hidden}
+
+.btn-primario::after{
+  content:"";position:absolute;top:0;bottom:0;left:-40%;width:38%;
+  pointer-events:none;transform:skewX(-18deg) translate3d(-180%,0,0);
+  background:linear-gradient(90deg, rgba(255,255,255,0),
+             rgba(255,255,255,.42), rgba(255,255,255,0));
+}
+html.con-animaciones .btn-primario:hover::after,
+html.con-animaciones .btn-primario:focus-visible::after{
+  animation:an-destello .78s ease both;
+}
+@keyframes an-destello{
+  from{transform:skewX(-18deg) translate3d(-180%,0,0)}
+  to  {transform:skewX(-18deg) translate3d(420%,0,0)}
+}
+
+/* ---------------------------------------------------------- Click Spark --
+   Las chispas del pulso: ocho rayitas que salen del punto donde se hizo
+   clic. Viven en una capa fija que no recibe ningún evento. */
+
+.an-chispas{
+  position:fixed;left:0;top:0;width:0;height:0;
+  pointer-events:none;z-index:9999;
+}
+.an-chispa{
+  position:absolute;left:0;top:0;width:11px;height:2px;border-radius:2px;
+  background:currentColor;opacity:.9;
+  transform-origin:0 50%;
+  animation:an-chispa .46s ease-out both;
+}
+@keyframes an-chispa{
+  from{opacity:.95;transform:rotate(var(--an-giro)) translateX(4px) scaleX(.6)}
+  to  {opacity:0;   transform:rotate(var(--an-giro)) translateX(26px) scaleX(.1)}
+}
+
+/* ------------------------------------------------------------- gráficas --
+   Scroll Reveal aplicado al SVG hecho a mano: las barras crecen desde su
+   base, la línea se dibuja sola, los puntos aparecen de a uno y la dona se
+   llena dando la vuelta. */
+
+html.con-animaciones .an-barra{
+  transform-box:fill-box;transform-origin:50% 100%;
+  animation:an-barra .66s var(--an-curva) var(--an-retardo,0s) both;
+}
+@keyframes an-barra{
+  from{transform:scaleY(0);opacity:.35}
+  to  {transform:none;opacity:1}
+}
+
+html.con-animaciones .an-trazo{
+  stroke-dasharray:var(--an-largo);
+  animation:an-trazo var(--an-larga) ease-out both;
+}
+@keyframes an-trazo{
+  from{stroke-dashoffset:var(--an-largo)}
+  to  {stroke-dashoffset:0}
+}
+
+html.con-animaciones .an-punto{
+  transform-box:fill-box;transform-origin:50% 50%;
+  animation:an-punto .4s var(--an-curva) var(--an-retardo,0s) both;
+}
+@keyframes an-punto{
+  from{transform:scale(0);opacity:0}
+  to  {transform:none;opacity:1}
+}
+
+html.con-animaciones .an-area{animation:an-aparecer .8s ease .25s both}
+html.con-animaciones .an-guia{animation:an-aparecer .5s ease both}
+
+/* ------------------------------------------------- cifras que cuentan --
+   Mientras cuenta, los dígitos no deben mover el ancho de la tarjeta. */
+
+.an-contando{font-variant-numeric:tabular-nums}
+
+/* ---------------------------------------------------------- menos movimiento --
+   Si el sistema pide menos movimiento se apaga todo: nada se mueve, nada
+   cuenta y todo queda visible en su sitio. */
+
+@media (prefers-reduced-motion:reduce){
+  html.con-animaciones .an-oculto,
+  html.con-animaciones .an-visible,
+  html.con-animaciones .an-palabra,
+  html.con-animaciones .vista.activa,
+  html.con-animaciones .an-barra,
+  html.con-animaciones .an-trazo,
+  html.con-animaciones .an-punto,
+  html.con-animaciones .an-area,
+  html.con-animaciones .an-guia{animation:none;opacity:1;transform:none;filter:none}
+
+  html.con-animaciones .btn-primario:hover::after{animation:none}
+  .an-foco::after{display:none}
+  .an-inclinar,.an-iman{transition:none}
+  html.con-animaciones .evento.an-inclinar:hover,
+  html.con-animaciones .kpi.an-inclinar:hover,
+  html.con-animaciones .tarjeta-acceso.an-inclinar:hover,
+  html.con-animaciones .btn.an-iman:hover{transform:translateY(-1px)}
+  .an-chispa{display:none}
+}
