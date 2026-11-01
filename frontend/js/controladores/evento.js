@@ -52,7 +52,7 @@ var EventoControlador = (function () {
 
     if (perfil === "visitante") {
       EventoVista.pintarAccion(EventoVista.envolver([
-        EventoVista.enlace("Reservar", "#/iniciar-sesion"),
+        EventoVista.enlace("Reservar", "#/iniciar-sesion", "#/reservar/" + evento.codigo_evento),
         EventoVista.ayuda("Hay que iniciar sesión para reservar.")
       ]));
       return;

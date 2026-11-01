@@ -64,10 +64,41 @@ var AccesoControlador = (function () {
     return primero !== null;
   }
 
+  // Dónde quería ir la persona antes de que le pidiéramos la sesión. Se
+  // guarda al pulsar "Reservar" sin haber entrado, y se usa una sola vez.
+  var LLAVE_VOLVER = "ticketflow:volver-a";
+  var VENCE = 30 * 60 * 1000;      // media hora; después ya no tiene sentido
+
+  function recordarDestino(ruta) {
+    try {
+      sessionStorage.setItem(LLAVE_VOLVER, JSON.stringify({ ruta: ruta, cuando: Date.now() }));
+    } catch (error) { /* en modo privado puede fallar; no pasa nada */ }
+  }
+
+  function destinoGuardado() {
+    try {
+      var crudo = sessionStorage.getItem(LLAVE_VOLVER);
+      sessionStorage.removeItem(LLAVE_VOLVER);
+      if (!crudo) return null;
+
+      var guardado = JSON.parse(crudo);
+      if (!guardado || !guardado.ruta) return null;
+      if (Date.now() - guardado.cuando > VENCE) return null;
+      return guardado.ruta;
+    } catch (error) { return null; }
+  }
+
   function entrar(sesion) {
     SesionModelo.guardar(sesion);
     SesionVista.actualizar(RutasModelo.actual());
-    window.location.hash = DESTINO[sesion.usuario.perfil] || "#/inicio";
+
+    // Si venía de un evento, se le devuelve ahí; si no, al tablero de su
+    // perfil. Solo los clientes pueden reservar, así que para los demás se
+    // ignora el destino guardado.
+    var volver = destinoGuardado();
+    window.location.hash = (volver && sesion.usuario.perfil === "cliente")
+      ? volver
+      : (DESTINO[sesion.usuario.perfil] || "#/inicio");
   }
 
   function enviar(form, tipo) {
@@ -128,6 +159,12 @@ var AccesoControlador = (function () {
   }
 
   function iniciar() {
+    // Cualquier enlace que diga a dónde volver deja la nota antes de irse al
+    // formulario de inicio de sesión.
+    document.addEventListener("click", function (e) {
+      var enlace = e.target.closest ? e.target.closest("[data-volver-a]") : null;
+      if (enlace) recordarDestino(enlace.dataset.volverA);
+    });
     cargarCiudades();
 
     // Solo los de acceso: el de registrar eventos lo maneja su controlador.

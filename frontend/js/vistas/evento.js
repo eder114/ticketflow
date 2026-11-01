@@ -117,11 +117,15 @@ var EventoVista = (function () {
     return b;
   }
 
-  function enlace(texto, ruta) {
+  // "volver" es a dónde hay que llevar a la persona después de iniciar
+  // sesión: si entró por el botón de reservar, vuelve a la reserva de este
+  // evento y no al catálogo.
+  function enlace(texto, ruta, volver) {
     var a = document.createElement("a");
     a.href = ruta;
     a.className = "btn btn-primario btn-lg btn-bloque";
     a.textContent = texto;
+    if (volver) a.dataset.volverA = volver;
     return a;
   }
 
