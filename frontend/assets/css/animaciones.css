@@ -91,7 +91,11 @@ html.con-animaciones .an-palabra{
    sube un poco, como el Gradual Blur de React Bits. */
 
 html.con-animaciones .vista.activa{
-  animation:an-pantalla .46s var(--an-curva) both;
+  /* "backwards" y no "both" a propósito: al terminar, la pantalla se queda
+     sin transform ni filter. Si se quedara con ellos (aunque valgan cero),
+     crearía un bloque contenedor y la barra fija de reserva dejaría de
+     pegarse al borde del celular. */
+  animation:an-pantalla .46s var(--an-curva) backwards;
 }
 @keyframes an-pantalla{
   from{opacity:0;transform:translate3d(0,12px,0);filter:blur(7px)}

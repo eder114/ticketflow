@@ -766,27 +766,39 @@ button{font-family:inherit}
 .migas a:hover{color:var(--indigo-700)}
 .migas [aria-current="page"]{color:var(--texto);font-weight:600}
 
-.detalle{padding-block:0 var(--e10)}
-.detalle-rejilla{display:grid;gap:var(--e6);grid-template-columns:1fr}
+.detalle{padding-block:0 var(--e6)}
+@media (min-width:768px){ .detalle{padding-block:0 var(--e10)} }
+.detalle-rejilla{display:grid;gap:var(--e4);grid-template-columns:1fr}
+@media (min-width:768px){ .detalle-rejilla{gap:var(--e6)} }
 
 .detalle-principal{display:flex;flex-direction:column;gap:var(--e3);min-width:0}
 .detalle-principal h1{font-size:26px;line-height:1.2}
-.detalle-principal h2{font-size:18px;margin-top:var(--e4)}
+.detalle-principal h2{font-size:17px;margin-top:var(--e3)}
+@media (min-width:768px){ .detalle-principal h2{font-size:18px;margin-top:var(--e4)} }
 .detalle-principal p{color:var(--texto-suave);line-height:1.65;max-width:66ch}
 
 .detalle-foto{border-radius:var(--r-card-lg);overflow:hidden;background:var(--gris-100)}
 .detalle-foto img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
 
 .detalle-datos{
-  display:grid;gap:var(--e3);grid-template-columns:1fr;
+  display:grid;gap:var(--e3) var(--e4);grid-template-columns:repeat(2,minmax(0,1fr));
   background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card);
-  padding:var(--e4);margin-top:var(--e2);
+  padding:var(--e3);margin-top:0;
 }
+/* Lugar y Organiza suelen ser textos largos: se quedan con la fila entera. */
+.detalle-datos > div:nth-child(1),
+.detalle-datos > div:nth-child(6){grid-column:1 / -1}
 .detalle-datos dt{
   font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
   color:var(--texto-suave);margin-bottom:3px;
 }
-.detalle-datos dd{font-size:15px;color:var(--texto)}
+.detalle-datos dd{font-size:14px;color:var(--texto);line-height:1.4}
+@media (min-width:576px){
+  .detalle-datos{padding:var(--e4);gap:var(--e3)}
+  .detalle-datos dd{font-size:15px}
+  .detalle-datos > div:nth-child(1),
+  .detalle-datos > div:nth-child(6){grid-column:auto}
+}
 
 .lista-puntos{display:flex;flex-direction:column;gap:8px;padding-left:20px}
 .lista-puntos li{color:var(--texto-suave);line-height:1.6}
@@ -794,9 +806,10 @@ button{font-family:inherit}
 .detalle-compra{
   background:#fff;border:1px solid var(--linea);border-radius:var(--r-card-lg);
   box-shadow:var(--sombra-md);
-  padding:var(--e5);display:flex;flex-direction:column;gap:var(--e3);
+  padding:var(--e4);display:flex;flex-direction:column;gap:var(--e3);
   height:fit-content;
 }
+@media (min-width:768px){ .detalle-compra{padding:var(--e5)} }
 .detalle-compra h2{font-size:17px}
 .detalle-precio{
   font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;
@@ -813,9 +826,6 @@ button{font-family:inherit}
 .detalle-total{font-size:15px;color:var(--texto-suave)}
 .detalle-total strong{color:var(--texto);font-size:17px}
 
-@media (min-width:576px){
-  .detalle-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
 @media (min-width:768px){
   .detalle-principal h1{font-size:32px}
 }
@@ -1092,12 +1102,13 @@ button{font-family:inherit}
 .tablero-usuario-perfil{font-size:12px;color:var(--texto-suave)}
 
 .tablero-nav{
-  display:flex;gap:var(--e2);overflow-x:auto;
-  padding-bottom:4px;
+  /* En celular baja de línea: antes se iba de lado y la última sección
+     quedaba cortada contra el borde de la pantalla. */
+  display:flex;flex-wrap:wrap;gap:var(--e2);
 }
 .tablero-nav a{
-  flex:0 0 auto;
-  padding:9px 14px;border-radius:var(--r-btn);
+  flex:1 1 auto;text-align:center;
+  padding:9px 12px;border-radius:var(--r-btn);
   font-size:14px;font-weight:500;color:var(--texto-suave);
   text-decoration:none;white-space:nowrap;
 }
@@ -1254,8 +1265,8 @@ button{font-family:inherit}
     padding:var(--e5) var(--e4);
     overflow-y:auto;
   }
-  .tablero-nav{flex-direction:column;overflow:visible;gap:4px;margin-top:var(--e2)}
-  .tablero-nav a{white-space:normal}
+  .tablero-nav{flex-direction:column;flex-wrap:nowrap;gap:4px;margin-top:var(--e2)}
+  .tablero-nav a{white-space:normal;text-align:left}
   .tablero-salir{margin-top:auto;flex-direction:column}
   .tablero-cuerpo{padding:var(--e8) var(--e8) var(--e12);gap:var(--e6)}
   .tablero-rejilla{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
@@ -1454,8 +1465,13 @@ body.con-cajon{overflow:hidden}
   background:var(--indigo-50);display:grid;place-items:center;font-size:15px;
 }
 
-.campos-dos{display:grid;gap:var(--e4);grid-template-columns:1fr}
+.campos-dos{display:grid;gap:var(--e3) var(--e4);grid-template-columns:repeat(2,minmax(0,1fr))}
 .campos-dos .campo-ancho{grid-column:1/-1}
+/* Los campos que se escriben necesitan el ancho completo en celular; los que
+   solo se leen (nombre, correo, perfil) caben de a dos. */
+@media (max-width:575px){
+  .campos-dos:not([data-rv-datos]){grid-template-columns:1fr;gap:var(--e4)}
+}
 
 /* La barra de guardar se queda pegada abajo mientras se llena el formulario. */
 .barra-acciones{
@@ -1479,8 +1495,14 @@ body.con-cajon{overflow:hidden}
 
 .encabezado-simple .encabezado-fila{justify-content:space-between}
 .encabezado-nota{font-size:13px;color:var(--texto-suave);display:flex;align-items:center;gap:8px}
+/* En celular la nota se parte en dos renglones al lado del logo y se ve
+   mal; ahí no aporta nada, así que no se muestra. */
+@media (max-width:575px){ .encabezado-nota{display:none} }
 
-.compra{padding-block:var(--e6) var(--e10);background:#F7F9FB}
+.compra{padding-block:var(--e4) var(--e6)}
+@media (min-width:768px){ .compra{padding-block:var(--e6) var(--e10)} }
+
+.compra{background:#F7F9FB}
 .compra h1{font-size:28px;line-height:1.2}
 .compra-nota{color:var(--texto-suave);font-size:15px;margin-top:6px}
 
@@ -1631,10 +1653,20 @@ body.con-cajon{overflow:hidden}
 /* ============== DETALLE DEL EVENTO: FOTO CON EL NOMBRE ENCIMA ============ */
 
 .detalle-foto{position:relative}
-.detalle-foto img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.detalle-foto img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .detalle-foto::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(17,24,39,0) 35%, rgba(17,24,39,.82) 100%);
+  /* En celular el nombre y los datos ocupan media foto, así que el velo
+     empieza mucho antes: si no, el texto blanco cae sobre el cielo claro
+     de la imagen y no se lee. */
+  background:linear-gradient(180deg,
+             rgba(17,24,39,0) 8%, rgba(17,24,39,.55) 45%, rgba(17,24,39,.92) 100%);
+}
+@media (min-width:576px){
+  .detalle-foto img{aspect-ratio:16/9}
+  .detalle-foto::after{
+    background:linear-gradient(180deg, rgba(17,24,39,0) 35%, rgba(17,24,39,.82) 100%);
+  }
 }
 
 .detalle-encima{
@@ -1643,10 +1675,11 @@ body.con-cajon{overflow:hidden}
   display:flex;flex-direction:column;gap:10px;color:#fff;
 }
 .detalle-encima .evento-cat{position:static;align-self:flex-start}
-.detalle-encima h1{color:#fff;font-size:26px;line-height:1.18}
+.detalle-encima h1{color:#fff;font-size:21px;line-height:1.2}
+@media (min-width:576px){ .detalle-encima h1{font-size:26px} }
 .detalle-linea{
-  display:flex;flex-wrap:wrap;gap:var(--e4);
-  font-size:13.5px;color:rgba(255,255,255,.92);
+  display:flex;flex-wrap:wrap;gap:6px var(--e3);
+  font-size:13px;color:#fff;
 }
 .detalle-linea span{display:inline-flex;align-items:center;gap:6px}
 
@@ -1998,4 +2031,40 @@ body.con-cajon{overflow:hidden}
   padding:3px 10px;border-radius:var(--r-full);
   background:rgba(99,91,255,.26);color:#C7C3FF;
   font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+
+
+/* ================== BARRA FIJA DE RESERVA (CELULAR Y TABLETA) ============ */
+/* La tarjeta de compra queda al final de la página en pantallas angostas, y
+   nadie baja hasta allá. Esta barra repite el precio y el botón, siempre a
+   la mano; en escritorio no aparece, porque allá la tarjeta va pegada al
+   costado y siempre se ve. */
+
+.barra-reserva{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--e3);
+  padding:10px var(--margen);
+  padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--linea);
+  box-shadow:0 -6px 20px rgba(17,24,39,.10);
+}
+.barra-reserva[hidden]{display:none}
+
+.barra-reserva-datos{display:flex;flex-direction:column;min-width:0}
+.barra-reserva-datos strong{
+  font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;
+  color:var(--navy);line-height:1.15;
+}
+.barra-reserva-datos span{font-size:12px;color:var(--texto-suave)}
+.barra-reserva .btn{flex:0 0 auto;padding:13px 26px;font-size:15px}
+.barra-reserva .btn:disabled{opacity:.55}
+
+/* Para que la barra no tape el final de la página. */
+@media (max-width:1023px){
+  #vista-evento .detalle{padding-bottom:84px}
+}
+@media (min-width:1024px){
+  .barra-reserva{display:none}
 }

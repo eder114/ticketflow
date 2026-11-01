@@ -55,6 +55,7 @@ var EventoVista = (function () {
     escribir("[data-ev-capacidad]", FormatoModelo.numero(evento.capacidad_total) + " personas");
     escribir("[data-ev-agente]", evento.agente);
     escribir("[data-ev-precio]", pesos(evento.precio_base));
+    sincronizarBarra();
     escribir("[data-ev-descripcion]",
              evento.descripcion || "El organizador no dejó una descripción de este evento.");
 
@@ -106,6 +107,43 @@ var EventoVista = (function () {
 
     caja.textContent = "";
     caja.appendChild(contenido);
+    sincronizarBarra();
+  }
+
+  // ------------------------------------------ barra fija de reserva --
+  // En celular la tarjeta de compra queda al final de la página, así que la
+  // barra de abajo repite el precio y el mismo botón. No inventa nada: copia
+  // lo que diga el control de verdad, y si no hay ninguno, se esconde.
+
+  function controlDeAccion() {
+    var caja = document.querySelector("[data-ev-accion]");
+    return caja ? caja.querySelector("a, button") : null;
+  }
+
+  function sincronizarBarra() {
+    var barra = document.querySelector("[data-barra-reserva]");
+    if (!barra) return;
+
+    var control = controlDeAccion();
+    var boton = barra.querySelector("[data-barra-accion]");
+    var precio = document.querySelector("[data-ev-precio]");
+    var destino = barra.querySelector("[data-barra-precio]");
+
+    if (!control || !boton) { barra.hidden = true; return; }
+
+    barra.hidden = false;
+    if (precio && destino) destino.textContent = precio.textContent;
+
+    boton.textContent = control.textContent.trim() || "Reservar";
+    boton.disabled = control.disabled === true;
+    boton.setAttribute("aria-label",
+      boton.textContent + (destino ? ", " + destino.textContent + " por entrada" : ""));
+  }
+
+  // Le pasa el clic al control de verdad de la tarjeta de compra.
+  function pulsarAccion() {
+    var control = controlDeAccion();
+    if (control) control.click();
   }
 
   function boton(texto) {
@@ -353,6 +391,8 @@ var EventoVista = (function () {
     pintarDetalle: pintarDetalle,
     limitarEntradas: limitarEntradas,
     pintarAccion: pintarAccion,
+    sincronizarBarra: sincronizarBarra,
+    pulsarAccion: pulsarAccion,
     boton: boton,
     enlace: enlace,
     ayuda: ayuda,

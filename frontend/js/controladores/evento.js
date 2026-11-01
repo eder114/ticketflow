@@ -150,6 +150,13 @@ var EventoControlador = (function () {
     campo.addEventListener("change", recalcular);
 
     document.addEventListener("click", function (e) {
+      // La barra fija de abajo no hace nada por su cuenta: pulsa el mismo
+      // control que está en la tarjeta de compra.
+      if (e.target.closest("[data-barra-accion]")) {
+        EventoVista.pulsarAccion();
+        return;
+      }
+
       var boton = e.target.closest("[data-reservar]");
       if (boton) { reservar(boton); return; }
 
