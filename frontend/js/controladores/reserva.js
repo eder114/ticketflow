@@ -148,8 +148,7 @@ var ReservaPantallaControlador = (function () {
   function confirmar(boton) {
     if (!evento) return;
 
-    boton.disabled = true;
-    boton.textContent = "Reservando...";
+    CargaVista.boton(boton, true, "Reservando…");
     mensaje("");
 
     var observaciones = document.getElementById("rv-observaciones").value.trim();
@@ -162,8 +161,7 @@ var ReservaPantallaControlador = (function () {
       hecha = reserva;
       window.location.hash = "#/reserva-lista/" + reserva.id_reserva;
     }).catch(function (error) {
-      boton.disabled = false;
-      boton.textContent = "Confirmar la reserva";
+      CargaVista.boton(boton, false);
       mensaje(error.message);
     });
   }
@@ -172,6 +170,9 @@ var ReservaPantallaControlador = (function () {
 
   function pintarConfirmacion(reserva) {
     document.querySelector("[data-lt-codigo]").textContent = codigoDe(reserva);
+
+    // El círculo y el chulo se dibujan solos al llegar a esta pantalla.
+    CargaVista.chulo(document.querySelector(".lista-chulo"));
 
     var caja = document.querySelector("[data-lt-evento]");
     tarjetaDeEvento(caja, {

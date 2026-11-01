@@ -1490,11 +1490,11 @@ body.con-cajon{overflow:hidden}
 
 /* Los pasos de la compra */
 .pasos-compra{
-  list-style:none;display:flex;gap:var(--e2);
-  overflow-x:auto;margin-bottom:var(--e6);padding-bottom:4px;
+  list-style:none;display:flex;flex-wrap:wrap;gap:var(--e2);
+  margin-bottom:var(--e4);
 }
 .paso-compra{
-  flex:1 0 auto;min-width:140px;
+  flex:1 1 150px;min-width:0;
   display:flex;align-items:center;gap:10px;
   padding:12px 14px;border-radius:var(--r-card);
   background:#fff;border:1px solid var(--linea-suave);

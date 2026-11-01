@@ -22,4 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.dispatchEvent(new CustomEvent("ticketflow:pantalla", {
     detail: { pantalla: RutasModelo.actual(), parametro: RutasModelo.parametro() }
   }));
+
+  // Ya hay pantalla pintada: se puede quitar el cargador de la marca.
+  CargaVista.listo();
 });

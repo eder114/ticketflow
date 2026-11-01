@@ -243,3 +243,122 @@ html.con-animaciones .an-guia{animation:an-aparecer .5s ease both}
   html.con-animaciones .btn.an-iman:hover{transform:translateY(-1px)}
   .an-chispa{display:none}
 }
+
+/* ===========================================================================
+   Cargador de marca y chulo de confirmación
+   ---------------------------------------------------------------------------
+   Dos piezas que la gente ya conoce de otras páginas: el logo dando vueltas
+   mientras carga, y el círculo que se dibuja con el chulo cuando algo salió
+   bien. El movimiento del chulo lo lleva anime.js (js/vistas/carga.js); el
+   del cargador es CSS puro, a propósito, para que se vea desde el primer
+   instante, antes de que corra una sola línea de JavaScript.
+   =========================================================================== */
+
+/* ------------------------------------------------- cargador de la marca -- */
+
+.cargador{
+  position:fixed;inset:0;z-index:9998;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--e4);
+  background:var(--navy);
+  /* Red de seguridad: si el JavaScript no llegara a esconderlo, se va solo a
+     los seis segundos y la página queda utilizable igual. */
+  animation:cargador-rendirse 0s linear 6s forwards;
+}
+.cargador[hidden]{display:none}
+.cargador.se-va{
+  animation:cargador-salir .42s ease forwards;
+  pointer-events:none;
+}
+@keyframes cargador-salir{
+  from{opacity:1}
+  to  {opacity:0;visibility:hidden}
+}
+@keyframes cargador-rendirse{
+  to{opacity:0;visibility:hidden;pointer-events:none}
+}
+
+.cargador-caja{position:relative;width:96px;height:96px;display:grid;place-items:center}
+
+.cargador-aro{position:absolute;inset:0;width:96px;height:96px}
+.cargador-pista{
+  fill:none;stroke:rgba(255,255,255,.14);stroke-width:4;
+}
+.cargador-giro{
+  fill:none;stroke:#635BFF;stroke-width:4;stroke-linecap:round;
+  stroke-dasharray:80 190;
+  transform-origin:50% 50%;
+  animation:cargador-vuelta 1.15s linear infinite;
+}
+@keyframes cargador-vuelta{
+  to{transform:rotate(360deg)}
+}
+
+/* El rombo de la marca, latiendo en el centro del aro. */
+.cargador-logo{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--grad);color:#fff;font-size:20px;
+  box-shadow:var(--brillo);
+  animation:cargador-latido 1.15s ease-in-out infinite;
+}
+@keyframes cargador-latido{
+  0%,100%{transform:scale(1)}
+  50%    {transform:scale(.88)}
+}
+
+.cargador-texto{
+  color:#CBD5E1;font-size:14px;letter-spacing:.02em;
+}
+.cargador-marca{
+  color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;
+}
+
+/* ----------------------------------------------- chulo de confirmación -- */
+/* El círculo se dibuja y el chulo entra detrás. Los trazos van con el color
+   de éxito que ya estaba en la paleta. */
+
+.chulo{width:100%;height:100%;display:block;overflow:visible}
+.chulo-aro,.chulo-marca{
+  fill:none;stroke:currentColor;stroke-width:5;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.chulo-aro{stroke-opacity:.9}
+
+/* Sin anime.js o sin movimiento, el dibujo se ve completo y quieto. */
+html.con-animaciones .chulo-aro,
+html.con-animaciones .chulo-marca{stroke-dashoffset:0}
+
+.lista-chulo{position:relative;overflow:visible}
+.lista-chulo .chulo{padding:13px}
+
+/* El anillo que se expande una vez, como el "pop" de las apps de pedidos. */
+.chulo-onda{
+  position:absolute;inset:0;border-radius:var(--r-full);
+  border:2px solid var(--exito-600);opacity:0;pointer-events:none;
+}
+html.con-animaciones .chulo-onda{animation:chulo-onda .9s ease-out .35s both}
+@keyframes chulo-onda{
+  from{transform:scale(1);opacity:.55}
+  to  {transform:scale(1.55);opacity:0}
+}
+
+/* ------------------------------------------------- botón trabajando -- */
+/* Mientras se guarda algo, el botón muestra su propio girito en vez de
+   quedarse mudo. */
+
+.btn-cargando{position:relative;pointer-events:none}
+.btn-girito{
+  width:16px;height:16px;flex:0 0 16px;margin-right:9px;
+  border-radius:50%;border:2px solid rgba(255,255,255,.35);
+  border-top-color:#fff;display:inline-block;vertical-align:-3px;
+  animation:cargador-vuelta .7s linear infinite;
+}
+.btn-secundario .btn-girito,
+.btn-fantasma .btn-girito{
+  border-color:rgba(17,24,39,.22);border-top-color:var(--indigo);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cargador-giro,.cargador-logo,.btn-girito{animation:none}
+  html.con-animaciones .chulo-onda{animation:none;opacity:0}
+}
