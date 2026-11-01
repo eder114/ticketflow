@@ -23,8 +23,8 @@ var AnimacionesVista = (function () {
   // Qué se anima en cada pantalla. "paso" es el retardo que se le suma a cada
   // hermano para que entren en fila, como el Animated List de React Bits.
   var REGLAS = [
-    // Inicio
-    { sel: ".hero p, .hero .buscador, .hero-datos", efecto: "subir", paso: 90 },
+    // Inicio. El hero no está aquí: su entrada la lleva anime.js, en
+    // js/vistas/efectos.js, como una sola línea de tiempo.
     { sel: ".categoria",               efecto: "escala", paso: 70 },
     { sel: ".tarjeta-acceso",          efecto: "escala", paso: 90 },
     { sel: ".paso",                    efecto: "subir",  paso: 80 },

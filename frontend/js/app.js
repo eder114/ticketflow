@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   SelectorControlador.iniciar();
   ReservaPantallaControlador.iniciar();
   AnimacionesVista.iniciar();
+  EfectosVista.iniciar();
 
   // El enrutador avisa de la pantalla apenas arranca, cuando los demás
   // controladores todavía no estaban escuchando; por eso se repite el aviso

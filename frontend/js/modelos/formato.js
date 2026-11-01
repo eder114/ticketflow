@@ -51,6 +51,32 @@ var FormatoModelo = (function () {
     return f.getFullYear() + "-" + (mes < 10 ? "0" + mes : mes) + "-" + (dia < 10 ? "0" + dia : dia);
   }
 
+
+  // Cuánto falta para un evento, en palabras: "Faltan 23 días", "Faltan 5 h",
+  // "Empieza ya". Devuelve también una marca para pintarlo de otro color
+  // cuando ya está encima.
+  function faltan(cadena) {
+    var f = new Date(cadena);
+    if (isNaN(f.getTime())) return null;
+
+    var minutos = Math.round((f.getTime() - Date.now()) / 60000);
+    if (minutos <= 0) return { texto: "Empieza ya", urgencia: "hoy" };
+
+    var dias = Math.floor(minutos / 1440);
+    if (dias >= 1) {
+      return {
+        texto: "Faltan " + dias + (dias === 1 ? " día" : " días"),
+        urgencia: dias <= 3 ? "urgente" : ""
+      };
+    }
+
+    var horas = Math.floor(minutos / 60);
+    if (horas >= 1) {
+      return { texto: "Faltan " + horas + " h " + (minutos % 60) + " min", urgencia: "urgente" };
+    }
+    return { texto: "Faltan " + minutos + " min", urgencia: "urgente" };
+  }
+
   // La clase del chip de color de cada estado, para eventos y para reservas.
   var CLASES = {
     "Programado": "estado-programado",
@@ -82,6 +108,7 @@ var FormatoModelo = (function () {
     fechaLarga: fechaLarga,
     fechaCorta: fechaCorta,
     fechaDeFiltro: fechaDeFiltro,
+    faltan: faltan,
     claseDeEstado: claseDeEstado,
     textoDeEstado: textoDeEstado
   };

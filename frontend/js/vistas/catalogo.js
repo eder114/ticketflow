@@ -37,6 +37,52 @@ var CatalogoVista = (function () {
     return linea;
   }
 
+  // Cuántas entradas quedan, en barra: la barra llena es "todavía hay de
+  // todo" y se va vaciando a medida que el evento se vende. El ancho lo pone
+  // después la animación (js/vistas/efectos.js); queda anotado en data-libre
+  // para que la barra se vea aunque las animaciones estén apagadas.
+  function aforo(evento) {
+    var total = Number(evento.capacidad_total) || 0;
+    var libres = Math.max(Number(evento.cupos_disponibles) || 0, 0);
+    var libre = total > 0 ? Math.min(Math.round((libres / total) * 100), 100) : 0;
+
+    var caja = document.createElement("div");
+    caja.className = "aforo";
+    caja.dataset.libre = String(libre);
+    if (libre <= 0) caja.classList.add("agotada");
+    else if (libre <= 20) caja.classList.add("pocas");
+
+    var datos = document.createElement("p");
+    datos.className = "aforo-datos";
+
+    var izquierda = document.createElement("span");
+    izquierda.appendChild(document.createTextNode("Quedan "));
+    var fuerte = document.createElement("strong");
+    fuerte.textContent = FormatoModelo.numero(libres);
+    izquierda.appendChild(fuerte);
+    izquierda.appendChild(document.createTextNode(" de " + FormatoModelo.numero(total)));
+
+    var derecha = document.createElement("span");
+    derecha.textContent = libre + "% disponible";
+
+    datos.appendChild(izquierda);
+    datos.appendChild(derecha);
+
+    var riel = document.createElement("div");
+    riel.className = "aforo-riel";
+    riel.setAttribute("role", "img");
+    riel.setAttribute("aria-label", "Aforo disponible: " + libre + " por ciento");
+
+    var relleno = document.createElement("span");
+    relleno.className = "aforo-relleno";
+    relleno.style.width = libre + "%";
+    riel.appendChild(relleno);
+
+    caja.appendChild(datos);
+    caja.appendChild(riel);
+    return caja;
+  }
+
   function tarjeta(evento) {
     var categoria = CatalogoModelo.categoriaDe(evento);
     var estado = disponibilidad(evento);
@@ -74,6 +120,20 @@ var CatalogoVista = (function () {
       caja.appendChild(cinta);
     }
 
+    // Cuánto falta para que empiece. En los eventos cancelados no se pone,
+    // porque ahí la cuenta no significa nada.
+    var cuenta = evento.estado === "Cancelado"
+      ? null
+      : FormatoModelo.faltan(evento.fecha_hora_inicio);
+
+    if (cuenta) {
+      var reloj = document.createElement("span");
+      reloj.className = "evento-cuenta" + (cuenta.urgencia ? " " + cuenta.urgencia : "");
+      reloj.dataset.cuenta = evento.fecha_hora_inicio;
+      reloj.textContent = "⏳ " + cuenta.texto;
+      caja.appendChild(reloj);
+    }
+
     // --- el cuerpo ---
     var cuerpo = document.createElement("div");
     cuerpo.className = "evento-cuerpo";
@@ -106,6 +166,7 @@ var CatalogoVista = (function () {
     cuerpo.appendChild(fila);
     cuerpo.appendChild(meta);
     cuerpo.appendChild(pie);
+    cuerpo.appendChild(aforo(evento));
 
     art.appendChild(caja);
     art.appendChild(cuerpo);
@@ -171,6 +232,54 @@ var CatalogoVista = (function () {
     eventos.forEach(function (evento) {
       caja.appendChild(tarjeta(evento));
     });
+  }
+
+  // La cinta que se desliza debajo del hero de la portada. Va dos veces la
+  // misma lista: la segunda copia es la que hace que el giro no se note, y
+  // queda oculta para los lectores de pantalla para no repetir lo mismo.
+  function pintarCinta(eventos) {
+    var pista = document.querySelector("[data-cinta-pista]");
+    var cinta = document.querySelector("[data-cinta]");
+    if (!pista || !cinta) return;
+
+    pista.textContent = "";
+    if (!eventos.length) { cinta.hidden = true; return; }
+
+    function copia(oculta) {
+      var grupo = document.createElement("div");
+      grupo.className = "cinta-pista-grupo";
+      grupo.style.display = "contents";
+      if (oculta) grupo.setAttribute("aria-hidden", "true");
+
+      var sello = document.createElement("span");
+      sello.className = "cinta-sello";
+      sello.textContent = "En cartelera";
+      grupo.appendChild(sello);
+
+      eventos.forEach(function (evento) {
+        var item = document.createElement("span");
+        item.className = "cinta-item";
+
+        var punto = document.createElement("span");
+        punto.className = "cinta-punto";
+        punto.setAttribute("aria-hidden", "true");
+
+        var nombre = document.createElement("strong");
+        nombre.textContent = evento.nombre;
+
+        item.appendChild(punto);
+        item.appendChild(nombre);
+        item.appendChild(document.createTextNode(
+          " · " + evento.ciudad + " · " + FormatoModelo.fechaCorta(evento.fecha_hora_inicio)
+        ));
+        grupo.appendChild(item);
+      });
+      return grupo;
+    }
+
+    pista.appendChild(copia(false));
+    pista.appendChild(copia(true));
+    cinta.hidden = false;
   }
 
   // Las tres tarjetas anchas del final del catálogo.
@@ -252,6 +361,7 @@ var CatalogoVista = (function () {
     pintar: pintar,
     pintarCiudades: pintarCiudades,
     pintarDestacados: pintarDestacados,
+    pintarCinta: pintarCinta,
     pintarRecomendados: pintarRecomendados,
     pintarTotal: pintarTotal,
     pintarPaginas: pintarPaginas,

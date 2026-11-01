@@ -83,6 +83,7 @@ var CatalogoControlador = (function () {
       CatalogoVista.pintarCiudades(todos);
       CatalogoVista.pintarTotal(todos.length);
       CatalogoVista.pintarDestacados(ordenar(todos).slice(0, 3));
+      CatalogoVista.pintarCinta(ordenar(todos).slice(0, 8));
       CatalogoVista.pintarRecomendados(ordenar(todos).slice(0, 3));
       SelectorControlador.montarTodos();
       pintar();

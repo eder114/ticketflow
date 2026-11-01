@@ -97,8 +97,8 @@ button{font-family:inherit}
   .vista.activa{animation:none}
 }
 
-.seccion{padding-block:36px}
-@media (min-width:768px){ .seccion{padding-block:56px} }
+.seccion{padding-block:22px}
+@media (min-width:768px){ .seccion{padding-block:30px} }
 
 .overline{
   font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -175,9 +175,9 @@ button{font-family:inherit}
 /* Hero con buscador */
 .hero{
   position:relative;background:var(--navy);color:#fff;
-  padding-block:40px 44px;overflow:visible;text-align:center;
+  padding-block:30px 34px;overflow:visible;text-align:center;
 }
-@media (min-width:768px){ .hero{padding-block:64px 68px} }
+@media (min-width:768px){ .hero{padding-block:44px 48px} }
 .hero::before{                      /* la fotografía */
   content:"";position:absolute;inset:0;
   background:url('../img/festival-noche.jpg') center/cover no-repeat;
@@ -192,7 +192,7 @@ button{font-family:inherit}
 .hero h1{max-width:18ch;margin:0 auto var(--e3)}
 .hero p{
   font-size:clamp(16px,2vw,19px);color:#E2E8F0;
-  max-width:56ch;margin:0 auto var(--e6);
+  max-width:56ch;margin:0 auto var(--e4);
 }
 .hero .overline{color:#A8A3FF;margin-bottom:var(--e3)}
 .hero-datos{justify-content:center}
@@ -358,7 +358,7 @@ button{font-family:inherit}
 }
 
 .hero-datos{
-  display:flex;flex-wrap:wrap;gap:var(--e5);margin-top:var(--e6);
+  display:flex;flex-wrap:wrap;gap:var(--e5);margin-top:var(--e4);
 }
 .hero-dato strong{
   display:block;font-family:'Space Grotesk',sans-serif;
@@ -641,7 +641,7 @@ button{font-family:inherit}
 /* Encabezado de sección */
 .seccion-titulo{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:var(--e6);margin-bottom:var(--e6);flex-wrap:wrap;
+  gap:var(--e4);margin-bottom:var(--e4);flex-wrap:wrap;
 }
 .seccion-titulo p{color:var(--texto-suave);margin-top:6px;max-width:56ch}
 
@@ -660,7 +660,7 @@ button{font-family:inherit}
 .paso p{font-size:14.5px;color:var(--texto-suave)}
 
 /* Pie de página */
-.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e10) var(--e6);margin-top:36px}
+.pie{background:var(--navy);color:#94A3B8;padding-block:var(--e8) var(--e5);margin-top:var(--e6)}
 .pie-rejilla{display:grid;gap:var(--e6);grid-template-columns:1fr}
 @media (min-width:576px){ .pie-rejilla{grid-template-columns:1fr 1fr} }
 @media (min-width:1024px){
@@ -1757,52 +1757,64 @@ body.con-cajon{overflow:hidden}
 
 .catalogo-hero{
   background:#F7F9FB;border-bottom:1px solid var(--linea-suave);
-  padding-block:var(--e8) var(--e6);text-align:center;
+  padding-block:var(--e5) var(--e4);text-align:center;
 }
 .catalogo-hero h1{
   font-size:30px;line-height:1.15;color:var(--indigo);
   text-wrap:balance;
 }
 .catalogo-hero p{
-  max-width:56ch;margin:var(--e3) auto 0;
+  max-width:56ch;margin:var(--e2) auto 0;
   color:var(--texto-suave);font-size:15.5px;line-height:1.6;
 }
 .catalogo-hero .chip-cuenta{
   display:inline-flex;align-items:center;gap:8px;
-  margin-top:var(--e4);
+  margin-top:var(--e3);
   padding:8px 16px;border-radius:var(--r-full);
   background:var(--indigo-50);color:var(--indigo-700);
   font-size:13.5px;font-weight:600;
 }
 
-.catalogo{padding-block:var(--e6) var(--e10);background:#F7F9FB}
+.catalogo{padding-block:var(--e4) var(--e8);background:#F7F9FB}
 
 /* La tarjeta del buscador */
 .buscador-catalogo{
   background:#fff;border:1px solid var(--linea-suave);border-radius:var(--r-card-lg);
   box-shadow:var(--sombra-md);
-  padding:var(--e4);margin-bottom:var(--e6);
-  display:flex;flex-direction:column;gap:var(--e3);
+  padding:var(--e3);margin-bottom:var(--e4);
+  display:flex;flex-direction:column;gap:var(--e2);
 }
-.buscador-linea{display:flex;flex-direction:column;gap:var(--e2)}
+.buscador-linea{display:flex;flex-direction:row;align-items:center;gap:var(--e2)}
 .campo-busqueda{position:relative;flex:1;min-width:0}
 .campo-busqueda-icono{
   position:absolute;left:14px;top:50%;transform:translateY(-50%);
   font-size:15px;color:var(--texto-suave);pointer-events:none;
 }
 .campo-busqueda input{
-  width:100%;padding:14px 14px 14px 42px;font:inherit;font-size:15px;
+  width:100%;padding:11px 12px 11px 38px;font:inherit;font-size:15px;
   border:1px solid var(--linea);border-radius:var(--r-btn);
   background:#fff;color:var(--texto);
 }
 .campo-busqueda input:focus{
   outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,91,255,.16);
 }
-.buscador-linea .btn{justify-content:center}
+.buscador-linea .btn{justify-content:center;flex:0 0 auto;padding:11px 18px;font-size:15px}
 
-.filtros-linea,.filtros-extra{display:grid;gap:var(--e3);grid-template-columns:1fr}
+.filtros-linea,.filtros-extra{
+  display:grid;gap:var(--e2) var(--e3);grid-template-columns:repeat(2,minmax(0,1fr));
+}
 .filtros-extra{
-  border-top:1px solid var(--linea-suave);padding-top:var(--e3);
+  border-top:1px solid var(--linea-suave);padding-top:var(--e2);
+}
+
+/* En celular los filtros van de a dos por fila, así que la letra baja un
+   punto para que quepa el nombre completo de la ciudad o la categoría. */
+@media (max-width:575px){
+  .filtros-linea .selector-boton,
+  .filtros-linea .filtro select,
+  .filtros-linea .filtro input{padding:10px 11px;font-size:13.5px}
+  .filtros-linea .filtro label{font-size:10.5px}
+  .filtro-boton .btn{padding:10px 8px;font-size:13.5px}
 }
 .filtro-boton{justify-content:flex-end}
 .filtro-boton .btn{width:100%;justify-content:center}
@@ -1891,7 +1903,7 @@ body.con-cajon{overflow:hidden}
 }
 
 @media (min-width:768px){
-  .catalogo-hero{padding-block:var(--e10) var(--e8)}
+  .catalogo-hero{padding-block:var(--e6) var(--e5)}
   .catalogo-hero h1{font-size:38px}
   .buscador-catalogo{padding:var(--e5)}
   .resultados-cabecera{flex-direction:row;align-items:center;justify-content:space-between}
@@ -1903,4 +1915,75 @@ body.con-cajon{overflow:hidden}
   .filtros-linea{grid-template-columns:repeat(4,minmax(0,1fr))}
   .filtros-extra{grid-template-columns:repeat(3,minmax(0,1fr))}
   .orden .selector{min-width:220px}
+}
+
+
+/* ======================= PIEZAS NUEVAS DE LA PORTADA ===================== */
+/* La cuenta regresiva, la barra de aforo, la cinta de eventos y el lienzo
+   del hero. Todas usan colores que ya estaban en la paleta. */
+
+/* --- lienzo de luces del hero --- */
+.hero-lienzo{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:1;pointer-events:none;
+}
+
+/* --- cuenta regresiva sobre la foto de la tarjeta --- */
+.evento-cuenta{
+  position:absolute;right:12px;bottom:12px;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:var(--r-full);
+  background:rgba(17,24,39,.78);color:#fff;
+  font-size:12px;font-weight:600;letter-spacing:.01em;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.evento-cuenta.urgente{background:rgba(185,28,28,.88)}
+.evento-cuenta.hoy{background:rgba(21,128,61,.90)}
+
+/* --- barra de aforo de la tarjeta --- */
+.aforo{display:flex;flex-direction:column;gap:5px;margin-top:2px}
+.aforo-datos{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--e2);
+  font-size:12.5px;color:var(--texto-suave);
+}
+.aforo-datos strong{
+  font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--texto);
+  font-variant-numeric:tabular-nums;
+}
+.aforo-riel{
+  height:6px;border-radius:var(--r-full);background:var(--gris-100);overflow:hidden;
+}
+.aforo-relleno{
+  display:block;height:100%;width:0;border-radius:var(--r-full);
+  background:var(--grad);
+}
+.aforo.pocas .aforo-relleno{background:linear-gradient(135deg,#F59E0B,#EF4444)}
+.aforo.agotada .aforo-riel{background:var(--error-100)}
+
+/* --- cinta de eventos que se desliza bajo el hero --- */
+.cinta-vivo{
+  background:var(--navy-800);color:#E2E8F0;
+  border-block:1px solid rgba(255,255,255,.08);
+  overflow:hidden;position:relative;
+}
+.cinta-vivo[hidden]{display:none}
+.cinta-pista{
+  display:flex;width:max-content;gap:var(--e8);
+  padding-block:11px;padding-left:var(--e8);
+  will-change:transform;
+}
+.cinta-item{
+  display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+  font-size:13.5px;color:#CBD5E1;
+}
+.cinta-item strong{color:#fff;font-weight:600}
+.cinta-punto{
+  width:7px;height:7px;border-radius:50%;background:#4ADE80;flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(74,222,128,.22);
+}
+.cinta-sello{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:3px 10px;border-radius:var(--r-full);
+  background:rgba(99,91,255,.26);color:#C7C3FF;
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
 }

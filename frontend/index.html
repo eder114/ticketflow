@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-01">
-<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-01">
+<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-01g">
+<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-01g">
 </head>
 <body>
 
@@ -49,6 +49,7 @@
 
     <!-- Hero -->
     <section class="hero" aria-labelledby="titulo-inicio">
+      <canvas class="hero-lienzo" data-hero-lienzo aria-hidden="true"></canvas>
       <div class="contenedor">
         <p class="overline">Más de 2.800 eventos en todo el país</p>
         <h1 id="titulo-inicio">Tu próximo plan empieza aquí</h1>
@@ -127,6 +128,11 @@
         </div>
       </div>
     </section>
+
+    <!-- Cinta de eventos en cartelera -->
+    <aside class="cinta-vivo" data-cinta hidden aria-label="Eventos en cartelera">
+      <div class="cinta-pista" data-cinta-pista></div>
+    </aside>
 
     <!-- Categorías -->
     <!-- Eventos destacados -->
@@ -2188,44 +2194,49 @@
 
 
 <!-- Modelos -->
-<script src="js/configuracion.js?v=2026-11-01"></script>
-<script src="js/modelos/rutas.js?v=2026-11-01"></script>
-<script src="js/modelos/sesion.js?v=2026-11-01"></script>
-<script src="js/modelos/api.js?v=2026-11-01"></script>
-<script src="js/modelos/validacion.js?v=2026-11-01"></script>
-<script src="js/modelos/calendario.js?v=2026-11-01"></script>
-<script src="js/modelos/catalogo.js?v=2026-11-01"></script>
-<script src="js/modelos/formato.js?v=2026-11-01"></script>
+<!-- anime.js (animejs.com), cargado desde CDN: el proyecto no usa compilador,
+     asi que se trae la version UMD y queda como variable global "anime". -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/configuracion.js?v=2026-11-01g"></script>
+<script src="js/modelos/rutas.js?v=2026-11-01g"></script>
+<script src="js/modelos/sesion.js?v=2026-11-01g"></script>
+<script src="js/modelos/api.js?v=2026-11-01g"></script>
+<script src="js/modelos/validacion.js?v=2026-11-01g"></script>
+<script src="js/modelos/calendario.js?v=2026-11-01g"></script>
+<script src="js/modelos/catalogo.js?v=2026-11-01g"></script>
+<script src="js/modelos/formato.js?v=2026-11-01g"></script>
 <!-- Vistas -->
-<script src="js/vistas/menu.js?v=2026-11-01"></script>
-<script src="js/vistas/pantallas.js?v=2026-11-01"></script>
-<script src="js/vistas/formularios.js?v=2026-11-01"></script>
-<script src="js/vistas/buscador.js?v=2026-11-01"></script>
-<script src="js/vistas/sesion.js?v=2026-11-01"></script>
-<script src="js/vistas/catalogo.js?v=2026-11-01"></script>
-<script src="js/vistas/evento.js?v=2026-11-01"></script>
-<script src="js/vistas/reservas.js?v=2026-11-01"></script>
-<script src="js/vistas/reportes.js?v=2026-11-01"></script>
-<script src="js/vistas/graficas.js?v=2026-11-01"></script>
-<script src="js/vistas/tablero.js?v=2026-11-01"></script>
-<script src="js/vistas/ventas.js?v=2026-11-01"></script>
-<script src="js/vistas/selector.js?v=2026-11-01"></script>
-<script src="js/vistas/gestion.js?v=2026-11-01"></script>
-<script src="js/vistas/animaciones.js?v=2026-11-01"></script>
+<script src="js/vistas/menu.js?v=2026-11-01g"></script>
+<script src="js/vistas/pantallas.js?v=2026-11-01g"></script>
+<script src="js/vistas/formularios.js?v=2026-11-01g"></script>
+<script src="js/vistas/buscador.js?v=2026-11-01g"></script>
+<script src="js/vistas/sesion.js?v=2026-11-01g"></script>
+<script src="js/vistas/catalogo.js?v=2026-11-01g"></script>
+<script src="js/vistas/evento.js?v=2026-11-01g"></script>
+<script src="js/vistas/reservas.js?v=2026-11-01g"></script>
+<script src="js/vistas/reportes.js?v=2026-11-01g"></script>
+<script src="js/vistas/graficas.js?v=2026-11-01g"></script>
+<script src="js/vistas/tablero.js?v=2026-11-01g"></script>
+<script src="js/vistas/ventas.js?v=2026-11-01g"></script>
+<script src="js/vistas/selector.js?v=2026-11-01g"></script>
+<script src="js/vistas/gestion.js?v=2026-11-01g"></script>
+<script src="js/vistas/animaciones.js?v=2026-11-01g"></script>
+<script src="js/vistas/efectos.js?v=2026-11-01g"></script>
 <!-- Controladores -->
-<script src="js/controladores/enrutador.js?v=2026-11-01"></script>
-<script src="js/controladores/formularios.js?v=2026-11-01"></script>
-<script src="js/controladores/buscador.js?v=2026-11-01"></script>
-<script src="js/controladores/menu.js?v=2026-11-01"></script>
-<script src="js/controladores/sesion.js?v=2026-11-01"></script>
-<script src="js/controladores/catalogo.js?v=2026-11-01"></script>
-<script src="js/controladores/evento.js?v=2026-11-01"></script>
-<script src="js/controladores/acceso.js?v=2026-11-01"></script>
-<script src="js/controladores/reservas.js?v=2026-11-01"></script>
-<script src="js/controladores/reportes.js?v=2026-11-01"></script>
-<script src="js/controladores/gestion.js?v=2026-11-01"></script>
-<script src="js/controladores/selector.js?v=2026-11-01"></script>
-<script src="js/controladores/reserva.js?v=2026-11-01"></script>
-<script src="js/app.js?v=2026-11-01"></script>
+<script src="js/controladores/enrutador.js?v=2026-11-01g"></script>
+<script src="js/controladores/formularios.js?v=2026-11-01g"></script>
+<script src="js/controladores/buscador.js?v=2026-11-01g"></script>
+<script src="js/controladores/menu.js?v=2026-11-01g"></script>
+<script src="js/controladores/sesion.js?v=2026-11-01g"></script>
+<script src="js/controladores/catalogo.js?v=2026-11-01g"></script>
+<script src="js/controladores/evento.js?v=2026-11-01g"></script>
+<script src="js/controladores/acceso.js?v=2026-11-01g"></script>
+<script src="js/controladores/reservas.js?v=2026-11-01g"></script>
+<script src="js/controladores/reportes.js?v=2026-11-01g"></script>
+<script src="js/controladores/gestion.js?v=2026-11-01g"></script>
+<script src="js/controladores/selector.js?v=2026-11-01g"></script>
+<script src="js/controladores/reserva.js?v=2026-11-01g"></script>
+<script src="js/app.js?v=2026-11-01g"></script>
 </body>
 </html>
