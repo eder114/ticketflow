@@ -381,6 +381,9 @@ var ReservaControlador = (function () {
 
   function conectarBotones() {
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var boton = e.target.closest("[data-estado][data-reserva-id]");
       if (boton) {
         if (boton.dataset.pideCausa !== undefined) {
@@ -453,6 +456,9 @@ var ReservaControlador = (function () {
     });
 
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var volver = e.target.closest("[data-cerrar-causa-evento]");
       if (!volver) return;
 
@@ -467,6 +473,9 @@ var ReservaControlador = (function () {
     // Borrar un evento. La base no deja borrar uno que todavia tiene
     // reservas, y ahi la API responde que esta relacionado con otros.
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var boton = e.target.closest("[data-borrar-evento]");
       if (!boton) return;
 

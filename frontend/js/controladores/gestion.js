@@ -242,6 +242,9 @@ var GestionControlador = (function () {
 
   function conectar() {
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var editar = e.target.closest("[data-editar-persona]");
       if (editar) {
         GestionVista.mostrarEdicion(editar.dataset.editarPersona, true);

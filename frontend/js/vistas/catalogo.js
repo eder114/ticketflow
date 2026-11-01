@@ -93,7 +93,7 @@ var CatalogoVista = (function () {
     art.dataset.categoria = categoria;
     art.dataset.precio = String(evento.precio_base);
     art.dataset.fecha = FormatoModelo.fechaDeFiltro(evento.fecha_hora_inicio);
-    art.dataset.cupos = String(evento.cupos_disponibles);
+    art.dataset.cuposLibres = String(evento.cupos_disponibles);
     art.dataset.busqueda = [evento.nombre, evento.teatro, evento.ciudad, categoria].join(" ");
 
     // --- la foto, con la categoría encima ---

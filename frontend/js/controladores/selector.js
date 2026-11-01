@@ -38,6 +38,9 @@ var SelectorControlador = (function () {
 
   function conectar() {
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var boton = e.target.closest(".selector-boton");
       if (boton) {
         var caja = boton.closest(".selector");
@@ -59,6 +62,9 @@ var SelectorControlador = (function () {
     });
 
     document.addEventListener("keydown", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var caja = e.target.closest(".selector");
       if (!caja) return;
 

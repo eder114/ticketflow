@@ -60,6 +60,9 @@ var CatalogoControlador = (function () {
   // Las tarjetas de categoría de la portada llevan al catálogo ya filtrado.
   function conectarCategorias() {
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var tarjeta = e.target.closest("[data-ir-categoria]");
       if (!tarjeta) return;
 

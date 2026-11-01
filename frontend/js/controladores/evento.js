@@ -150,6 +150,9 @@ var EventoControlador = (function () {
     campo.addEventListener("change", recalcular);
 
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       // La barra fija de abajo no hace nada por su cuenta: pulsa el mismo
       // control que está en la tarjeta de compra.
       if (e.target.closest("[data-barra-accion]")) {

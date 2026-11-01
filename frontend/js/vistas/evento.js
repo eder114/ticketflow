@@ -71,7 +71,7 @@ var EventoVista = (function () {
       chip.textContent = FormatoModelo.textoDeEstado(evento.estado);
     }
 
-    var cupos = document.querySelector("[data-cupos]");
+    var cupos = document.querySelector("[data-ev-cupos]");
     if (cupos) {
       cupos.textContent = Number(evento.cupos_disponibles) > 0
         ? "Quedan " + FormatoModelo.numero(evento.cupos_disponibles) +

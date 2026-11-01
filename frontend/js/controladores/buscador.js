@@ -107,6 +107,9 @@ var BuscadorControlador = (function () {
 
     document.addEventListener("click", function () { cerrarPanel(false); });
     document.addEventListener("keydown", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       if (e.key === "Escape" && abierto) cerrarPanel(true);
     });
     window.addEventListener("resize", function () { cerrarPanel(false); });

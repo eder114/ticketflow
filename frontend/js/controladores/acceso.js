@@ -162,6 +162,9 @@ var AccesoControlador = (function () {
     // Cualquier enlace que diga a dónde volver deja la nota antes de irse al
     // formulario de inicio de sesión.
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var enlace = e.target.closest ? e.target.closest("[data-volver-a]") : null;
       if (enlace) recordarDestino(enlace.dataset.volverA);
     });

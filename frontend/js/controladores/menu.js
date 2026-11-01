@@ -4,6 +4,9 @@ var MenuControlador = (function () {
 
   function iniciar() {
     document.addEventListener("click", function (e) {
+      // Un evento puede venir de algo que no es un elemento (por ejemplo, uno
+      // lanzado sobre el propio documento): ahí no hay nada que buscar.
+      if (!e.target || !e.target.closest) return;
       var abrir = e.target.closest("[data-abrir-cajon]");
       if (abrir) {
         e.preventDefault();
