@@ -130,9 +130,24 @@ var ReservaVista = (function () {
     var form = art.querySelector(".form-causa");
     if (!form) return;
 
+    var acciones = art.querySelector(".reserva-acciones");
     form.hidden = !abierta;
-    art.querySelector(".reserva-acciones").hidden = abierta;
-    if (abierta) form.querySelector("textarea").focus();
+    acciones.hidden = abierta;
+
+    if (abierta) {
+      form.querySelector("textarea").focus();
+      return;
+    }
+
+    // Al cerrarla se borra lo escrito y el error, y el foco vuelve al botón
+    // que la abrió: el que tenía el foco acaba de esconderse.
+    var campo = form.querySelector("textarea");
+    if (campo) campo.value = "";
+    var error = form.querySelector(".error");
+    if (error) { error.textContent = ""; error.classList.remove("visible"); }
+
+    var pedir = acciones.querySelector("[data-pide-causa]");
+    if (pedir) pedir.focus();
   }
 
   return {

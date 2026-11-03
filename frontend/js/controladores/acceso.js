@@ -92,13 +92,19 @@ var AccesoControlador = (function () {
     SesionModelo.guardar(sesion);
     SesionVista.actualizar(RutasModelo.actual());
 
-    // Si venía de un evento, se le devuelve ahí; si no, al tablero de su
-    // perfil. Solo los clientes pueden reservar, así que para los demás se
-    // ignora el destino guardado.
+    // Si venía de algún lado —porque puló "Reservar" sin haber entrado, o
+    // porque se le venció la sesión ahí— se le devuelve a ese mismo sitio,
+    // siempre que su perfil pueda verlo. Si no, al tablero que le toca.
     var volver = destinoGuardado();
-    window.location.hash = (volver && sesion.usuario.perfil === "cliente")
+    window.location.hash = (volver && puedeIr(volver))
       ? volver
       : (DESTINO[sesion.usuario.perfil] || "#/inicio");
+  }
+
+  /** Si el perfil que acaba de entrar tiene permiso para esa ruta. */
+  function puedeIr(ruta) {
+    var pantalla = String(ruta).replace(/^#?\//, "").split("/")[0];
+    return !!pantalla && SesionModelo.puedeVer(pantalla);
   }
 
   function enviar(form, tipo) {
@@ -158,6 +164,36 @@ var AccesoControlador = (function () {
     });
   }
 
+  // El token dura ocho horas. Cuando vence, la API responde 401 y el modelo
+  // avisa: aquí se cierra la sesión de verdad y se lleva a la persona al
+  // formulario, en vez de dejarla con una sesión que ya no sirve y una
+  // pantalla que falla cada vez que entra.
+  function vigilarSesionVencida() {
+    var avisando = false;
+
+    document.addEventListener("ticketflow:sesion-vencida", function () {
+      if (avisando || !SesionModelo.iniciada()) return;
+      avisando = true;
+
+      // Vuelve a donde estaba una vez entre otra vez.
+      recordarDestino(window.location.hash.slice(1));
+      SesionModelo.cerrar();
+      SesionVista.actualizar();
+      window.location.hash = "#/iniciar-sesion";
+
+      window.setTimeout(function () {
+        var form = document.querySelector('form[data-envio="sesion"]');
+        if (form) {
+          FormularioVista.mostrarMensaje(
+            form,
+            "La sesión se venció por seguridad. Vuelve a entrar para seguir donde ibas."
+          );
+        }
+        avisando = false;
+      }, 60);
+    });
+  }
+
   function iniciar() {
     // Cualquier enlace que diga a dónde volver deja la nota antes de irse al
     // formulario de inicio de sesión.
@@ -169,6 +205,7 @@ var AccesoControlador = (function () {
       if (enlace) recordarDestino(enlace.dataset.volverA);
     });
     cargarCiudades();
+    vigilarSesionVencida();
 
     // Solo los de acceso: el de registrar eventos lo maneja su controlador.
     var MIOS = ["sesion", "registro-cliente", "registro-agente"];

@@ -19,10 +19,23 @@ var SelectorVista = (function () {
     return o ? o.textContent : "";
   }
 
+  // Los <select> que arma el JavaScript (el estado de cada evento, por
+  // ejemplo) no traen id, y entonces todos los paneles quedaban llamados
+  // "panel-": doce elementos con el mismo identificador, y el aria-controls
+  // de cada botón apuntando siempre al primero. Cuando no hay id, se le pone
+  // uno propio.
+  var seguidos = 0;
+
+  function idDePanel(select) {
+    if (select.id) return "panel-" + select.id;
+    seguidos += 1;
+    return "panel-selector-" + seguidos;
+  }
+
   function panel(select, caja) {
     var lista = document.createElement("div");
     lista.className = "selector-panel";
-    lista.id = "panel-" + select.id;
+    lista.id = idDePanel(select);
     lista.setAttribute("role", "listbox");
     lista.setAttribute("aria-label", etiquetaDe(select));
     lista.hidden = true;

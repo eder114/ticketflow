@@ -50,6 +50,16 @@ var ApiModelo = (function () {
           try { cuerpo = texto ? JSON.parse(texto) : null; } catch (e) { cuerpo = null; }
 
           if (respuesta.ok) return cuerpo;
+
+          // 401 con una sesión guardada quiere decir que el token se venció
+          // (duran ocho horas). Si no se avisa, la aplicación se queda
+          // creyendo que hay sesión y todas las pantallas fallan en fila sin
+          // que el usuario sepa que lo único que tiene que hacer es entrar
+          // otra vez. El aviso lo recoge el controlador de acceso.
+          if (respuesta.status === 401 && sesion) {
+            document.dispatchEvent(new CustomEvent("ticketflow:sesion-vencida"));
+          }
+
           throw new ErrorApi(
             (cuerpo && cuerpo.error) || "No se pudo completar la operación.",
             cuerpo && cuerpo.detalles,

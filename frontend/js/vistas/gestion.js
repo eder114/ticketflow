@@ -159,13 +159,52 @@ var GestionVista = (function () {
 
   function filtrarPersonas(texto) {
     var buscado = CatalogoModelo.llano(texto);
+    var encontradas = 0;
+
     document.querySelectorAll("[data-ge-personas] [data-persona]").forEach(function (fila) {
       var coincide = !buscado || CatalogoModelo.llano(fila.textContent).indexOf(buscado) !== -1;
       fila.hidden = !coincide;
+      if (coincide) encontradas += 1;
 
       var edicion = document.querySelector('[data-edicion-de="' + fila.dataset.persona + '"]');
       if (edicion && !coincide) edicion.hidden = true;
     });
+
+    sinResultados(buscado && encontradas === 0, texto);
+  }
+
+  // Una tabla que se queda con los títulos y nada debajo no dice si no hay
+  // nadie o si algo se rompió. Esta fila lo aclara.
+  function sinResultados(mostrar, texto) {
+    var cuerpo = document.querySelector("[data-ge-personas]");
+    if (!cuerpo) return;
+
+    var fila = cuerpo.querySelector("[data-ge-sin-resultados]");
+
+    if (!mostrar) {
+      if (fila) fila.remove();
+      return;
+    }
+    if (fila) {
+      fila.querySelector("td").textContent = mensajeVacio(texto);
+      return;
+    }
+
+    fila = document.createElement("tr");
+    fila.dataset.geSinResultados = "";
+
+    var celda = document.createElement("td");
+    celda.colSpan = 6;
+    celda.className = "tabla-vacia";
+    celda.setAttribute("role", "status");
+    celda.textContent = mensajeVacio(texto);
+
+    fila.appendChild(celda);
+    cuerpo.appendChild(fila);
+  }
+
+  function mensajeVacio(texto) {
+    return 'No hay nadie registrado que coincida con “' + String(texto).trim() + '”.';
   }
 
   function mostrarEdicion(identificacion, abierta) {

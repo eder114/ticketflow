@@ -324,12 +324,30 @@ var VentasVista = (function () {
     var fila = boton.closest("tr");
     if (!fila) return;
 
-    var id = fila.dataset.reserva || boton.dataset.reservaId;
+    // Al abrir, el botón está en la fila de la reserva; al cerrar, está dentro
+    // de la propia fila de la causa, que no lleva data-reserva. Hay que mirar
+    // las tres, o el botón de "dejarla como está" no cierra nada.
+    var id = fila.dataset.causaFila || fila.dataset.reserva || boton.dataset.reservaId;
     var caja = document.querySelector('[data-causa-fila="' + id + '"]');
     if (!caja) return;
 
     caja.hidden = !abierta;
-    if (abierta) caja.querySelector("textarea").focus();
+
+    if (abierta) {
+      caja.querySelector("textarea").focus();
+      return;
+    }
+
+    // Al cerrarla se borra lo que se había escrito y el error que quedara, y
+    // el foco vuelve al botón de Cancelar: si se queda en un botón escondido,
+    // quien navega con el teclado pierde el sitio.
+    var campo = caja.querySelector("textarea");
+    if (campo) campo.value = "";
+    var error = caja.querySelector(".error");
+    if (error) { error.textContent = ""; error.classList.remove("visible"); }
+
+    var volver = document.querySelector('[data-reserva-id="' + id + '"][data-pide-causa]');
+    if (volver) volver.focus();
   }
 
   function pintarConteo(mostradas, total) {

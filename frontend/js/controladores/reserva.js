@@ -52,6 +52,13 @@ var ReservaPantallaControlador = (function () {
     document.querySelector("[data-rv-total]").textContent = FormatoModelo.pesos(precio * cuantas);
     document.querySelector("[data-rv-precio]").textContent =
       FormatoModelo.pesos(precio) + " por entrada";
+
+    // Los botones se apagan en los extremos: si no, uno los aprieta y no pasa
+    // nada, que es la peor respuesta que puede dar un botón.
+    var menos = document.querySelector("[data-rv-menos]");
+    var mas = document.querySelector("[data-rv-mas]");
+    if (menos) menos.disabled = cuantas <= 1;
+    if (mas) mas.disabled = cuantas >= tope();
   }
 
   function dato(caja, titulo, valor) {
