@@ -25,6 +25,7 @@ SELECT
   e.capacidad_total,
   e.precio_base,
   e.observaciones,
+  e.imagen,
   e.estado,
   e.causa_cancelacion,
   e.id_ciudad,

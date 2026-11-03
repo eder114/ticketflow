@@ -201,6 +201,7 @@ var EventoControlador = (function () {
       capacidad_total: Number(valor(form, "capacidad")) || 0,
       precio_base: Number(valor(form, "precio")) || 0,
       observaciones: valor(form, "observaciones") || null,
+      imagen: EventoVista.laFoto(),
       id_ciudad: Number(valor(form, "ciudad")) || null
     };
   }
@@ -214,6 +215,7 @@ var EventoControlador = (function () {
     capacidad_total: "capacidad",
     precio_base: "precio",
     id_ciudad: "ciudad",
+    imagen: "imagen",
     identificacion_agente: "nombre"
   };
 
@@ -253,8 +255,8 @@ var EventoControlador = (function () {
       var era = editando;
 
       if (!era) {
-        form.reset();
-        EventoVista.alternarCausa("Programado");
+        // Deja el formulario en blanco, la foto elegida incluida.
+        EventoVista.limpiarFormulario();
       }
       FormularioVista.mostrarMensaje(
         form,
@@ -278,6 +280,44 @@ var EventoControlador = (function () {
     });
   }
 
+  // --------------------------------------------------- la foto del evento --
+  // El archivo no viaja como archivo: se reduce en el navegador y se manda
+  // como texto dentro del mismo JSON del evento. Así no hace falta un
+  // servidor de archivos, que es lo único que no tenemos.
+
+  function conectarFoto() {
+    var entrada = document.getElementById("nv-imagen");
+    if (!entrada) return;
+
+    var caja = entrada.closest("[data-subir-foto]");
+    var quitar = caja ? caja.querySelector("[data-quitar-foto]") : null;
+
+    entrada.addEventListener("change", function () {
+      var archivo = entrada.files && entrada.files[0];
+      if (!archivo) return;
+
+      FormularioVista.limpiarError(entrada);
+
+      EventoVista.reducir(archivo).then(function (dataUri) {
+        EventoVista.mostrarFoto(dataUri);
+      }).catch(function (error) {
+        // El input se vacía para que no quede un archivo que no se usó.
+        entrada.value = "";
+        EventoVista.mostrarFoto(null);
+        FormularioVista.mostrarError(entrada, error.message);
+      });
+    });
+
+    if (quitar) {
+      quitar.addEventListener("click", function () {
+        entrada.value = "";
+        FormularioVista.limpiarError(entrada);
+        EventoVista.mostrarFoto(null);
+        entrada.focus();
+      });
+    }
+  }
+
   function iniciarFormulario() {
     var estado = document.getElementById("nv-estado");
     if (!estado) return;
@@ -296,6 +336,8 @@ var EventoControlador = (function () {
         if (fin.value && fin.value < inicio.value) fin.value = "";
       });
     }
+
+    conectarFoto();
 
     var form = estado.closest("form");
     form.addEventListener("ticketflow:validado", function () {

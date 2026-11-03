@@ -26,6 +26,8 @@ export interface DatosEvento {
   capacidad_total: number;
   precio_base: number;
   observaciones: string | null;
+  /** Foto propia del evento como data URI; null deja la de la categoría. */
+  imagen: string | null;
   id_ciudad: number;
   identificacion_agente: string;
 }
@@ -81,13 +83,14 @@ export async function crear(datos: DatosEvento): Promise<EventoCompleto> {
   const fila = await consultarUno<Evento>(
     `INSERT INTO evento
        (nombre, descripcion, teatro, fecha_hora_inicio, fecha_hora_fin,
-        capacidad_total, precio_base, observaciones, id_ciudad, identificacion_agente)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        capacidad_total, precio_base, observaciones, imagen, id_ciudad,
+        identificacion_agente)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
      RETURNING codigo_evento`,
     [
       datos.nombre, datos.descripcion, datos.teatro, datos.fecha_hora_inicio,
       datos.fecha_hora_fin, datos.capacidad_total, datos.precio_base,
-      datos.observaciones, datos.id_ciudad, datos.identificacion_agente
+      datos.observaciones, datos.imagen, datos.id_ciudad, datos.identificacion_agente
     ]
   );
   return obtener(fila!.codigo_evento);
@@ -113,12 +116,13 @@ export async function actualizar(
     `UPDATE evento SET
        nombre = $2, descripcion = $3, teatro = $4, fecha_hora_inicio = $5,
        fecha_hora_fin = $6, capacidad_total = $7, precio_base = $8,
-       observaciones = $9, id_ciudad = $10, identificacion_agente = $11
+       observaciones = $9, imagen = $10, id_ciudad = $11,
+       identificacion_agente = $12
      WHERE codigo_evento = $1`,
     [
       codigo, datos.nombre, datos.descripcion, datos.teatro, datos.fecha_hora_inicio,
       datos.fecha_hora_fin, datos.capacidad_total, datos.precio_base,
-      datos.observaciones, datos.id_ciudad, datos.identificacion_agente
+      datos.observaciones, datos.imagen, datos.id_ciudad, datos.identificacion_agente
     ]
   );
   return obtener(codigo);

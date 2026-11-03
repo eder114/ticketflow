@@ -2068,3 +2068,57 @@ body.con-cajon{overflow:hidden}
 @media (min-width:1024px){
   .barra-reserva{display:none}
 }
+
+/* ===================================================== SUBIR LA IMAGEN === */
+/* El campo de la foto del evento. El input de archivo queda escondido para
+   los ojos pero no para el teclado ni para el lector de pantalla: quien lo
+   abre es el <label>, que ya se ve como un botón. */
+
+.campo-rotulo{
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--texto-suave);
+}
+.subir-foto{display:flex;flex-direction:column;gap:var(--e3)}
+
+.subir-foto-vista{
+  /* 16/9 y con tope de ancho: se ve igual que la tarjeta del catálogo, pero
+     sin comerse media pantalla en el computador. */
+  position:relative;aspect-ratio:16/9;max-width:560px;overflow:hidden;
+  border:1px dashed var(--linea);border-radius:var(--r-card);
+  background:var(--gris-100);
+  display:grid;place-items:center;
+}
+.subir-foto-vista img{width:100%;height:100%;object-fit:cover;display:block}
+.subir-foto-vacia{
+  margin:0;padding:0 var(--e5);max-width:38ch;
+  /* Sobre el gris del recuadro, el gris suave no alcanza el contraste AA. */
+  text-align:center;font-size:13.5px;color:var(--navy-700);
+}
+
+/* Con la imagen puesta el borde punteado sobra. */
+.subir-foto.tiene-foto .subir-foto-vista{border-style:solid;border-color:var(--linea)}
+
+.subir-foto-acciones{display:flex;flex-wrap:wrap;gap:var(--e3);align-items:center}
+
+/* .campo input le pone ancho completo a todos los campos y le gana a
+   .solo-lectores por especificidad: sin esto el input de archivo, aunque no
+   se vea, se sale de la pantalla y deja la página con barra horizontal. */
+.campo input.solo-lectores{width:1px;padding:0;border:0}
+.subir-foto-acciones label{cursor:pointer;margin:0}
+
+/* El foco del input escondido se tiene que ver en el botón que lo abre. */
+.subir-foto-acciones:focus-within label[for="nv-imagen"]{
+  outline:2px solid var(--indigo);outline-offset:2px;
+}
+
+.btn-texto{
+  background:none;border:0;padding:6px 2px;
+  font-family:inherit;font-size:14px;font-weight:600;
+  color:var(--texto-suave);text-decoration:underline;cursor:pointer;
+}
+.btn-texto:hover{color:var(--error-600)}
+
+@media (max-width:520px){
+  .subir-foto-acciones{flex-direction:column;align-items:stretch}
+  .subir-foto-acciones label{text-align:center}
+}

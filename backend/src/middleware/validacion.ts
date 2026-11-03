@@ -130,6 +130,33 @@ export class Revision {
     return this;
   }
 
+  /**
+   * Una imagen que llega dentro del propio JSON, como data URI. El navegador
+   * ya la reduce antes de mandarla, pero esta es la que de verdad corta: un
+   * texto cualquiera no entra, y una foto enorme tampoco.
+   */
+  imagen(campo: string, etiqueta: string, maxBytes = 600 * 1024) {
+    const bruto = this.valor(campo);
+    if (bruto === undefined || bruto === null || bruto === "") {
+      this.limpio[campo] = null;
+      return this;
+    }
+    const texto = String(bruto).trim();
+    const formato = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/;
+    if (!formato.test(texto)) {
+      this.errores[campo] = `${etiqueta} tiene que ser una foto JPG, PNG o WebP.`;
+      return this;
+    }
+    // Cada 4 caracteres de base64 son 3 bytes de imagen.
+    const bytes = Math.floor((texto.length - texto.indexOf(",") - 1) * 3 / 4);
+    if (bytes > maxBytes) {
+      this.errores[campo] = `${etiqueta} no puede pesar más de ${Math.round(maxBytes / 1024)} KB.`;
+      return this;
+    }
+    this.limpio[campo] = texto;
+    return this;
+  }
+
   listaDeTextos(campo: string, etiqueta: string, max = 5) {
     const bruto = this.valor(campo);
     if (bruto === undefined || bruto === null) {

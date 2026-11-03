@@ -48,6 +48,7 @@ function leerDatos(pet: Request) {
     .entero("capacidad_total", "La capacidad", { min: 1, max: 500000 })
     .decimal("precio_base", "El precio base", { min: 0 })
     .texto("observaciones", "Las observaciones", { max: 2000, obligatorio: false })
+    .imagen("imagen", "La imagen del evento")
     .entero("id_ciudad", "La ciudad", { min: 1 })
     .datos<eventos.DatosEvento>();
 

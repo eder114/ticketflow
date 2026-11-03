@@ -103,6 +103,9 @@ CREATE TABLE evento (
   capacidad_total       INTEGER NOT NULL CHECK (capacidad_total > 0),
   precio_base           NUMERIC(12,2) NOT NULL CHECK (precio_base >= 0),
   observaciones         TEXT,
+  -- La foto del evento que sube el agente, guardada como data URI. Si queda
+  -- en NULL, el catalogo pone la imagen de referencia de la categoria.
+  imagen                TEXT,
   estado                VARCHAR(15) NOT NULL DEFAULT 'Programado',
   causa_cancelacion     TEXT,
   id_ciudad             INTEGER NOT NULL

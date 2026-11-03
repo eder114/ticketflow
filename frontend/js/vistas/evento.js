@@ -61,8 +61,12 @@ var EventoVista = (function () {
 
     var foto = document.querySelector("[data-ev-foto]");
     if (foto) {
-      foto.src = CatalogoModelo.imagenDe(categoria);
-      foto.alt = "Imagen de referencia de la categoría " + categoria;
+      // La que subió el organizador manda; si no subió ninguna, queda la de
+      // referencia de la categoría.
+      foto.src = evento.imagen || CatalogoModelo.imagenDe(categoria);
+      foto.alt = evento.imagen
+        ? "Imagen del evento " + evento.nombre
+        : "Imagen de referencia de la categoría " + categoria;
     }
 
     var chip = document.querySelector("[data-ev-estado]");
@@ -195,6 +199,75 @@ var EventoVista = (function () {
     caja.textContent = texto;
   }
 
+  // ------------------------------------------------- la foto del evento --
+  // El agente elige una imagen suya y queda guardada como data URI: se manda
+  // dentro del mismo JSON del evento, sin tener que montar un servidor de
+  // archivos aparte. Antes de mandarla se reduce aquí en el navegador, porque
+  // una foto de celular pesa varios megas y no tiene sentido guardarla así.
+
+  var ANCHO_MAXIMO = 1280;
+  var CALIDAD = 0.82;
+  var fotoElegida = null;          // lo que se va a guardar, o null
+
+  /** Reduce la imagen y la devuelve como data URI JPEG. */
+  function reducir(archivo) {
+    return new Promise(function (listo, falla) {
+      var lector = new FileReader();
+
+      lector.onerror = function () { falla(new Error("No se pudo leer la imagen.")); };
+      lector.onload = function () {
+        var img = new Image();
+
+        img.onerror = function () { falla(new Error("Ese archivo no es una imagen válida.")); };
+        img.onload = function () {
+          var escala = Math.min(1, ANCHO_MAXIMO / img.naturalWidth);
+          var lienzo = document.createElement("canvas");
+          lienzo.width = Math.round(img.naturalWidth * escala);
+          lienzo.height = Math.round(img.naturalHeight * escala);
+
+          var pincel = lienzo.getContext("2d");
+          // Fondo blanco: un PNG con transparencia pasado a JPEG se vuelve negro.
+          pincel.fillStyle = "#fff";
+          pincel.fillRect(0, 0, lienzo.width, lienzo.height);
+          pincel.drawImage(img, 0, 0, lienzo.width, lienzo.height);
+
+          listo(lienzo.toDataURL("image/jpeg", CALIDAD));
+        };
+        img.src = lector.result;
+      };
+      lector.readAsDataURL(archivo);
+    });
+  }
+
+  // Un punto transparente: deja el <img> válido cuando no hay foto, sin
+  // disparar una petición a una dirección vacía.
+  var PUNTO = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+  /** Pone (o quita) la foto en la caja de vista previa. */
+  function mostrarFoto(dataUri) {
+    fotoElegida = dataUri || null;
+
+    var caja = document.querySelector("[data-subir-foto]");
+    if (!caja) return;
+
+    var previa = caja.querySelector("[data-foto-previa]");
+    var vacia = caja.querySelector("[data-foto-vacia]");
+    var quitar = caja.querySelector("[data-quitar-foto]");
+
+    caja.classList.toggle("tiene-foto", !!fotoElegida);
+    if (previa) {
+      previa.hidden = !fotoElegida;
+      previa.src = fotoElegida || PUNTO;
+      previa.alt = fotoElegida ? "Vista previa de la imagen del evento" : "";
+    }
+    if (vacia) vacia.hidden = !!fotoElegida;
+    if (quitar) quitar.hidden = !fotoElegida;
+  }
+
+  function laFoto() {
+    return fotoElegida;
+  }
+
   // El mismo formulario sirve para registrar y para editar: cuando se edita,
   // se llena con lo que ya tiene el evento.
   function llenarFormulario(evento) {
@@ -212,6 +285,8 @@ var EventoVista = (function () {
     form.elements.observaciones.value = evento.observaciones || "";
     form.elements.estado.value = evento.estado;
     if (form.elements.causa) form.elements.causa.value = evento.causa_cancelacion || "";
+    if (form.elements.imagen) form.elements.imagen.value = "";
+    mostrarFoto(evento.imagen || null);
     alternarCausa(evento.estado);
   }
 
@@ -219,6 +294,7 @@ var EventoVista = (function () {
     var form = document.querySelector("#vista-crear-evento form");
     if (!form) return;
     form.reset();
+    mostrarFoto(null);
     alternarCausa("Programado");
   }
 
@@ -388,6 +464,9 @@ var EventoVista = (function () {
     pesos: pesos,
     pintarTotal: pintarTotal,
     alternarCausa: alternarCausa,
+    reducir: reducir,
+    mostrarFoto: mostrarFoto,
+    laFoto: laFoto,
     pintarDetalle: pintarDetalle,
     limitarEntradas: limitarEntradas,
     pintarAccion: pintarAccion,

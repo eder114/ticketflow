@@ -91,8 +91,10 @@ var ReservaPantallaControlador = (function () {
     tarjeta.className = "resumen-tarjeta";
 
     var foto = document.createElement("img");
-    foto.src = CatalogoModelo.imagenDe(categoria);
-    foto.alt = "Imagen de referencia de la categoría " + categoria;
+    foto.src = evento.imagen || CatalogoModelo.imagenDe(categoria);
+    foto.alt = evento.imagen
+      ? "Imagen del evento " + evento.nombre
+      : "Imagen de referencia de la categoría " + categoria;
 
     var cuerpo = document.createElement("div");
 

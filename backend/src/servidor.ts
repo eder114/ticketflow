@@ -9,7 +9,10 @@ import rutas from "./rutas";
 const app = express();
 
 app.use(cors({ origin: entorno.origenPermitido === "*" ? true : entorno.origenPermitido.split(",") }));
-app.use(express.json({ limit: "1mb" }));
+// 2 MB: la foto del evento viaja dentro del JSON como data URI, y base64
+// la engorda cerca de un tercio. El tope real de la imagen lo pone la
+// validación del evento, que son 600 KB.
+app.use(express.json({ limit: "2mb" }));
 
 // Para comprobar de un vistazo que el servidor está vivo.
 app.get("/api/salud", (_pet, res) => {

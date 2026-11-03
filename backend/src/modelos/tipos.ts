@@ -75,6 +75,7 @@ export interface Evento {
   capacidad_total: number;
   precio_base: number;
   observaciones: string | null;
+  imagen: string | null;
   estado: EstadoEvento;
   causa_cancelacion: string | null;
   id_ciudad: number;

@@ -102,8 +102,12 @@ var CatalogoVista = (function () {
     if (estado.agotado) caja.classList.add("esta-agotado");
 
     var img = document.createElement("img");
-    img.src = CatalogoModelo.imagenDe(categoria);
-    img.alt = "Imagen de referencia de la categoría " + categoria;
+    // La que subió el organizador manda; si no subió ninguna, queda la de
+    // referencia de la categoría.
+    img.src = evento.imagen || CatalogoModelo.imagenDe(categoria);
+    img.alt = evento.imagen
+      ? "Imagen del evento " + evento.nombre
+      : "Imagen de referencia de la categoría " + categoria;
     img.loading = "lazy";
 
     var etiqueta = document.createElement("span");
@@ -300,7 +304,7 @@ var CatalogoVista = (function () {
       enlace.className = "recomendado-enlace";
 
       var img = document.createElement("img");
-      img.src = CatalogoModelo.imagenDe(categoria);
+      img.src = evento.imagen || CatalogoModelo.imagenDe(categoria);
       img.alt = "";
       img.loading = "lazy";
 

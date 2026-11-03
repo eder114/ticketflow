@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-01o">
-<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-01o">
+<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-03a">
+<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-03a">
 </head>
 <body>
 
@@ -1235,6 +1235,33 @@
                         data-reglas="requerido" aria-describedby="err-nv-descripcion"></textarea>
               <p class="error" id="err-nv-descripcion" role="alert"></p>
             </div>
+
+            <div class="campo campo-ancho">
+              <span class="campo-rotulo">Imagen del evento</span>
+
+              <div class="subir-foto" data-subir-foto>
+                <div class="subir-foto-vista">
+                  <!-- Nace con un punto transparente porque un <img> sin src no es
+                       HTML válido; el JavaScript le pone la foto elegida. -->
+                  <img data-foto-previa alt="" hidden
+                       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+                  <p class="subir-foto-vacia" data-foto-vacia>
+                    Sin imagen propia: se usará la foto de referencia de la categoría.
+                  </p>
+                </div>
+
+                <div class="subir-foto-acciones">
+                  <label class="btn btn-secundario" for="nv-imagen">Elegir una imagen</label>
+                  <input type="file" id="nv-imagen" name="imagen" accept="image/jpeg,image/png,image/webp"
+                         class="solo-lectores" aria-describedby="ayuda-imagen err-nv-imagen">
+                  <button type="button" class="btn btn-texto" data-quitar-foto hidden>Quitar la imagen</button>
+                </div>
+
+                <p class="ayuda" id="ayuda-imagen">JPG, PNG o WebP. Se reduce sola antes de
+                   guardarla, así que no importa si la foto viene pesada.</p>
+                <p class="error" id="err-nv-imagen" role="alert"></p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2222,46 +2249,46 @@
      asi que se trae la version UMD y queda como variable global "anime". -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/configuracion.js?v=2026-11-01o"></script>
-<script src="js/modelos/rutas.js?v=2026-11-01o"></script>
-<script src="js/modelos/sesion.js?v=2026-11-01o"></script>
-<script src="js/modelos/api.js?v=2026-11-01o"></script>
-<script src="js/modelos/validacion.js?v=2026-11-01o"></script>
-<script src="js/modelos/calendario.js?v=2026-11-01o"></script>
-<script src="js/modelos/catalogo.js?v=2026-11-01o"></script>
-<script src="js/modelos/formato.js?v=2026-11-01o"></script>
+<script src="js/configuracion.js?v=2026-11-03a"></script>
+<script src="js/modelos/rutas.js?v=2026-11-03a"></script>
+<script src="js/modelos/sesion.js?v=2026-11-03a"></script>
+<script src="js/modelos/api.js?v=2026-11-03a"></script>
+<script src="js/modelos/validacion.js?v=2026-11-03a"></script>
+<script src="js/modelos/calendario.js?v=2026-11-03a"></script>
+<script src="js/modelos/catalogo.js?v=2026-11-03a"></script>
+<script src="js/modelos/formato.js?v=2026-11-03a"></script>
 <!-- Vistas -->
-<script src="js/vistas/carga.js?v=2026-11-01o"></script>
-<script src="js/vistas/menu.js?v=2026-11-01o"></script>
-<script src="js/vistas/pantallas.js?v=2026-11-01o"></script>
-<script src="js/vistas/formularios.js?v=2026-11-01o"></script>
-<script src="js/vistas/buscador.js?v=2026-11-01o"></script>
-<script src="js/vistas/sesion.js?v=2026-11-01o"></script>
-<script src="js/vistas/catalogo.js?v=2026-11-01o"></script>
-<script src="js/vistas/evento.js?v=2026-11-01o"></script>
-<script src="js/vistas/reservas.js?v=2026-11-01o"></script>
-<script src="js/vistas/reportes.js?v=2026-11-01o"></script>
-<script src="js/vistas/graficas.js?v=2026-11-01o"></script>
-<script src="js/vistas/tablero.js?v=2026-11-01o"></script>
-<script src="js/vistas/ventas.js?v=2026-11-01o"></script>
-<script src="js/vistas/selector.js?v=2026-11-01o"></script>
-<script src="js/vistas/gestion.js?v=2026-11-01o"></script>
-<script src="js/vistas/animaciones.js?v=2026-11-01o"></script>
-<script src="js/vistas/efectos.js?v=2026-11-01o"></script>
+<script src="js/vistas/carga.js?v=2026-11-03a"></script>
+<script src="js/vistas/menu.js?v=2026-11-03a"></script>
+<script src="js/vistas/pantallas.js?v=2026-11-03a"></script>
+<script src="js/vistas/formularios.js?v=2026-11-03a"></script>
+<script src="js/vistas/buscador.js?v=2026-11-03a"></script>
+<script src="js/vistas/sesion.js?v=2026-11-03a"></script>
+<script src="js/vistas/catalogo.js?v=2026-11-03a"></script>
+<script src="js/vistas/evento.js?v=2026-11-03a"></script>
+<script src="js/vistas/reservas.js?v=2026-11-03a"></script>
+<script src="js/vistas/reportes.js?v=2026-11-03a"></script>
+<script src="js/vistas/graficas.js?v=2026-11-03a"></script>
+<script src="js/vistas/tablero.js?v=2026-11-03a"></script>
+<script src="js/vistas/ventas.js?v=2026-11-03a"></script>
+<script src="js/vistas/selector.js?v=2026-11-03a"></script>
+<script src="js/vistas/gestion.js?v=2026-11-03a"></script>
+<script src="js/vistas/animaciones.js?v=2026-11-03a"></script>
+<script src="js/vistas/efectos.js?v=2026-11-03a"></script>
 <!-- Controladores -->
-<script src="js/controladores/enrutador.js?v=2026-11-01o"></script>
-<script src="js/controladores/formularios.js?v=2026-11-01o"></script>
-<script src="js/controladores/buscador.js?v=2026-11-01o"></script>
-<script src="js/controladores/menu.js?v=2026-11-01o"></script>
-<script src="js/controladores/sesion.js?v=2026-11-01o"></script>
-<script src="js/controladores/catalogo.js?v=2026-11-01o"></script>
-<script src="js/controladores/evento.js?v=2026-11-01o"></script>
-<script src="js/controladores/acceso.js?v=2026-11-01o"></script>
-<script src="js/controladores/reservas.js?v=2026-11-01o"></script>
-<script src="js/controladores/reportes.js?v=2026-11-01o"></script>
-<script src="js/controladores/gestion.js?v=2026-11-01o"></script>
-<script src="js/controladores/selector.js?v=2026-11-01o"></script>
-<script src="js/controladores/reserva.js?v=2026-11-01o"></script>
-<script src="js/app.js?v=2026-11-01o"></script>
+<script src="js/controladores/enrutador.js?v=2026-11-03a"></script>
+<script src="js/controladores/formularios.js?v=2026-11-03a"></script>
+<script src="js/controladores/buscador.js?v=2026-11-03a"></script>
+<script src="js/controladores/menu.js?v=2026-11-03a"></script>
+<script src="js/controladores/sesion.js?v=2026-11-03a"></script>
+<script src="js/controladores/catalogo.js?v=2026-11-03a"></script>
+<script src="js/controladores/evento.js?v=2026-11-03a"></script>
+<script src="js/controladores/acceso.js?v=2026-11-03a"></script>
+<script src="js/controladores/reservas.js?v=2026-11-03a"></script>
+<script src="js/controladores/reportes.js?v=2026-11-03a"></script>
+<script src="js/controladores/gestion.js?v=2026-11-03a"></script>
+<script src="js/controladores/selector.js?v=2026-11-03a"></script>
+<script src="js/controladores/reserva.js?v=2026-11-03a"></script>
+<script src="js/app.js?v=2026-11-03a"></script>
 </body>
 </html>

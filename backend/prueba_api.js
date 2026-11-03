@@ -275,6 +275,95 @@ async function principal() {
   revisar("el agente solo ve los eventos suyos",
           mios.estado === 200 && mios.cuerpo.every((e) => e.identificacion_agente === "94567123"));
 
+  // ------------------------------------------- la imagen propia del evento --
+  // Viaja dentro del mismo JSON, como data URI. El navegador la reduce antes
+  // de mandarla; aqui se prueba lo que el servidor acepta y lo que no.
+  const unJpeg = "data:image/jpeg;base64," + Buffer.alloc(2048, "a").toString("base64");
+
+  const conFoto = await pedir("/eventos/" + codigo, {
+    method: "PUT", token: agente.cuerpo.token,
+    body: JSON.stringify({
+      nombre: "Evento de prueba automatica",
+      descripcion: "Lo crea la prueba y lo borra al final.",
+      teatro: "Sala de pruebas",
+      fecha_hora_inicio: "2027-06-10 19:00",
+      fecha_hora_fin: "2027-06-10 22:00",
+      capacidad_total: 5, precio_base: 20000, id_ciudad: 1,
+      imagen: unJpeg
+    })
+  });
+  revisar("el evento guarda la imagen que subio el agente",
+          conFoto.estado === 200 && conFoto.cuerpo?.imagen === unJpeg, conFoto.cuerpo?.error);
+
+  const enElCatalogo = await pedir("/eventos/" + codigo);
+  revisar("y el catalogo la devuelve", enElCatalogo.cuerpo?.imagen === unJpeg);
+
+  const datosEvento = {
+    nombre: "Evento de prueba automatica", teatro: "Sala de pruebas",
+    fecha_hora_inicio: "2027-06-10 19:00", fecha_hora_fin: "2027-06-10 22:00",
+    capacidad_total: 5, precio_base: 20000, id_ciudad: 1
+  };
+
+  const fotoFalsa = await pedir("/eventos/" + codigo, {
+    method: "PUT", token: agente.cuerpo.token,
+    body: JSON.stringify({ ...datosEvento, imagen: "no soy una foto" })
+  });
+  revisar("no acepta cualquier texto como imagen",
+          fotoFalsa.estado === 400 && !!fotoFalsa.cuerpo?.detalles?.imagen);
+
+  const svg = await pedir("/eventos/" + codigo, {
+    method: "PUT", token: agente.cuerpo.token,
+    body: JSON.stringify({ ...datosEvento, imagen: "data:image/svg+xml;base64,PHN2Zz48L3N2Zz4=" })
+  });
+  revisar("ni un SVG, que puede traer codigo adentro", svg.estado === 400);
+
+  const pesada = await pedir("/eventos/" + codigo, {
+    method: "PUT", token: agente.cuerpo.token,
+    body: JSON.stringify({
+      ...datosEvento,
+      imagen: "data:image/jpeg;base64," + Buffer.alloc(900 * 1024, "a").toString("base64")
+    })
+  });
+  revisar("ni una foto que se pase del tope", pesada.estado === 400);
+
+  const sinFoto = await pedir("/eventos/" + codigo, {
+    method: "PUT", token: agente.cuerpo.token,
+    body: JSON.stringify({ ...datosEvento, imagen: null })
+  });
+  revisar("y se puede quitar la imagen", sinFoto.estado === 200 && sinFoto.cuerpo?.imagen === null);
+
+  // ------------------------------- cada agente solo manda en lo suyo --------
+  // Es lo que separa a un organizador de otro: ven la misma pantalla, pero no
+  // se pueden tocar los eventos entre ellos.
+  const otroAgente = await entrar("ricardo.salazar@ticketflow.com");
+  revisar("entra un segundo agente", otroAgente.estado === 200 && !!otroAgente.cuerpo.token);
+
+  revisar("un agente no puede editar el evento de otro agente",
+          (await pedir("/eventos/" + codigo, {
+            method: "PUT", token: otroAgente.cuerpo.token,
+            body: JSON.stringify(datosEvento)
+          })).estado === 403);
+
+  revisar("ni cancelarselo",
+          (await pedir("/eventos/" + codigo + "/estado", {
+            method: "PATCH", token: otroAgente.cuerpo.token,
+            body: JSON.stringify({ estado: "Cancelado", causa_cancelacion: "Prueba." })
+          })).estado === 403);
+
+  revisar("ni borrarselo",
+          (await pedir("/eventos/" + codigo, {
+            method: "DELETE", token: otroAgente.cuerpo.token
+          })).estado === 403);
+
+  const sigueIgual = await pedir("/eventos/" + codigo);
+  revisar("el evento del primer agente quedo intacto",
+          sigueIgual.estado === 200 && sigueIgual.cuerpo.estado !== "Cancelado");
+
+  const delOtro = await pedir("/eventos/mios", { token: otroAgente.cuerpo.token });
+  revisar("y en su panel el segundo agente solo ve los suyos",
+          delOtro.estado === 200 &&
+          delOtro.cuerpo.every((e) => e.identificacion_agente === "79845612"));
+
   // ---------------------------------------------------------- reservas ----
   console.log("\nReservas y control de aforo");
   const reserva = await pedir("/reservas", {

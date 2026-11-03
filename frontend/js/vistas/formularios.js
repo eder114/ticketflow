@@ -2,9 +2,20 @@
 var FormularioVista = (function () {
   "use strict";
 
+  // aria-describedby puede traer varios identificadores separados por
+  // espacio: la ayuda del campo y la caja del error. El error es el que lleva
+  // role="alert", así que se busca ese y no el primero de la lista.
   function cajaError(campo) {
-    var id = campo.getAttribute("aria-describedby");
-    return id ? document.getElementById(id) : null;
+    var lista = (campo.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+    var caja = null;
+
+    for (var i = 0; i < lista.length; i += 1) {
+      var nodo = document.getElementById(lista[i]);
+      if (!nodo) continue;
+      if (nodo.getAttribute("role") === "alert") return nodo;
+      if (!caja) caja = nodo;
+    }
+    return lista.length === 1 ? caja : null;
   }
 
   function mostrarError(campo, mensaje) {

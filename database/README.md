@@ -51,7 +51,7 @@ psql -U postgres -d ticketflow -f sql/seed.sql
 | `CLIENTE` | identificacion (heredada) | puntos, ve_publicidad |
 | `AGENTE` | identificacion (heredada) | comision, experiencia |
 | `ADMINISTRADOR` | identificacion (heredada) | salario, horario |
-| `EVENTO` | codigo_evento | nombre, descripcion, teatro, fecha_hora_inicio, fecha_hora_fin, capacidad_total, precio_base, observaciones, estado, cupos_disponibles *(derivado)* |
+| `EVENTO` | codigo_evento | nombre, descripcion, teatro, fecha_hora_inicio, fecha_hora_fin, capacidad_total, precio_base, observaciones, imagen, estado, cupos_disponibles *(derivado)* |
 | `RESERVA` | id_reserva | fecha_hora, numero_entradas, valor_total *(derivado)*, observaciones, estado |
 
 **Atributo compuesto:** `nombre_completo` se divide en nombres y apellidos.

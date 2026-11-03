@@ -41,8 +41,10 @@ var VentasVista = (function () {
     var foto = document.createElement("div");
     foto.className = "evento-actual-foto";
     var img = document.createElement("img");
-    img.src = CatalogoModelo.imagenDe(categoria);
-    img.alt = "Imagen de referencia de la categoría " + categoria;
+    img.src = evento.imagen || CatalogoModelo.imagenDe(categoria);
+    img.alt = evento.imagen
+      ? "Imagen del evento " + evento.nombre
+      : "Imagen de referencia de la categoría " + categoria;
     var chip = document.createElement("span");
     chip.className = "estado-chip " + FormatoModelo.claseDeEstado(evento.estado);
     chip.textContent = FormatoModelo.textoDeEstado(evento.estado);
