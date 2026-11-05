@@ -32,3 +32,17 @@ services:
         value: 8
       - key: ORIGEN_PERMITIDO
         value: https://eder114.github.io
+      # Correo saliente. CORREO_CLAVE es la contrasena de aplicacion de Gmail,
+      # de 16 caracteres, no la contrasena de la cuenta. Las tres van con
+      # sync: false para que Render las pida en el panel y no queden escritas
+      # en este archivo, que si se sube al repositorio.
+      - key: CORREO_HOST
+        value: smtp.gmail.com
+      - key: CORREO_PUERTO
+        value: 465
+      - key: CORREO_USUARIO
+        sync: false
+      - key: CORREO_CLAVE
+        sync: false
+      - key: CORREO_DESDE
+        sync: false
