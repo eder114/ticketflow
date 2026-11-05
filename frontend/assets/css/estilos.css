@@ -2122,3 +2122,15 @@ body.con-cajon{overflow:hidden}
   .subir-foto-acciones{flex-direction:column;align-items:stretch}
   .subir-foto-acciones label{text-align:center}
 }
+
+/* El campo donde se escribe el código de seis dígitos que llega al correo.
+   Monoespaciado y separado: así se compara de un vistazo con el del correo. */
+.campo .campo-codigo{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:24px;
+  font-weight:600;
+  letter-spacing:.42em;
+  text-indent:.42em;
+  text-align:center;
+}
+.campo .campo-codigo::placeholder{letter-spacing:.42em;font-weight:400}

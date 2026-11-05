@@ -3,6 +3,7 @@ import { Router } from "express";
 import { atrapar } from "../middleware/errores";
 import { conPerfil, conSesion } from "../middleware/sesion";
 import * as autenticacion from "../controladores/autenticacion";
+import * as recuperacion from "../controladores/recuperacion";
 import * as personas from "../controladores/personas";
 import * as ubicacion from "../controladores/ubicacion";
 import * as eventos from "../controladores/eventos";
@@ -21,6 +22,11 @@ rutas.post("/sesion", atrapar(autenticacion.iniciarSesion));
 rutas.get("/sesion", conSesion, atrapar(autenticacion.sesionActual));
 rutas.post("/registro/cliente", atrapar(autenticacion.registrarCliente));
 rutas.post("/registro/agente", atrapar(autenticacion.registrarAgente));
+
+// Recuperar la contrasena: publicas a proposito, porque quien las usa es
+// justamente alguien que no puede iniciar sesion.
+rutas.post("/recuperacion", atrapar(recuperacion.pedir));
+rutas.post("/recuperacion/cambiar", atrapar(recuperacion.cambiar));
 
 // -------------------------------------------------------------- ubicación --
 // Leer es público: los formularios de registro necesitan las listas antes de

@@ -34,5 +34,20 @@ export const entorno = {
     secreto: obligatoria("JWT_SECRETO"),
     horas: Number(opcional("JWT_HORAS", "8"))
   },
+  // Correo saliente. Con Gmail: host smtp.gmail.com, puerto 465, el usuario es
+  // la cuenta completa y la clave es una CONTRASENA DE APLICACION de 16
+  // caracteres (Google no acepta la contrasena normal). Si se dejan vacias,
+  // el servicio de correo queda apagado y solo anota en la consola.
+  correo: {
+    host: opcional("CORREO_HOST", "smtp.gmail.com"),
+    puerto: Number(opcional("CORREO_PUERTO", "465")),
+    usuario: process.env.CORREO_USUARIO || "",
+    clave: process.env.CORREO_CLAVE || "",
+    desde: opcional("CORREO_DESDE", process.env.CORREO_USUARIO || "TicketFlow")
+  },
+  recuperacion: {
+    minutos: Number(opcional("RECUPERACION_MINUTOS", "15")),
+    intentos: Number(opcional("RECUPERACION_INTENTOS", "5"))
+  },
   origenPermitido: opcional("ORIGEN_PERMITIDO", "*")
 };

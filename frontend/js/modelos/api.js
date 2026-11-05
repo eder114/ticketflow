@@ -100,6 +100,17 @@ var ApiModelo = (function () {
     registrarAgente: function (datos) {
       return pedir("/registro/agente", { metodo: "POST", datos: datos });
     },
+
+    // Recuperar la contraseña: pedir el código y después cambiarla.
+    pedirCodigo: function (correo) {
+      return pedir("/recuperacion", { metodo: "POST", datos: { correo: correo } });
+    },
+    cambiarContrasena: function (correo, codigo, contrasena) {
+      return pedir("/recuperacion/cambiar", {
+        metodo: "POST",
+        datos: { correo: correo, codigo: codigo, contrasena: contrasena }
+      });
+    },
     ciudades: function () {
       return pedir("/ciudades?conUbicacion=true");
     },

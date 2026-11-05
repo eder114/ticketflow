@@ -175,3 +175,24 @@ base local se ignoran. Para aplicar un archivo `.sql` en esa base sin tener
 ```bash
 node aplicar_sql.js ../database/sql/vistas.sql
 ```
+
+## Correo saliente
+
+Los avisos (el comprobante de la reserva y el codigo para recuperar la
+contrasena) salen por SMTP con Nodemailer. Con Gmail hace falta una
+**contrasena de aplicacion**, no la contrasena normal de la cuenta:
+
+1. En la cuenta de Google, activar la **verificacion en dos pasos**.
+2. Seguridad > Verificacion en 2 pasos > **Contrasenas de aplicaciones**.
+3. Crear una para "Correo" y copiar los 16 caracteres que entrega.
+4. Ponerlos en `CORREO_CLAVE` del `.env`, y la cuenta en `CORREO_USUARIO`.
+   En Render, las mismas dos como variables de entorno del servicio.
+
+Si esas dos variables quedan vacias, el servicio de correo queda **apagado**:
+anota cada mensaje en la consola y la aplicacion sigue funcionando igual. Eso
+permite desarrollar y correr las pruebas sin tener una cuenta configurada.
+
+> Por que SMTP y no la API REST de Gmail: la API obliga a montar un proyecto en
+> Google Cloud, una pantalla de consentimiento y un refresh token OAuth2 que hay
+> que renovar. SMTP con contrasena de aplicacion usa la misma cuenta, se
+> configura en cinco minutos y deja cambiar de proveedor tocando solo variables.

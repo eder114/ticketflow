@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   CatalogoControlador.iniciar();
   EventoControlador.iniciar();
   AccesoControlador.iniciar();
+  RecuperacionControlador.iniciar();
   ReservaControlador.iniciar();
   ReporteControlador.iniciar();
   GestionControlador.iniciar();

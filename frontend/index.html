@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-03b">
-<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-03b">
+<link rel="stylesheet" href="assets/css/estilos.css?v=2026-11-05a">
+<link rel="stylesheet" href="assets/css/animaciones.css?v=2026-11-05a">
 </head>
 <body>
 
@@ -458,7 +458,7 @@
                   <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--texto-suave);text-transform:none;letter-spacing:0;font-weight:400">
                     <input type="checkbox" name="recordar" style="width:auto"> Mantener la sesión abierta
                   </label>
-                  <a href="#/iniciar-sesion" style="font-size:14px;color:var(--indigo-700);font-weight:600">¿Olvidaste tu contraseña?</a>
+                  <a href="#/recuperar" style="font-size:14px;color:var(--indigo-700);font-weight:600">¿Olvidaste tu contraseña?</a>
                 </div>
 
                 <p class="aviso" data-exito role="status" hidden>
@@ -486,6 +486,105 @@
 </div>
 
 <!-- REGISTRO CLIENTE -->
+<!-- RECUPERAR LA CONTRASEÑA -->
+<div class="vista" id="vista-recuperar" data-titulo="Recuperar contraseña" hidden>
+  <div class="acceso">
+    <div class="acceso-columna">
+
+      <a href="#/inicio" class="marca" style="align-self:center">
+        <span class="marca-logo" aria-hidden="true">◆</span> TicketFlow
+      </a>
+
+      <div class="tarjeta-acceso">
+        <div class="tarjeta-foto">
+          <img src="assets/img/teatro-sala.jpg" alt="Sala de teatro vista desde el escenario">
+          <div class="tarjeta-foto-texto">
+            <span class="overline">Recuperar el acceso</span>
+            <h1 data-rec-titulo>¿Olvidaste tu contraseña?</h1>
+          </div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+
+          <!-- Paso 1: el correo -->
+          <div data-rec-paso="correo">
+            <p class="acceso-sub">Escribe el correo de tu cuenta y te mandamos un código
+               de seis dígitos para que pongas una contraseña nueva.</p>
+
+            <form data-validar data-envio="recuperar-pedir" data-rec-pedir class="form-pila" novalidate>
+              <div class="campo">
+                <label for="rec-correo">Correo electrónico</label>
+                <input type="email" id="rec-correo" name="correo"
+                       placeholder="nombre@correo.com" autocomplete="email"
+                       data-reglas="requerido correo" aria-describedby="err-rec-correo">
+                <p class="error" id="err-rec-correo" role="alert"></p>
+              </div>
+
+              <button type="submit" class="btn btn-primario btn-lg btn-bloque">
+                Mandarme el código
+              </button>
+            </form>
+          </div>
+
+          <!-- Paso 2: el código y la contraseña nueva -->
+          <div data-rec-paso="codigo" hidden>
+            <p class="aviso" data-rec-enviado role="status"></p>
+
+            <form data-validar data-envio="recuperar-cambiar" data-rec-cambiar class="form-pila" novalidate>
+              <div class="campo">
+                <label for="rec-codigo">Código de seis dígitos</label>
+                <input type="text" id="rec-codigo" name="codigo"
+                       inputmode="numeric" maxlength="6" autocomplete="one-time-code"
+                       placeholder="000000" class="campo-codigo"
+                       data-reglas="requerido codigo" aria-describedby="ayuda-rec-codigo err-rec-codigo">
+                <p class="ayuda" id="ayuda-rec-codigo">Revisa tu bandeja de entrada.
+                   Si no aparece, mira en correo no deseado.</p>
+                <p class="error" id="err-rec-codigo" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="rec-clave">Contraseña nueva</label>
+                <input type="password" id="rec-clave" name="contrasena"
+                       placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                       data-reglas="requerido clave" data-medidor="rec-fuerza"
+                       aria-describedby="err-rec-clave">
+                <div class="fuerza" id="rec-fuerza" data-nivel="0" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <p class="error" id="err-rec-clave" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="rec-clave2">Repite la contraseña nueva</label>
+                <input type="password" id="rec-clave2" name="contrasena2"
+                       placeholder="La misma de arriba" autocomplete="new-password"
+                       data-reglas="requerido confirmar" data-confirmar="rec-clave" aria-describedby="err-rec-clave2">
+                <p class="error" id="err-rec-clave2" role="alert"></p>
+              </div>
+
+              <button type="submit" class="btn btn-primario btn-lg btn-bloque">
+                Guardar la contraseña nueva
+              </button>
+            </form>
+
+            <div class="separador"><span>o</span></div>
+            <div class="accesos-rapidos">
+              <a href="#/recuperar" data-rec-otro>Mandarme otro código</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p class="acceso-pie">
+        ¿Ya te acordaste? <a href="#/iniciar-sesion">Volver a iniciar sesión</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+
 <div class="vista" id="vista-registro-cliente" data-titulo="Crear cuenta de cliente" hidden>
   <div class="acceso">
     <div class="acceso-columna">
@@ -2249,46 +2348,47 @@
      asi que se trae la version UMD y queda como variable global "anime". -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/configuracion.js?v=2026-11-03b"></script>
-<script src="js/modelos/rutas.js?v=2026-11-03b"></script>
-<script src="js/modelos/sesion.js?v=2026-11-03b"></script>
-<script src="js/modelos/api.js?v=2026-11-03b"></script>
-<script src="js/modelos/validacion.js?v=2026-11-03b"></script>
-<script src="js/modelos/calendario.js?v=2026-11-03b"></script>
-<script src="js/modelos/catalogo.js?v=2026-11-03b"></script>
-<script src="js/modelos/formato.js?v=2026-11-03b"></script>
+<script src="js/configuracion.js?v=2026-11-05a"></script>
+<script src="js/modelos/rutas.js?v=2026-11-05a"></script>
+<script src="js/modelos/sesion.js?v=2026-11-05a"></script>
+<script src="js/modelos/api.js?v=2026-11-05a"></script>
+<script src="js/modelos/validacion.js?v=2026-11-05a"></script>
+<script src="js/modelos/calendario.js?v=2026-11-05a"></script>
+<script src="js/modelos/catalogo.js?v=2026-11-05a"></script>
+<script src="js/modelos/formato.js?v=2026-11-05a"></script>
 <!-- Vistas -->
-<script src="js/vistas/carga.js?v=2026-11-03b"></script>
-<script src="js/vistas/menu.js?v=2026-11-03b"></script>
-<script src="js/vistas/pantallas.js?v=2026-11-03b"></script>
-<script src="js/vistas/formularios.js?v=2026-11-03b"></script>
-<script src="js/vistas/buscador.js?v=2026-11-03b"></script>
-<script src="js/vistas/sesion.js?v=2026-11-03b"></script>
-<script src="js/vistas/catalogo.js?v=2026-11-03b"></script>
-<script src="js/vistas/evento.js?v=2026-11-03b"></script>
-<script src="js/vistas/reservas.js?v=2026-11-03b"></script>
-<script src="js/vistas/reportes.js?v=2026-11-03b"></script>
-<script src="js/vistas/graficas.js?v=2026-11-03b"></script>
-<script src="js/vistas/tablero.js?v=2026-11-03b"></script>
-<script src="js/vistas/ventas.js?v=2026-11-03b"></script>
-<script src="js/vistas/selector.js?v=2026-11-03b"></script>
-<script src="js/vistas/gestion.js?v=2026-11-03b"></script>
-<script src="js/vistas/animaciones.js?v=2026-11-03b"></script>
-<script src="js/vistas/efectos.js?v=2026-11-03b"></script>
+<script src="js/vistas/carga.js?v=2026-11-05a"></script>
+<script src="js/vistas/menu.js?v=2026-11-05a"></script>
+<script src="js/vistas/pantallas.js?v=2026-11-05a"></script>
+<script src="js/vistas/formularios.js?v=2026-11-05a"></script>
+<script src="js/vistas/buscador.js?v=2026-11-05a"></script>
+<script src="js/vistas/sesion.js?v=2026-11-05a"></script>
+<script src="js/vistas/catalogo.js?v=2026-11-05a"></script>
+<script src="js/vistas/evento.js?v=2026-11-05a"></script>
+<script src="js/vistas/reservas.js?v=2026-11-05a"></script>
+<script src="js/vistas/reportes.js?v=2026-11-05a"></script>
+<script src="js/vistas/graficas.js?v=2026-11-05a"></script>
+<script src="js/vistas/tablero.js?v=2026-11-05a"></script>
+<script src="js/vistas/ventas.js?v=2026-11-05a"></script>
+<script src="js/vistas/selector.js?v=2026-11-05a"></script>
+<script src="js/vistas/gestion.js?v=2026-11-05a"></script>
+<script src="js/vistas/animaciones.js?v=2026-11-05a"></script>
+<script src="js/vistas/efectos.js?v=2026-11-05a"></script>
 <!-- Controladores -->
-<script src="js/controladores/enrutador.js?v=2026-11-03b"></script>
-<script src="js/controladores/formularios.js?v=2026-11-03b"></script>
-<script src="js/controladores/buscador.js?v=2026-11-03b"></script>
-<script src="js/controladores/menu.js?v=2026-11-03b"></script>
-<script src="js/controladores/sesion.js?v=2026-11-03b"></script>
-<script src="js/controladores/catalogo.js?v=2026-11-03b"></script>
-<script src="js/controladores/evento.js?v=2026-11-03b"></script>
-<script src="js/controladores/acceso.js?v=2026-11-03b"></script>
-<script src="js/controladores/reservas.js?v=2026-11-03b"></script>
-<script src="js/controladores/reportes.js?v=2026-11-03b"></script>
-<script src="js/controladores/gestion.js?v=2026-11-03b"></script>
-<script src="js/controladores/selector.js?v=2026-11-03b"></script>
-<script src="js/controladores/reserva.js?v=2026-11-03b"></script>
-<script src="js/app.js?v=2026-11-03b"></script>
+<script src="js/controladores/enrutador.js?v=2026-11-05a"></script>
+<script src="js/controladores/formularios.js?v=2026-11-05a"></script>
+<script src="js/controladores/buscador.js?v=2026-11-05a"></script>
+<script src="js/controladores/menu.js?v=2026-11-05a"></script>
+<script src="js/controladores/sesion.js?v=2026-11-05a"></script>
+<script src="js/controladores/catalogo.js?v=2026-11-05a"></script>
+<script src="js/controladores/evento.js?v=2026-11-05a"></script>
+<script src="js/controladores/acceso.js?v=2026-11-05a"></script>
+<script src="js/controladores/recuperacion.js?v=2026-11-05a"></script>
+<script src="js/controladores/reservas.js?v=2026-11-05a"></script>
+<script src="js/controladores/reportes.js?v=2026-11-05a"></script>
+<script src="js/controladores/gestion.js?v=2026-11-05a"></script>
+<script src="js/controladores/selector.js?v=2026-11-05a"></script>
+<script src="js/controladores/reserva.js?v=2026-11-05a"></script>
+<script src="js/app.js?v=2026-11-05a"></script>
 </body>
 </html>

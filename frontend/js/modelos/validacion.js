@@ -59,6 +59,13 @@ var ValidacionModelo = (function () {
         : "El NIT va con 9 o 10 dígitos, opcionalmente con guion y dígito de verificación.";
     },
 
+    codigo: function (v) {
+      if (v.trim() === "") return null;
+      return /^[0-9]{6}$/.test(v.trim())
+        ? null
+        : "El código son seis dígitos, tal como llegó al correo.";
+    },
+
     aceptar: function (v, campo) {
       return campo.checked ? null : "Debes aceptar los términos para continuar.";
     }

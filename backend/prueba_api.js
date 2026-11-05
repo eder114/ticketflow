@@ -38,6 +38,26 @@ async function pedir(ruta, opciones = {}) {
   return { estado: respuesta.status, cuerpo };
 }
 
+// Con el correo apagado, el servicio anota "[correo apagado] Para x: 123456 es
+// tu codigo...". De ahi se saca el codigo para poder probar el ciclo entero
+// sin tener una cuenta de Gmail configurada.
+const RUTA_LOG = process.env.LOG_SERVIDOR || "";
+
+function codigoDeLaConsola() {
+  if (!RUTA_LOG) return null;
+  try {
+    const fs = require("fs");
+    const lineas = fs.readFileSync(RUTA_LOG, "utf8")
+      .split("\n")
+      .filter((l) => l.includes("[correo apagado]"));
+    const ultima = lineas[lineas.length - 1] || "";
+    const encontrado = ultima.match(/([0-9]{6}) es tu c/);
+    return encontrado ? encontrado[1] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 const entrar = (correo) =>
   pedir("/sesion", { method: "POST", body: JSON.stringify({ correo, contrasena: CLAVE }) });
 
@@ -493,6 +513,79 @@ async function principal() {
           ));
 
   // ---------------------------------------------------------- reportes ----
+  // --------------------------------------- recuperacion de contrasena ----
+  // El correo esta apagado en las pruebas, asi que el codigo se lee del
+  // asunto que el servicio anota en la consola. Al final se devuelve la
+  // contrasena original para no dejar la base alterada.
+  console.log("\nRecuperacion de contrasena");
+
+  const CORREO_PRUEBA = "andres.moreno@correo.com";
+
+  const fantasma = await pedir("/recuperacion", {
+    method: "POST", body: JSON.stringify({ correo: "nadie@ejemplo.com" })
+  });
+  revisar("un correo que no existe responde igual que uno que si", fantasma.estado === 200);
+  revisar("y no delata si la cuenta existe", /si hay una cuenta/i.test(fantasma.cuerpo?.mensaje || ""));
+
+  revisar("rechaza un correo con mal formato",
+          (await pedir("/recuperacion", {
+            method: "POST", body: JSON.stringify({ correo: "noesuncorreo" })
+          })).estado === 400);
+
+  const pedido = await pedir("/recuperacion", {
+    method: "POST", body: JSON.stringify({ correo: CORREO_PRUEBA })
+  });
+  revisar("pide el codigo para un correo registrado", pedido.estado === 200, pedido.cuerpo?.error);
+  revisar("y devuelve el destino enmascarado",
+          /^an\*+@correo\.com$/.test(pedido.cuerpo?.destino || ""), pedido.cuerpo?.destino);
+
+  const codigoRec = codigoDeLaConsola();
+  revisar("el codigo son seis digitos", /^[0-9]{6}$/.test(codigoRec || ""), String(codigoRec));
+
+  if (codigoRec) {
+    revisar("un codigo equivocado no cambia nada",
+            (await pedir("/recuperacion/cambiar", {
+              method: "POST",
+              body: JSON.stringify({ correo: CORREO_PRUEBA, codigo: "000000", contrasena: "Nueva2026" })
+            })).estado === 400);
+
+    revisar("exige una contrasena de al menos 8 caracteres",
+            (await pedir("/recuperacion/cambiar", {
+              method: "POST",
+              body: JSON.stringify({ correo: CORREO_PRUEBA, codigo: codigoRec, contrasena: "abc" })
+            })).estado === 400);
+
+    const cambio = await pedir("/recuperacion/cambiar", {
+      method: "POST",
+      body: JSON.stringify({ correo: CORREO_PRUEBA, codigo: codigoRec, contrasena: "Nueva2026" })
+    });
+    revisar("el codigo bueno cambia la contrasena", cambio.estado === 200, cambio.cuerpo?.error);
+
+    revisar("la contrasena vieja ya no sirve",
+            (await entrar(CORREO_PRUEBA)).estado === 401);
+
+    const conNueva = await pedir("/sesion", {
+      method: "POST",
+      body: JSON.stringify({ correo: CORREO_PRUEBA, contrasena: "Nueva2026" })
+    });
+    revisar("la nueva si deja entrar", conNueva.estado === 200);
+
+    revisar("el mismo codigo no sirve dos veces",
+            (await pedir("/recuperacion/cambiar", {
+              method: "POST",
+              body: JSON.stringify({ correo: CORREO_PRUEBA, codigo: codigoRec, contrasena: "Otra2026xy" })
+            })).estado === 400);
+
+    // Se deja la base como estaba.
+    await pedir("/recuperacion", { method: "POST", body: JSON.stringify({ correo: CORREO_PRUEBA }) });
+    const devolver = codigoDeLaConsola();
+    await pedir("/recuperacion/cambiar", {
+      method: "POST",
+      body: JSON.stringify({ correo: CORREO_PRUEBA, codigo: devolver, contrasena: CLAVE })
+    });
+    revisar("queda con la contrasena de siempre", (await entrar(CORREO_PRUEBA)).estado === 200);
+  }
+
   console.log("\nReportes del administrador");
   revisar("un cliente no puede ver los reportes",
           (await pedir("/reportes/general", { token: cliente.cuerpo.token })).estado === 403);

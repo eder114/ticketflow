@@ -138,9 +138,28 @@ CREATE TABLE reserva (
 );
 
 
+-- ======================================== RECUPERACION DE CONTRASENA ====
+-- Codigo de un solo uso que se manda al correo. No se guarda el codigo sino
+-- su hash, por la misma razon que la contrasena de persona.
+
+CREATE TABLE recuperacion_contrasena (
+  id_recuperacion SERIAL PRIMARY KEY,
+  identificacion  VARCHAR(20) NOT NULL
+    REFERENCES persona (identificacion) ON UPDATE CASCADE ON DELETE CASCADE,
+  codigo_hash     VARCHAR(100) NOT NULL,
+  creado_en       TIMESTAMP NOT NULL DEFAULT NOW(),
+  expira_en       TIMESTAMP NOT NULL,
+  usado_en        TIMESTAMP,
+  intentos        SMALLINT NOT NULL DEFAULT 0,
+  CONSTRAINT expira_despues_de_crearse CHECK (expira_en > creado_en)
+);
+
+
 -- ================================================================ INDICES ====
 -- Los de las llaves primarias y los UNIQUE los crea PostgreSQL solo. Estos son
 -- para las columnas por las que mas vamos a filtrar.
+
+CREATE INDEX idx_recuperacion_persona  ON recuperacion_contrasena (identificacion, creado_en DESC);
 
 CREATE INDEX idx_departamento_pais     ON departamento (id_pais);
 CREATE INDEX idx_ciudad_departamento   ON ciudad (id_departamento);

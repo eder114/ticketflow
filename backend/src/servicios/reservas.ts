@@ -3,6 +3,7 @@
 import { consultar, consultarUno, enTransaccion } from "../datos/conexion";
 import { enConflicto, noEncontrado, peticionInvalida, sinPermiso } from "../middleware/errores";
 import { EstadoReserva, Reserva, ReservaCompleta, UsuarioEnSesion } from "../modelos/tipos";
+import { correoDeReserva, enviar } from "./correo";
 
 /** Un evento solo recibe reservas mientras no haya empezado ni se haya cancelado. */
 const ESTADOS_QUE_ACEPTAN_RESERVAS = ["Programado", "En Boleteria"];
@@ -124,7 +125,15 @@ export async function crear(datos: {
     return creada.rows[0].id_reserva;
   });
 
-  return obtener(id);
+  const reserva = await obtener(id);
+
+  // El comprobante sale sin hacer esperar al cliente, y si el correo falla la
+  // reserva ya esta hecha: no se puede deshacer algo que si salio bien solo
+  // porque el servidor de correo este caido. El servicio de correo tampoco
+  // lanza, pero el catch queda por si acaso.
+  void enviar(correoDeReserva(reserva)).catch(() => undefined);
+
+  return reserva;
 }
 
 /**
