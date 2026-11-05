@@ -41,8 +41,10 @@ export const entorno = {
   correo: {
     host: opcional("CORREO_HOST", "smtp.gmail.com"),
     puerto: Number(opcional("CORREO_PUERTO", "465")),
-    usuario: process.env.CORREO_USUARIO || "",
-    clave: process.env.CORREO_CLAVE || "",
+    usuario: (process.env.CORREO_USUARIO || "").trim(),
+    // Google muestra la contrasena de aplicacion en cuatro grupos de cuatro,
+    // y asi es como se pega. Los espacios no son parte de la clave.
+    clave: (process.env.CORREO_CLAVE || "").replace(/\s+/g, ""),
     desde: opcional("CORREO_DESDE", process.env.CORREO_USUARIO || "TicketFlow")
   },
   recuperacion: {
