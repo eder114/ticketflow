@@ -3,7 +3,7 @@
 import { consultar, consultarUno, enTransaccion } from "../datos/conexion";
 import { enConflicto, noEncontrado, peticionInvalida, sinPermiso } from "../middleware/errores";
 import { EstadoReserva, Reserva, ReservaCompleta, UsuarioEnSesion } from "../modelos/tipos";
-import { correoDeReserva, enviar } from "./correo";
+import { correoDeCancelacion, correoDeConfirmacion, correoDeReserva, enviar } from "./correo";
 
 /** Un evento solo recibe reservas mientras no haya empezado ni se haya cancelado. */
 const ESTADOS_QUE_ACEPTAN_RESERVAS = ["Programado", "En Boleteria"];
@@ -193,7 +193,27 @@ export async function cambiarEstado(
     );
   });
 
-  return obtener(id);
+  const actualizada = await obtener(id);
+  avisarDelCambio(actualizada, usuario);
+  return actualizada;
+}
+
+/**
+ * El aviso al cliente cuando su reserva cambia de estado.
+ *
+ * Si fue el propio cliente quien la canceló no se le manda nada: acaba de
+ * hacerlo él mismo y un correo contándoselo sobra. El que sí importa es
+ * cuando la cancela el organizador o el administrador, porque ahí el cliente
+ * no se entera por ningún otro lado.
+ */
+function avisarDelCambio(reserva: ReservaCompleta, usuario: UsuarioEnSesion): void {
+  if (reserva.estado === "Confirmada") {
+    void enviar(correoDeConfirmacion(reserva)).catch(() => undefined);
+    return;
+  }
+  if (reserva.estado === "Cancelada" && usuario.perfil !== "cliente") {
+    void enviar(correoDeCancelacion(reserva)).catch(() => undefined);
+  }
 }
 
 export async function eliminar(id: number): Promise<void> {

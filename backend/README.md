@@ -205,3 +205,31 @@ permite desarrollar y correr las pruebas sin tener una cuenta configurada.
 > Google Cloud, una pantalla de consentimiento y un refresh token OAuth2 que hay
 > que renovar. SMTP con contrasena de aplicacion usa la misma cuenta, se
 > configura en cinco minutos y deja cambiar de proveedor tocando solo variables.
+
+### Cuando sale cada correo
+
+| Momento | Quien lo recibe | Contenido |
+| --- | --- | --- |
+| El cliente crea una reserva | el cliente | comprobante con codigo, evento, lugar y total |
+| El organizador la confirma | el cliente | aviso de que quedo confirmada |
+| El organizador o el admin la cancela | el cliente | aviso con el motivo |
+| Se cancela el evento entero | todos los que tenian reserva | aviso con la causa del evento |
+| El cliente cancela la suya | nadie | acaba de hacerlo el, un correo sobra |
+| Se pide recuperar la contrasena | quien la pidio | codigo de seis digitos |
+
+Ninguno de esos envios puede tumbar la operacion: si el servidor de correo
+falla, la reserva, la confirmacion o la cancelacion ya quedaron hechas.
+
+### Probar el ciclo del codigo de recuperacion
+
+Con el correo encendido el codigo se va al buzon y no queda en la consola,
+asi que `prueba_api.js` no puede leerlo y avisa que omite esa parte. Para
+probarla hay que dejar el correo apagado:
+
+    # .env con CORREO_CLAVE vacia
+    npm run dev > salida.log
+    # en otra terminal
+    LOG_SERVIDOR=salida.log node prueba_api.js
+
+Asi pasan las 115 comprobaciones. Con el correo encendido pasan 107 y las 8
+del ciclo del codigo quedan anotadas como omitidas.

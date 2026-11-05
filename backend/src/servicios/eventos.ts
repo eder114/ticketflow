@@ -3,7 +3,14 @@
 // completa y los cupos disponibles.
 import { consultar, consultarUno, enTransaccion } from "../datos/conexion";
 import { enConflicto, noEncontrado, peticionInvalida, sinPermiso } from "../middleware/errores";
-import { Evento, EventoCompleto, EstadoEvento, UsuarioEnSesion } from "../modelos/tipos";
+import {
+  Evento,
+  EventoCompleto,
+  EstadoEvento,
+  ReservaCompleta,
+  UsuarioEnSesion
+} from "../modelos/tipos";
+import { correoDeCancelacion, enviar } from "./correo";
 
 export interface FiltrosEvento {
   ciudad?: number;
@@ -157,6 +164,17 @@ export async function cambiarEstado(
     });
   }
 
+  // Antes de tocar nada se apunta a quién le va a caer la cancelación: después
+  // de la transacción ya no se distinguen de las que estaban canceladas antes.
+  const arrastradas =
+    estado === "Cancelado"
+      ? await consultar<{ id_reserva: number }>(
+          `SELECT id_reserva FROM reserva
+           WHERE codigo_evento = $1 AND estado <> 'Cancelada'`,
+          [codigo]
+        )
+      : [];
+
   await enTransaccion(async (cliente) => {
     await cliente.query(
       "UPDATE evento SET estado = $2, causa_cancelacion = $3 WHERE codigo_evento = $1",
@@ -173,7 +191,31 @@ export async function cambiarEstado(
     }
   });
 
+  if (arrastradas.length) void avisarALosClientes(arrastradas.map((r) => r.id_reserva));
+
   return obtener(codigo);
+}
+
+/**
+ * Cuando se cancela un evento, cada cliente que tenía una reserva se entera
+ * por correo. Es el caso donde más falta hace: el cliente no hizo nada y su
+ * entrada dejó de existir.
+ *
+ * Va fuera de la transacción y sin bloquear la respuesta. Si el correo falla,
+ * el evento igual quedó cancelado.
+ */
+async function avisarALosClientes(ids: number[]): Promise<void> {
+  try {
+    const reservas = await consultar<ReservaCompleta>(
+      `SELECT * FROM vista_reserva WHERE id_reserva = ANY($1::int[])`,
+      [ids]
+    );
+    for (const reserva of reservas) {
+      await enviar(correoDeCancelacion(reserva));
+    }
+  } catch {
+    // Ya está registrado en el servicio de correo; aquí no hay nada que hacer.
+  }
 }
 
 export async function eliminar(codigo: number): Promise<void> {

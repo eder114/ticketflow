@@ -210,6 +210,118 @@ export function correoDeReserva(reserva: ReservaCompleta): Mensaje {
   };
 }
 
+/** Cuando el organizador aprueba la reserva. */
+export function correoDeConfirmacion(reserva: ReservaCompleta): Mensaje {
+  const codigo = `TF-2026-${String(reserva.id_reserva).padStart(4, "0")}`;
+  const lugar = `${reserva.teatro}, ${reserva.ciudad}`;
+
+  const cuerpo = `
+    <h1 style="margin:0 0 6px;font-size:21px;line-height:1.25">Tu reserva quedó confirmada</h1>
+    <p style="margin:0 0 20px;font-size:15px;color:${SUAVE};line-height:1.55">
+      Hola ${limpio(reserva.cliente)}, el organizador ya revisó tu reserva para
+      <strong style="color:${TINTA}">${limpio(reserva.evento)}</strong>.
+      Tus ${limpio(reserva.numero_entradas)} entradas están aseguradas.
+    </p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+           style="border-collapse:collapse;margin-bottom:20px">
+      ${fila("Código de la reserva", codigo)}
+      ${fila("Evento", String(reserva.evento))}
+      ${fila("Fecha y hora", fecha(reserva.fecha_evento))}
+      ${fila("Lugar", lugar)}
+      ${fila("Entradas", String(reserva.numero_entradas))}
+      <tr>
+        <td style="padding:12px 0;font-size:15px;font-weight:700">Total</td>
+        <td style="padding:12px 0;font-size:17px;font-weight:700;text-align:right;color:${MARCA}">
+          ${limpio(pesos(reserva.valor_total))}
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0;font-size:13.5px;color:${SUAVE};line-height:1.55">
+      Presenta este código el día del evento. Si al final no puedes ir, cancélala
+      desde <em>Mis reservas</em> para que el cupo quede libre.
+    </p>`;
+
+  const texto = [
+    `Hola ${reserva.cliente}, tu reserva quedó confirmada.`,
+    ``,
+    `Código: ${codigo}`,
+    `Evento: ${reserva.evento}`,
+    `Fecha: ${fecha(reserva.fecha_evento)}`,
+    `Lugar: ${lugar}`,
+    `Entradas: ${reserva.numero_entradas}`,
+    `Total: ${pesos(reserva.valor_total)}`,
+    ``,
+    `Presenta este código el día del evento.`
+  ].join("\n");
+
+  return {
+    para: reserva.correo_cliente,
+    asunto: `Confirmada · ${codigo} · ${reserva.evento}`,
+    html: envoltura("Tu reserva quedó confirmada", cuerpo),
+    texto
+  };
+}
+
+/**
+ * Cuando la reserva se cancela. El aviso solo sale si la canceló alguien
+ * distinto del propio cliente: si fue él, ya lo sabe, y un correo diciéndole
+ * lo que acaba de hacer sobra.
+ */
+export function correoDeCancelacion(reserva: ReservaCompleta): Mensaje {
+  const codigo = `TF-2026-${String(reserva.id_reserva).padStart(4, "0")}`;
+  const causa = reserva.causa_cancelacion || "No se dejó una causa registrada.";
+
+  const cuerpo = `
+    <h1 style="margin:0 0 6px;font-size:21px;line-height:1.25">Se canceló tu reserva</h1>
+    <p style="margin:0 0 20px;font-size:15px;color:${SUAVE};line-height:1.55">
+      Hola ${limpio(reserva.cliente)}, tu reserva para
+      <strong style="color:${TINTA}">${limpio(reserva.evento)}</strong>
+      quedó cancelada y el cupo volvió al evento.
+    </p>
+
+    <div style="margin:0 0 20px;padding:14px 16px;background:#FEF2F2;
+                border-left:3px solid #DC2626;border-radius:0 6px 6px 0">
+      <p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.08em;
+                text-transform:uppercase;color:#B91C1C">Motivo</p>
+      <p style="margin:0;font-size:14.5px;line-height:1.5;color:${TINTA}">${limpio(causa)}</p>
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+           style="border-collapse:collapse;margin-bottom:20px">
+      ${fila("Código de la reserva", codigo)}
+      ${fila("Evento", String(reserva.evento))}
+      ${fila("Fecha y hora", fecha(reserva.fecha_evento))}
+      ${fila("Entradas que tenías", String(reserva.numero_entradas))}
+    </table>
+
+    <p style="margin:0;font-size:13.5px;color:${SUAVE};line-height:1.55">
+      Si quieres volver a intentarlo, el evento sigue en el catálogo mientras le
+      queden cupos.
+    </p>`;
+
+  const texto = [
+    `Hola ${reserva.cliente}, se cancelo tu reserva.`,
+    ``,
+    `Motivo: ${causa}`,
+    ``,
+    `Código: ${codigo}`,
+    `Evento: ${reserva.evento}`,
+    `Fecha: ${fecha(reserva.fecha_evento)}`,
+    `Entradas que tenías: ${reserva.numero_entradas}`,
+    ``,
+    `El cupo volvió al evento.`
+  ].join("\n");
+
+  return {
+    para: reserva.correo_cliente,
+    asunto: `Cancelada · ${codigo} · ${reserva.evento}`,
+    html: envoltura("Se canceló tu reserva", cuerpo),
+    texto
+  };
+}
+
 /** El código de seis dígitos para volver a entrar. */
 export function correoDeCodigo(para: string, nombre: string, codigo: string, minutos: number): Mensaje {
   const cuerpo = `
