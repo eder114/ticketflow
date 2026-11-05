@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/servidor.js",
     "verificar": "tsc --noEmit",
+    "correo:probar": "tsx src/herramientas/probar_correo.ts",
     "bd:crear": "psql -U postgres -f ../database/sql/schema.sql -d ticketflow",
     "bd:vistas": "psql -U postgres -f ../database/sql/vistas.sql -d ticketflow",
     "bd:datos": "psql -U postgres -f ../database/sql/seed.sql -d ticketflow"

@@ -188,6 +188,15 @@ contrasena) salen por SMTP con Nodemailer. Con Gmail hace falta una
 4. Ponerlos en `CORREO_CLAVE` del `.env`, y la cuenta en `CORREO_USUARIO`.
    En Render, las mismas dos como variables de entorno del servicio.
 
+Para comprobar que quedaron bien puestas, sin tener que reservar nada:
+
+    npm run correo:probar                      revisa la conexion
+    npm run correo:probar -- tu@correo.com     ademas manda un mensaje
+
+La contrasena de la cuenta NO sirve: Google cerro el acceso SMTP con la
+contrasena normal en mayo de 2022. Tiene que ser la de aplicacion, de 16
+caracteres. Si se pone otra cosa, la herramienta avisa antes de intentarlo.
+
 Si esas dos variables quedan vacias, el servicio de correo queda **apagado**:
 anota cada mensaje en la consola y la aplicacion sigue funcionando igual. Eso
 permite desarrollar y correr las pruebas sin tener una cuenta configurada.
